@@ -24,4 +24,4 @@ jobs:
         java-version: ${{ matrix.java-version }}
         cache: maven
     - run: mvn --batch-mode package
-    - uses: codecov/codecov-action@v2
+    - uses: codecov/codecov-action@v3
