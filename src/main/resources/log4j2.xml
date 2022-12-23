@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="console" target="SYSTEM_ERR">
+			<PatternLayout pattern="%5level: %message%n"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.github.alexisjehan.mavencheck" level="ERROR" additivity="false">
+			<AppenderRef ref="console"/>
+		</Logger>
+		<Root level="ERROR">
+			<AppenderRef ref="console"/>
+		</Root>
+	</Loggers>
+</Configuration>

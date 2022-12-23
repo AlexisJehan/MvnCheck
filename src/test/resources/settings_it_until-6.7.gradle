@@ -1,0 +1,7 @@
+pluginManagement {
+	repositories {
+		maven {
+			url 'https://plugin-management.example.com'
+		}
+	}
+}

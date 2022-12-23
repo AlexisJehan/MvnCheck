@@ -1,0 +1,10 @@
+# comment
+foo-group-id:foo-artifact-id
+foo-group-id:foo-artifact-id:foo-version
+foo-group-id:foo-artifact-id:FOO-VERSION
+foo-group-id:foo-artifact-id:foo-version?
+foo-group-id:foo-artifact-id:foo-?
+foo-group-id:foo-artifact-id:foo-???????
+foo-group-id:foo-artifact-id:foo-version*
+foo-group-id:foo-artifact-id:foo-*
+foo-group-id:foo-artifact-id:foo-*******

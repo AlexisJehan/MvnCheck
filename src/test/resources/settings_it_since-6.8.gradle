@@ -1,0 +1,15 @@
+pluginManagement {
+	repositories {
+		maven {
+			url 'https://plugin-management.example.com'
+		}
+	}
+}
+
+dependencyResolutionManagement {
+	repositories {
+		maven {
+			url 'https://dependency-resolution-management.example.com'
+		}
+	}
+}

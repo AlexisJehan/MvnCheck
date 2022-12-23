@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Null name="null"/>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.github.alexisjehan.mavencheck" level="ALL" additivity="false">
+			<AppenderRef ref="null"/>
+		</Logger>
+		<Root level="ERROR">
+			<AppenderRef ref="null"/>
+		</Root>
+	</Loggers>
+</Configuration>
