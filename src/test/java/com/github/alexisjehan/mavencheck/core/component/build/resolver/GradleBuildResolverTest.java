@@ -507,14 +507,25 @@ final class GradleBuildResolverTest {
 										+ "apiElements - API elements for main. (n)\n"
 										+ "No dependencies\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id FAILED\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id FAILED\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version (n)\n"
-										+ "|    \\--- sub-foo-compile-only-group-id:"
-										+ "sub-foo-compile-only-artifact-id -> sub-foo-compile-only-version (n)\n"
-										+ "\\--- bar-compile-only-group-id:bar-compile-only-artifact-id (n)\n"
-										+ "     \\--- sub-bar-compile-only-group-id:"
-										+ "sub-bar-compile-only-artifact-id (n)\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
+										+ "bar-compile-only-version (n)\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-resolved-version\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id -> "
+										+ "bar-compile-only-resolved-version\n"
+										+ "\\--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)\n"
+										+ "     \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
+										+ "bar-compile-only-version -> bar-compile-only-resolved-version (c)\n"
+										+ "\n"
+										+ "(c) - dependency constraint\n"
+										+ "\n"
+										+ "(n) - Not resolved (configuration is not meant to be resolved)\n"
 										+ "\n"
 										+ "A web-based, searchable dependency report is available by adding the --scan "
 										+ "option."
@@ -527,15 +538,31 @@ final class GradleBuildResolverTest {
 							new ArtifactIdentifier(
 									"foo-compile-only-group-id",
 									"foo-compile-only-artifact-id"
+							)
+					),
+					new Artifact<>(
+							GradleArtifactType.COMPILE_ONLY,
+							new ArtifactIdentifier(
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
 							),
 							"foo-compile-only-version"
 					),
 					new Artifact<>(
 							GradleArtifactType.COMPILE_ONLY,
 							new ArtifactIdentifier(
-									"bar-compile-only-group-id",
-									"bar-compile-only-artifact-id"
-							)
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
+							),
+							"foo-compile-only-resolved-version"
+					),
+					new Artifact<>(
+							GradleArtifactType.COMPILE_ONLY,
+							new ArtifactIdentifier(
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
+							),
+							"foo-compile-only-version"
 					)
 			);
 		}
@@ -554,14 +581,25 @@ final class GradleBuildResolverTest {
 										+ "apiElements - API elements for main. (n)\n"
 										+ "No dependencies\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id FAILED\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id FAILED\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version (n)\n"
-										+ "|    \\--- sub-foo-compile-only-group-id:"
-										+ "sub-foo-compile-only-artifact-id -> sub-foo-compile-only-version (n)\n"
-										+ "\\--- bar-compile-only-group-id:bar-compile-only-artifact-id (n)\n"
-										+ "     \\--- sub-bar-compile-only-group-id:"
-										+ "sub-bar-compile-only-artifact-id (n)\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
+										+ "bar-compile-only-version (n)\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-resolved-version\n"
+										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id -> "
+										+ "bar-compile-only-resolved-version\n"
+										+ "\\--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)\n"
+										+ "     \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
+										+ "bar-compile-only-version -> bar-compile-only-resolved-version (c)\n"
+										+ "\n"
+										+ "(c) - dependency constraint\n"
+										+ "\n"
+										+ "(n) - Not resolved (configuration is not meant to be resolved)\n"
 										+ "\n"
 										+ "A web-based, searchable dependency report is available by adding the --scan "
 										+ "option."
@@ -574,15 +612,31 @@ final class GradleBuildResolverTest {
 							new ArtifactIdentifier(
 									"foo-compile-only-group-id",
 									"foo-compile-only-artifact-id"
+							)
+					),
+					new Artifact<>(
+							GradleArtifactType.COMPILE_ONLY,
+							new ArtifactIdentifier(
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
 							),
 							"foo-compile-only-version"
 					),
 					new Artifact<>(
 							GradleArtifactType.COMPILE_ONLY,
 							new ArtifactIdentifier(
-									"bar-compile-only-group-id",
-									"bar-compile-only-artifact-id"
-							)
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
+							),
+							"foo-compile-only-resolved-version"
+					),
+					new Artifact<>(
+							GradleArtifactType.COMPILE_ONLY,
+							new ArtifactIdentifier(
+									"foo-compile-only-group-id",
+									"foo-compile-only-artifact-id"
+							),
+							"foo-compile-only-version"
 					)
 			);
 		}
@@ -759,8 +813,44 @@ final class GradleBuildResolverTest {
 										+ "------------------------------------------------------------\n"
 										+ "\n"
 										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (n)"
+						)
+				)
+		) {
+			assertThatExceptionOfType(BuildResolveException.class)
+					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
+		}
+		try (
+				final var bufferedReader = new BufferedReader(
+						new StringReader(
+								"> Task :dependencies\n"
+										+ "\n"
+										+ "------------------------------------------------------------\n"
+										+ "Root project 'foo-project'\n" // Since Gradle 6.8
+										+ "------------------------------------------------------------\n"
+										+ "\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (n)"
+						)
+				)
+		) {
+			assertThatExceptionOfType(BuildResolveException.class)
+					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
+		}
+		try (
+				final var bufferedReader = new BufferedReader(
+						new StringReader(
+								"> Task :dependencies\n"
+										+ "\n"
+										+ "------------------------------------------------------------\n"
+										+ "Root project\n" // Until Gradle 6.7
+										+ "------------------------------------------------------------\n"
+										+ "\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version:foo (n)"
+										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
 						)
 				)
 		) {
@@ -778,7 +868,7 @@ final class GradleBuildResolverTest {
 										+ "\n"
 										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version:foo (n)"
+										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
 						)
 				)
 		) {

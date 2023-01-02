@@ -265,25 +265,40 @@ public final class GradleBuildResolver implements BuildResolver {
 							if (!line.startsWith("+--- ") && !line.startsWith("\\--- ")) {
 								throw new BuildResolveException("Unexpected Gradle \":dependencies\" artifact format");
 							}
-							final var artifactString = Strings.substringBefore(
-									Strings.substringAfter(
-											line,
-											"--- "
+							var artifactString = Strings.substringBefore(
+									Strings.substringBefore(
+											Strings.substringAfter(
+													line,
+													"--- "
+											),
+											" ("
 									),
-									' '
+									" FAILED"
 							);
-							final var frequency = Strings.frequency(artifactString, ':');
+							var frequency = Strings.frequency(artifactString, " -> ");
+							if (1 < frequency) {
+								throw new BuildResolveException("Unexpected Gradle \":dependencies\" artifact format");
+							}
+							var parts = Strings.split(" -> ", artifactString);
+							artifactString = parts.get(0);
+							var version = 2 == parts.size()
+									? parts.get(1)
+									: null;
+							frequency = Strings.frequency(artifactString, ':');
 							if (1 > frequency || 2 < frequency) {
 								throw new BuildResolveException("Unexpected Gradle \":dependencies\" artifact format");
 							}
-							final var parts = Strings.split(':', artifactString);
+							parts = Strings.split(':', artifactString);
+							final var groupId = parts.get(0);
+							final var artifactId = parts.get(1);
+							if (3 == parts.size()) {
+								version = parts.get(2);
+							}
 							artifacts.add(
 									new Artifact<>(
 											artifactType,
-											new ArtifactIdentifier(parts.get(0), parts.get(1)),
-											3 == parts.size()
-													? parts.get(2)
-													: null
+											new ArtifactIdentifier(groupId, artifactId),
+											version
 									)
 							);
 						}
