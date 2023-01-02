@@ -136,27 +136,27 @@ final class GradleBuildResolverIT {
 					);
 					assertThat(build.getArtifacts()).containsExactly(
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.android.material", "material"),
 									"1.0.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"10.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-jre"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-android"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("org.springframework", "spring-core"),
 									"3.0.0.RELEASE"
 							)
@@ -205,27 +205,27 @@ final class GradleBuildResolverIT {
 					);
 					assertThat(build.getArtifacts()).containsExactly(
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.android.material", "material"),
 									"1.0.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"10.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-jre"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-android"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("org.springframework", "spring-core"),
 									"3.0.0.RELEASE"
 							)
@@ -286,27 +286,27 @@ final class GradleBuildResolverIT {
 					);
 					assertThat(build.getArtifacts()).containsExactly(
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.android.material", "material"),
 									"1.0.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"10.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-jre"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-android"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("org.springframework", "spring-core"),
 									"3.0.0.RELEASE"
 							)
@@ -360,27 +360,27 @@ final class GradleBuildResolverIT {
 					);
 					assertThat(build.getArtifacts()).containsExactly(
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.android.material", "material"),
 									"1.0.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"10.0"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-jre"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("com.google.guava", "guava"),
 									"23.1-android"
 							),
 							new Artifact<>(
-									GradleArtifactType.IMPLEMENTATION,
+									GradleArtifactType.COMPILE_ONLY,
 									new ArtifactIdentifier("org.springframework", "spring-core"),
 									"3.0.0.RELEASE"
 							)
