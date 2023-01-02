@@ -8,5 +8,8 @@
 ### Bug fixes
 - Missing artifacts related to _Gradle_ `:dependencies` resolved versions
 
+### Notes
+- Update `maven-core` to `3.8.7`
+
 ## 1.0.0 _(2022-12-23)_
 Initial release

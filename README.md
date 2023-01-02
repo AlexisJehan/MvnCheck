@@ -95,6 +95,7 @@ version of a build tool may still be compatible.
 
 | Maven Check | Maven version | Gradle version |
 |:-----------:|:-------------:|:--------------:|
+|    1.0.1    |     3.8.7     |      7.6       |
 |    1.0.0    |     3.8.6     |      7.6       |
 
 Note: _Gradle_ is compatible starting with _Gradle 4.8_.
