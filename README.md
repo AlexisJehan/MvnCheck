@@ -41,16 +41,16 @@ You can download binaries for the latest version of _Maven Check_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf maven-check-1.0.0-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/maven-check-1.0.0/bin
+sudo tar -xvzf maven-check-1.0.1-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/maven-check-1.0.1/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\maven-check-1.0.0`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\maven-check-1.0.1`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\maven-check-1.0.0\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\maven-check-1.0.1\bin` at the end
 
 ### Verify
 If _Maven Check_ is correctly installed, this command should work as expected:

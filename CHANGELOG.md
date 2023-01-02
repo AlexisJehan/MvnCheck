@@ -3,7 +3,7 @@
 ## 1.1.0 _(in progress)_
 …
 
-## 1.0.1 _(in progress)_
+## 1.0.1 _(2023-01-02)_
 
 ### Bug fixes
 - Missing artifacts related to _Gradle_ `:dependencies` resolved versions
