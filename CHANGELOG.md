@@ -10,6 +10,7 @@
 
 ### Notes
 - Update `maven-core` to `3.8.7`
+- Update `mockito-inline` and `mockito-junit-jupiter` to `4.11.0`
 
 ## 1.0.0 _(2022-12-23)_
 Initial release
