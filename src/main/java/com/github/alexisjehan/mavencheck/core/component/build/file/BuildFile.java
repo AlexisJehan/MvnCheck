@@ -33,6 +33,8 @@ import java.nio.file.Path;
 
 /**
  * <p>Class that describes a build file.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @since 1.0.0
  */
 public final class BuildFile {

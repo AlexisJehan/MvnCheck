@@ -31,6 +31,7 @@ import java.util.Optional;
 
 /**
  * <p>Unchecked {@link Exception} related to artifact filter parsing.</p>
+ * <p><b>Note</b>: This class is serializable.</p>
  * @since 1.0.0
  */
 public final class ArtifactFilterParseException extends RuntimeException {

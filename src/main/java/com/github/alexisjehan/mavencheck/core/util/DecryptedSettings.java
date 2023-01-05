@@ -35,6 +35,8 @@ import java.util.List;
 
 /**
  * <p>Class that describes <i>Maven</i> decrypted settings.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @since 1.0.0
  */
 final class DecryptedSettings {

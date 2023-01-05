@@ -27,6 +27,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
  * <p>Unchecked {@link Exception} related to <i>Maven</i> sessions.</p>
+ * <p><b>Note</b>: This class is serializable.</p>
  * @since 1.0.0
  */
 public final class MavenSessionException extends RuntimeException {

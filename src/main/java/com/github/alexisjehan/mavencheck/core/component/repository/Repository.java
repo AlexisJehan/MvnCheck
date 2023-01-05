@@ -31,6 +31,8 @@ import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 
 /**
  * <p>Class that describes a repository.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @since 1.0.0
  */
 public final class Repository {

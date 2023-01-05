@@ -32,6 +32,8 @@ import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
 
 /**
  * <p>Class that describes an update version for an artifact.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @since 1.0.0
  */
 public final class ArtifactUpdateVersion {

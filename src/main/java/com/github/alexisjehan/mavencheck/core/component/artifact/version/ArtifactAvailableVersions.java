@@ -34,6 +34,8 @@ import java.util.List;
 
 /**
  * <p>Class that describes available versions for an artifact.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @since 1.0.0
  */
 public final class ArtifactAvailableVersions {

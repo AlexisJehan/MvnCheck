@@ -34,6 +34,8 @@ import java.util.Optional;
 
 /**
  * <p>Class that describes an artifact.</p>
+ * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
+ * methods.</p>
  * @param <T> the type
  * @since 1.0.0
  */
