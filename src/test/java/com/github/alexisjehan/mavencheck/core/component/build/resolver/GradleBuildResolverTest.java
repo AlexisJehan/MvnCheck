@@ -742,7 +742,7 @@ final class GradleBuildResolverTest {
 										+ "Root project\n" // Until Gradle 6.7
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "???? foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version (n)"
 						)
@@ -760,7 +760,7 @@ final class GradleBuildResolverTest {
 										+ "Root project 'foo-project'\n" // Since Gradle 6.8
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "???? foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version (n)"
 						)
@@ -778,7 +778,7 @@ final class GradleBuildResolverTest {
 										+ "Root project\n" // Until Gradle 6.7
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "+--- foo-compile-only-group-id (n)"
 						)
 				)
@@ -795,7 +795,7 @@ final class GradleBuildResolverTest {
 										+ "Root project 'foo-project'\n" // Since Gradle 6.8
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "+--- foo-compile-only-group-id (n)"
 						)
 				)
@@ -812,43 +812,7 @@ final class GradleBuildResolverTest {
 										+ "Root project\n" // Until Gradle 6.7
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				final var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				final var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
 						)
@@ -866,9 +830,45 @@ final class GradleBuildResolverTest {
 										+ "Root project 'foo-project'\n" // Since Gradle 6.8
 										+ "------------------------------------------------------------\n"
 										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'. (n)\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
 										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
 										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
+						)
+				)
+		) {
+			assertThatExceptionOfType(BuildResolveException.class)
+					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
+		}
+		try (
+				final var bufferedReader = new BufferedReader(
+						new StringReader(
+								"> Task :dependencies\n"
+										+ "\n"
+										+ "------------------------------------------------------------\n"
+										+ "Root project\n" // Until Gradle 6.7
+										+ "------------------------------------------------------------\n"
+										+ "\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)"
+						)
+				)
+		) {
+			assertThatExceptionOfType(BuildResolveException.class)
+					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
+		}
+		try (
+				final var bufferedReader = new BufferedReader(
+						new StringReader(
+								"> Task :dependencies\n"
+										+ "\n"
+										+ "------------------------------------------------------------\n"
+										+ "Root project 'foo-project'\n" // Since Gradle 6.8
+										+ "------------------------------------------------------------\n"
+										+ "\n"
+										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
+										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
+										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)"
 						)
 				)
 		) {
