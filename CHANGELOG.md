@@ -4,6 +4,7 @@
 
 ### Notes
 - Update `junit-jupiter` to `5.9.2`
+- Update `assertj-core` to `3.24.1`
 
 ## 1.0.1 _(2023-01-02)_
 
