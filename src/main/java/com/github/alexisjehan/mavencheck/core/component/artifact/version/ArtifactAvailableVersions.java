@@ -29,6 +29,7 @@ import com.github.alexisjehan.javanilla.misc.quality.HashCode;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
+import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public final class ArtifactAvailableVersions {
 	 * <p>Artifact.</p>
 	 * @since 1.0.0
 	 */
-	private final Artifact<?> artifact;
+	private final Artifact<ArtifactType> artifact;
 
 	/**
 	 * <p>{@link List} of available versions.</p>
@@ -60,10 +61,11 @@ public final class ArtifactAvailableVersions {
 	 *         {@code null}
 	 * @since 1.0.0
 	 */
+	@SuppressWarnings("unchecked")
 	public ArtifactAvailableVersions(final Artifact<?> artifact, final List<String> availableVersions) {
 		Ensure.notNull("artifact", artifact);
 		Ensure.notNullAndNotNullElements("availableVersions", availableVersions);
-		this.artifact = artifact;
+		this.artifact = (Artifact<ArtifactType>) artifact;
 		this.availableVersions = List.copyOf(availableVersions);
 	}
 
@@ -114,7 +116,7 @@ public final class ArtifactAvailableVersions {
 	 * @return the artifact
 	 * @since 1.0.0
 	 */
-	public Artifact<?> getArtifact() {
+	public Artifact<ArtifactType> getArtifact() {
 		return artifact;
 	}
 

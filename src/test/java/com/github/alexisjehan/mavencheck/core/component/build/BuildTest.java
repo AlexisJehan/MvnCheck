@@ -25,6 +25,7 @@ package com.github.alexisjehan.mavencheck.core.component.build;
 
 import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
 import com.github.alexisjehan.mavencheck.core.component.artifact.ArtifactIdentifier;
+import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
 import com.github.alexisjehan.mavencheck.core.component.artifact.type.MavenArtifactType;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFile;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFileType;
@@ -47,7 +48,7 @@ final class BuildTest {
 	private static final List<Repository> REPOSITORIES = List.of(
 			new Repository(RepositoryType.NORMAL, "foo-id", "https://foo-host")
 	);
-	private static final List<Artifact<?>> ARTIFACTS = List.of(
+	private static final List<Artifact<ArtifactType>> ARTIFACTS = List.of(
 			new Artifact<>(
 					MavenArtifactType.DEPENDENCY,
 					new ArtifactIdentifier("foo-group-id", "foo-artifact-id"),
@@ -58,7 +59,7 @@ final class BuildTest {
 	private static final List<Repository> OTHER_REPOSITORIES = List.of(
 			new Repository(RepositoryType.PLUGIN, "bar-id", "https://bar-host")
 	);
-	private static final List<Artifact<?>> OTHER_ARTIFACTS = List.of(
+	private static final List<Artifact<ArtifactType>> OTHER_ARTIFACTS = List.of(
 			new Artifact<>(
 					MavenArtifactType.BUILD_PLUGIN,
 					new ArtifactIdentifier("bar-group-id", "bar-artifact-id")

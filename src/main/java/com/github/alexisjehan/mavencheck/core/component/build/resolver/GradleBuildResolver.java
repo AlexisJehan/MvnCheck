@@ -317,7 +317,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
 	 * @since 1.0.0
 	 */
-	static List<Artifact<?>> filter(final List<Artifact<GradleArtifactType>> artifacts) {
+	static List<Artifact<GradleArtifactType>> filter(final List<Artifact<GradleArtifactType>> artifacts) {
 		Ensure.notNullAndNotNullElements("artifacts", artifacts);
 		artifacts.stream()
 				.filter(artifact -> {

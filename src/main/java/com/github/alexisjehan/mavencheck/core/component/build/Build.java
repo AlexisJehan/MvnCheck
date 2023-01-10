@@ -29,6 +29,7 @@ import com.github.alexisjehan.javanilla.misc.quality.HashCode;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
+import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFile;
 import com.github.alexisjehan.mavencheck.core.component.repository.Repository;
 
@@ -58,7 +59,7 @@ public final class Build {
 	 * <p>{@link List} of artifacts.</p>
 	 * @since 1.0.0
 	 */
-	private final List<Artifact<?>> artifacts;
+	private final List<Artifact<ArtifactType>> artifacts;
 
 	/**
 	 * <p>Constructor.</p>
@@ -69,17 +70,18 @@ public final class Build {
 	 *         artifacts or any of them is {@code null}
 	 * @since 1.0.0
 	 */
+	@SuppressWarnings("unchecked")
 	public Build(
 			final BuildFile file,
 			final List<Repository> repositories,
-			final List<Artifact<?>> artifacts
+			final List<? extends Artifact<?>> artifacts
 	) {
 		Ensure.notNull("file", file);
 		Ensure.notNullAndNotNullElements("repositories", repositories);
 		Ensure.notNullAndNotNullElements("artifacts", artifacts);
 		this.file = file;
 		this.repositories = List.copyOf(repositories);
-		this.artifacts = List.copyOf(artifacts);
+		this.artifacts = (List<Artifact<ArtifactType>>) List.copyOf(artifacts);
 	}
 
 	/**
@@ -150,7 +152,7 @@ public final class Build {
 	 * @return the {@link List} of artifacts
 	 * @since 1.0.0
 	 */
-	public List<Artifact<?>> getArtifacts() {
+	public List<Artifact<ArtifactType>> getArtifacts() {
 		return artifacts;
 	}
 }

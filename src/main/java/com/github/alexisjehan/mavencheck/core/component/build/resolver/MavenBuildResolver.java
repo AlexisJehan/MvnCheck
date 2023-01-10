@@ -276,7 +276,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	 * @return the {@link List} of artifacts
 	 * @since 1.0.0
 	 */
-	private static List<Artifact<?>> filter(
+	private static List<Artifact<MavenArtifactType>> filter(
 			final List<Artifact<MavenArtifactType>> effectiveArtifacts,
 			final List<Artifact<MavenArtifactType>> rawArtifacts
 	) {

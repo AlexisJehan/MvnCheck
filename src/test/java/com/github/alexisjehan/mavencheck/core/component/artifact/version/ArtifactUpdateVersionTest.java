@@ -26,6 +26,7 @@ package com.github.alexisjehan.mavencheck.core.component.artifact.version;
 import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
 import com.github.alexisjehan.mavencheck.core.component.artifact.ArtifactIdentifier;
+import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
 import com.github.alexisjehan.mavencheck.core.component.artifact.type.MavenArtifactType;
 import org.junit.jupiter.api.Test;
 
@@ -35,12 +36,12 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 final class ArtifactUpdateVersionTest {
 
-	private static final Artifact<?> ARTIFACT = new Artifact<>(
+	private static final Artifact<ArtifactType> ARTIFACT = new Artifact<>(
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier("foo-group-id", "foo-artifact-id")
 	);
 	private static final String UPDATE_VERSION = "foo-version";
-	private static final Artifact<?> OTHER_ARTIFACT = new Artifact<>(
+	private static final Artifact<ArtifactType> OTHER_ARTIFACT = new Artifact<>(
 			MavenArtifactType.BUILD_PLUGIN,
 			new ArtifactIdentifier("bar-group-id", "bar-artifact-id")
 	);

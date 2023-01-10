@@ -29,6 +29,7 @@ import com.github.alexisjehan.javanilla.misc.quality.HashCode;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
+import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
 
 /**
  * <p>Class that describes an update version for an artifact.</p>
@@ -42,7 +43,7 @@ public final class ArtifactUpdateVersion {
 	 * <p>Artifact.</p>
 	 * @since 1.0.0
 	 */
-	private final Artifact<?> artifact;
+	private final Artifact<ArtifactType> artifact;
 
 	/**
 	 * <p>Update version.</p>
@@ -58,10 +59,11 @@ public final class ArtifactUpdateVersion {
 	 * @throws IllegalArgumentException if the update version is empty
 	 * @since 1.0.0
 	 */
+	@SuppressWarnings("unchecked")
 	public ArtifactUpdateVersion(final Artifact<?> artifact, final String updateVersion) {
 		Ensure.notNull("artifact", artifact);
 		Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
-		this.artifact = artifact;
+		this.artifact = (Artifact<ArtifactType>) artifact;
 		this.updateVersion = updateVersion;
 	}
 
@@ -112,7 +114,7 @@ public final class ArtifactUpdateVersion {
 	 * @return the artifact
 	 * @since 1.0.0
 	 */
-	public Artifact<?> getArtifact() {
+	public Artifact<ArtifactType> getArtifact() {
 		return artifact;
 	}
 
