@@ -1,7 +1,9 @@
 # Changelog
 
 ## 1.1.0 _(in progress)_
-…
+
+### Notes
+- Update `junit-jupiter` to `5.9.2`
 
 ## 1.0.1 _(2023-01-02)_
 
