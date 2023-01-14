@@ -52,7 +52,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactDescriptorInvalid(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.warn(
 				"Invalid {} artifact descriptor: {}",
 				() -> ToString.toString(event.getArtifact()),
 				() -> ToString.toString(event.getException())
@@ -67,7 +67,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactDescriptorMissing(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.warn(
 				"Missing {} artifact descriptor",
 				() -> ToString.toString(event.getArtifact())
 		);
@@ -81,7 +81,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactResolving(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Resolving {} artifact from {}",
 				() -> ToString.toString(event.getArtifact()),
 				() -> ToString.toString(event.getRepository())
@@ -111,7 +111,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactDownloading(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Downloading {} artifact from {}",
 				() -> ToString.toString(event.getArtifact()),
 				() -> ToString.toString(event.getRepository())
@@ -141,7 +141,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactInstalling(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Installing {} artifact to {}",
 				() -> ToString.toString(event.getArtifact()),
 				() -> ToString.toString(event.getFile())
@@ -171,7 +171,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void artifactDeploying(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Deploying {} artifact to {}",
 				() -> ToString.toString(event.getArtifact()),
 				() -> ToString.toString(event.getRepository())
@@ -201,7 +201,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void metadataInvalid(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.warn(
 				"Invalid {} metadata: {}",
 				() -> ToString.toString(event.getMetadata()),
 				() -> ToString.toString(event.getException())
@@ -216,7 +216,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void metadataResolving(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Resolving {} metadata from {}",
 				() -> ToString.toString(event.getMetadata()),
 				() -> ToString.toString(event.getRepository())
@@ -246,7 +246,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void metadataDownloading(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Downloading {} metadata from {}",
 				() -> ToString.toString(event.getMetadata()),
 				() -> ToString.toString(event.getRepository())
@@ -276,7 +276,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void metadataInstalling(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Installing {} metadata to {}",
 				() -> ToString.toString(event.getMetadata()),
 				() -> ToString.toString(event.getFile())
@@ -306,7 +306,7 @@ final class ConsoleRepositoryListener implements RepositoryListener {
 	@Override
 	public void metadataDeploying(final RepositoryEvent event) {
 		Ensure.notNull("event", event);
-		logger.debug(
+		logger.trace(
 				"Deploying {} metadata to {}",
 				() -> ToString.toString(event.getMetadata()),
 				() -> ToString.toString(event.getRepository())
