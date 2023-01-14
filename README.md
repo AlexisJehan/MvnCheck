@@ -23,6 +23,22 @@ most relevant update version for an artifact.
 - Use any already installed _Maven_ configuration and repository
 - Use any already installed _Gradle_ installation if available, or download a wrapper distribution
 
+### Output example
+```
+2 build file(s) found, checking for artifact updates
+
+my-gradle-project\build.gradle
+[COMPILE ONLY] com.google.guava:guava 31.0-android -> 31.1-android
+1 artifact update(s) available
+
+my-maven-project\pom.xml
+[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.12.0
+[BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.10.1
+2 artifact update(s) available
+
+2/2 build file(s) checked, 3 artifact update(s) available
+```
+
 ## Getting started
 
 ### Prerequisites
