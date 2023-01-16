@@ -56,6 +56,8 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
+			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+					.thenCallRealMethod();
 			assertThat(MavenUtils.retrieveOptionalGlobalHome()).isEmpty();
 		}
 		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
@@ -68,6 +70,8 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
+			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+					.thenCallRealMethod();
 			assertThat(MavenUtils.retrieveOptionalGlobalHome()).contains(File.separator + "apache-maven-1.0.0");
 		}
 	}
@@ -83,6 +87,8 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
+			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+					.thenCallRealMethod();
 			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
 					.isEmpty();
 		}
@@ -96,6 +102,8 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
+			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+					.thenCallRealMethod();
 			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
 					.contains(
 							Path.of(
