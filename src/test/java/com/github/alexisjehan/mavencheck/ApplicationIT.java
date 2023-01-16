@@ -82,7 +82,7 @@ final class ApplicationIT {
 							+ "\\d+\\.\\d+(?:\\.\\d+)?-android\\R"
 							+ "5 artifact update\\(s\\) available\\R"
 							+ "\\R"
-							+ ".+[/\\\\]build\\.gradle\\R"
+							+ ".+[/\\\\]groovy[/\\\\]build\\.gradle\\R"
 							+ "\\[COMPILE ONLY] com\\.google\\.android\\.material:material 1\\.0\\.0 -> "
 							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "\\[COMPILE ONLY] com\\.google\\.guava:guava 10\\.0 -> \\d+\\.\\d+(?:\\.\\d+)?-jre\\R"
@@ -93,7 +93,7 @@ final class ApplicationIT {
 							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "5 artifact update\\(s\\) available\\R"
 							+ "\\R"
-							+ ".+[/\\\\]build\\.gradle\\.kts\\R"
+							+ ".+[/\\\\]kotlin[/\\\\]build\\.gradle\\.kts\\R"
 							+ "\\[COMPILE ONLY] com\\.google\\.android\\.material:material 1\\.0\\.0 -> "
 							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "\\[COMPILE ONLY] com\\.google\\.guava:guava 10\\.0 -> \\d+\\.\\d+(?:\\.\\d+)?-jre\\R"
@@ -105,7 +105,7 @@ final class ApplicationIT {
 							+ "5 artifact update\\(s\\) available\\R"
 							+ "\\R"
 							+ "3/3 build file\\(s\\) checked, 15 artifact update\\(s\\) available\\R"
-							+ "\\R"
+							+ "\\R?"
 							+ "$"
 			);
 		}
