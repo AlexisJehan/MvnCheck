@@ -57,22 +57,43 @@ final class GradleBuildResolverIT {
 	}
 
 	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_12)
+	@ValueSource(strings = {"4.8", "4.9", "4.10", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6"})
+	void testResolveUntilGradle67UntilJava12(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveUntilGradle67(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_13)
-	@ValueSource(strings = {"4.8", "4.9", "4.10", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "6.0", "6.1", "6.2"})
+	@ValueSource(strings = {"6.0", "6.1", "6.2"})
 	void testResolveUntilGradle67UntilJava13(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveUntilGradle67(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
-	@EnabledForJreRange(max = JRE.JAVA_17)
+	@EnabledForJreRange(max = JRE.JAVA_15)
 	@ValueSource(strings = {"6.3", "6.4", "6.5", "6.6", "6.7"})
-	void testResolveUntilGradle67UntilJava17(final String gradleVersion, @TempDir final Path tmpDirectory) {
+	void testResolveUntilGradle67UntilJava15(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveUntilGradle67(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_15)
+	@ValueSource(strings = {"6.8", "6.9"})
+	void testResolveSinceGradle68UntilJava15(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveSinceGradle68(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_16)
+	@ValueSource(strings = {"7.0", "7.1"})
+	void testResolveSinceGradle68UntilJava16(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveSinceGradle68(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_17)
-	@ValueSource(strings = {"6.8", "6.9", "7.0", "7.1", "7.2"})
+	@ValueSource(strings = {"7.2"})
 	void testResolveSinceGradle68UntilJava17(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
