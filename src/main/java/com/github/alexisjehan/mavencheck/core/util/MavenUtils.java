@@ -27,8 +27,8 @@ import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.maven.Maven;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
+import org.apache.maven.rtinfo.internal.DefaultRuntimeInformation;
 import org.apache.maven.settings.Repository;
 import org.apache.maven.settings.Settings;
 import org.apache.maven.settings.building.DefaultSettingsBuilderFactory;
@@ -81,7 +81,7 @@ public final class MavenUtils {
 	 * <p><i>Maven</i> version.</p>
 	 * @since 1.0.0
 	 */
-	private static final String VERSION = Maven.class.getPackage().getImplementationVersion();
+	private static final String VERSION = new DefaultRuntimeInformation().getMavenVersion();
 
 	/**
 	 * <p>Pattern to extract the <i>Maven</i> home from the {@code PATH} environment variable.</p>
