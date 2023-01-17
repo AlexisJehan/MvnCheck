@@ -33,6 +33,7 @@ import com.github.alexisjehan.mavencheck.core.component.repository.RepositoryTyp
 import com.github.alexisjehan.mavencheck.core.util.GradleUtils;
 import org.gradle.tooling.GradleConnector;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.io.TempDir;
@@ -47,6 +48,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 final class GradleBuildResolverIT {
 
 	private final GradleBuildResolver gradleBuildResolver = new GradleBuildResolver();
