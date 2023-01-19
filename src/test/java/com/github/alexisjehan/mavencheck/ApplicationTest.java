@@ -58,7 +58,7 @@ final class ApplicationTest {
 
 	@Test
 	void testConstructorInvalid() {
-		try (final var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			assertThatNullPointerException()
 					.isThrownBy(() -> new Application(null, printStream, false));
 			assertThatNullPointerException()
@@ -105,10 +105,10 @@ final class ApplicationTest {
 				.thenReturn(List.of());
 		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
-		try (final var mockedApplication = Mockito.mockStatic(Application.class)) {
+		try (var mockedApplication = Mockito.mockStatic(Application.class)) {
 			mockedApplication.when(Application::createService)
 					.thenReturn(mockedService);
-			try (final var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 				final var application = new Application(printStream);
 				assertThatNoException().isThrownBy(application::run);
 				assertThatNoException().isThrownBy(() -> application.run("-h"));
@@ -128,7 +128,7 @@ final class ApplicationTest {
 
 	@Test
 	void testRunInvalid() {
-		try (final var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			final var application = new Application(printStream);
 			assertThatNullPointerException()
 					.isThrownBy(() -> application.run((String[]) null));

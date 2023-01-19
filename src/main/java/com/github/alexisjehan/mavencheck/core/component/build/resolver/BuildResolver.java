@@ -42,7 +42,7 @@ public interface BuildResolver {
 	 * @throws BuildResolveException might occur while resolving the build
 	 * @since 1.0.0
 	 */
-	Build resolve(final BuildFile file) throws BuildResolveException;
+	Build resolve(BuildFile file);
 
 	/**
 	 * <p>Get the {@link Set} of file types.</p>

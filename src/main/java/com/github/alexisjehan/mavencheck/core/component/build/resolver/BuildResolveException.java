@@ -36,7 +36,7 @@ public final class BuildResolveException extends RuntimeException {
 	 * <p>Serial version unique identifier.</p>
 	 * @since 1.0.0
 	 */
-	private static final long serialVersionUID = 2259143999947820179L;
+	private static final long serialVersionUID = -8048900544512654741L;
 
 	/**
 	 * <p>Constructor with a message.</p>
@@ -47,6 +47,18 @@ public final class BuildResolveException extends RuntimeException {
 	 */
 	BuildResolveException(final String message) {
 		super(Ensure.notNullAndNotEmpty("message", message));
+	}
+
+	/**
+	 * <p>Constructor with a message and a cause.</p>
+	 * @param message a message
+	 * @param cause a cause
+	 * @throws NullPointerException if the message or the cause is {@code null}
+	 * @throws IllegalArgumentException if the message is empty
+	 * @since 1.1.0
+	 */
+	BuildResolveException(final String message, final Throwable cause) {
+		super(Ensure.notNullAndNotEmpty("message", message), Ensure.notNull("cause", cause));
 	}
 
 	/**

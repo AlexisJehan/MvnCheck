@@ -38,5 +38,5 @@ public interface VersionFilterFactory {
 	 * @return the version filter
 	 * @since 1.0.0
 	 */
-	VersionFilter create(final String artifactVersion);
+	VersionFilter create(String artifactVersion);
 }

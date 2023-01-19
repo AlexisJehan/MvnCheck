@@ -99,7 +99,7 @@ public final class ArtifactFilterParser {
 	public static ArtifactFilter parse(final Path ignoreFile) throws IOException {
 		Ensure.notNullAndFile("ignoreFile", ignoreFile);
 		logger.info("Parsing the {} ignore file", () -> ToString.toString(ignoreFile));
-		try (final var reader = Readers.of(ignoreFile)) {
+		try (var reader = Readers.of(ignoreFile)) {
 			return parse(reader);
 		} catch (final ArtifactFilterParseException e) {
 			throw e.with(ignoreFile);
@@ -119,9 +119,9 @@ public final class ArtifactFilterParser {
 		Ensure.notNull("reader", reader);
 		final var identifiers = new HashSet<ArtifactIdentifier>();
 		final var identifiersVersions = new HashMap<ArtifactIdentifier, Set<Pattern>>();
-		try (final var bufferedReader = Readers.buffered(reader)) {
+		try (var bufferedReader = Readers.buffered(reader)) {
 			String line;
-			long lineNumber = 1;
+			long lineNumber = 1L;
 			while (null != (line = bufferedReader.readLine())) {
 				line = Strings.substringBefore(line, COMMENT_START).trim();
 				if (line.isEmpty()) {

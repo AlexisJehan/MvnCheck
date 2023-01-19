@@ -99,7 +99,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	@ExcludeFromJacocoGeneratedReport
 	public Build resolve(final BuildFile file) {
 		Ensure.notNull("file", file);
-		try (final var outputStream = new ByteArrayOutputStream()) {
+		try (var outputStream = new ByteArrayOutputStream()) {
 			return resolve(file, outputStream);
 		} catch (final IOException e) {
 			throw new AssertionError(e);
@@ -125,7 +125,7 @@ public final class GradleBuildResolver implements BuildResolver {
 					logger.debug("Using the {} installation", () -> ToString.toString(installation));
 					connector.useInstallation(installation.toFile());
 				});
-		try (final var connection = connector.connect()) {
+		try (var connection = connector.connect()) {
 			connection.newBuild()
 					.forTasks("repositories", "dependencies")
 					.withArguments("--init-script=" + getClass().getClassLoader().getResource(INIT_FILE_NAME))
@@ -136,7 +136,7 @@ public final class GradleBuildResolver implements BuildResolver {
 		} finally {
 			connector.disconnect();
 		}
-		try (final var reader = Readers.buffered(Readers.of(outputStream.toString()))) {
+		try (var reader = Readers.buffered(Readers.of(outputStream.toString()))) {
 			logger.trace("Parsing repositories");
 			final var repositories = parseRepositories(reader);
 			logger.debug("Parsed repositories:");
@@ -199,7 +199,10 @@ public final class GradleBuildResolver implements BuildResolver {
 					try {
 						repositoryType = RepositoryType.valueOf(parts.get(0));
 					} catch (final IllegalArgumentException e) {
-						throw new BuildResolveException("Unexpected Gradle \":repositories\" repository type format");
+						throw new BuildResolveException(
+								"Unexpected Gradle \":repositories\" repository type format",
+								e
+						);
 					}
 					repositories.add(new Repository(repositoryType, parts.get(1), parts.get(2)));
 				}
@@ -352,17 +355,17 @@ public final class GradleBuildResolver implements BuildResolver {
 				.forEach(artifact -> artifacts.remove(artifact.with(GradleArtifactType.TEST_RUNTIME_CLASSPATH)));
 		return artifacts.stream()
 				.map(artifact -> {
-					final var artifactType = artifact.getType();
-					if (GradleArtifactType.COMPILE_CLASSPATH == artifactType) {
-						return artifact.with(GradleArtifactType.IMPLEMENTATION);
-					} else if (GradleArtifactType.RUNTIME_CLASSPATH == artifactType) {
-						return artifact.with(GradleArtifactType.RUNTIME_ONLY);
-					} else if (GradleArtifactType.TEST_COMPILE_CLASSPATH == artifactType) {
-						return artifact.with(GradleArtifactType.TEST_IMPLEMENTATION);
-					} else if (GradleArtifactType.TEST_RUNTIME_CLASSPATH == artifactType) {
-						return artifact.with(GradleArtifactType.TEST_RUNTIME_ONLY);
-					} else {
-						return artifact;
+					switch (artifact.getType()) {
+						case COMPILE_CLASSPATH:
+							return artifact.with(GradleArtifactType.IMPLEMENTATION);
+						case RUNTIME_CLASSPATH:
+							return artifact.with(GradleArtifactType.RUNTIME_ONLY);
+						case TEST_COMPILE_CLASSPATH:
+							return artifact.with(GradleArtifactType.TEST_IMPLEMENTATION);
+						case TEST_RUNTIME_CLASSPATH:
+							return artifact.with(GradleArtifactType.TEST_RUNTIME_ONLY);
+						default:
+							return artifact;
 					}
 				})
 				.collect(Collectors.toUnmodifiableList());

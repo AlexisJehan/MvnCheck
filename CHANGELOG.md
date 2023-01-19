@@ -2,6 +2,9 @@
 
 ## 1.1.0 _(in progress)_
 
+### API changes
+- Add the `BuildResolveException(String, Throwable)` method
+
 ### Notes
 - Update `junit-jupiter` to `5.9.2`
 - Update `assertj-core` to `3.24.1`

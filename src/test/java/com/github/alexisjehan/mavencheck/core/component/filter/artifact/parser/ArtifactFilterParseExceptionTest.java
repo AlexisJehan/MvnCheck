@@ -37,7 +37,7 @@ final class ArtifactFilterParseExceptionTest {
 
 	private static final String REASON = "foo-reason";
 	private static final String LINE = "foo-line";
-	private static final long LINE_NUMBER = 1;
+	private static final long LINE_NUMBER = 1L;
 	private static final Path FILE = Path.of("foo-file");
 
 	private final ArtifactFilterParseException artifactFilterParseException = new ArtifactFilterParseException(
@@ -61,7 +61,7 @@ final class ArtifactFilterParseExceptionTest {
 			throw new ArtifactFilterParseException(REASON, Strings.EMPTY, LINE_NUMBER);
 		});
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(REASON, LINE, 0);
+			throw new ArtifactFilterParseException(REASON, LINE, 0L);
 		});
 	}
 

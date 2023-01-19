@@ -36,7 +36,6 @@ import org.eclipse.aether.resolution.VersionRangeResult;
 import org.eclipse.aether.version.Version;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.AdditionalAnswers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -60,7 +59,17 @@ final class MavenArtifactAvailableVersionsResolverTest {
 		}
 
 		@Override
-		public int compareTo(final Version o) {
+		public int compareTo(final Version other) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean equals(final Object object) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public int hashCode() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -89,7 +98,7 @@ final class MavenArtifactAvailableVersionsResolverTest {
 		);
 		versionRangeResult.addException(new RuntimeException());
 		Mockito.when(mockedMavenSession.resolve(Mockito.notNull()))
-				.then(AdditionalAnswers.returnsFirstArg());
+				.thenAnswer(invocation -> invocation.getArgument(0));
 		Mockito.when(mockedMavenSession.request(Mockito.notNull()))
 				.thenReturn(versionRangeResult);
 		final var mavenArtifactAvailableVersionsResolver = new MavenArtifactAvailableVersionsResolver(
@@ -124,7 +133,7 @@ final class MavenArtifactAvailableVersionsResolverTest {
 	@Test
 	void testResolveInvalid() throws VersionRangeResolutionException {
 		Mockito.when(mockedMavenSession.resolve(Mockito.notNull()))
-				.then(AdditionalAnswers.returnsFirstArg());
+				.thenAnswer(invocation -> invocation.getArgument(0));
 		Mockito.when(mockedMavenSession.request(Mockito.notNull()))
 				.thenThrow(VersionRangeResolutionException.class);
 		final var mavenArtifactAvailableVersionsResolver = new MavenArtifactAvailableVersionsResolver(

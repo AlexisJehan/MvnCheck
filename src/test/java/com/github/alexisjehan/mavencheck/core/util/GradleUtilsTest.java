@@ -35,7 +35,7 @@ final class GradleUtilsTest {
 
 	@Test
 	void testRetrieveOptionalHome() {
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
 					.thenReturn(Optional.empty());
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
@@ -48,7 +48,7 @@ final class GradleUtilsTest {
 					);
 			assertThat(GradleUtils.retrieveOptionalHome()).isEmpty();
 		}
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
 					.thenReturn(Optional.empty());
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
@@ -62,7 +62,7 @@ final class GradleUtilsTest {
 					);
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
 		}
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
 					.thenReturn(Optional.of(File.separatorChar + "gradle-1.0"));
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
@@ -75,7 +75,7 @@ final class GradleUtilsTest {
 					);
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
 		}
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
 					.thenReturn(Optional.of(File.separatorChar + "gradle-1.0"));
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)

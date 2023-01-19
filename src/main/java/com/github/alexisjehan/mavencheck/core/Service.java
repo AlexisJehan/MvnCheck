@@ -143,7 +143,7 @@ public final class Service {
 	 */
 	public List<BuildFile> findBuildFiles(final Path path) throws IOException {
 		Ensure.notNullAndExists("path", path);
-		try (final var stream = Files.walk(path)) {
+		try (var stream = Files.walk(path)) {
 			return stream
 					.filter(Files::isRegularFile)
 					.map(file -> {

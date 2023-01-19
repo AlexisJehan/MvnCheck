@@ -102,7 +102,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 						+ ": "
 						+ ToString.toString(Ensure.notNullAndNotEmpty("line", line))
 						+ " ("
-						+ "at line " + Ensure.greaterThan("lineNumber", lineNumber, 0)
+						+ "at line " + Ensure.greaterThan("lineNumber", lineNumber, 0L)
 						+ (null != file ? " of the " + ToString.toString(file) + " file" : "")
 						+ ")"
 		);

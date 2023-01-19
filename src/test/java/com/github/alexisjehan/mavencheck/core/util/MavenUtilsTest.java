@@ -47,7 +47,7 @@ final class MavenUtilsTest {
 
 	@Test
 	void testRetrieveOptionalGlobalHome() {
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
@@ -60,7 +60,7 @@ final class MavenUtilsTest {
 					.thenCallRealMethod();
 			assertThat(MavenUtils.retrieveOptionalGlobalHome()).isEmpty();
 		}
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
@@ -78,7 +78,7 @@ final class MavenUtilsTest {
 
 	@Test
 	void testRetrieveOptionalGlobalSettingsFile() {
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
@@ -92,7 +92,7 @@ final class MavenUtilsTest {
 			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
 					.isEmpty();
 		}
-		try (final var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(

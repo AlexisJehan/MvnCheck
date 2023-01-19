@@ -207,7 +207,7 @@ public final class Application {
 					outputStream.println();
 					outputStream.println(DESCRIPTION);
 					outputStream.println();
-					try (final var writer = new PrintWriter(outputStream)) {
+					try (var writer = new PrintWriter(outputStream)) {
 						final var helpFormatter = new HelpFormatter();
 						helpFormatter.printHelp(
 								writer,

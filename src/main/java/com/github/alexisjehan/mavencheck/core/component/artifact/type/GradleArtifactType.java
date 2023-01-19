@@ -52,7 +52,7 @@ public enum GradleArtifactType implements ArtifactType {
 	/**
 	 * <p>Dependency artifacts.</p>
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
-	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link IMPLEMENTATION}).</p>
+	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #IMPLEMENTATION}).</p>
 	 * @since 1.0.0
 	 */
 	COMPILE(Property.DEPRECATED),
@@ -85,7 +85,7 @@ public enum GradleArtifactType implements ArtifactType {
 	/**
 	 * <p>Runtime dependency artifacts.</p>
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
-	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link RUNTIME_ONLY}).</p>
+	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #RUNTIME_ONLY}).</p>
 	 * @since 1.0.0
 	 */
 	RUNTIME(Property.DEPRECATED),
@@ -112,7 +112,7 @@ public enum GradleArtifactType implements ArtifactType {
 	/**
 	 * <p>Test dependency artifacts.</p>
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
-	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link TEST_IMPLEMENTATION}).</p>
+	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #TEST_IMPLEMENTATION}).</p>
 	 * @since 1.0.0
 	 */
 	TEST_COMPILE(Property.DEPRECATED),
@@ -138,7 +138,7 @@ public enum GradleArtifactType implements ArtifactType {
 	/**
 	 * <p>Test runtime dependency artifacts.</p>
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
-	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link TEST_RUNTIME_ONLY}).</p>
+	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #TEST_RUNTIME_ONLY}).</p>
 	 * @since 1.0.0
 	 */
 	TEST_RUNTIME(Property.DEPRECATED),

@@ -43,5 +43,5 @@ public interface ArtifactAvailableVersionsResolver {
 	 * @return available versions
 	 * @since 1.0.0
 	 */
-	ArtifactAvailableVersions resolve(final Artifact<?> artifact, final List<Repository> repositories);
+	ArtifactAvailableVersions resolve(Artifact<?> artifact, List<Repository> repositories);
 }

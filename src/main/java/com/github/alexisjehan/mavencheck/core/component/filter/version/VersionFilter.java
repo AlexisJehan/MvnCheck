@@ -47,5 +47,5 @@ public interface VersionFilter {
 	 * @return {@code true} if the version is accepted
 	 * @since 1.0.0
 	 */
-	boolean accept(final String version);
+	boolean accept(String version);
 }

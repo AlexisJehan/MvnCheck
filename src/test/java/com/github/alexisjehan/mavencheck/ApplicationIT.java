@@ -61,8 +61,8 @@ final class ApplicationIT {
 				tmpKotlinBuildFile,
 				StandardCopyOption.REPLACE_EXISTING
 		);
-		try (final var outputStream = new ByteArrayOutputStream()) {
-			try (final var printStream = new PrintStream(outputStream)) {
+		try (var outputStream = new ByteArrayOutputStream()) {
+			try (var printStream = new PrintStream(outputStream)) {
 				final var application = new Application(printStream);
 				application.run(tmpDirectory, false, false);
 			}
@@ -105,7 +105,6 @@ final class ApplicationIT {
 							+ "5 artifact update\\(s\\) available\\R"
 							+ "\\R"
 							+ "3/3 build file\\(s\\) checked, 15 artifact update\\(s\\) available\\R"
-							+ "\\R?"
 							+ "$"
 			);
 		}

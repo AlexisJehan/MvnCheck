@@ -71,7 +71,7 @@ final class ArtifactFilterParserTest {
 
 	@Test
 	void testParseReader() {
-		try (final var reader = new StringReader(Strings.EMPTY)) {
+		try (var reader = new StringReader(Strings.EMPTY)) {
 			assertThatNoException().isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
 	}
@@ -79,23 +79,23 @@ final class ArtifactFilterParserTest {
 	@Test
 	void testParseReaderInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilterParser.parse((Reader) null));
-		try (final var reader = new StringReader("foo-group-id")) {
+		try (var reader = new StringReader("foo-group-id")) {
 			assertThatExceptionOfType(ArtifactFilterParseException.class)
 					.isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version:foo")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version:foo")) {
 			assertThatExceptionOfType(ArtifactFilterParseException.class)
 					.isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
-		try (final var reader = new StringReader(":foo-artifact-id")) {
+		try (var reader = new StringReader(":foo-artifact-id")) {
 			assertThatExceptionOfType(ArtifactFilterParseException.class)
 					.isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
-		try (final var reader = new StringReader("foo-group-id:")) {
+		try (var reader = new StringReader("foo-group-id:")) {
 			assertThatExceptionOfType(ArtifactFilterParseException.class)
 					.isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:")) {
 			assertThatExceptionOfType(ArtifactFilterParseException.class)
 					.isThrownBy(() -> ArtifactFilterParser.parse(reader));
 		}
@@ -103,13 +103,13 @@ final class ArtifactFilterParserTest {
 
 	@Test
 	void testParseReaderAccept() throws IOException {
-		try (final var reader = new StringReader("#foo-group-id:foo-artifact-id")) {
+		try (var reader = new StringReader("#foo-group-id:foo-artifact-id")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT)).isTrue();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:bar-artifact-id")) {
+		try (var reader = new StringReader("foo-group-id:bar-artifact-id")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT)).isTrue();
 		}
 	}
@@ -122,34 +122,34 @@ final class ArtifactFilterParserTest {
 
 	@Test
 	void testParseReaderAcceptUpdateVersion() throws IOException {
-		try (final var reader = new StringReader("#foo-group-id:foo-artifact-id:foo-version")) {
+		try (var reader = new StringReader("#foo-group-id:foo-artifact-id:foo-version")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isTrue();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:bar-version")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:bar-version")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isTrue();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:FOO-VERSION")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:FOO-VERSION")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version?")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version?")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isTrue();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-?")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-?")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isTrue();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-???????")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-???????")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version*")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-version*")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-*")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-*")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
-		try (final var reader = new StringReader("foo-group-id:foo-artifact-id:foo-*******")) {
+		try (var reader = new StringReader("foo-group-id:foo-artifact-id:foo-*******")) {
 			assertThat(ArtifactFilterParser.parse(reader).accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 		}
 	}

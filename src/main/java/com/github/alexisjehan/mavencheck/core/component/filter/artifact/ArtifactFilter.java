@@ -100,7 +100,7 @@ public interface ArtifactFilter {
 	 * @return {@code true} if the artifact is accepted
 	 * @since 1.0.0
 	 */
-	boolean accept(final Artifact<?> artifact);
+	boolean accept(Artifact<?> artifact);
 
 	/**
 	 * <p>Test if an artifact and an update version are accepted.</p>
@@ -109,5 +109,5 @@ public interface ArtifactFilter {
 	 * @return {@code true} if the artifact and the update version are accepted
 	 * @since 1.0.0
 	 */
-	boolean accept(final Artifact<?> artifact, final String updateVersion);
+	boolean accept(Artifact<?> artifact, String updateVersion);
 }

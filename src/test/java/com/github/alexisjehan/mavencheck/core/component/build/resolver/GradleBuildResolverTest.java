@@ -295,7 +295,7 @@ final class GradleBuildResolverTest {
 				assertThatExceptionOfType(BuildResolveException.class)
 						.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
 						.withCauseInstanceOf(GradleConnectionException.class);
-				try (final var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
+				try (var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
 					mockedGradleUtils.when(GradleUtils::retrieveOptionalHome)
 							.thenReturn(Optional.of("directory_not-found"));
 					Files.copy(
@@ -328,7 +328,7 @@ final class GradleBuildResolverTest {
 				assertThatExceptionOfType(BuildResolveException.class)
 						.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
 						.withCauseInstanceOf(GradleConnectionException.class);
-				try (final var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
+				try (var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
 					mockedGradleUtils.when(GradleUtils::retrieveOptionalHome)
 							.thenReturn(Optional.of("directory_not-found"));
 					Files.copy(
@@ -355,7 +355,7 @@ final class GradleBuildResolverTest {
 	@Test
 	void testParseRepositories() throws IOException {
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"\n"
 						)
@@ -364,7 +364,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseRepositories(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :repositories\n"
 										+ "NORMAL:foo-repository-name:https://foo-repository-host\n"
@@ -392,7 +392,7 @@ final class GradleBuildResolverTest {
 		assertThatNullPointerException()
 				.isThrownBy(() -> GradleBuildResolver.parseRepositories(null));
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :repositories\n"
 										+ "NORMAL:foo-repository-name"
@@ -403,7 +403,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseRepositories(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :repositories\n"
 										+ "UNKNOWN:foo-repository-name:https://foo-repository-host"
@@ -418,7 +418,7 @@ final class GradleBuildResolverTest {
 	@Test
 	void testParseArtifacts() throws IOException {
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"\n"
 						)
@@ -427,7 +427,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -442,7 +442,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -457,7 +457,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -475,7 +475,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -493,7 +493,7 @@ final class GradleBuildResolverTest {
 			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -567,7 +567,7 @@ final class GradleBuildResolverTest {
 			);
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -647,7 +647,7 @@ final class GradleBuildResolverTest {
 		assertThatNullPointerException()
 				.isThrownBy(() -> GradleBuildResolver.parseArtifacts(null));
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies"
 						)
@@ -657,7 +657,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -668,7 +668,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -680,7 +680,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -693,7 +693,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -706,7 +706,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -720,7 +720,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -734,7 +734,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -752,7 +752,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -770,7 +770,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -787,7 +787,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -804,7 +804,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -822,7 +822,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -840,7 +840,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"
@@ -858,7 +858,7 @@ final class GradleBuildResolverTest {
 					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
 		}
 		try (
-				final var bufferedReader = new BufferedReader(
+				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"> Task :dependencies\n"
 										+ "\n"

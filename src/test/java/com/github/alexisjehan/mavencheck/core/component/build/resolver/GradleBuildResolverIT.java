@@ -95,7 +95,7 @@ final class GradleBuildResolverIT {
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_17)
-	@ValueSource(strings = {"7.2"})
+	@ValueSource(strings = "7.2")
 	void testResolveSinceGradle68UntilJava17(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
@@ -114,13 +114,13 @@ final class GradleBuildResolverIT {
 	}
 
 	private void testResolveUntilGradle67(final String gradleVersion, final Path tmpDirectory) {
-		try (final var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
+		try (var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
 			mockedGradleUtils.when(GradleUtils::retrieveOptionalHome)
 					.thenReturn(Optional.empty());
 			assertThat(BuildFileType.GRADLE_GROOVY).satisfies(buildFileType -> {
 				final var connector = GradleConnector.newConnector()
 						.useGradleVersion(gradleVersion);
-				try (final var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
+				try (var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
 					mockedGradleConnector.when(GradleConnector::newConnector)
 							.thenReturn(connector);
 					final var tmpBuildDirectory = tmpDirectory.resolve("groovy");
@@ -189,7 +189,7 @@ final class GradleBuildResolverIT {
 			assertThat(BuildFileType.GRADLE_KOTLIN).satisfies(buildFileType -> {
 				final var connector = GradleConnector.newConnector()
 						.useGradleVersion(gradleVersion);
-				try (final var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
+				try (var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
 					mockedGradleConnector.when(GradleConnector::newConnector)
 							.thenReturn(connector);
 					final var tmpBuildDirectory = tmpDirectory.resolve("kotlin");
@@ -259,13 +259,13 @@ final class GradleBuildResolverIT {
 	}
 
 	private void testResolveSinceGradle68(final String gradleVersion, final Path tmpDirectory) {
-		try (final var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
+		try (var mockedGradleUtils = Mockito.mockStatic(GradleUtils.class)) {
 			mockedGradleUtils.when(GradleUtils::retrieveOptionalHome)
 					.thenReturn(Optional.empty());
 			assertThat(BuildFileType.GRADLE_GROOVY).satisfies(buildFileType -> {
 				final var connector = GradleConnector.newConnector()
 						.useGradleVersion(gradleVersion);
-				try (final var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
+				try (var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
 					mockedGradleConnector.when(GradleConnector::newConnector)
 							.thenReturn(connector);
 					final var tmpBuildDirectory = tmpDirectory.resolve("groovy");
@@ -339,7 +339,7 @@ final class GradleBuildResolverIT {
 			assertThat(BuildFileType.GRADLE_KOTLIN).satisfies(buildFileType -> {
 				final var connector = GradleConnector.newConnector()
 						.useGradleVersion(gradleVersion);
-				try (final var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
+				try (var mockedGradleConnector = Mockito.mockStatic(GradleConnector.class)) {
 					mockedGradleConnector.when(GradleConnector::newConnector)
 							.thenReturn(connector);
 					final var tmpBuildDirectory = tmpDirectory.resolve("kotlin");
