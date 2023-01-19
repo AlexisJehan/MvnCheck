@@ -6,8 +6,10 @@
 - Add the `BuildResolveException(String, Throwable)` method
 
 ### Notes
+- Migrate from `mockito-inline` to `mockito-core`
 - Update `junit-jupiter` to `5.9.2`
 - Update `assertj-core` to `3.24.2`
+- Update `mockito-core` and `mockito-junit-jupiter` to `5.0.0`
 
 ## 1.0.1 _(2023-01-02)_
 
