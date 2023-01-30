@@ -200,6 +200,38 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.20.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-core</artifactId>
+						<version>6.54.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-java</artifactId>
+						<version>6.54.0</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<excludeFromFailureFile>${project.basedir}/exclude-pmd.properties</excludeFromFailureFile>
+					<linkXRef>false</linkXRef>
+					<includeTests>true</includeTests>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pmd-check</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>

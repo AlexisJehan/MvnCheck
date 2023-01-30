@@ -6,6 +6,7 @@
 - Add the `BuildResolveException(String, Throwable)` method
 
 ### Notes
+- Add the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
 - Migrate the `mockito-inline` dependency to `mockito-core`
 - Update the `junit-jupiter` dependency to `5.9.2`
 - Update the `assertj-core` dependency to `3.24.2`
