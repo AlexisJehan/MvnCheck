@@ -103,7 +103,8 @@ final class ServiceTest {
 	}
 
 	@Test
-	void testFindBuildFiles(@TempDir final Path tmpDirectory) throws IOException {
+	@Deprecated
+	void testFindBuildFilesDeprecated(@TempDir final Path tmpDirectory) throws IOException {
 		final var service = new Service(mockedMavenSession);
 		final var rootMavenFile = tmpDirectory.resolve(Path.of("pom.xml"));
 		final var fooMavenFile = tmpDirectory.resolve(Path.of("foo", "pom.xml"));
@@ -156,12 +157,89 @@ final class ServiceTest {
 	}
 
 	@Test
-	void testFindBuildFilesInvalid() throws IOException {
+	@Deprecated
+	void testFindBuildFilesDeprecatedInvalid() throws IOException {
 		final var service = new Service(mockedMavenSession);
 		assertThatNullPointerException()
 				.isThrownBy(() -> service.findBuildFiles(null));
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> service.findBuildFiles(Path.of("directory_not-found")));
+	}
+
+	@Test
+	void testFindBuildFiles(@TempDir final Path tmpDirectory) throws IOException {
+		final var service = new Service(mockedMavenSession);
+		final var rootMavenFile = tmpDirectory.resolve(Path.of("pom.xml"));
+		final var fooMavenFile = tmpDirectory.resolve(Path.of("foo", "pom.xml"));
+		final var fooGradleGroovyFile = tmpDirectory.resolve(Path.of("foo", "build.gradle"));
+		final var fooGradleKotlinFile = tmpDirectory.resolve(Path.of("foo", "build.gradle.kts"));
+		final var foo10MavenFile = tmpDirectory.resolve(Path.of("foo", "10", "pom.xml"));
+		final var foo1GradleGroovyFile = tmpDirectory.resolve(Path.of("foo", "1", "build.gradle"));
+		final var foo2GradleKotlinFile = tmpDirectory.resolve(Path.of("foo", "2", "build.gradle.kts"));
+		final var barMavenFile = tmpDirectory.resolve(Path.of("bar", "pom.xml"));
+		final var barGradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "build.gradle"));
+		final var barGradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "build.gradle.kts"));
+		final var bar10MavenFile = tmpDirectory.resolve(Path.of("bar", "10", "pom.xml"));
+		final var bar1GradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "1", "build.gradle"));
+		final var bar2GradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "2", "build.gradle.kts"));
+		Stream.of(
+				rootMavenFile,
+				fooMavenFile,
+				fooGradleGroovyFile,
+				fooGradleKotlinFile,
+				foo10MavenFile,
+				foo1GradleGroovyFile,
+				foo2GradleKotlinFile,
+				barMavenFile,
+				barGradleGroovyFile,
+				barGradleKotlinFile,
+				bar10MavenFile,
+				bar1GradleGroovyFile,
+				bar2GradleKotlinFile
+		).forEach(
+				ThrowableConsumer.sneaky(file -> {
+					Files.createDirectories(file.getParent());
+					Files.createFile(file);
+				})
+		);
+		assertThat(service.findBuildFiles(tmpDirectory, 0)).containsExactly(
+				new BuildFile(BuildFileType.MAVEN, rootMavenFile)
+		);
+		assertThat(service.findBuildFiles(tmpDirectory, 1)).containsExactly(
+				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, barGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, barMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, fooGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, fooGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, fooMavenFile)
+		);
+		assertThat(service.findBuildFiles(tmpDirectory, 2)).containsExactly(
+				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, barGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, barMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, bar1GradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, bar2GradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, bar10MavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, fooGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, fooGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, fooMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, foo1GradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, foo2GradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, foo10MavenFile)
+		);
+	}
+
+	@Test
+	void testFindBuildFilesInvalid(@TempDir final Path tmpDirectory) throws IOException {
+		final var service = new Service(mockedMavenSession);
+		assertThatNullPointerException()
+				.isThrownBy(() -> service.findBuildFiles(null, 0));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> service.findBuildFiles(Path.of("directory_not-found"), 0));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> service.findBuildFiles(tmpDirectory, -1));
 	}
 
 	@Test

@@ -2,6 +2,9 @@
 
 ## 1.1.0 _(unreleased)_
 
+### Features
+- Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
+
 ### Improvements
 - Improve resolving the _Maven_ version
 - Improve exceptions output

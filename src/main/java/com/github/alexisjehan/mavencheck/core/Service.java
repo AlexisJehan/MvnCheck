@@ -139,11 +139,28 @@ public final class Service {
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the path is {@code null}
 	 * @throws IllegalArgumentException if the path does not exist
+	 * @deprecated since 1.1.0, use {@link #findBuildFiles(Path, int)} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.1.0")
 	public List<BuildFile> findBuildFiles(final Path path) throws IOException {
+		return findBuildFiles(path, Integer.MAX_VALUE);
+	}
+
+	/**
+	 * <p>Find a {@link List} of build files in the given path, recursively.</p>
+	 * @param path a path
+	 * @param maxDepth a maximum depth
+	 * @return the {@link List} of build files
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the path is {@code null}
+	 * @throws IllegalArgumentException if the path does not exist or if the maximum depth is lower than {@code 0}
+	 * @since 1.1.0
+	 */
+	public List<BuildFile> findBuildFiles(final Path path, final int maxDepth) throws IOException {
 		Ensure.notNullAndExists("path", path);
-		try (var stream = Files.walk(path)) {
+		Ensure.greaterThanOrEqualTo("maxDepth", maxDepth, 0);
+		try (var stream = Files.walk(path, Integer.MAX_VALUE > maxDepth ? maxDepth + 1 : Integer.MAX_VALUE)) {
 			return stream
 					.filter(Files::isRegularFile)
 					.map(file -> {

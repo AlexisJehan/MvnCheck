@@ -47,6 +47,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -63,6 +64,98 @@ final class ApplicationTest {
 					.isThrownBy(() -> new Application(null, printStream, false));
 			assertThatNullPointerException()
 					.isThrownBy(() -> new Application(printStream, null, false));
+		}
+	}
+
+	@Test
+	@Deprecated
+	void testRunDeprecated() throws IOException {
+		final var path1 = Path.of("path1");
+		final var path2 = Path.of("path2");
+		final var path3 = Path.of("path3");
+		final var buildFile1 = new BuildFile(BuildFileType.MAVEN, Path.of("pom.xml"));
+		final var buildFile2 = new BuildFile(BuildFileType.GRADLE_GROOVY, Path.of("build.gradle"));
+		final var buildFile3 = new BuildFile(BuildFileType.GRADLE_KOTLIN, Path.of("build.gradle.kts"));
+		final var artifact = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				new ArtifactIdentifier("foo-group-id", "foo-artifact-id"),
+				"1.0.0"
+		);
+		final var build1 = new Build(
+				buildFile1,
+				List.of(),
+				List.of(artifact)
+		);
+		final var build2 = new Build(
+				buildFile2,
+				List.of(),
+				List.of(artifact)
+		);
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path1::equals), Mockito.anyInt()))
+				.thenReturn(List.of());
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path2::equals), Mockito.anyInt()))
+				.thenReturn(List.of(buildFile1));
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path3::equals), Mockito.anyInt()))
+				.thenReturn(List.of(buildFile1, buildFile2, buildFile3));
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile1::equals)))
+				.thenReturn(build1);
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile2::equals)))
+				.thenReturn(build2);
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile3::equals)))
+				.thenThrow(BuildResolveException.class);
+		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build1::equals), Mockito.anyBoolean()))
+				.thenReturn(List.of());
+		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
+				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
+		try (var mockedApplication = Mockito.mockStatic(Application.class)) {
+			mockedApplication.when(Application::createService)
+					.thenReturn(mockedService);
+			try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+				final var application = new Application(printStream);
+				assertThatNoException()
+						.isThrownBy(application::run);
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-d", "0"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-h"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-i"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-s"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-v"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("directory_not-found"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path1.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path2.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path3.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path1, true, true));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path2, true, true));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path3, true, true));
+			}
+		}
+	}
+
+	@Test
+	@Deprecated
+	void testRunDeprecatedInvalid() {
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			final var application = new Application(printStream);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String[]) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run(null, false, false)
+			);
 		}
 	}
 
@@ -89,11 +182,11 @@ final class ApplicationTest {
 				List.of(),
 				List.of(artifact)
 		);
-		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path1::equals)))
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path1::equals), Mockito.anyInt()))
 				.thenReturn(List.of());
-		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path2::equals)))
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path2::equals), Mockito.anyInt()))
 				.thenReturn(List.of(buildFile1));
-		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path3::equals)))
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path3::equals), Mockito.anyInt()))
 				.thenReturn(List.of(buildFile1, buildFile2, buildFile3));
 		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile1::equals)))
 				.thenReturn(build1);
@@ -110,18 +203,32 @@ final class ApplicationTest {
 					.thenReturn(mockedService);
 			try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 				final var application = new Application(printStream);
-				assertThatNoException().isThrownBy(application::run);
-				assertThatNoException().isThrownBy(() -> application.run("-h"));
-				assertThatNoException().isThrownBy(() -> application.run("-i"));
-				assertThatNoException().isThrownBy(() -> application.run("-s"));
-				assertThatNoException().isThrownBy(() -> application.run("-v"));
-				assertThatNoException().isThrownBy(() -> application.run("directory_not-found"));
-				assertThatNoException().isThrownBy(() -> application.run(path1.toString()));
-				assertThatNoException().isThrownBy(() -> application.run(path2.toString()));
-				assertThatNoException().isThrownBy(() -> application.run(path3.toString()));
-				assertThatNoException().isThrownBy(() -> application.run(path1, true, true));
-				assertThatNoException().isThrownBy(() -> application.run(path2, true, true));
-				assertThatNoException().isThrownBy(() -> application.run(path3, true, true));
+				assertThatNoException()
+						.isThrownBy(application::run);
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-d", "0"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-h"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-i"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-s"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("-v"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run("directory_not-found"));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path1.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path2.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path3.toString()));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path1, 0, true, true));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path2, 0, true, true));
+				assertThatNoException()
+						.isThrownBy(() -> application.run(path3, 0, true, true));
 			}
 		}
 	}
@@ -130,12 +237,18 @@ final class ApplicationTest {
 	void testRunInvalid() {
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			final var application = new Application(printStream);
-			assertThatNullPointerException()
-					.isThrownBy(() -> application.run((String[]) null));
-			assertThatNullPointerException()
-					.isThrownBy(() -> application.run((String) null));
-			assertThatNullPointerException()
-					.isThrownBy(() -> application.run(null, false, false));
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String[]) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run(null, 0, false, false)
+			);
+			assertThatIllegalArgumentException().isThrownBy(
+					() -> application.run(Path.of("path"), -1, false, false)
+			);
 		}
 	}
 
