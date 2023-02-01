@@ -146,8 +146,10 @@ final class ApplicationTest {
 
 	@Test
 	void testToStringException() {
-		assertThat(Application.toString(new Exception(" foo "))).isEqualTo("foo");
-		assertThat(Application.toString(new Exception(" foo ", new Exception(" bar ")))).isEqualTo("bar");
+		assertThat(Application.toString(new Exception("foo ")))
+				.isEqualTo("java.lang.Exception: foo");
+		assertThat(Application.toString(new Exception("foo ", new Exception("bar "))))
+				.isEqualTo("java.lang.Exception: bar");
 	}
 
 	@Test

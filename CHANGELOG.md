@@ -4,6 +4,7 @@
 
 ### Improvements
 - Improve resolving the _Maven_ version
+- Improve exceptions output
 - Improve some log levels
 
 ### Notes

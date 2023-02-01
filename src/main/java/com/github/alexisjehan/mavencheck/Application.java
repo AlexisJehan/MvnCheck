@@ -327,7 +327,7 @@ public final class Application {
 	 */
 	static String toString(final Exception exception) {
 		Ensure.notNull("exception", exception);
-		return Throwables.getOptionalRootCause(exception).orElse(exception).getMessage().trim();
+		return Throwables.getOptionalRootCause(exception).orElse(exception).toString().stripTrailing();
 	}
 
 	/**
