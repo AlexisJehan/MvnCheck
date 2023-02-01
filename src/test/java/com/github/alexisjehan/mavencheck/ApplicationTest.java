@@ -119,9 +119,9 @@ final class ApplicationTest {
 				assertThatNoException().isThrownBy(() -> application.run(path1.toString()));
 				assertThatNoException().isThrownBy(() -> application.run(path2.toString()));
 				assertThatNoException().isThrownBy(() -> application.run(path3.toString()));
-				assertThatNoException().isThrownBy(() -> application.run(path1, false, true));
-				assertThatNoException().isThrownBy(() -> application.run(path2, false, true));
-				assertThatNoException().isThrownBy(() -> application.run(path3, false, true));
+				assertThatNoException().isThrownBy(() -> application.run(path1, true, true));
+				assertThatNoException().isThrownBy(() -> application.run(path2, true, true));
+				assertThatNoException().isThrownBy(() -> application.run(path3, true, true));
 			}
 		}
 	}

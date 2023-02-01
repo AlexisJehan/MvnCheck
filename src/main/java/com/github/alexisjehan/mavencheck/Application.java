@@ -114,7 +114,7 @@ public final class Application {
 	private static final boolean DEFAULT_ANSI = false;
 
 	/**
-	 * <p>Default path, current directory.</p>
+	 * <p>Default path.</p>
 	 * @since 1.0.0
 	 */
 	private static final Path DEFAULT_PATH = Path.of(".");

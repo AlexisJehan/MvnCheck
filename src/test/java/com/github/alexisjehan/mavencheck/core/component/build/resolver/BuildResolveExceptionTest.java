@@ -48,6 +48,15 @@ final class BuildResolveExceptionTest {
 			throw new BuildResolveException(Strings.EMPTY);
 		});
 		assertThatNullPointerException().isThrownBy(() -> {
+			throw new BuildResolveException(null, CAUSE);
+		});
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			throw new BuildResolveException(Strings.EMPTY, CAUSE);
+		});
+		assertThatNullPointerException().isThrownBy(() -> {
+			throw new BuildResolveException(MESSAGE, null);
+		});
+		assertThatNullPointerException().isThrownBy(() -> {
 			throw new BuildResolveException((Throwable) null);
 		});
 	}
