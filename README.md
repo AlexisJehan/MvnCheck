@@ -76,7 +76,9 @@ mvnchk --version
 
 ## Usage
 ```
-usage: mvnchk [<path>] [-h] [-i] [-s] [-v]
+usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [-s] [-v]
+ -d,--max-depth <arg>    Maximum depth of subdirectories to find build
+                         files (a non-negative integer)
  -h,--help               Display help information
  -i,--ignore-snapshots   Ignore build file artifacts with a snapshot
                          version
