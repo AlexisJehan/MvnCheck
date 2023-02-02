@@ -2,7 +2,7 @@
 
 ## 1.1.0 _(unreleased)_
 
-### Features
+### New features
 - Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
 
 ### Improvements
@@ -19,7 +19,7 @@
 
 ## [1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) _(2023-01-02)_
 
-### Fixes
+### Bug fixes
 - Fix missing artifacts related to _Gradle_ `:dependencies` resolved versions
 
 ### Notes
