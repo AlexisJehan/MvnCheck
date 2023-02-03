@@ -15,7 +15,7 @@
 - Migrate the `mockito-inline` dependency to `mockito-core`
 - Update the `junit-jupiter` dependency to `5.9.2`
 - Update the `assertj-core` dependency to `3.24.2`
-- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.0`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.1`
 
 ## [1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) _(2023-01-02)_
 
