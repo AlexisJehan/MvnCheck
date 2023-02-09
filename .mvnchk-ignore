@@ -1,6 +1,1 @@
 commons-cli:commons-cli:20040117.000000
-
-# FIXME NoSuchMethodError with maven-core:3.8.7
-org.apache.maven.resolver:maven-resolver-connector-basic:1.?.?
-org.apache.maven.resolver:maven-resolver-transport-file:1.?.?
-org.apache.maven.resolver:maven-resolver-transport-http:1.?.?

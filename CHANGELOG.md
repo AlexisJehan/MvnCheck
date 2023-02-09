@@ -13,9 +13,12 @@
 ### Notes
 - Include the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
 - Migrate the `mockito-inline` dependency to `mockito-core`
+- Update the `maven-core` dependency to `3.9.0`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.4`
 - Update the `junit-jupiter` dependency to `5.9.2`
 - Update the `assertj-core` dependency to `3.24.2`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.1`
+- Remove the `maven-resolver-transport-file` dependency
 
 ## [1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) _(2023-01-02)_
 
