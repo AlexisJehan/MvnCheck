@@ -7,6 +7,7 @@
 
 ### Improvements
 - Improve resolving the _Maven_ version
+- Improve _Maven_ dependency injection by migrating from `ServiceLocator` to `Eclipse Sisu`
 - Improve exceptions output
 - Improve some log levels
 

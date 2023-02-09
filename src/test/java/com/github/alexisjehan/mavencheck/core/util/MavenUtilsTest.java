@@ -177,28 +177,43 @@ final class MavenUtilsTest {
 	}
 
 	@Test
+	@Deprecated
 	void testMakeServiceLocator() {
 		assertThat(MavenUtils.makeServiceLocator()).isNotNull();
 	}
 
 	@Test
-	void testMakeRepositorySystem() {
+	@Deprecated
+	void testMakeRepositorySystemDeprecated() {
 		assertThat(MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())).isNotNull();
 	}
 
 	@Test
-	void testMakeRepositorySystemInvalid() {
+	@Deprecated
+	void testMakeRepositorySystemDeprecatedInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> MavenUtils.makeRepositorySystem(null));
 	}
 
 	@Test
-	void testMakeRemoteRepositoryManager() {
+	void testMakeRepositorySystem() {
+		assertThat(MavenUtils.makeRepositorySystem()).isNotNull();
+	}
+
+	@Test
+	@Deprecated
+	void testMakeRemoteRepositoryManagerDeprecated() {
 		assertThat(MavenUtils.makeRemoteRepositoryManager(MavenUtils.makeServiceLocator())).isNotNull();
 	}
 
 	@Test
-	void testMakeRemoteRepositoryManagerInvalid() {
+	@Deprecated
+	void testMakeRemoteRepositoryManagerDeprecatedInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> MavenUtils.makeRemoteRepositoryManager(null));
+	}
+
+	@Test
+	void testMakeRemoteRepositoryManager() {
+		assertThat(MavenUtils.makeRemoteRepositoryManager()).isNotNull();
 	}
 
 	@Test
@@ -451,7 +466,7 @@ final class MavenUtilsTest {
 				settings,
 				Path.of("src", "test", "resources", "settings-security.xml")
 		);
-		final var repositorySystem = MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator());
+		final var repositorySystem = MavenUtils.makeRepositorySystem();
 		assertThat(MavenUtils.makeRepositorySystemSession(settings, decryptedSettings, repositorySystem)).isNotNull();
 	}
 
@@ -465,7 +480,7 @@ final class MavenUtilsTest {
 				settings,
 				Path.of("src", "test", "resources", "settings-security.xml")
 		);
-		final var repositorySystem = MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator());
+		final var repositorySystem = MavenUtils.makeRepositorySystem();
 		assertThatNullPointerException().isThrownBy(
 				() -> MavenUtils.makeRepositorySystemSession(null, decryptedSettings, repositorySystem)
 		);

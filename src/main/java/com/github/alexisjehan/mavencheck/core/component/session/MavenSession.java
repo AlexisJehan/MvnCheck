@@ -85,8 +85,7 @@ public final class MavenSession {
 	 * @since 1.0.0
 	 */
 	public MavenSession() {
-		final var serviceLocator = MavenUtils.makeServiceLocator();
-		repositorySystem = MavenUtils.makeRepositorySystem(serviceLocator);
+		repositorySystem = MavenUtils.makeRepositorySystem();
 		final Settings settings;
 		try {
 			settings = MavenUtils.makeSettings();
@@ -100,7 +99,7 @@ public final class MavenSession {
 				repositorySystemSession,
 				null,
 				repositorySystem,
-				MavenUtils.makeRemoteRepositoryManager(serviceLocator),
+				MavenUtils.makeRemoteRepositoryManager(),
 				remoteRepositories,
 				ProjectBuildingRequest.RepositoryMerging.POM_DOMINANT,
 				new PublicReactorModelPool()

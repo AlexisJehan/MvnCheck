@@ -65,9 +65,7 @@ final class MavenSessionTest {
 		Mockito.when(mockedRepositorySystem.newResolutionRepositories(Mockito.any(), Mockito.any()))
 				.thenReturn(remoteRepositories);
 		try (var mockedMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
-			mockedMavenUtils.when(MavenUtils::makeServiceLocator)
-					.thenCallRealMethod();
-			mockedMavenUtils.when(() -> MavenUtils.makeRepositorySystem(Mockito.notNull()))
+			mockedMavenUtils.when(MavenUtils::makeRepositorySystem)
 					.thenReturn(mockedRepositorySystem);
 			final var mavenSession = new MavenSession();
 			assertThat(mavenSession.resolve(List.of())).isSameAs(remoteRepositories);
@@ -87,9 +85,7 @@ final class MavenSessionTest {
 		Mockito.when(mockedRepositorySystem.resolveVersionRange(Mockito.any(), Mockito.any()))
 				.thenReturn(versionRangeResult);
 		try (var mockedMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
-			mockedMavenUtils.when(MavenUtils::makeServiceLocator)
-					.thenCallRealMethod();
-			mockedMavenUtils.when(() -> MavenUtils.makeRepositorySystem(Mockito.notNull()))
+			mockedMavenUtils.when(MavenUtils::makeRepositorySystem)
 					.thenReturn(mockedRepositorySystem);
 			final var mavenSession = new MavenSession();
 			assertThat(mavenSession.request(new VersionRangeRequest())).isSameAs(versionRangeResult);

@@ -48,7 +48,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DESCRIPTOR_INVALID
 						)
@@ -74,7 +74,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DESCRIPTOR_MISSING
 						)
@@ -99,7 +99,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_RESOLVING
 						)
@@ -124,7 +124,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_RESOLVED
 						)
@@ -149,7 +149,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DOWNLOADING
 						)
@@ -174,7 +174,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DOWNLOADED
 						)
@@ -199,7 +199,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_INSTALLING
 						)
@@ -224,7 +224,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_INSTALLED
 						)
@@ -249,7 +249,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DEPLOYING
 						)
@@ -274,7 +274,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.ARTIFACT_DEPLOYED
 						)
@@ -299,7 +299,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_INVALID
 						)
@@ -324,7 +324,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_RESOLVING
 						)
@@ -349,7 +349,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_RESOLVED
 						)
@@ -374,7 +374,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_DOWNLOADING
 						)
@@ -399,7 +399,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_DOWNLOADED
 						)
@@ -424,7 +424,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_INSTALLING
 						)
@@ -449,7 +449,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_INSTALLED
 						)
@@ -474,7 +474,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_DEPLOYING
 						)
@@ -499,7 +499,7 @@ final class ConsoleRepositoryListenerTest {
 								MavenUtils.makeRepositorySystemSession(
 										settings,
 										MavenUtils.makeDecryptedSettings(settings),
-										MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())
+										MavenUtils.makeRepositorySystem()
 								),
 								RepositoryEvent.EventType.METADATA_DEPLOYED
 						)

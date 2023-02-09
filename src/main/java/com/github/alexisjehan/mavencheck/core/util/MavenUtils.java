@@ -25,6 +25,8 @@ package com.github.alexisjehan.mavencheck.core.util;
 
 import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
@@ -39,7 +41,6 @@ import org.apache.maven.settings.crypto.DefaultSettingsDecryptionRequest;
 import org.eclipse.aether.DefaultRepositoryCache;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
-import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.impl.RemoteRepositoryManager;
 import org.eclipse.aether.repository.AuthenticationSelector;
 import org.eclipse.aether.repository.LocalRepository;
@@ -48,17 +49,15 @@ import org.eclipse.aether.repository.Proxy;
 import org.eclipse.aether.repository.ProxySelector;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.repository.RepositoryPolicy;
-import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
-import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.spi.locator.ServiceLocator;
-import org.eclipse.aether.transport.file.FileTransporterFactory;
-import org.eclipse.aether.transport.http.HttpTransporterFactory;
 import org.eclipse.aether.util.repository.AuthenticationBuilder;
 import org.eclipse.aether.util.repository.ConservativeAuthenticationSelector;
 import org.eclipse.aether.util.repository.ConservativeProxySelector;
 import org.eclipse.aether.util.repository.DefaultAuthenticationSelector;
 import org.eclipse.aether.util.repository.DefaultMirrorSelector;
 import org.eclipse.aether.util.repository.DefaultProxySelector;
+import org.eclipse.sisu.launch.Main;
+import org.eclipse.sisu.space.BeanScanning;
 import org.sonatype.plexus.components.cipher.DefaultPlexusCipher;
 import org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher;
 
@@ -120,6 +119,12 @@ public final class MavenUtils {
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+
+	/**
+	 * <p>Dependency injector.</p>
+	 * @since 1.1.0
+	 */
+	private static final Injector injector = Guice.createInjector(Main.wire(BeanScanning.INDEX));
 
 	/**
 	 * <p>Constructor not available.</p>
@@ -216,13 +221,12 @@ public final class MavenUtils {
 	/**
 	 * <p>Make a service locator.</p>
 	 * @return the service locator
+	 * @deprecated since 1.1.0, don't use anymore
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.1.0")
 	public static ServiceLocator makeServiceLocator() {
-		return MavenRepositorySystemUtils.newServiceLocator()
-				.addService(RepositoryConnectorFactory.class, BasicRepositoryConnectorFactory.class)
-				.addService(TransporterFactory.class, FileTransporterFactory.class)
-				.addService(TransporterFactory.class, HttpTransporterFactory.class);
+		return MavenRepositorySystemUtils.newServiceLocator();
 	}
 
 	/**
@@ -230,11 +234,22 @@ public final class MavenUtils {
 	 * @param serviceLocator a service locator
 	 * @return the repository system
 	 * @throws NullPointerException if the service locator is {@code null}
+	 * @deprecated since 1.1.0, use {@link #makeRepositorySystem()} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.1.0")
 	public static RepositorySystem makeRepositorySystem(final ServiceLocator serviceLocator) {
 		Ensure.notNull("serviceLocator", serviceLocator);
-		return serviceLocator.getService(RepositorySystem.class);
+		return makeRepositorySystem();
+	}
+
+	/**
+	 * <p>Make a repository system.</p>
+	 * @return the repository system
+	 * @since 1.1.0
+	 */
+	public static RepositorySystem makeRepositorySystem() {
+		return injector.getInstance(RepositorySystem.class);
 	}
 
 	/**
@@ -242,11 +257,22 @@ public final class MavenUtils {
 	 * @param serviceLocator a service locator
 	 * @return the remote repository manager
 	 * @throws NullPointerException if the service locator is {@code null}
+	 * @deprecated since 1.1.0, use {@link #makeRemoteRepositoryManager()} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.1.0")
 	public static RemoteRepositoryManager makeRemoteRepositoryManager(final ServiceLocator serviceLocator) {
 		Ensure.notNull("serviceLocator", serviceLocator);
-		return serviceLocator.getService(RemoteRepositoryManager.class);
+		return makeRemoteRepositoryManager();
+	}
+
+	/**
+	 * <p>Make a remote repository manager.</p>
+	 * @return the remote repository manager
+	 * @since 1.1.0
+	 */
+	public static RemoteRepositoryManager makeRemoteRepositoryManager() {
+		return injector.getInstance(RemoteRepositoryManager.class);
 	}
 
 	/**
