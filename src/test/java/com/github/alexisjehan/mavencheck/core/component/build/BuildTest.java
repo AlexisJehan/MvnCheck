@@ -75,8 +75,8 @@ final class BuildTest {
 		final var build = new Build(FILE, repositories, artifacts);
 		repositories.clear();
 		artifacts.clear();
-		assertThat(build.getRepositories()).containsExactlyElementsOf(REPOSITORIES);
-		assertThat(build.getArtifacts()).containsExactlyElementsOf(ARTIFACTS);
+		assertThat(build.getRepositories()).isEqualTo(REPOSITORIES);
+		assertThat(build.getArtifacts()).isEqualTo(ARTIFACTS);
 	}
 
 	@Test

@@ -51,8 +51,8 @@ final class DecryptedSettingsTest {
 		final var decryptedSettings = new DecryptedSettings(proxies, servers);
 		proxies.clear();
 		servers.clear();
-		assertThat(decryptedSettings.getProxies()).containsExactlyElementsOf(PROXIES);
-		assertThat(decryptedSettings.getServers()).containsExactlyElementsOf(SERVERS);
+		assertThat(decryptedSettings.getProxies()).isEqualTo(PROXIES);
+		assertThat(decryptedSettings.getServers()).isEqualTo(SERVERS);
 	}
 
 	@Test

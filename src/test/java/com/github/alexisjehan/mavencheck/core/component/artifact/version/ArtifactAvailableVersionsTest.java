@@ -60,7 +60,7 @@ final class ArtifactAvailableVersionsTest {
 		final var availableVersions = new ArrayList<>(AVAILABLE_VERSIONS);
 		final var artifactAvailableVersions = new ArtifactAvailableVersions(ARTIFACT, availableVersions);
 		availableVersions.clear();
-		assertThat(artifactAvailableVersions.getAvailableVersions()).containsExactlyElementsOf(AVAILABLE_VERSIONS);
+		assertThat(artifactAvailableVersions.getAvailableVersions()).isEqualTo(AVAILABLE_VERSIONS);
 	}
 
 	@Test
