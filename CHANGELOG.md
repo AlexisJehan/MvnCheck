@@ -1,6 +1,8 @@
 # Changelog
 
-## 1.1.0 _(unreleased)_
+## 1.2.0 _(unreleased)_
+
+## [1.1.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0) _(2023-02-09)_
 
 ### New features
 - Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
