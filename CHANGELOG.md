@@ -1,8 +1,6 @@
 # Changelog
 
-## 1.2.0 _(unreleased)_
-
-## [1.1.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0) _(2023-02-09)_
+## [v1.1.0 (2023-02-09)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0)
 
 ### New features
 - Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
@@ -23,7 +21,7 @@
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.1`
 - Remove the `maven-resolver-transport-file` dependency
 
-## [1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) _(2023-01-02)_
+## [v1.0.1 (2023-01-02)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1)
 
 ### Bug fixes
 - Fix missing artifacts related to _Gradle_ `:dependencies` resolved versions
@@ -32,5 +30,5 @@
 - Update the `maven-core` dependency to `3.8.7`
 - Update `mockito-inline` and `mockito-junit-jupiter` dependencies to `4.11.0`
 
-## [1.0.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.0) _(2022-12-23)_
+## [v1.0.0 (2022-12-23)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.0)
 Initial release
