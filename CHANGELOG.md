@@ -4,6 +4,7 @@
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.0.1`
+- Update `log4j-api`, `log4j-core` and `log4j-slf4j-impl` dependencies to `2.20.0`
 
 ## [v1.1.0 (2023-02-09)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0)
 
