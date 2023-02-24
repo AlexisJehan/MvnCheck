@@ -1,1 +1,3 @@
 commons-cli:commons-cli:20040117.000000
+org.apache.maven.resolver:maven-resolver-connector-basic
+org.apache.maven.resolver:maven-resolver-transport-http
