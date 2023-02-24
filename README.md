@@ -113,6 +113,7 @@ version of a build tool may still be compatible.
 
 | Maven Check | Maven version | Gradle version |
 |:-----------:|:-------------:|:--------------:|
+|    1.1.1    |     3.9.0     |     8.0.1      |
 |    1.1.0    |     3.9.0     |      7.6       |
 |    1.0.1    |     3.8.7     |      7.6       |
 |    1.0.0    |     3.8.6     |      7.6       |
