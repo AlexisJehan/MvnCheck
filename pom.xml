@@ -175,10 +175,14 @@
 				<artifactId>license-maven-plugin</artifactId>
 				<version>4.1</version>
 				<configuration>
-					<header>LICENSE.txt</header>
-					<includes>
-						<includes>src/**/*.java</includes>
-					</includes>
+					<licenseSets>
+						<licenseSet>
+							<header>LICENSE.txt</header>
+							<includes>
+								<includes>src/**/*.java</includes>
+							</includes>
+						</licenseSet>
+					</licenseSets>
 					<mapping>
 						<java>SLASHSTAR_STYLE</java>
 					</mapping>
