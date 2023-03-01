@@ -4,6 +4,7 @@
 
 ### Notes
 - Update `pmd-core` and `pmd-java` dependencies to `6.55.0`
+- Update the `maven-compiler-plugin` plugin to `3.11.0`
 
 ## [v1.1.1 (2023-02-24)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.1)
 
