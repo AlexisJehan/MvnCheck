@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.0 (unreleased)
+
+### Notes
+- Update `pmd-core` and `pmd-java` dependencies to `6.55.0`
+
 ## [v1.1.1 (2023-02-24)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.1)
 
 ### Notes
