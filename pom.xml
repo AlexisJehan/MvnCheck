@@ -51,8 +51,6 @@
 		<maven.compiler.release>11</maven.compiler.release>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-		<maven.test.skip>false</maven.test.skip>
-		<maven.javadoc.skip>false</maven.javadoc.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -80,12 +78,14 @@
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-connector-basic</artifactId>
-			<version>1.9.4</version> <!-- Based on org.apache.maven:maven-core:3.9.0 -->
+			<version>1.9.4</version> <!-- Based on "org.apache.maven:maven-core:3.9.0" -->
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-transport-http</artifactId>
-			<version>1.9.4</version> <!-- Based on org.apache.maven:maven-core:3.9.0 -->
+			<version>1.9.4</version> <!-- Based on "org.apache.maven:maven-core:3.9.0" -->
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.gradle</groupId>
