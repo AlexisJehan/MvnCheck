@@ -3,6 +3,7 @@
 ## v1.2.0 (unreleased)
 
 ### Notes
+- Update the `gradle-tooling-api` dependency to `8.0.2`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.2.0`
 - Update `pmd-core` and `pmd-java` dependencies to `6.55.0`
 - Update the `maven-compiler-plugin` plugin to `3.11.0`
