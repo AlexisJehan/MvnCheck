@@ -6,7 +6,7 @@
 - Update `pmd-core` and `pmd-java` dependencies to `6.55.0`
 - Update the `maven-compiler-plugin` plugin to `3.11.0`
 
-## [v1.1.1 (2023-02-24)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.1)
+## [v1.1.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.1) (2023-02-24)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.0.1`
@@ -14,7 +14,7 @@
 - Update the `maven-javadoc-plugin` plugin to `3.5.0`
 - Update the `maven-assembly-plugin` plugin to `3.5.0`
 
-## [v1.1.0 (2023-02-09)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0)
+## [v1.1.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0) (2023-02-09)
 
 ### New features
 - Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
@@ -35,7 +35,7 @@
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.1`
 - Remove the `maven-resolver-transport-file` dependency
 
-## [v1.0.1 (2023-01-02)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1)
+## [v1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) (2023-01-02)
 
 ### Bug fixes
 - Fix missing artifacts related to _Gradle_ `:dependencies` resolved versions
@@ -44,5 +44,5 @@
 - Update the `maven-core` dependency to `3.8.7`
 - Update `mockito-inline` and `mockito-junit-jupiter` dependencies to `4.11.0`
 
-## [v1.0.0 (2022-12-23)](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.0)
+## [v1.0.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.0) (2022-12-23)
 Initial release
