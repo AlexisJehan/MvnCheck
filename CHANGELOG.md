@@ -2,6 +2,8 @@
 
 ## v1.2.0 (unreleased)
 
+## [v1.1.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.2) (2023-03-10)
+
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.0.2`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.2.0`
