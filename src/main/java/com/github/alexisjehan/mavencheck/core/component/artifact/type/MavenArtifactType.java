@@ -27,7 +27,7 @@ import com.github.alexisjehan.mavencheck.core.component.repository.RepositoryTyp
 
 /**
  * <p>Enumeration of <i>Maven</i> artifact types.</p>
- * <p><b>Note</b>: Based on {@code org.apache.maven:maven-core:3.9.0}.</p>
+ * <p><b>Note</b>: Based on {@code org.apache.maven:maven-core:3.9.1}.</p>
  * @see <a href="https://maven.apache.org/ref/current/maven-model/maven.html">https://maven.apache.org/ref/current/maven-model/maven.html</a>
  * @since 1.0.0
  */

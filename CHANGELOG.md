@@ -3,6 +3,8 @@
 ## v1.2.0 (unreleased)
 
 ### Notes
+- Update the `maven-core` dependency to `3.9.1`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.7`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.0.0`
 
 ## [v1.1.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.2) (2023-03-10)
