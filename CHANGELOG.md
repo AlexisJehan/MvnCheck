@@ -2,6 +2,9 @@
 
 ## v1.2.0 (unreleased)
 
+### Notes
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.0.0`
+
 ## [v1.1.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.2) (2023-03-10)
 
 ### Notes
