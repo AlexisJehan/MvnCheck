@@ -33,7 +33,7 @@ my-gradle-project\build.gradle
 
 my-maven-project\pom.xml
 [DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.12.0
-[BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.10.1
+[BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.11.0
 2 artifact update(s) available
 
 2/2 build file(s) checked, 3 artifact update(s) available
@@ -57,16 +57,16 @@ You can download binaries for the latest version of _Maven Check_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf maven-check-1.1.2-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/maven-check-1.1.2/bin
+sudo tar -xvzf maven-check-1.1.3-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/maven-check-1.1.3/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\maven-check-1.1.2`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\maven-check-1.1.3`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\maven-check-1.1.2\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\maven-check-1.1.3\bin` at the end
 
 ### Verify
 If _Maven Check_ is correctly installed, this command should work as expected:
@@ -113,6 +113,7 @@ version of a build tool may still be compatible.
 
 | Maven Check | Maven version | Gradle version |
 |:-----------:|:-------------:|:--------------:|
+|    1.1.3    |     3.9.1     |     8.0.2      |
 |    1.1.2    |     3.9.0     |     8.0.2      |
 |    1.1.1    |     3.9.0     |     8.0.1      |
 |    1.1.0    |     3.9.0     |      7.6       |

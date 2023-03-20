@@ -2,6 +2,8 @@
 
 ## v1.2.0 (unreleased)
 
+## [v1.1.3](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.3) (2023-03-20)
+
 ### Notes
 - Update the `maven-core` dependency to `3.9.1`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.7`
