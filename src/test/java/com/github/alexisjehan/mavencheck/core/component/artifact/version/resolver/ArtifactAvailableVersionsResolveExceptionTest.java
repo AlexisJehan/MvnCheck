@@ -23,26 +23,37 @@
  */
 package com.github.alexisjehan.mavencheck.core.component.artifact.version.resolver;
 
-import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
-import com.github.alexisjehan.mavencheck.core.component.artifact.version.ArtifactAvailableVersions;
-import com.github.alexisjehan.mavencheck.core.component.repository.Repository;
+import com.github.alexisjehan.javanilla.io.Serializables;
+import com.github.alexisjehan.javanilla.lang.Strings;
+import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-/**
- * <p>Interface that describes a resolver of available versions for an artifact.</p>
- * @since 1.0.0
- */
-@FunctionalInterface
-public interface ArtifactAvailableVersionsResolver {
+final class ArtifactAvailableVersionsResolveExceptionTest {
 
-	/**
-	 * <p>Resolve available versions for an artifact.</p>
-	 * @param artifact an artifact
-	 * @param repositories a {@link List} of repositories
-	 * @return available versions
-	 * @throws ArtifactAvailableVersionsResolveException might occur while resolving available versions
-	 * @since 1.0.0
-	 */
-	ArtifactAvailableVersions resolve(Artifact<?> artifact, List<Repository> repositories);
+	private static final String MESSAGE = "foo-message";
+
+	private final ArtifactAvailableVersionsResolveException artifactAvailableVersionsResolveException
+			= new ArtifactAvailableVersionsResolveException(MESSAGE);
+
+	@Test
+	void testConstructorInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> {
+			throw new ArtifactAvailableVersionsResolveException(null);
+		});
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			throw new ArtifactAvailableVersionsResolveException(Strings.EMPTY);
+		});
+	}
+
+	@Test
+	void testSerializable() {
+		assertThat(
+				Serializables.<ArtifactAvailableVersionsResolveException>deserialize(
+						Serializables.serialize(artifactAvailableVersionsResolveException)
+				)
+		).hasSameClassAs(artifactAvailableVersionsResolveException);
+	}
 }

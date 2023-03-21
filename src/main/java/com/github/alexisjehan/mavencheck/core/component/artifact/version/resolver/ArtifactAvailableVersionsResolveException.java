@@ -23,26 +23,29 @@
  */
 package com.github.alexisjehan.mavencheck.core.component.artifact.version.resolver;
 
-import com.github.alexisjehan.mavencheck.core.component.artifact.Artifact;
-import com.github.alexisjehan.mavencheck.core.component.artifact.version.ArtifactAvailableVersions;
-import com.github.alexisjehan.mavencheck.core.component.repository.Repository;
-
-import java.util.List;
+import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
- * <p>Interface that describes a resolver of available versions for an artifact.</p>
- * @since 1.0.0
+ * <p>Unchecked {@link Exception} related to available versions resolving.</p>
+ * <p><b>Note</b>: This class is serializable.</p>
+ * @since 1.2.0
  */
-@FunctionalInterface
-public interface ArtifactAvailableVersionsResolver {
+public final class ArtifactAvailableVersionsResolveException extends RuntimeException {
 
 	/**
-	 * <p>Resolve available versions for an artifact.</p>
-	 * @param artifact an artifact
-	 * @param repositories a {@link List} of repositories
-	 * @return available versions
-	 * @throws ArtifactAvailableVersionsResolveException might occur while resolving available versions
-	 * @since 1.0.0
+	 * <p>Serial version unique identifier.</p>
+	 * @since 1.2.0
 	 */
-	ArtifactAvailableVersions resolve(Artifact<?> artifact, List<Repository> repositories);
+	private static final long serialVersionUID = -5535968052576747258L;
+
+	/**
+	 * <p>Constructor with a message.</p>
+	 * @param message a message
+	 * @throws NullPointerException if the message is {@code null}
+	 * @throws IllegalArgumentException if the message is empty
+	 * @since 1.2.0
+	 */
+	ArtifactAvailableVersionsResolveException(final String message) {
+		super(Ensure.notNullAndNotEmpty("message", message));
+	}
 }

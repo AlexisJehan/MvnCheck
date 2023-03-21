@@ -83,6 +83,23 @@ public final class MavenArtifactAvailableVersionsResolver implements ArtifactAva
 		logger.info("Resolving {} artifact available versions", () -> ToString.toString(artifact));
 		final var artifactType = artifact.getType();
 		final var artifactIdentifier = artifact.getIdentifier();
+		final var resolvedRepositories = session.resolve(
+				repositories.stream()
+						.filter(
+								repository -> RepositoryType.PLUGIN == artifactType.getRepositoryType()
+										|| RepositoryType.NORMAL == repository.getType()
+						)
+						.map(
+								repository -> MavenUtils.createRemoteRepository(
+										repository.getId(),
+										repository.getUrl()
+								)
+						)
+						.collect(Collectors.toUnmodifiableList())
+		);
+		if (resolvedRepositories.isEmpty()) {
+			throw new ArtifactAvailableVersionsResolveException("No remote repository has been resolved");
+		}
 		final var request = new VersionRangeRequest()
 				.setArtifact(
 						new DefaultArtifact(
@@ -92,22 +109,7 @@ public final class MavenArtifactAvailableVersionsResolver implements ArtifactAva
 								"(,]"
 						)
 				)
-				.setRepositories(
-						session.resolve(
-								repositories.stream()
-										.filter(
-												repository -> RepositoryType.PLUGIN == artifactType.getRepositoryType()
-														|| RepositoryType.NORMAL == repository.getType()
-										)
-										.map(
-												repository -> MavenUtils.createRemoteRepository(
-														repository.getId(),
-														repository.getUrl()
-												)
-										)
-										.collect(Collectors.toUnmodifiableList())
-						)
-				);
+				.setRepositories(resolvedRepositories);
 		final VersionRangeResult result;
 		try {
 			result = session.request(request);

@@ -160,6 +160,10 @@ final class MavenArtifactAvailableVersionsResolverTest {
 				.isThrownBy(
 						() -> mavenArtifactAvailableVersionsResolver.resolve(artifact, Collections.singletonList(null))
 				);
+		assertThatExceptionOfType(ArtifactAvailableVersionsResolveException.class)
+				.isThrownBy(
+						() -> mavenArtifactAvailableVersionsResolver.resolve(artifact, List.of())
+				);
 		assertThatExceptionOfType(AssertionError.class)
 				.isThrownBy(
 						() -> mavenArtifactAvailableVersionsResolver.resolve(artifact, repositories)

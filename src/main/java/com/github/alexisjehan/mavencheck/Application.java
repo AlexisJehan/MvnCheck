@@ -29,7 +29,8 @@ import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.mavencheck.core.Service;
 import com.github.alexisjehan.mavencheck.core.component.artifact.ArtifactIdentifier;
 import com.github.alexisjehan.mavencheck.core.component.artifact.type.ArtifactType;
-import com.github.alexisjehan.mavencheck.core.component.build.Build;
+import com.github.alexisjehan.mavencheck.core.component.artifact.version.ArtifactUpdateVersion;
+import com.github.alexisjehan.mavencheck.core.component.artifact.version.resolver.ArtifactAvailableVersionsResolveException;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFileType;
 import com.github.alexisjehan.mavencheck.core.component.build.resolver.BuildResolveException;
 import com.github.alexisjehan.mavencheck.core.component.session.MavenSession;
@@ -47,6 +48,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * <p>Class that describes the application.</p>
@@ -304,16 +306,16 @@ public final class Application {
 		var artifactsUpdatesCount = 0;
 		for (final var buildFile : buildFiles) {
 			final var file = buildFile.getFile();
-			final Build build;
+			final List<ArtifactUpdateVersion> artifactUpdateVersions;
 			try {
-				build = service.findBuild(buildFile);
-			} catch (final BuildResolveException e) {
+				final var build = service.findBuild(buildFile);
+				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreSnapshots);
+			} catch (final BuildResolveException | ArtifactAvailableVersionsResolveException e) {
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(file)).reset());
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(e)).reset());
 				outputStream.println();
 				continue;
 			}
-			final var artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreSnapshots);
 			if (artifactUpdateVersions.isEmpty()) {
 				if (!short0) {
 					outputStream.println(Ansi.ansi().fgBrightGreen().a(toString(file)).reset());

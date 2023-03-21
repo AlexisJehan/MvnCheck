@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 final class MavenArtifactAvailableVersionsResolverIT {
 
@@ -51,12 +52,6 @@ final class MavenArtifactAvailableVersionsResolverIT {
 			assertThat(
 					mavenArtifactAvailableVersionsResolver.resolve(
 							artifact,
-							List.of()
-					).getAvailableVersions()
-			).isEmpty();
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
 							List.of(
 									new Repository(
 											RepositoryType.NORMAL,
@@ -66,8 +61,8 @@ final class MavenArtifactAvailableVersionsResolverIT {
 							)
 					).getAvailableVersions()
 			).isNotEmpty();
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
+			assertThatExceptionOfType(ArtifactAvailableVersionsResolveException.class).isThrownBy(
+					() -> mavenArtifactAvailableVersionsResolver.resolve(
 							artifact,
 							List.of(
 									new Repository(
@@ -76,8 +71,8 @@ final class MavenArtifactAvailableVersionsResolverIT {
 											"https://repo.maven.apache.org/maven2"
 									)
 							)
-					).getAvailableVersions()
-			).isEmpty();
+					)
+			);
 		});
 		assertThat(
 				new Artifact<>(
@@ -85,12 +80,6 @@ final class MavenArtifactAvailableVersionsResolverIT {
 						new ArtifactIdentifier("org.apache.maven.plugins", "maven-compiler-plugin")
 				)
 		).satisfies(artifact -> {
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
-							List.of()
-					).getAvailableVersions()
-			).isEmpty();
 			assertThat(
 					mavenArtifactAvailableVersionsResolver.resolve(
 							artifact,
