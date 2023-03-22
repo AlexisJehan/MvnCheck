@@ -144,6 +144,13 @@ public final class GradleBuildResolver implements BuildResolver {
 					repository -> logger.debug("- {}", () -> ToString.toString(repository))
 			);
 
+			logger.trace("Filtering repositories");
+			final var filteredRepositories = filterRepositories(repositories);
+			logger.debug("Filtered repositories:");
+			filteredRepositories.forEach(
+					filteredRepository -> logger.debug("- {}", () -> ToString.toString(filteredRepository))
+			);
+
 			logger.trace("Parsing artifacts");
 			final var artifacts = parseArtifacts(reader);
 			logger.debug("Parsed artifacts:");
@@ -152,13 +159,13 @@ public final class GradleBuildResolver implements BuildResolver {
 			);
 
 			logger.trace("Filtering artifacts");
-			final var filteredArtifacts = filter(artifacts);
+			final var filteredArtifacts = filterArtifacts(artifacts);
 			logger.debug("Filtered artifacts:");
 			filteredArtifacts.forEach(
 					filteredArtifact -> logger.debug("- {}", () -> ToString.toString(filteredArtifact))
 			);
 
-			return new Build(file, repositories, filteredArtifacts);
+			return new Build(file, filteredRepositories, filteredArtifacts);
 		}
 	}
 
@@ -204,7 +211,9 @@ public final class GradleBuildResolver implements BuildResolver {
 								e
 						);
 					}
-					repositories.add(new Repository(repositoryType, parts.get(1), parts.get(2)));
+					final var id = parts.get(1);
+					final var url = parts.get(2);
+					repositories.add(new Repository(repositoryType, id, url));
 				}
 				break;
 			}
@@ -314,13 +323,40 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
+	 * <p>Filter a modifiable {@link List} of repositories, removing irrelevant ones.</p>
+	 * @param repositories a modifiable {@link List} of repositories
+	 * @return the {@link List} of repositories
+	 * @throws NullPointerException if the {@link List} of repositories or any of them is {@code null}
+	 * @since 1.2.0
+	 */
+	static List<Repository> filterRepositories(final List<Repository> repositories) {
+		Ensure.notNullAndNotNullElements("repositories", repositories);
+		return repositories.stream()
+				.filter(repository -> !repository.getUrl().startsWith("file:"))
+				.collect(Collectors.toUnmodifiableList());
+	}
+
+	/**
 	 * <p>Filter a modifiable {@link List} of artifacts, removing redundant duplicates.</p>
 	 * @param artifacts a modifiable {@link List} of artifacts
 	 * @return the {@link List} of artifacts
 	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
+	 * @deprecated since 1.2.0, use {@link #filterArtifacts(List)} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.2.0")
 	static List<Artifact<GradleArtifactType>> filter(final List<Artifact<GradleArtifactType>> artifacts) {
+		return filterArtifacts(artifacts);
+	}
+
+	/**
+	 * <p>Filter a modifiable {@link List} of artifacts, removing irrelevant ones.</p>
+	 * @param artifacts a modifiable {@link List} of artifacts
+	 * @return the {@link List} of artifacts
+	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
+	 * @since 1.2.0
+	 */
+	static List<Artifact<GradleArtifactType>> filterArtifacts(final List<Artifact<GradleArtifactType>> artifacts) {
 		Ensure.notNullAndNotNullElements("artifacts", artifacts);
 		artifacts.stream()
 				.filter(artifact -> {

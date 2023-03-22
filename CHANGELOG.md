@@ -3,7 +3,8 @@
 ## v1.2.0 (unreleased)
 
 ### Improvements
-- Improve resolving artifact available versions by throwing an exception if no remote repository is available
+- Improve resolving _Maven_ artifact available versions by throwing an exception if no remote repository is available
+- Improve resolving _Gradle_ build files by filtering to exclude local repositories
 
 ## [v1.1.3](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.3) (2023-03-20)
 
