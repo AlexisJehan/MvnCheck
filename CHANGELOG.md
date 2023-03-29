@@ -6,6 +6,9 @@
 - Improve resolving _Maven_ artifact available versions by throwing an exception if no remote repository is available
 - Improve resolving _Gradle_ build files by filtering to exclude local repositories
 
+### Notes
+- Update the `license-maven-plugin` plugin to `4.2`
+
 ## [v1.1.3](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.3) (2023-03-20)
 
 ### Notes
