@@ -8,6 +8,7 @@
 
 ### Notes
 - Update the `license-maven-plugin` plugin to `4.2`
+- Update the `jacoco-maven-plugin` plugin to `0.8.9`
 
 ## [v1.1.3](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.3) (2023-03-20)
 
