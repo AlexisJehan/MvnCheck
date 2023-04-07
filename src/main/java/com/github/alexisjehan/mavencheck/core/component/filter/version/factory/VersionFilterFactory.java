@@ -27,6 +27,7 @@ import com.github.alexisjehan.mavencheck.core.component.filter.version.VersionFi
 
 /**
  * <p>Interface that describes a version filter factory.</p>
+ * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #create(String)}.</p>
  * @since 1.0.0
  */
 @FunctionalInterface

@@ -27,7 +27,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
  * <p>Unchecked {@link Exception} related to build resolving.</p>
- * <p><b>Note</b>: This class is serializable.</p>
+ * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.0.0
  */
 public final class BuildResolveException extends RuntimeException {

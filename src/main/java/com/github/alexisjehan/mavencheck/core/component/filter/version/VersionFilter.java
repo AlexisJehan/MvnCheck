@@ -27,6 +27,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
  * <p>Interface that describes a version filter.</p>
+ * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #accept(String)}.</p>
  * @since 1.0.0
  */
 @FunctionalInterface

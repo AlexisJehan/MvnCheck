@@ -27,7 +27,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
  * <p>Unchecked {@link Exception} related to available versions resolving.</p>
- * <p><b>Note</b>: This class is serializable.</p>
+ * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.2.0
  */
 public final class ArtifactAvailableVersionsResolveException extends RuntimeException {
