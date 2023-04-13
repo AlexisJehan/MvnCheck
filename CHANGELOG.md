@@ -7,6 +7,7 @@
 - Improve resolving _Gradle_ build files by filtering to exclude local repositories
 
 ### Notes
+- Update the `gradle-tooling-api` dependency to `8.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.3.0`
 - Update the `license-maven-plugin` plugin to `4.2`
 - Update the `jacoco-maven-plugin` plugin to `0.8.9`
