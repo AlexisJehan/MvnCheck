@@ -477,7 +477,6 @@ public final class MavenUtils {
 				.setProxySelector(makeProxySelector(decryptedSettings))
 				.setAuthenticationSelector(makeAuthenticationSelector(decryptedSettings))
 				.setMirrorSelector(makeMirrorSelector(settings))
-				.setRepositoryListener(new ConsoleRepositoryListener())
 				.setCache(new DefaultRepositoryCache())
 				.setSystemProperties(System.getProperties());
 	}

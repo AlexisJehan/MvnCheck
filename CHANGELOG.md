@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3.0 (unreleased)
+
+### Improvements
+- Improve logs
+
 ## [v1.2.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.2.1) (2023-04-26)
 
 ### Notes

@@ -34,8 +34,10 @@ import java.lang.invoke.MethodHandles;
 
 /**
  * <p>Class that describes a <i>Maven</i> console repository listener.</p>
+ * @deprecated since 1.3.0, don't use anymore
  * @since 1.0.0
  */
+@Deprecated(since = "1.3.0")
 final class ConsoleRepositoryListener implements RepositoryListener {
 
 	/**
