@@ -4,6 +4,7 @@
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.1.1`
+- Update the `junit-jupiter` dependency to `5.9.3`
 
 ## [v1.2.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.2.0) (2023-04-13)
 
