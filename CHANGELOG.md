@@ -6,8 +6,9 @@
 - Improve logs
 
 ### Notes
-- Update the `maven-surefire-plugin` plugin to `3.1.0`
-- Update the `maven-failsafe-plugin` plugin to `3.1.0`
+- Update the `maven-core` dependency to `3.9.2`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.10`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.1.0`
 - Update the `maven-assembly-plugin` plugin to `3.6.0`
 - Update the `maven-gpg-plugin` plugin to `3.1.0`
 
