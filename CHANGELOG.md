@@ -8,6 +8,7 @@
 ### Notes
 - Update the `maven-surefire-plugin` plugin to `3.1.0`
 - Update the `maven-failsafe-plugin` plugin to `3.1.0`
+- Update the `maven-assembly-plugin` plugin to `3.6.0`
 - Update the `maven-gpg-plugin` plugin to `3.1.0`
 
 ## [v1.2.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.2.1) (2023-04-26)
