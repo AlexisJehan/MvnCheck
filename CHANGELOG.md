@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0 (unreleased)
+
+### Notes
+- Update the `maven-pmd-plugin` plugin to `3.21.0`
+- Update the `maven-source-plugin` plugin to `3.3.0`
+
 ## [1.3.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.0) (2023-05-15)
 
 ### Improvements
