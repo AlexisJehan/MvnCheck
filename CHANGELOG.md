@@ -3,6 +3,9 @@
 ## 1.4.0 (unreleased)
 
 ### Notes
+- Update the `maven-core` dependency to `3.9.3`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.13`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.4.0`
 - Update the `maven-pmd-plugin` plugin to `3.21.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.1.2`
 - Update the `maven-source-plugin` plugin to `3.3.0`
