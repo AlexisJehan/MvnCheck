@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.4.0 (unreleased)
+## [1.3.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.2) (2023-07-14)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.2.1`
