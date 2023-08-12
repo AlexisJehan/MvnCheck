@@ -57,8 +57,7 @@
 
 	<repositories>
 		<repository>
-			<id>gradle-releases</id>
-			<name>Gradle Releases</name>
+			<id>gradle</id>
 			<url>https://repo.gradle.org/gradle/libs-releases</url>
 		</repository>
 	</repositories>
@@ -73,18 +72,18 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-core</artifactId>
-			<version>3.9.3</version>
+			<version>3.9.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-connector-basic</artifactId>
-			<version>1.9.13</version> <!-- Based on "org.apache.maven:maven-core:3.9.3" -->
+			<version>1.9.14</version> <!-- Based on "org.apache.maven:maven-core:3.9.4" -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-transport-http</artifactId>
-			<version>1.9.13</version> <!-- Based on "org.apache.maven:maven-core:3.9.3" -->
+			<version>1.9.14</version> <!-- Based on "org.apache.maven:maven-core:3.9.4" -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -123,7 +122,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.3</version>
+			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
