@@ -29,7 +29,7 @@ import java.util.Set;
 
 /**
  * <p>Enumeration of <i>Gradle</i> artifact types.</p>
- * <p><b>Note</b>: Based on {@code org.gradle:gradle-tooling-api:8.2.1}.</p>
+ * <p><b>Note</b>: Based on {@code org.gradle:gradle-tooling-api:8.3}.</p>
  * @see <a href="https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management">https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management</a>
  * @see <a href="https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph">https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph</a>
  * @since 1.0.0

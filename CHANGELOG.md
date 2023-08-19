@@ -5,6 +5,7 @@
 ### Notes
 - Update the `maven-core` dependency to `3.9.4`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.14`
+- Update the `gradle-tooling-api` dependency to `8.3`
 - Update the `junit-jupiter` dependency to `5.10.0`
 
 ## [1.3.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.2) (2023-07-14)
