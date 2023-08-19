@@ -80,7 +80,7 @@ public final class MavenUtils {
 	 * <p><i>Maven</i> version.</p>
 	 * @since 1.0.0
 	 */
-	private static final String VERSION = new DefaultRuntimeInformation().getMavenVersion();
+	public static final String VERSION = new DefaultRuntimeInformation().getMavenVersion();
 
 	/**
 	 * <p>Pattern to extract the <i>Maven</i> home from the {@code PATH} environment variable.</p>
@@ -511,8 +511,10 @@ public final class MavenUtils {
 	/**
 	 * <p>Get the <i>Maven</i> version.</p>
 	 * @return the <i>Maven</i> version
+	 * @deprecated since 1.4.0, use {@link #VERSION} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.4.0")
 	public static String getVersion() {
 		return VERSION;
 	}

@@ -39,7 +39,7 @@ import java.util.List;
  * methods.</p>
  * @since 1.0.0
  */
-final class DecryptedSettings {
+public final class DecryptedSettings {
 
 	/**
 	 * <p>{@link List} of proxies.</p>
@@ -115,7 +115,7 @@ final class DecryptedSettings {
 	 * @return the {@link List} of proxies
 	 * @since 1.0.0
 	 */
-	List<Proxy> getProxies() {
+	public List<Proxy> getProxies() {
 		return proxies;
 	}
 
@@ -124,7 +124,7 @@ final class DecryptedSettings {
 	 * @return the {@link List} of servers
 	 * @since 1.0.0
 	 */
-	List<Server> getServers() {
+	public List<Server> getServers() {
 		return servers;
 	}
 }

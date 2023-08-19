@@ -46,7 +46,6 @@ import org.fusesource.jansi.AnsiConsole;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.lang.invoke.MethodHandles;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -57,17 +56,11 @@ import java.util.List;
 public final class Application {
 
 	/**
-	 * <p>Name.</p>
-	 * @since 1.0.0
+	 * <p>Title.</p>
+	 * @since 1.4.0
 	 */
-	private static final String NAME = MethodHandles.lookup().lookupClass().getPackage().getImplementationTitle();
-
-	/**
-	 * <p>Version.</p>
-	 * @since 1.0.0
-	 */
-	private static final String VERSION = MethodHandles.lookup().lookupClass().getPackage().getImplementationVersion()
-			+ " (built with Maven " + MavenUtils.getVersion() + " and Gradle " + GradleUtils.getVersion() + ")";
+	private static final String TITLE = Constants.NAME + " " + Constants.VERSION
+			+ " (built with Maven " + MavenUtils.VERSION + " and Gradle " + GradleUtils.VERSION + ")";
 
 	/**
 	 * <p>Description.</p>
@@ -222,7 +215,7 @@ public final class Application {
 		try {
 			final var commandLine = new DefaultParser().parse(options, args, false);
 			if (commandLine.hasOption(OPTION_VERSION) || commandLine.hasOption(OPTION_HELP)) {
-				outputStream.println(NAME + " " + VERSION);
+				outputStream.println(TITLE);
 				if (commandLine.hasOption(OPTION_HELP)) {
 					outputStream.println();
 					outputStream.println(DESCRIPTION);

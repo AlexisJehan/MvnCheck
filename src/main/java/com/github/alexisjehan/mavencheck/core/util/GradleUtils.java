@@ -40,7 +40,7 @@ public final class GradleUtils {
 	 * <p><i>Gradle</i> version.</p>
 	 * @since 1.0.0
 	 */
-	private static final String VERSION = GradleVersion.current().getVersion();
+	public static final String VERSION = GradleVersion.current().getVersion();
 
 	/**
 	 * <p>Pattern to extract the <i>Gradle</i> home from the {@code PATH} environment variable.</p>
@@ -84,8 +84,10 @@ public final class GradleUtils {
 	/**
 	 * <p>Get the <i>Gradle</i> version.</p>
 	 * @return the <i>Gradle</i> version
+	 * @deprecated since 1.4.0, use {@link #VERSION} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.4.0")
 	public static String getVersion() {
 		return VERSION;
 	}

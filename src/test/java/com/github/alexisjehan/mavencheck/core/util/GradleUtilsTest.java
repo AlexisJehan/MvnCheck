@@ -92,6 +92,7 @@ final class GradleUtilsTest {
 	}
 
 	@Test
+	@Deprecated
 	void testGetVersion() {
 		assertThat(GradleUtils.getVersion()).matches("^\\d+\\.\\d+(?:\\.\\d+)?$");
 	}

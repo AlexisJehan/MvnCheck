@@ -518,6 +518,7 @@ final class MavenUtilsTest {
 	}
 
 	@Test
+	@Deprecated
 	void testGetVersion() {
 		assertThat(MavenUtils.getVersion()).matches("^\\d+\\.\\d+\\.\\d+$");
 	}
