@@ -44,6 +44,18 @@ final class Constants {
 	static final String VERSION = MethodHandles.lookup().lookupClass().getPackage().getImplementationVersion();
 
 	/**
+	 * <p><i>GitHub</i> owner name.</p>
+	 * @since 1.4.0
+	 */
+	static final String GITHUB_OWNER_NAME = "AlexisJehan";
+
+	/**
+	 * <p><i>GitHub</i> repository name.</p>
+	 * @since 1.4.0
+	 */
+	static final String GITHUB_REPOSITORY_NAME = "MavenCheck";
+
+	/**
 	 * <p>Constructor not available.</p>
 	 * @since 1.4.0
 	 */

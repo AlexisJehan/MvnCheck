@@ -2,7 +2,13 @@
 
 ## 1.4.0 (unreleased)
 
+### New features
+- Check if an update is available to download on _GitHub_ at the end of the execution
+
 ### Notes
+- Add the `github-api` dependency
+- Add the `bridge-method-annotation` dependency
+- Add the `spotbugs-annotations` dependency
 - Update the `maven-core` dependency to `3.9.4`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.14`
 - Update the `gradle-tooling-api` dependency to `8.3`

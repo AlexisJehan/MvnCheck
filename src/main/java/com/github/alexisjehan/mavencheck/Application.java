@@ -34,6 +34,7 @@ import com.github.alexisjehan.mavencheck.core.component.artifact.version.resolve
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFileType;
 import com.github.alexisjehan.mavencheck.core.component.build.resolver.BuildResolveException;
 import com.github.alexisjehan.mavencheck.core.component.session.MavenSession;
+import com.github.alexisjehan.mavencheck.core.util.GithubUtils;
 import com.github.alexisjehan.mavencheck.core.util.GradleUtils;
 import com.github.alexisjehan.mavencheck.core.util.MavenUtils;
 import internal.ExcludeFromJacocoGeneratedReport;
@@ -323,13 +324,17 @@ public final class Application {
 					outputStream.println(
 							Ansi.ansi()
 									.a("[")
-									.fgBrightBlue().a(toString(artifact.getType())).reset()
-									.a("] ")
-									.a(toString(artifact.getIdentifier()))
-									.a(" ")
-									.fgBrightYellow().a(artifact.getOptionalVersion().orElseThrow()).reset()
+									.fgBrightBlue()
+									.a(toString(artifact.getType()))
+									.reset()
+									.a("] " + toString(artifact.getIdentifier()) + " ")
+									.fgBrightYellow()
+									.a(artifact.getOptionalVersion().orElseThrow())
+									.reset()
 									.a(" -> ")
-									.fgBrightGreen().a(updateVersion).reset()
+									.fgBrightGreen()
+									.a(updateVersion)
+									.reset()
 					);
 					++artifactsUpdatesCount;
 				}
@@ -345,6 +350,19 @@ public final class Application {
 								: artifactsUpdatesCount + " artifact update(s) available"
 				)
 		);
+		final var currentVersion = getCurrentVersion();
+		if (null != currentVersion) {
+			GithubUtils.retrieveOptionalLatestReleaseName(Constants.GITHUB_OWNER_NAME, Constants.GITHUB_REPOSITORY_NAME)
+					.filter(latestVersion -> 0 > currentVersion.compareTo(latestVersion))
+					.ifPresent(
+							latestVersion -> outputStream.println(
+									Ansi.ansi()
+											.fgBrightYellow()
+											.a("(A newer version is available to download on GitHub)")
+											.reset()
+							)
+					);
+		}
 	}
 
 	/**
@@ -403,6 +421,15 @@ public final class Application {
 	static String toString(final ArtifactIdentifier artifactIdentifier) {
 		Ensure.notNull("artifactIdentifier", artifactIdentifier);
 		return artifactIdentifier.getGroupId() + ":" + artifactIdentifier.getArtifactId();
+	}
+
+	/**
+	 * <p>Get the current version.</p>
+	 * @return the current version
+	 * @since 1.4.0
+	 */
+	static String getCurrentVersion() {
+		return Constants.VERSION;
 	}
 
 	/**

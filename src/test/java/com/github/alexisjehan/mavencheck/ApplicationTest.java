@@ -33,6 +33,7 @@ import com.github.alexisjehan.mavencheck.core.component.build.Build;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFile;
 import com.github.alexisjehan.mavencheck.core.component.build.file.BuildFileType;
 import com.github.alexisjehan.mavencheck.core.component.build.resolver.BuildResolveException;
+import com.github.alexisjehan.mavencheck.core.util.GithubUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -45,6 +46,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -107,37 +109,56 @@ final class ApplicationTest {
 				.thenReturn(List.of());
 		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
-		try (var mockedApplication = Mockito.mockStatic(Application.class)) {
-			mockedApplication.when(Application::createService)
-					.thenReturn(mockedService);
-			try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
-				final var application = new Application(printStream);
-				assertThatNoException()
-						.isThrownBy(application::run);
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-d", "0"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-h"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-i"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-s"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-v"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("directory_not-found"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path1.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path2.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path3.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path1, true, true));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path2, true, true));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path3, true, true));
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			try (var mockedGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
+				mockedGithubUtils.when(
+								() -> GithubUtils.retrieveOptionalLatestReleaseName(
+										Mockito.notNull(),
+										Mockito.notNull()
+								)
+						)
+						.thenReturn(
+								Optional.of("1.0.0"),
+								Optional.of("2.0.0"),
+								Optional.empty()
+						);
+				try (var mockedApplication = Mockito.mockStatic(Application.class)) {
+					mockedApplication.when(Application::createService)
+							.thenReturn(mockedService);
+					mockedApplication.when(Application::getCurrentVersion)
+							.thenReturn(
+									"1.0.0",
+									"1.0.0",
+									null
+							);
+					final var application = new Application(printStream);
+					assertThatNoException()
+							.isThrownBy(application::run);
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-d", "0"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-h"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-i"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-s"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-v"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("directory_not-found"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path1.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path2.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path3.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path1, true, true));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path2, true, true));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path3, true, true));
+				}
 			}
 		}
 	}
@@ -198,37 +219,56 @@ final class ApplicationTest {
 				.thenReturn(List.of());
 		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
-		try (var mockedApplication = Mockito.mockStatic(Application.class)) {
-			mockedApplication.when(Application::createService)
-					.thenReturn(mockedService);
-			try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
-				final var application = new Application(printStream);
-				assertThatNoException()
-						.isThrownBy(application::run);
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-d", "0"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-h"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-i"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-s"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("-v"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run("directory_not-found"));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path1.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path2.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path3.toString()));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path1, 0, true, true));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path2, 0, true, true));
-				assertThatNoException()
-						.isThrownBy(() -> application.run(path3, 0, true, true));
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			try (var mockedGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
+				mockedGithubUtils.when(
+								() -> GithubUtils.retrieveOptionalLatestReleaseName(
+										Mockito.notNull(),
+										Mockito.notNull()
+								)
+						)
+						.thenReturn(
+								Optional.of("1.0.0"),
+								Optional.of("2.0.0"),
+								Optional.empty()
+						);
+				try (var mockedApplication = Mockito.mockStatic(Application.class)) {
+					mockedApplication.when(Application::createService)
+							.thenReturn(mockedService);
+					mockedApplication.when(Application::getCurrentVersion)
+							.thenReturn(
+									"1.0.0",
+									"1.0.0",
+									null
+							);
+					final var application = new Application(printStream);
+					assertThatNoException()
+							.isThrownBy(application::run);
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-d", "0"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-h"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-i"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-s"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("-v"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run("directory_not-found"));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path1.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path2.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path3.toString()));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path1, 0, true, true));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path2, 0, true, true));
+					assertThatNoException()
+							.isThrownBy(() -> application.run(path3, 0, true, true));
+				}
 			}
 		}
 	}
@@ -303,5 +343,10 @@ final class ApplicationTest {
 	@Test
 	void testToStringArtifactIdentifierInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> Application.toString((ArtifactIdentifier) null));
+	}
+
+	@Test
+	void testGetCurrentVersion() {
+		assertThatNoException().isThrownBy(Application::getCurrentVersion);
 	}
 }
