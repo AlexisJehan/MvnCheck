@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.5.0 (unreleased)
+
 ## [1.4.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.4.0) (2023-08-23)
 
 ### New features
