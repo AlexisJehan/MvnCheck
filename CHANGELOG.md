@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.4.0 (unreleased)
+## [1.4.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.4.0) (2023-08-23)
 
 ### New features
 - Check if an update is available to download on _GitHub_ at the end of the execution
