@@ -2,6 +2,12 @@
 
 ## 1.5.0 (unreleased)
 
+### Bug fixes
+- Fix redirecting `java.util.logging` logs from the `github-api` dependency to `log4j`
+
+### Notes
+- Add the `log4j-jul` dependency
+
 ## [1.4.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.4.0) (2023-08-23)
 
 ### New features
