@@ -50,8 +50,8 @@ final class MavenSessionTest {
 
 	@Test
 	void testConstructorInvalid() {
-		try (var mockedMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
-			mockedMavenUtils.when(MavenUtils::makeSettings)
+		try (var mockedStaticMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
+			mockedStaticMavenUtils.when(MavenUtils::makeSettings)
 					.thenThrow(SettingsBuildingException.class);
 			assertThatExceptionOfType(MavenSessionException.class)
 					.isThrownBy(MavenSession::new)
@@ -64,8 +64,8 @@ final class MavenSessionTest {
 		final var remoteRepositories = List.of(MavenUtils.createRemoteRepository("foo-id", "https://foo-host"));
 		Mockito.when(mockedRepositorySystem.newResolutionRepositories(Mockito.any(), Mockito.any()))
 				.thenReturn(remoteRepositories);
-		try (var mockedMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
-			mockedMavenUtils.when(MavenUtils::makeRepositorySystem)
+		try (var mockedStaticMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
+			mockedStaticMavenUtils.when(MavenUtils::makeRepositorySystem)
 					.thenReturn(mockedRepositorySystem);
 			final var mavenSession = new MavenSession();
 			assertThat(mavenSession.resolve(List.of())).isSameAs(remoteRepositories);
@@ -84,8 +84,8 @@ final class MavenSessionTest {
 		final var versionRangeResult = new VersionRangeResult(new VersionRangeRequest());
 		Mockito.when(mockedRepositorySystem.resolveVersionRange(Mockito.any(), Mockito.any()))
 				.thenReturn(versionRangeResult);
-		try (var mockedMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
-			mockedMavenUtils.when(MavenUtils::makeRepositorySystem)
+		try (var mockedStaticMavenUtils = Mockito.mockStatic(MavenUtils.class)) {
+			mockedStaticMavenUtils.when(MavenUtils::makeRepositorySystem)
 					.thenReturn(mockedRepositorySystem);
 			final var mavenSession = new MavenSession();
 			assertThat(mavenSession.request(new VersionRangeRequest())).isSameAs(versionRangeResult);

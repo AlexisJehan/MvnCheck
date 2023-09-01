@@ -110,8 +110,8 @@ final class ApplicationTest {
 		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
-			try (var mockedGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
-				mockedGithubUtils.when(
+			try (var mockedStaticGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
+				mockedStaticGithubUtils.when(
 								() -> GithubUtils.retrieveOptionalLatestReleaseName(
 										Mockito.notNull(),
 										Mockito.notNull()
@@ -122,10 +122,10 @@ final class ApplicationTest {
 								Optional.of("2.0.0"),
 								Optional.empty()
 						);
-				try (var mockedApplication = Mockito.mockStatic(Application.class)) {
-					mockedApplication.when(Application::createService)
+				try (var mockedStaticApplication = Mockito.mockStatic(Application.class)) {
+					mockedStaticApplication.when(Application::createService)
 							.thenReturn(mockedService);
-					mockedApplication.when(Application::getCurrentVersion)
+					mockedStaticApplication.when(Application::getCurrentVersion)
 							.thenReturn(
 									"1.0.0",
 									"1.0.0",
@@ -220,8 +220,8 @@ final class ApplicationTest {
 		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
-			try (var mockedGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
-				mockedGithubUtils.when(
+			try (var mockedStaticGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
+				mockedStaticGithubUtils.when(
 								() -> GithubUtils.retrieveOptionalLatestReleaseName(
 										Mockito.notNull(),
 										Mockito.notNull()
@@ -232,10 +232,10 @@ final class ApplicationTest {
 								Optional.of("2.0.0"),
 								Optional.empty()
 						);
-				try (var mockedApplication = Mockito.mockStatic(Application.class)) {
-					mockedApplication.when(Application::createService)
+				try (var mockedStaticApplication = Mockito.mockStatic(Application.class)) {
+					mockedStaticApplication.when(Application::createService)
 							.thenReturn(mockedService);
-					mockedApplication.when(Application::getCurrentVersion)
+					mockedStaticApplication.when(Application::getCurrentVersion)
 							.thenReturn(
 									"1.0.0",
 									"1.0.0",

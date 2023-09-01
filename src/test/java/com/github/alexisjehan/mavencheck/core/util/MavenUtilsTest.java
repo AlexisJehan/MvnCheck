@@ -47,22 +47,14 @@ final class MavenUtilsTest {
 
 	@Test
 	void testRetrieveOptionalGlobalHome() {
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
+		try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+			mockedStaticSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
 									File.pathSeparator,
 									"foo",
 									"bar"
-							)
-					);
-			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
-					.thenCallRealMethod();
-			assertThat(MavenUtils.retrieveOptionalGlobalHome()).isEmpty();
-		}
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
-					.thenReturn(
+							),
 							String.join(
 									File.pathSeparator,
 									"foo",
@@ -70,31 +62,23 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
-			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+			mockedStaticSystemUtils.when(SystemUtils::getUserHomeDirectory)
 					.thenCallRealMethod();
+			assertThat(MavenUtils.retrieveOptionalGlobalHome()).isEmpty();
 			assertThat(MavenUtils.retrieveOptionalGlobalHome()).contains(File.separator + "apache-maven-1.0.0");
 		}
 	}
 
 	@Test
 	void testRetrieveOptionalGlobalSettingsFile() {
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
+		try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+			mockedStaticSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
 									File.pathSeparator,
 									"foo",
 									"bar"
-							)
-					);
-			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
-					.thenCallRealMethod();
-			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
-					.isEmpty();
-		}
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
-					.thenReturn(
+							),
 							String.join(
 									File.pathSeparator,
 									"foo",
@@ -102,8 +86,10 @@ final class MavenUtilsTest {
 									"bar"
 							)
 					);
-			mockedSystemUtils.when(SystemUtils::getUserHomeDirectory)
+			mockedStaticSystemUtils.when(SystemUtils::getUserHomeDirectory)
 					.thenCallRealMethod();
+			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
+					.isEmpty();
 			assertThat(MavenUtils.retrieveOptionalGlobalSettingsFile())
 					.contains(
 							Path.of(

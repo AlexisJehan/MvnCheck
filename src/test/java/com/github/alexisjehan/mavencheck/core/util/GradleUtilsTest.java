@@ -35,58 +35,42 @@ final class GradleUtilsTest {
 
 	@Test
 	void testRetrieveOptionalHome() {
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
-					.thenReturn(Optional.empty());
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
+		try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+			mockedStaticSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
+					.thenReturn(
+							Optional.empty(),
+							Optional.empty(),
+							Optional.of(File.separatorChar + "gradle-1.0"),
+							Optional.of(File.separatorChar + "gradle-1.0")
+					);
+			mockedStaticSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
 					.thenReturn(
 							String.join(
 									File.pathSeparator,
 									"foo",
+									"bar"
+							),
+							String.join(
+									File.pathSeparator,
+									"foo",
+									File.separator + "gradle-1.0" + File.separator + "bin",
+									"bar"
+							),
+							String.join(
+									File.pathSeparator,
+									"foo",
+									"bar"
+							),
+							String.join(
+									File.pathSeparator,
+									"foo",
+									File.separator + "gradle-1.0" + File.separator + "bin",
 									"bar"
 							)
 					);
 			assertThat(GradleUtils.retrieveOptionalHome()).isEmpty();
-		}
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
-					.thenReturn(Optional.empty());
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
-					.thenReturn(
-							String.join(
-									File.pathSeparator,
-									"foo",
-									File.separator + "gradle-1.0" + File.separator + "bin",
-									"bar"
-							)
-					);
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
-		}
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
-					.thenReturn(Optional.of(File.separatorChar + "gradle-1.0"));
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
-					.thenReturn(
-							String.join(
-									File.pathSeparator,
-									"foo",
-									"bar"
-							)
-					);
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
-		}
-		try (var mockedSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
-			mockedSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("GRADLE_HOME"))
-					.thenReturn(Optional.of(File.separatorChar + "gradle-1.0"));
-			mockedSystemUtils.when(SystemUtils::getPathEnvironmentVariable)
-					.thenReturn(
-							String.join(
-									File.pathSeparator,
-									"foo",
-									File.separator + "gradle-1.0" + File.separator + "bin",
-									"bar"
-							)
-					);
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
 		}
 	}
