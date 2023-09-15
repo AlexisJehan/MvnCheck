@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
-	<Appenders>
-		<Null name="null"/>
-	</Appenders>
-	<Loggers>
-		<Logger name="com.github.alexisjehan.mavencheck" level="ALL" additivity="false">
-			<AppenderRef ref="null"/>
-		</Logger>
-		<Root level="ERROR">
-			<AppenderRef ref="null"/>
-		</Root>
-	</Loggers>
-</Configuration>
+<configuration status="INFO">
+	<appenders>
+		<console name="console" target="SYSTEM_ERR">
+			<patternLayout pattern="%5.5level: %message%n"/>
+		</console>
+	</appenders>
+	<loggers>
+		<logger name="com.github.alexisjehan.mavencheck" level="OFF" additivity="false">
+			<appenderRef ref="console"/>
+		</logger>
+		<root level="OFF">
+			<appenderRef ref="console"/>
+		</root>
+	</loggers>
+</configuration>
