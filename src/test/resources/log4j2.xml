@@ -4,7 +4,7 @@
 		<null name="null"/>
 	</appenders>
 	<loggers>
-		<logger name="com.github.alexisjehan.mavencheck" level="ALL" additivity="false">
+		<logger name="com.github.alexisjehan.mvncheck" level="ALL" additivity="false">
 			<appenderRef ref="null"/>
 		</logger>
 		<root level="ALL">

@@ -6,7 +6,7 @@
 		</console>
 	</appenders>
 	<loggers>
-		<logger name="com.github.alexisjehan.mavencheck" level="ERROR" additivity="false">
+		<logger name="com.github.alexisjehan.mvncheck" level="ERROR" additivity="false">
 			<appenderRef ref="console"/>
 		</logger>
 		<root level="ERROR">

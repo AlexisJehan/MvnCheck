@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.alexisjehan</groupId>
-	<artifactId>maven-check</artifactId>
+	<artifactId>mvn-check</artifactId>
 	<version>1.5.0-SNAPSHOT</version>
 
-	<name>Maven Check</name>
+	<name>MvnCheck</name>
 	<description>A Java 11+ command line tool to check for artifact updates of Maven and Gradle projects.</description>
-	<url>https://github.com/AlexisJehan/MavenCheck</url>
+	<url>https://github.com/AlexisJehan/MvnCheck</url>
 	<inceptionYear>2022</inceptionYear>
 	<licenses>
 		<license>
@@ -32,17 +32,17 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:AlexisJehan/MavenCheck.git</connection>
-		<developerConnection>scm:git:git@github.com:AlexisJehan/MavenCheck.git</developerConnection>
-		<url>https://github.com/AlexisJehan/MavenCheck</url>
+		<connection>scm:git:git@github.com:AlexisJehan/MvnCheck.git</connection>
+		<developerConnection>scm:git:git@github.com:AlexisJehan/MvnCheck.git</developerConnection>
+		<url>https://github.com/AlexisJehan/MvnCheck</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/AlexisJehan/MavenCheck/issues</url>
+		<url>https://github.com/AlexisJehan/MvnCheck/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/AlexisJehan/MavenCheck/actions</url>
+		<url>https://github.com/AlexisJehan/MvnCheck/actions</url>
 	</ciManagement>
 
 	<properties>
@@ -386,7 +386,7 @@
 					<programs>
 						<program>
 							<id>mvnchk</id>
-							<mainClass>com.github.alexisjehan.mavencheck.Application</mainClass>
+							<mainClass>com.github.alexisjehan.mvncheck.Application</mainClass>
 							<licenseHeaderFile>LICENSE.txt</licenseHeaderFile>
 						</program>
 					</programs>

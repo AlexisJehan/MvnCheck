@@ -1,16 +1,16 @@
 <image src="logo.png" align="right" width="200"/>
 
-# Maven Check
-[![release](https://img.shields.io/github/v/release/AlexisJehan/MavenCheck?display_name=tag)](https://github.com/AlexisJehan/MavenCheck/releases/latest)
-[![build](https://img.shields.io/github/actions/workflow/status/AlexisJehan/MavenCheck/ci.yml?branch=main)](https://github.com/AlexisJehan/MavenCheck/actions/workflows/ci.yml)
-[![coverage](https://img.shields.io/codecov/c/github/AlexisJehan/MavenCheck)](https://codecov.io/gh/AlexisJehan/MavenCheck)
-[![license](https://img.shields.io/github/license/AlexisJehan/MavenCheck)](LICENSE.txt)
+# MvnCheck
+[![release](https://img.shields.io/github/v/release/AlexisJehan/MvnCheck?display_name=tag)](https://github.com/AlexisJehan/MvnCheck/releases/latest)
+[![build](https://img.shields.io/github/actions/workflow/status/AlexisJehan/MvnCheck/ci.yml?branch=main)](https://github.com/AlexisJehan/MvnCheck/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/codecov/c/github/AlexisJehan/MvnCheck)](https://codecov.io/gh/AlexisJehan/MvnCheck)
+[![license](https://img.shields.io/github/license/AlexisJehan/MvnCheck)](LICENSE.txt)
 
 A _Java 11+_ command line tool to check for artifact updates of _Maven_ and _Gradle_ projects.
 
 ## Introduction
-**Maven Check** aims to help developers to keep their projects up-to-date by checking for last available dependency and
-plugin versions. Unlike some existing _Maven_ plugins, _Maven Check_ uses an advanced filtering system to choose the
+**MvnCheck** aims to help developers to keep their projects up-to-date by checking for last available dependency and
+plugin versions. Unlike some existing _Maven_ plugins, _MvnCheck_ uses an advanced filtering system to choose the
 most relevant update version for an artifact.
 
 ### Features
@@ -42,7 +42,7 @@ my-maven-project\pom.xml
 ## Getting started
 
 ### Prerequisites
-_Maven Check_ is running on most operating systems, it only requires _Java 11_ or higher to be installed.
+_MvnCheck_ is running on most operating systems, it only requires _Java 11_ or higher to be installed.
 
 You can check that _Java_ is available in your environment and its version using the following command:
 ```console
@@ -50,26 +50,26 @@ java -version
 ```
 
 ### Installation
-You can download binaries for the latest version of _Maven Check_ on the
-[release](https://github.com/AlexisJehan/MavenCheck/releases/latest) page.
+You can download binaries for the latest version of _MvnCheck_ on the
+[release](https://github.com/AlexisJehan/MvnCheck/releases/latest) page.
 
 #### Linux / Mac
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf maven-check-1.4.0-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/maven-check-1.4.0/bin
+sudo tar -xvzf mvn-check-1.4.0-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-1.4.0/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\maven-check-1.4.0`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.4.0`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\maven-check-1.4.0\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.4.0\bin` at the end
 
 ### Verify
-If _Maven Check_ is correctly installed, this command should work as expected:
+If _MvnCheck_ is correctly installed, this command should work as expected:
 ```console
 mvnchk --version
 ```
@@ -88,7 +88,7 @@ usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [-s] [-v]
 ```
 
 ## Ignore file
-_Maven Check_ allows to ignore artifacts or update versions by having a `.mvnchk-ignore` file:
+_MvnCheck_ allows to ignore artifacts or update versions by having a `.mvnchk-ignore` file:
 - globally in the user home
 - specifically in a project directory.
 
@@ -108,23 +108,23 @@ com.google.guava:guava:30.?-android
 ```
 
 ## Compatibility matrix
-The table below shows which version of _Maven_ and _Gradle_ is used by each _Maven Check_ release. However, a higher
+The table below shows which version of _Maven_ and _Gradle_ is used by each _MvnCheck_ release. However, a higher
 version of a build tool may still be compatible.
 
-| Maven Check | Maven version | Gradle version |
-|:-----------:|:-------------:|:--------------:|
-|    1.4.0    |     3.9.4     |      8.3       |
-|    1.3.2    |     3.9.3     |     8.2.1      |
-|    1.3.1    |     3.9.3     |     8.1.1      |
-|    1.3.0    |     3.9.2     |     8.1.1      |
-|    1.2.1    |     3.9.1     |     8.1.1      |
-|    1.2.0    |     3.9.1     |      8.1       |
-|    1.1.3    |     3.9.1     |     8.0.2      |
-|    1.1.2    |     3.9.0     |     8.0.2      |
-|    1.1.1    |     3.9.0     |     8.0.1      |
-|    1.1.0    |     3.9.0     |      7.6       |
-|    1.0.1    |     3.8.7     |      7.6       |
-|    1.0.0    |     3.8.6     |      7.6       |
+| MvnCheck version | Maven version | Gradle version |
+|:----------------:|:-------------:|:--------------:|
+|      1.4.0       |     3.9.4     |      8.3       |
+|      1.3.2       |     3.9.3     |     8.2.1      |
+|      1.3.1       |     3.9.3     |     8.1.1      |
+|      1.3.0       |     3.9.2     |     8.1.1      |
+|      1.2.1       |     3.9.1     |     8.1.1      |
+|      1.2.0       |     3.9.1     |      8.1       |
+|      1.1.3       |     3.9.1     |     8.0.2      |
+|      1.1.2       |     3.9.0     |     8.0.2      |
+|      1.1.1       |     3.9.0     |     8.0.1      |
+|      1.1.0       |     3.9.0     |      7.6       |
+|      1.0.1       |     3.8.7     |      7.6       |
+|      1.0.0       |     3.8.6     |      7.6       |
 
 Note: _Gradle_ is compatible starting with _Gradle 4.8_.
 

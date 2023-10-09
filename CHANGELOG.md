@@ -6,10 +6,11 @@
 - Fix redirecting `java.util.logging` logs from the `github-api` dependency to `log4j`
 
 ### Notes
+- Rename the project to `MvnCheck`
 - Add the `log4j-jul` dependency
 - Update the `maven-javadoc-plugin` plugin to `3.6.0`
 
-## [1.4.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.4.0) (2023-08-23)
+## [1.4.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.4.0) (2023-08-23)
 
 ### New features
 - Check if an update is available to download on _GitHub_ at the end of the execution
@@ -24,12 +25,12 @@
 - Update the `junit-jupiter` dependency to `5.10.0`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.5.0`
 
-## [1.3.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.2) (2023-07-14)
+## [1.3.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.3.2) (2023-07-14)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.2.1`
 
-## [1.3.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.1) (2023-06-27)
+## [1.3.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.3.1) (2023-06-27)
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.3`
@@ -39,7 +40,7 @@
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.1.2`
 - Update the `maven-source-plugin` plugin to `3.3.0`
 
-## [1.3.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.3.0) (2023-05-15)
+## [1.3.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.3.0) (2023-05-15)
 
 ### Improvements
 - Improve logs
@@ -51,7 +52,7 @@
 - Update the `maven-assembly-plugin` plugin to `3.6.0`
 - Update the `maven-gpg-plugin` plugin to `3.1.0`
 
-## [1.2.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.2.1) (2023-04-26)
+## [1.2.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.2.1) (2023-04-26)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.1.1`
@@ -59,7 +60,7 @@
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.3.1`
 - Update the `jacoco-maven-plugin` plugin to `0.8.10`
 
-## [1.2.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.2.0) (2023-04-13)
+## [1.2.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.2.0) (2023-04-13)
 
 ### Improvements
 - Improve resolving _Maven_ artifact available versions by throwing an exception if no remote repository is available
@@ -71,14 +72,14 @@
 - Update the `license-maven-plugin` plugin to `4.2`
 - Update the `jacoco-maven-plugin` plugin to `0.8.9`
 
-## [1.1.3](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.3) (2023-03-20)
+## [1.1.3](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.1.3) (2023-03-20)
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.1`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.7`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.0.0`
 
-## [1.1.2](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.2) (2023-03-10)
+## [1.1.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.1.2) (2023-03-10)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.0.2`
@@ -86,7 +87,7 @@
 - Update `pmd-core` and `pmd-java` dependencies to `6.55.0`
 - Update the `maven-compiler-plugin` plugin to `3.11.0`
 
-## [1.1.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.1) (2023-02-24)
+## [1.1.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.1.1) (2023-02-24)
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.0.1`
@@ -94,7 +95,7 @@
 - Update the `maven-javadoc-plugin` plugin to `3.5.0`
 - Update the `maven-assembly-plugin` plugin to `3.5.0`
 
-## [1.1.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.1.0) (2023-02-09)
+## [1.1.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.1.0) (2023-02-09)
 
 ### New features
 - Add the `--max-depth`/`-d` option to customize the maximum depth of subdirectories to find build
@@ -115,7 +116,7 @@
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.1.1`
 - Remove the `maven-resolver-transport-file` dependency
 
-## [1.0.1](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.1) (2023-01-02)
+## [1.0.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.0.1) (2023-01-02)
 
 ### Bug fixes
 - Fix missing artifacts related to _Gradle_ `:dependencies` resolved versions
@@ -124,5 +125,5 @@
 - Update the `maven-core` dependency to `3.8.7`
 - Update `mockito-inline` and `mockito-junit-jupiter` dependencies to `4.11.0`
 
-## [1.0.0](https://github.com/AlexisJehan/MavenCheck/releases/tag/v1.0.0) (2022-12-23)
+## [1.0.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.0.0) (2022-12-23)
 Initial release
