@@ -9,6 +9,7 @@
 - Rename the project to `MvnCheck`
 - Add the `log4j-jul` dependency
 - Update the `maven-javadoc-plugin` plugin to `3.6.0`
+- Update the XML schema of the `bin.xml` file to `2.2.0`
 
 ## [1.4.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.4.0) (2023-08-23)
 
