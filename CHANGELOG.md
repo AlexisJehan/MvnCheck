@@ -10,6 +10,7 @@
 - Add the `log4j-jul` dependency
 - Update the `maven-core` dependency to `3.9.5`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.16`
+- Update the `gradle-tooling-api` dependency to `8.4`
 - Update the `maven-javadoc-plugin` plugin to `3.6.0`
 - Update the XML schema of the `bin.xml` file to `2.2.0`
 
