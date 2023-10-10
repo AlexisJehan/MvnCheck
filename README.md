@@ -57,16 +57,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-1.4.0-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-1.4.0/bin
+sudo tar -xvzf mvn-check-1.4.1-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-1.4.1/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.4.0`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.4.1`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.4.0\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.4.1\bin` at the end
 
 ### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -113,6 +113,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      1.4.1       |     3.9.5     |      8.4       |
 |      1.4.0       |     3.9.4     |      8.3       |
 |      1.3.2       |     3.9.3     |     8.2.1      |
 |      1.3.1       |     3.9.3     |     8.1.1      |
