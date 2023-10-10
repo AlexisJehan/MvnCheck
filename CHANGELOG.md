@@ -12,6 +12,7 @@
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.16`
 - Update the `gradle-tooling-api` dependency to `8.4`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.6.0`
+- Update the `license-maven-plugin` plugin to `4.3`
 - Update the `maven-javadoc-plugin` plugin to `3.6.0`
 - Update the XML schema of the `bin.xml` file to `2.2.0`
 
