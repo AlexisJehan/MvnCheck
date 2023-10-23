@@ -115,7 +115,7 @@
 - Improve some log levels
 
 ### Notes
-- Include the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
+- Add the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
 - Migrate the `mockito-inline` dependency to `mockito-core`
 - Update the `maven-core` dependency to `3.9.0`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.4`

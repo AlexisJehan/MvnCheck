@@ -48,11 +48,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.release>11</maven.compiler.release>
-		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 	</properties>
 
 	<repositories>
@@ -256,10 +252,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
+					<showDeprecation>true</showDeprecation>
 					<compilerArgs>
 						<compilerArg>-Xlint:all</compilerArg>
-						<compilerArg>-Xlint:-processing</compilerArg>
 					</compilerArgs>
+					<proc>none</proc>
 				</configuration>
 			</plugin>
 			<plugin>
