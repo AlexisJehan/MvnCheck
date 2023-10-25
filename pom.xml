@@ -58,6 +58,22 @@
 		</repository>
 	</repositories>
 
+	<!-- FIXME Remove after next "org.assertj:assertj-core" update -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy</artifactId>
+				<version>1.14.9</version>
+			</dependency>
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy-agent</artifactId>
+				<version>1.14.9</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github.alexisjehan</groupId>
