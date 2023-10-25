@@ -5,7 +5,8 @@
 ### Notes
 - Update the `github-api` dependency to `1.317`
 - Update the `jansi` dependency to `2.4.1`
-- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.21.0`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.21.1`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.2.1`
 - Update the `jacoco-maven-plugin` plugin to `0.8.11`
 
 ## [1.4.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.4.1) (2023-10-10)
