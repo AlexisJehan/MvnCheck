@@ -4,10 +4,15 @@
 
 ### Notes
 - Update the `github-api` dependency to `1.317`
+- Update the `commons-cli` dependency to `1.6.0`
 - Update the `jansi` dependency to `2.4.1`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.21.1`
-- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.2.1`
+- Update the `junit-jupiter` dependency to `5.10.1`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.7.0`
+- Update the `maven-pmd-plugin` plugin to `3.21.2`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.2.2`
 - Update the `jacoco-maven-plugin` plugin to `0.8.11`
+- Update the `maven-javadoc-plugin` plugin to `3.6.2`
 
 ## [1.4.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.4.1) (2023-10-10)
 
