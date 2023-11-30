@@ -3,10 +3,11 @@
 ## 1.5.0 (unreleased)
 
 ### Notes
-- Update the `github-api` dependency to `1.317`
+- Update the `gradle-tooling-api` dependency to `8.5`
+- Update the `github-api` dependency to `1.318`
 - Update the `commons-cli` dependency to `1.6.0`
 - Update the `jansi` dependency to `2.4.1`
-- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.21.1`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.22.0`
 - Update the `junit-jupiter` dependency to `5.10.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.7.0`
 - Update the `maven-pmd-plugin` plugin to `3.21.2`
