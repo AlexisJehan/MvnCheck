@@ -62,7 +62,7 @@ export PATH=$PATH:/opt/mvn-check-1.4.2/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.4.1`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.4.2`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
