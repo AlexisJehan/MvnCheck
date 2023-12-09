@@ -2,6 +2,13 @@
 
 ## 1.5.0 (unreleased)
 
+### Notes
+- Update the `maven-core` dependency to `3.9.6`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.18`
+- Update the `bridge-method-annotation` dependency to `1.29`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.8.0`
+- Update the `maven-javadoc-plugin` plugin to `3.6.3`
+
 ## [1.4.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.4.2) (2023-11-30)
 
 ### Notes

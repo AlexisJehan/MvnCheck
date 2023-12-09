@@ -56,6 +56,10 @@
 			<id>gradle</id>
 			<url>https://repo.gradle.org/gradle/libs-releases</url>
 		</repository>
+		<repository>
+			<id>jenkins</id>
+			<url>https://repo.jenkins-ci.org/public</url>
+		</repository>
 	</repositories>
 
 	<!-- FIXME Remove after next "org.assertj:assertj-core" update -->
@@ -84,23 +88,23 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-core</artifactId>
-			<version>3.9.5</version>
+			<version>3.9.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-connector-basic</artifactId>
-			<version>1.9.16</version> <!-- Based on "org.apache.maven:maven-core:3.9.5" -->
+			<version>1.9.18</version> <!-- Based on "org.apache.maven:maven-core:3.9.6" -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
 			<artifactId>maven-resolver-transport-http</artifactId>
-			<version>1.9.16</version> <!-- Based on "org.apache.maven:maven-core:3.9.5" -->
+			<version>1.9.18</version> <!-- Based on "org.apache.maven:maven-core:3.9.6" -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.gradle</groupId>
-			<artifactId>gradle-tooling-api</artifactId>
+			<artifactId>gradle-tooling-api</artifactId> <!-- From the "gradle" repository -->
 			<version>8.5</version>
 		</dependency>
 		<dependency>
@@ -110,14 +114,14 @@
 		</dependency>
 		<dependency>
 			<groupId>com.infradna.tool</groupId>
-			<artifactId>bridge-method-annotation</artifactId>
-			<version>1.23</version> <!-- Based on "org.kohsuke:github-api:1.316" -->
+			<artifactId>bridge-method-annotation</artifactId> <!-- From the "jenkins" repository -->
+			<version>1.29</version> <!-- Based on "org.kohsuke:github-api:1.318" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>4.7.3</version> <!-- Based on "org.kohsuke:github-api:1.316" -->
+			<version>4.7.3</version> <!-- Based on "org.kohsuke:github-api:1.318" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -169,13 +173,13 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>5.7.0</version>
+			<version>5.8.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>5.7.0</version>
+			<version>5.8.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -370,7 +374,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.6.2</version>
+				<version>3.6.3</version>
 				<executions>
 					<execution>
 						<id>javadoc-jar</id>
