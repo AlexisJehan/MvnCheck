@@ -6,6 +6,8 @@
 - Update the `maven-core` dependency to `3.9.6`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.18`
 - Update the `bridge-method-annotation` dependency to `1.29`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.22.1`
+- Update the `assertj-core` dependency to `3.25.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.8.0`
 - Update the `maven-compiler-plugin` plugin to `3.12.1`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.2.3`
