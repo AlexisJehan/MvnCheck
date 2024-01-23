@@ -259,8 +259,8 @@
 					<showDeprecation>true</showDeprecation>
 					<compilerArgs>
 						<compilerArg>-Xlint:all</compilerArg>
+						<compilerArg>-Xlint:-processing</compilerArg>
 					</compilerArgs>
-					<proc>none</proc>
 				</configuration>
 			</plugin>
 			<plugin>

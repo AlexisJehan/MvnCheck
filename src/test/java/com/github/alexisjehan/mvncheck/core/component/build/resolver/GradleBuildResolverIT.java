@@ -115,7 +115,14 @@ final class GradleBuildResolverIT {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"8.1", "8.2", "8.3", "8.4", "8.5"})
+	@EnabledForJreRange(max = JRE.JAVA_20)
+	@ValueSource(strings = "8.1")
+	void testResolveSinceGradle68UntilJava20(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveSinceGradle68(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"8.2", "8.3", "8.4", "8.5"})
 	void testResolveSinceGradle68UntilJavaLatest(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
