@@ -79,12 +79,10 @@ public final class ArtifactFilterParser {
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
-	private ArtifactFilterParser() {
-		// Not available
-	}
+	private ArtifactFilterParser() {}
 
 	/**
 	 * <p>Parse an artifact filter from the given ignore file.</p>

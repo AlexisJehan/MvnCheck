@@ -30,7 +30,7 @@ package org.apache.maven.project;
 public final class PublicReactorModelPool extends ReactorModelPool {
 
 	/**
-	 * <p>Constructor by default.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelPool() {

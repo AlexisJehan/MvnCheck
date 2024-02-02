@@ -127,12 +127,10 @@ public final class MavenUtils {
 	private static final Injector injector = Guice.createInjector(Main.wire(BeanScanning.INDEX));
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
-	private MavenUtils() {
-		// Not available
-	}
+	private MavenUtils() {}
 
 	/**
 	 * <p>Retrieve an {@link Optional} of the <i>Maven</i> home.</p>

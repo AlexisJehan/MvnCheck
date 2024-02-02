@@ -142,7 +142,7 @@ public enum MavenArtifactType implements ArtifactType {
 	private final RepositoryType repositoryType;
 
 	/**
-	 * <p>Constructor by default.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
 	MavenArtifactType() {

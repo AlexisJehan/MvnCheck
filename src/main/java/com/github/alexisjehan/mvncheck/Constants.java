@@ -56,10 +56,8 @@ final class Constants {
 	static final String GITHUB_REPOSITORY_NAME = "MvnCheck";
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.4.0
 	 */
-	private Constants() {
-		// Not available
-	}
+	private Constants() {}
 }

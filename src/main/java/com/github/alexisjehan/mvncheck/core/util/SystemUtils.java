@@ -47,12 +47,10 @@ public final class SystemUtils {
 	private static final Path USER_HOME_DIRECTORY = Path.of(System.getProperty("user.home"));
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
-	private SystemUtils() {
-		// Not available
-	}
+	private SystemUtils() {}
 
 	/**
 	 * <p>Get an {@link Optional} environment variable for the given name.</p>

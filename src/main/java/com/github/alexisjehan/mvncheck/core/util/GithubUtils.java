@@ -43,12 +43,10 @@ public final class GithubUtils {
 	private static final int RATE_LIMIT_REMAINING_THRESHOLD = 3;
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.4.0
 	 */
-	private GithubUtils() {
-		// Not available
-	}
+	private GithubUtils() {}
 
 	/**
 	 * <p>Retrieve an {@link Optional} of the latest release name.</p>

@@ -30,7 +30,7 @@ package org.apache.maven.project;
 public final class PublicReactorModelCache extends ReactorModelCache {
 
 	/**
-	 * <p>Constructor by default.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelCache() {

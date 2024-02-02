@@ -51,12 +51,10 @@ public final class GradleUtils {
 	);
 
 	/**
-	 * <p>Constructor not available.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
-	private GradleUtils() {
-		// Not available
-	}
+	private GradleUtils() {}
 
 	/**
 	 * <p>Retrieve an {@link Optional} of the <i>Gradle</i> home.</p>

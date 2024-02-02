@@ -83,7 +83,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Constructor by default.</p>
+	 * <p>Constructor.</p>
 	 * @since 1.0.0
 	 */
 	public GradleBuildResolver() {
