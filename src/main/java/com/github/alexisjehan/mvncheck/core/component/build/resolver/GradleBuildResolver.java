@@ -87,7 +87,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	 * @since 1.0.0
 	 */
 	public GradleBuildResolver() {
-		// By default
+		// Empty
 	}
 
 	/**

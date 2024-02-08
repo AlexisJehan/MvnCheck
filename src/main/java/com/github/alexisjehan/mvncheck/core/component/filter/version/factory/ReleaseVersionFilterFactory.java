@@ -32,13 +32,15 @@ import java.util.regex.Pattern;
  * <p>Enumeration of a singleton release version filter factory.</p>
  * @since 1.0.0
  */
-public enum ReleaseVersionFilterFactory implements VersionFilterFactory {
+public final class ReleaseVersionFilterFactory implements VersionFilterFactory {
 
 	/**
 	 * <p>Singleton instance.</p>
+	 * @deprecated since 1.5.0, use {@link #ReleaseVersionFilterFactory()} instead, this is not a singleton anymore!
 	 * @since 1.0.0
 	 */
-	INSTANCE;
+	@Deprecated(since = "1.5.0")
+	public static final ReleaseVersionFilterFactory INSTANCE = new ReleaseVersionFilterFactory();
 
 	/**
 	 * <p>Pattern to match pre-release versions.</p>
@@ -48,6 +50,14 @@ public enum ReleaseVersionFilterFactory implements VersionFilterFactory {
 			"^.*[.\\-]?(?:alpha|a|beta|b|milestone|m|rc|cr|snapshot)[.\\-]?\\d*$",
 			Pattern.CASE_INSENSITIVE
 	);
+
+	/**
+	 * <p>Constructor.</p>
+	 * @since 1.5.0
+	 */
+	public ReleaseVersionFilterFactory() {
+		// Empty
+	}
 
 	/**
 	 * {@inheritDoc}

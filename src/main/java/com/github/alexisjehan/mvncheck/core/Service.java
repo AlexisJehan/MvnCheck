@@ -85,8 +85,8 @@ public final class Service {
 	 * @since 1.0.0
 	 */
 	private final VersionFilterFactory versionFilterFactory = new CompositeVersionFilterFactory(
-			QualifierVersionFilterFactory.INSTANCE,
-			ReleaseVersionFilterFactory.INSTANCE
+			new QualifierVersionFilterFactory(),
+			new ReleaseVersionFilterFactory()
 	);
 
 	/**

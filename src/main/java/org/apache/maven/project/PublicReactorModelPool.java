@@ -34,6 +34,6 @@ public final class PublicReactorModelPool extends ReactorModelPool {
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelPool() {
-		// By default
+		// Empty
 	}
 }

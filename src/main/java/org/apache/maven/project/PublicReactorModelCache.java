@@ -34,6 +34,6 @@ public final class PublicReactorModelCache extends ReactorModelCache {
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelCache() {
-		// By default
+		// Empty
 	}
 }

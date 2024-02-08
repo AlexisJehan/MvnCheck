@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 final class QualifierVersionFilterFactoryTest {
 
-	private final QualifierVersionFilterFactory qualifierVersionFilterFactory = QualifierVersionFilterFactory.INSTANCE;
+	private final QualifierVersionFilterFactory qualifierVersionFilterFactory = new QualifierVersionFilterFactory();
 
 	@Test
 	void testCreateInvalid() {

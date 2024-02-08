@@ -32,13 +32,15 @@ import java.util.regex.Pattern;
  * <p>Enumeration of a singleton qualifier version filter factory.</p>
  * @since 1.0.0
  */
-public enum QualifierVersionFilterFactory implements VersionFilterFactory {
+public final class QualifierVersionFilterFactory implements VersionFilterFactory {
 
 	/**
 	 * <p>Singleton instance.</p>
+	 * @deprecated since 1.5.0, use {@link #QualifierVersionFilterFactory()} instead, this is not a singleton anymore!
 	 * @since 1.0.0
 	 */
-	INSTANCE;
+	@Deprecated(since = "1.5.0")
+	public static final QualifierVersionFilterFactory INSTANCE = new QualifierVersionFilterFactory();
 
 	/**
 	 * <p>Pattern to extract the qualifier from a version.</p>
@@ -48,6 +50,14 @@ public enum QualifierVersionFilterFactory implements VersionFilterFactory {
 			"^.*[.\\-]?([a-z]+)[.\\-]?\\d*$",
 			Pattern.CASE_INSENSITIVE
 	);
+
+	/**
+	 * <p>Constructor.</p>
+	 * @since 1.5.0
+	 */
+	public QualifierVersionFilterFactory() {
+		// Empty
+	}
 
 	/**
 	 * {@inheritDoc}
