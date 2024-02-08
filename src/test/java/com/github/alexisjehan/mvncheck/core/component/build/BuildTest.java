@@ -98,28 +98,28 @@ final class BuildTest {
 		assertThat(build.equals(build)).isTrue();
 		assertThat(build).isNotEqualTo(new Object());
 		assertThat(new Build(FILE, REPOSITORIES, ARTIFACTS)).satisfies(otherBuild -> {
-			assertThat(build).isNotSameAs(otherBuild);
-			assertThat(build).isEqualTo(otherBuild);
-			assertThat(build).hasSameHashCodeAs(otherBuild);
-			assertThat(build).hasToString(otherBuild.toString());
+			assertThat(otherBuild).isNotSameAs(build);
+			assertThat(otherBuild).isEqualTo(build);
+			assertThat(otherBuild).hasSameHashCodeAs(build);
+			assertThat(otherBuild).hasToString(build.toString());
 		});
 		assertThat(new Build(OTHER_FILE, REPOSITORIES, ARTIFACTS)).satisfies(otherBuild -> {
-			assertThat(build).isNotSameAs(otherBuild);
-			assertThat(build).isNotEqualTo(otherBuild);
-			assertThat(build).doesNotHaveSameHashCodeAs(otherBuild);
-			assertThat(build).doesNotHaveToString(otherBuild.toString());
+			assertThat(otherBuild).isNotSameAs(build);
+			assertThat(otherBuild).isNotEqualTo(build);
+			assertThat(otherBuild).doesNotHaveSameHashCodeAs(build);
+			assertThat(otherBuild).doesNotHaveToString(build.toString());
 		});
 		assertThat(new Build(FILE, OTHER_REPOSITORIES, ARTIFACTS)).satisfies(otherBuild -> {
-			assertThat(build).isNotSameAs(otherBuild);
-			assertThat(build).isNotEqualTo(otherBuild);
-			assertThat(build).doesNotHaveSameHashCodeAs(otherBuild);
-			assertThat(build).doesNotHaveToString(otherBuild.toString());
+			assertThat(otherBuild).isNotSameAs(build);
+			assertThat(otherBuild).isNotEqualTo(build);
+			assertThat(otherBuild).doesNotHaveSameHashCodeAs(build);
+			assertThat(otherBuild).doesNotHaveToString(build.toString());
 		});
 		assertThat(new Build(FILE, REPOSITORIES, OTHER_ARTIFACTS)).satisfies(otherBuild -> {
-			assertThat(build).isNotSameAs(otherBuild);
-			assertThat(build).isNotEqualTo(otherBuild);
-			assertThat(build).doesNotHaveSameHashCodeAs(otherBuild);
-			assertThat(build).doesNotHaveToString(otherBuild.toString());
+			assertThat(otherBuild).isNotSameAs(build);
+			assertThat(otherBuild).isNotEqualTo(build);
+			assertThat(otherBuild).doesNotHaveSameHashCodeAs(build);
+			assertThat(otherBuild).doesNotHaveToString(build.toString());
 		});
 	}
 

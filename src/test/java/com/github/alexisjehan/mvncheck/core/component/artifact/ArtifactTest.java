@@ -55,13 +55,13 @@ final class ArtifactTest {
 	void testWith() {
 		assertThat(artifact.with(TYPE)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
-			assertThat(artifact.getIdentifier()).isEqualTo(otherArtifact.getIdentifier());
-			assertThat(artifact.getOptionalVersion()).isEqualTo(otherArtifact.getOptionalVersion());
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
 		});
 		assertThat(artifact.with(OTHER_TYPE)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact.getType()).isEqualTo(OTHER_TYPE);
-			assertThat(artifact.getIdentifier()).isEqualTo(otherArtifact.getIdentifier());
-			assertThat(artifact.getOptionalVersion()).isEqualTo(otherArtifact.getOptionalVersion());
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
 		});
 	}
 
@@ -70,28 +70,28 @@ final class ArtifactTest {
 		assertThat(artifact.equals(artifact)).isTrue();
 		assertThat(artifact).isNotEqualTo(new Object());
 		assertThat(new Artifact<>(TYPE, IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
-			assertThat(artifact).isNotSameAs(otherArtifact);
-			assertThat(artifact).isEqualTo(otherArtifact);
-			assertThat(artifact).hasSameHashCodeAs(otherArtifact);
-			assertThat(artifact).hasToString(otherArtifact.toString());
+			assertThat(otherArtifact).isNotSameAs(artifact);
+			assertThat(otherArtifact).isEqualTo(artifact);
+			assertThat(otherArtifact).hasSameHashCodeAs(artifact);
+			assertThat(otherArtifact).hasToString(artifact.toString());
 		});
 		assertThat(new Artifact<>(OTHER_TYPE, IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
-			assertThat(artifact).isNotSameAs(otherArtifact);
-			assertThat(artifact).isNotEqualTo(otherArtifact);
-			assertThat(artifact).doesNotHaveSameHashCodeAs(otherArtifact);
-			assertThat(artifact).doesNotHaveToString(otherArtifact.toString());
+			assertThat(otherArtifact).isNotSameAs(artifact);
+			assertThat(otherArtifact).isNotEqualTo(artifact);
+			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
+			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
 		});
 		assertThat(new Artifact<>(TYPE, OTHER_IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
-			assertThat(artifact).isNotSameAs(otherArtifact);
-			assertThat(artifact).isNotEqualTo(otherArtifact);
-			assertThat(artifact).doesNotHaveSameHashCodeAs(otherArtifact);
-			assertThat(artifact).doesNotHaveToString(otherArtifact.toString());
+			assertThat(otherArtifact).isNotSameAs(artifact);
+			assertThat(otherArtifact).isNotEqualTo(artifact);
+			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
+			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
 		});
 		assertThat(new Artifact<>(TYPE, IDENTIFIER)).satisfies(otherArtifact -> {
-			assertThat(artifact).isNotSameAs(otherArtifact);
-			assertThat(artifact).isNotEqualTo(otherArtifact);
-			assertThat(artifact).doesNotHaveSameHashCodeAs(otherArtifact);
-			assertThat(artifact).doesNotHaveToString(otherArtifact.toString());
+			assertThat(otherArtifact).isNotSameAs(artifact);
+			assertThat(otherArtifact).isNotEqualTo(artifact);
+			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
+			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
 		});
 	}
 

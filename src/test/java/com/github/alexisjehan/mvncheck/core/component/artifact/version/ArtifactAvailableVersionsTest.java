@@ -79,36 +79,36 @@ final class ArtifactAvailableVersionsTest {
 		assertThat(artifactAvailableVersions).isNotEqualTo(new Object());
 		assertThat(new ArtifactAvailableVersions(ARTIFACT, AVAILABLE_VERSIONS))
 				.satisfies(otherArtifactAvailableVersions -> {
-					assertThat(artifactAvailableVersions)
-							.isNotSameAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.isEqualTo(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.hasSameHashCodeAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.hasToString(otherArtifactAvailableVersions.toString());
+					assertThat(otherArtifactAvailableVersions)
+							.isNotSameAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.isEqualTo(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.hasSameHashCodeAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.hasToString(artifactAvailableVersions.toString());
 				});
 		assertThat(new ArtifactAvailableVersions(OTHER_ARTIFACT, AVAILABLE_VERSIONS))
 				.satisfies(otherArtifactAvailableVersions -> {
-					assertThat(artifactAvailableVersions)
-							.isNotSameAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.isNotEqualTo(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.doesNotHaveSameHashCodeAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.doesNotHaveToString(otherArtifactAvailableVersions.toString());
+					assertThat(otherArtifactAvailableVersions)
+							.isNotSameAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.isNotEqualTo(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.doesNotHaveSameHashCodeAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.doesNotHaveToString(artifactAvailableVersions.toString());
 				});
 		assertThat(new ArtifactAvailableVersions(ARTIFACT, OTHER_AVAILABLE_VERSIONS))
 				.satisfies(otherArtifactAvailableVersions -> {
-					assertThat(artifactAvailableVersions)
-							.isNotSameAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.isNotEqualTo(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.doesNotHaveSameHashCodeAs(otherArtifactAvailableVersions);
-					assertThat(artifactAvailableVersions)
-							.doesNotHaveToString(otherArtifactAvailableVersions.toString());
+					assertThat(otherArtifactAvailableVersions)
+							.isNotSameAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.isNotEqualTo(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.doesNotHaveSameHashCodeAs(artifactAvailableVersions);
+					assertThat(otherArtifactAvailableVersions)
+							.doesNotHaveToString(artifactAvailableVersions.toString());
 				});
 	}
 

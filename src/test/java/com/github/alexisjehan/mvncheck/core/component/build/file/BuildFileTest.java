@@ -50,22 +50,22 @@ final class BuildFileTest {
 		assertThat(buildFile.equals(buildFile)).isTrue();
 		assertThat(buildFile).isNotEqualTo(new Object());
 		assertThat(new BuildFile(TYPE, FILE)).satisfies(otherBuildFile -> {
-			assertThat(buildFile).isNotSameAs(otherBuildFile);
-			assertThat(buildFile).isEqualTo(otherBuildFile);
-			assertThat(buildFile).hasSameHashCodeAs(otherBuildFile);
-			assertThat(buildFile).hasToString(otherBuildFile.toString());
+			assertThat(otherBuildFile).isNotSameAs(buildFile);
+			assertThat(otherBuildFile).isEqualTo(buildFile);
+			assertThat(otherBuildFile).hasSameHashCodeAs(buildFile);
+			assertThat(otherBuildFile).hasToString(buildFile.toString());
 		});
 		assertThat(new BuildFile(OTHER_TYPE, FILE)).satisfies(otherBuildFile -> {
-			assertThat(buildFile).isNotSameAs(otherBuildFile);
-			assertThat(buildFile).isNotEqualTo(otherBuildFile);
-			assertThat(buildFile).doesNotHaveSameHashCodeAs(otherBuildFile);
-			assertThat(buildFile).doesNotHaveToString(otherBuildFile.toString());
+			assertThat(otherBuildFile).isNotSameAs(buildFile);
+			assertThat(otherBuildFile).isNotEqualTo(buildFile);
+			assertThat(otherBuildFile).doesNotHaveSameHashCodeAs(buildFile);
+			assertThat(otherBuildFile).doesNotHaveToString(buildFile.toString());
 		});
 		assertThat(new BuildFile(TYPE, OTHER_FILE)).satisfies(otherBuildFile -> {
-			assertThat(buildFile).isNotSameAs(otherBuildFile);
-			assertThat(buildFile).isNotEqualTo(otherBuildFile);
-			assertThat(buildFile).doesNotHaveSameHashCodeAs(otherBuildFile);
-			assertThat(buildFile).doesNotHaveToString(otherBuildFile.toString());
+			assertThat(otherBuildFile).isNotSameAs(buildFile);
+			assertThat(otherBuildFile).isNotEqualTo(buildFile);
+			assertThat(otherBuildFile).doesNotHaveSameHashCodeAs(buildFile);
+			assertThat(otherBuildFile).doesNotHaveToString(buildFile.toString());
 		});
 	}
 

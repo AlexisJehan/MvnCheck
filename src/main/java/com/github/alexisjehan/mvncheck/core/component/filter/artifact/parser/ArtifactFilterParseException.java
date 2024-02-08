@@ -76,7 +76,11 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 *         to 0
 	 * @since 1.0.0
 	 */
-	ArtifactFilterParseException(final String reason, final String line, final long lineNumber) {
+	ArtifactFilterParseException(
+			final String reason,
+			final String line,
+			final long lineNumber
+	) {
 		this(reason, line, lineNumber, null);
 	}
 

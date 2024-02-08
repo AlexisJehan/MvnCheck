@@ -52,22 +52,22 @@ final class ArtifactIdentifierTest {
 		assertThat(artifactIdentifier.equals(artifactIdentifier)).isTrue();
 		assertThat(artifactIdentifier).isNotEqualTo(new Object());
 		assertThat(new ArtifactIdentifier(GROUP_ID, ARTIFACT_ID)).satisfies(otherArtifactIdentifier -> {
-			assertThat(artifactIdentifier).isNotSameAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).isEqualTo(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).hasSameHashCodeAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).hasToString(otherArtifactIdentifier.toString());
+			assertThat(otherArtifactIdentifier).isNotSameAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).isEqualTo(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).hasSameHashCodeAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).hasToString(artifactIdentifier.toString());
 		});
 		assertThat(new ArtifactIdentifier(OTHER_GROUP_ID, ARTIFACT_ID)).satisfies(otherArtifactIdentifier -> {
-			assertThat(artifactIdentifier).isNotSameAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).isNotEqualTo(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).doesNotHaveSameHashCodeAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).doesNotHaveToString(otherArtifactIdentifier.toString());
+			assertThat(otherArtifactIdentifier).isNotSameAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).isNotEqualTo(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).doesNotHaveSameHashCodeAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).doesNotHaveToString(artifactIdentifier.toString());
 		});
 		assertThat(new ArtifactIdentifier(GROUP_ID, OTHER_ARTIFACT_ID)).satisfies(otherArtifactIdentifier -> {
-			assertThat(artifactIdentifier).isNotSameAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).isNotEqualTo(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).doesNotHaveSameHashCodeAs(otherArtifactIdentifier);
-			assertThat(artifactIdentifier).doesNotHaveToString(otherArtifactIdentifier.toString());
+			assertThat(otherArtifactIdentifier).isNotSameAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).isNotEqualTo(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).doesNotHaveSameHashCodeAs(artifactIdentifier);
+			assertThat(otherArtifactIdentifier).doesNotHaveToString(artifactIdentifier.toString());
 		});
 	}
 

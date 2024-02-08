@@ -72,22 +72,22 @@ final class DecryptedSettingsTest {
 		assertThat(decryptedSettings.equals(decryptedSettings)).isTrue();
 		assertThat(decryptedSettings).isNotEqualTo(new Object());
 		assertThat(new DecryptedSettings(PROXIES, SERVERS)).satisfies(otherDecryptedSettings -> {
-			assertThat(decryptedSettings).isNotSameAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).isEqualTo(otherDecryptedSettings);
-			assertThat(decryptedSettings).hasSameHashCodeAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).hasToString(otherDecryptedSettings.toString());
+			assertThat(otherDecryptedSettings).isNotSameAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).isEqualTo(decryptedSettings);
+			assertThat(otherDecryptedSettings).hasSameHashCodeAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).hasToString(decryptedSettings.toString());
 		});
 		assertThat(new DecryptedSettings(OTHER_PROXIES, SERVERS)).satisfies(otherDecryptedSettings -> {
-			assertThat(decryptedSettings).isNotSameAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).isNotEqualTo(otherDecryptedSettings);
-			assertThat(decryptedSettings).doesNotHaveSameHashCodeAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).doesNotHaveToString(otherDecryptedSettings.toString());
+			assertThat(otherDecryptedSettings).isNotSameAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).isNotEqualTo(decryptedSettings);
+			assertThat(otherDecryptedSettings).doesNotHaveSameHashCodeAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).doesNotHaveToString(decryptedSettings.toString());
 		});
 		assertThat(new DecryptedSettings(PROXIES, OTHER_SERVERS)).satisfies(otherDecryptedSettings -> {
-			assertThat(decryptedSettings).isNotSameAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).isNotEqualTo(otherDecryptedSettings);
-			assertThat(decryptedSettings).doesNotHaveSameHashCodeAs(otherDecryptedSettings);
-			assertThat(decryptedSettings).doesNotHaveToString(otherDecryptedSettings.toString());
+			assertThat(otherDecryptedSettings).isNotSameAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).isNotEqualTo(decryptedSettings);
+			assertThat(otherDecryptedSettings).doesNotHaveSameHashCodeAs(decryptedSettings);
+			assertThat(otherDecryptedSettings).doesNotHaveToString(decryptedSettings.toString());
 		});
 	}
 

@@ -55,28 +55,28 @@ final class RepositoryTest {
 		assertThat(repository.equals(repository)).isTrue();
 		assertThat(repository).isNotEqualTo(new Object());
 		assertThat(new Repository(TYPE, ID, URL)).satisfies(otherRepository -> {
-			assertThat(repository).isNotSameAs(otherRepository);
-			assertThat(repository).isEqualTo(otherRepository);
-			assertThat(repository).hasSameHashCodeAs(otherRepository);
-			assertThat(repository).hasToString(otherRepository.toString());
+			assertThat(otherRepository).isNotSameAs(repository);
+			assertThat(otherRepository).isEqualTo(repository);
+			assertThat(otherRepository).hasSameHashCodeAs(repository);
+			assertThat(otherRepository).hasToString(repository.toString());
 		});
 		assertThat(new Repository(OTHER_TYPE, ID, URL)).satisfies(otherRepository -> {
-			assertThat(repository).isNotSameAs(otherRepository);
-			assertThat(repository).isNotEqualTo(otherRepository);
-			assertThat(repository).doesNotHaveSameHashCodeAs(otherRepository);
-			assertThat(repository).doesNotHaveToString(otherRepository.toString());
+			assertThat(otherRepository).isNotSameAs(repository);
+			assertThat(otherRepository).isNotEqualTo(repository);
+			assertThat(otherRepository).doesNotHaveSameHashCodeAs(repository);
+			assertThat(otherRepository).doesNotHaveToString(repository.toString());
 		});
 		assertThat(new Repository(TYPE, OTHER_ID, URL)).satisfies(otherRepository -> {
-			assertThat(repository).isNotSameAs(otherRepository);
-			assertThat(repository).isNotEqualTo(otherRepository);
-			assertThat(repository).doesNotHaveSameHashCodeAs(otherRepository);
-			assertThat(repository).doesNotHaveToString(otherRepository.toString());
+			assertThat(otherRepository).isNotSameAs(repository);
+			assertThat(otherRepository).isNotEqualTo(repository);
+			assertThat(otherRepository).doesNotHaveSameHashCodeAs(repository);
+			assertThat(otherRepository).doesNotHaveToString(repository.toString());
 		});
 		assertThat(new Repository(TYPE, ID, OTHER_URL)).satisfies(otherRepository -> {
-			assertThat(repository).isNotSameAs(otherRepository);
-			assertThat(repository).isNotEqualTo(otherRepository);
-			assertThat(repository).doesNotHaveSameHashCodeAs(otherRepository);
-			assertThat(repository).doesNotHaveToString(otherRepository.toString());
+			assertThat(otherRepository).isNotSameAs(repository);
+			assertThat(otherRepository).isNotEqualTo(repository);
+			assertThat(otherRepository).doesNotHaveSameHashCodeAs(repository);
+			assertThat(otherRepository).doesNotHaveToString(repository.toString());
 		});
 	}
 
