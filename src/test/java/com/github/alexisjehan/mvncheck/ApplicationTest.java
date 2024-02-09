@@ -71,7 +71,7 @@ final class ApplicationTest {
 
 	@Test
 	@Deprecated
-	void testRunDeprecated() throws IOException {
+	void testRunDeprecated1() throws IOException {
 		final var path1 = Path.of("path1");
 		final var path2 = Path.of("path2");
 		final var path3 = Path.of("path3");
@@ -105,9 +105,21 @@ final class ApplicationTest {
 				.thenReturn(build2);
 		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile3::equals)))
 				.thenThrow(BuildResolveException.class);
-		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build1::equals), Mockito.anyBoolean()))
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build1::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
 				.thenReturn(List.of());
-		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build2::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			try (var mockedStaticGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
@@ -165,7 +177,7 @@ final class ApplicationTest {
 
 	@Test
 	@Deprecated
-	void testRunDeprecatedInvalid() {
+	void testRunDeprecated1Invalid() {
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			final var application = new Application(printStream);
 			assertThatNullPointerException().isThrownBy(
@@ -181,7 +193,8 @@ final class ApplicationTest {
 	}
 
 	@Test
-	void testRun() throws IOException {
+	@Deprecated
+	void testRunDeprecated2() throws IOException {
 		final var path1 = Path.of("path1");
 		final var path2 = Path.of("path2");
 		final var path3 = Path.of("path3");
@@ -215,9 +228,21 @@ final class ApplicationTest {
 				.thenReturn(build2);
 		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile3::equals)))
 				.thenThrow(BuildResolveException.class);
-		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build1::equals), Mockito.anyBoolean()))
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build1::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
 				.thenReturn(List.of());
-		Mockito.when(mockedService.findArtifactUpdateVersions(Mockito.argThat(build2::equals), Mockito.anyBoolean()))
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build2::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
 				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			try (var mockedStaticGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
@@ -274,7 +299,8 @@ final class ApplicationTest {
 	}
 
 	@Test
-	void testRunInvalid() {
+	@Deprecated
+	void testRunDeprecated2Invalid() {
 		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
 			final var application = new Application(printStream);
 			assertThatNullPointerException().isThrownBy(
@@ -288,6 +314,159 @@ final class ApplicationTest {
 			);
 			assertThatIllegalArgumentException().isThrownBy(
 					() -> application.run(Path.of("path"), -1, false, false)
+			);
+		}
+	}
+
+	@Test
+	void testRun() throws IOException {
+		final var path1 = Path.of("path1");
+		final var path2 = Path.of("path2");
+		final var path3 = Path.of("path3");
+		final var buildFile1 = new BuildFile(BuildFileType.MAVEN, Path.of("pom.xml"));
+		final var buildFile2 = new BuildFile(BuildFileType.GRADLE_GROOVY, Path.of("build.gradle"));
+		final var buildFile3 = new BuildFile(BuildFileType.GRADLE_KOTLIN, Path.of("build.gradle.kts"));
+		final var artifact = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				new ArtifactIdentifier("foo-group-id", "foo-artifact-id"),
+				"1.0.0",
+				true
+		);
+		final var build1 = new Build(
+				buildFile1,
+				List.of(),
+				List.of(artifact)
+		);
+		final var build2 = new Build(
+				buildFile2,
+				List.of(),
+				List.of(artifact)
+		);
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path1::equals), Mockito.anyInt()))
+				.thenReturn(List.of());
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path2::equals), Mockito.anyInt()))
+				.thenReturn(List.of(buildFile1));
+		Mockito.when(mockedService.findBuildFiles(Mockito.argThat(path3::equals), Mockito.anyInt()))
+				.thenReturn(List.of(buildFile1, buildFile2, buildFile3));
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile1::equals)))
+				.thenReturn(build1);
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile2::equals)))
+				.thenReturn(build2);
+		Mockito.when(mockedService.findBuild(Mockito.argThat(buildFile3::equals)))
+				.thenThrow(BuildResolveException.class);
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build1::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
+				.thenReturn(List.of());
+		Mockito.when(
+						mockedService.findArtifactUpdateVersions(
+								Mockito.argThat(build2::equals),
+								Mockito.anyBoolean(),
+								Mockito.anyBoolean()
+						)
+				)
+				.thenReturn(List.of(new ArtifactUpdateVersion(artifact, "2.0.0")));
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			try (var mockedStaticGithubUtils = Mockito.mockStatic(GithubUtils.class)) {
+				mockedStaticGithubUtils.when(
+								() -> GithubUtils.retrieveOptionalLatestReleaseName(
+										Mockito.notNull(),
+										Mockito.notNull()
+								)
+						)
+						.thenReturn(
+								Optional.of("1.0.0"),
+								Optional.of("2.0.0"),
+								Optional.empty()
+						);
+				try (var mockedStaticApplication = Mockito.mockStatic(Application.class)) {
+					mockedStaticApplication.when(Application::createService)
+							.thenReturn(mockedService);
+					mockedStaticApplication.when(Application::getCurrentVersion)
+							.thenReturn(
+									"1.0.0",
+									"1.0.0",
+									null
+							);
+					final var application = new Application(printStream);
+					assertThatNoException().isThrownBy(
+							application::run
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_MAX_DEPTH, "0")
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_HELP)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_IGNORE_INHERITED)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_IGNORE_SNAPSHOTS)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_SHORT)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_VERSION)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("directory_not-found")
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path1.toString())
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path2.toString())
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path3.toString())
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path1, 0, true, true, true)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path2, 0, true, true, true)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run(path3, 0, true, true, true)
+					);
+				}
+			}
+		}
+	}
+
+	@Test
+	void testRunInvalid() {
+		try (var printStream = new PrintStream(OutputStream.nullOutputStream())) {
+			final var application = new Application(printStream);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String[]) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run((String) null)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run(
+							null,
+							0,
+							false,
+							false,
+							false
+					)
+			);
+			assertThatIllegalArgumentException().isThrownBy(
+					() -> application.run(
+							Path.of("path"),
+							-1,
+							false,
+							false,
+							false
+					)
 			);
 		}
 	}

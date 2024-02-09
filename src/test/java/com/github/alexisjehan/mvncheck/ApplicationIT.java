@@ -64,7 +64,7 @@ final class ApplicationIT {
 		try (var outputStream = new ByteArrayOutputStream()) {
 			try (var printStream = new PrintStream(outputStream)) {
 				final var application = new Application(printStream);
-				application.run(tmpDirectory, 1, false, false);
+				application.run(tmpDirectory, 1, false, false, false);
 			}
 			assertThat(outputStream.toString()).matches(
 					"^"

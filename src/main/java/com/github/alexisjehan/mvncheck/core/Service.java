@@ -206,10 +206,30 @@ public final class Service {
 	 * @return the {@link List} of artifact update versions
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the build is {@code null}
+	 * @deprecated since 1.5.0, use {@link #findArtifactUpdateVersions(Build, boolean, boolean)} instead
 	 * @since 1.0.0
+	 */
+	@Deprecated(since = "1.5.0")
+	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
+			final Build build,
+			final boolean ignoreSnapshots
+	) throws IOException {
+		return findArtifactUpdateVersions(build, false, ignoreSnapshots);
+	}
+
+	/**
+	 * <p>Find a {@link List} of artifact update versions for the given build.</p>
+	 * @param build a build
+	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
+	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
+	 * @return the {@link List} of artifact update versions
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the build is {@code null}
+	 * @since 1.5.0
 	 */
 	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
 			final Build build,
+			final boolean ignoreInherited,
 			final boolean ignoreSnapshots
 	) throws IOException {
 		Ensure.notNull("build", build);
@@ -220,6 +240,7 @@ public final class Service {
 		return build.getArtifacts()
 				.parallelStream()
 				.filter(artifactFilter::accept)
+				.filter(artifact -> !ignoreInherited || !artifact.isVersionInherited())
 				.filter(
 						artifact -> artifact.getOptionalVersion()
 								.filter(version -> !ignoreSnapshots || !VersionFilter.SNAPSHOT.accept(version))

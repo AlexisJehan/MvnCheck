@@ -57,6 +57,42 @@ import java.util.List;
 public final class Application {
 
 	/**
+	 * <p>Maximum depth option long name.</p>
+	 * @since 1.1.0
+	 */
+	static final String OPTION_MAX_DEPTH = "max-depth";
+
+	/**
+	 * <p>Help option long name.</p>
+	 * @since 1.0.0
+	 */
+	static final String OPTION_HELP = "help";
+
+	/**
+	 * <p>Ignore inherited option long name.</p>
+	 * @since 1.5.0
+	 */
+	static final String OPTION_IGNORE_INHERITED = "ignore-inherited";
+
+	/**
+	 * <p>Ignore snapshots option long name.</p>
+	 * @since 1.0.0
+	 */
+	static final String OPTION_IGNORE_SNAPSHOTS = "ignore-snapshots";
+
+	/**
+	 * <p>Short option long name.</p>
+	 * @since 1.0.0
+	 */
+	static final String OPTION_SHORT = "short";
+
+	/**
+	 * <p>Version option long name.</p>
+	 * @since 1.0.0
+	 */
+	static final String OPTION_VERSION = "version";
+
+	/**
 	 * <p>Title.</p>
 	 * @since 1.4.0
 	 */
@@ -78,36 +114,6 @@ public final class Application {
 	 * @since 1.0.0
 	 */
 	private static final String COMMAND_NAME = "mvnchk";
-
-	/**
-	 * <p>Maximum depth option long name.</p>
-	 * @since 1.1.0
-	 */
-	private static final String OPTION_MAX_DEPTH = "max-depth";
-
-	/**
-	 * <p>Help option long name.</p>
-	 * @since 1.0.0
-	 */
-	private static final String OPTION_HELP = "help";
-
-	/**
-	 * <p>Ignore snapshots option long name.</p>
-	 * @since 1.0.0
-	 */
-	private static final String OPTION_IGNORE_SNAPSHOTS = "ignore-snapshots";
-
-	/**
-	 * <p>Short option long name.</p>
-	 * @since 1.0.0
-	 */
-	private static final String OPTION_SHORT = "short";
-
-	/**
-	 * <p>Version option long name.</p>
-	 * @since 1.0.0
-	 */
-	private static final String OPTION_VERSION = "version";
 
 	/**
 	 * <p>Default value depending on whether ANSI should be enabled or not.</p>
@@ -145,6 +151,12 @@ public final class Application {
 				OPTION_HELP,
 				false,
 				"Display help information"
+		);
+		options.addOption(
+				null,
+				OPTION_IGNORE_INHERITED,
+				false,
+				"Ignore build file artifacts with an inherited version"
 		);
 		options.addOption(
 				"i",
@@ -245,6 +257,7 @@ public final class Application {
 						commandLine.hasOption(OPTION_MAX_DEPTH)
 								? Integer.parseUnsignedInt(commandLine.getOptionValue(OPTION_MAX_DEPTH))
 								: DEFAULT_MAX_DEPTH,
+						commandLine.hasOption(OPTION_IGNORE_INHERITED),
 						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS),
 						commandLine.hasOption(OPTION_SHORT)
 				);
@@ -265,7 +278,11 @@ public final class Application {
 	 * @since 1.0.0
 	 */
 	@Deprecated(since = "1.1.0")
-	void run(final Path path, final boolean ignoreSnapshots, final boolean short0) throws IOException {
+	void run(
+			final Path path,
+			final boolean ignoreSnapshots,
+			final boolean short0
+	) throws IOException {
 		run(path, DEFAULT_MAX_DEPTH, ignoreSnapshots, short0);
 	}
 
@@ -278,11 +295,35 @@ public final class Application {
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the path is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
+	 * @deprecated since 1.5.0, use {@link #run(Path, int, boolean, boolean, boolean)} instead
 	 * @since 1.1.0
+	 */
+	@Deprecated(since = "1.5.0")
+	void run(
+			final Path path,
+			final int maxDepth,
+			final boolean ignoreSnapshots,
+			final boolean short0
+	) throws IOException {
+		run(path, maxDepth, false, ignoreSnapshots, short0);
+	}
+
+	/**
+	 * <p>Run the program.</p>
+	 * @param path a path
+	 * @param maxDepth a maximum depth
+	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
+	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
+	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the path is {@code null}
+	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
+	 * @since 1.5.0
 	 */
 	void run(
 			final Path path,
 			final int maxDepth,
+			final boolean ignoreInherited,
 			final boolean ignoreSnapshots,
 			final boolean short0
 	) throws IOException {
@@ -303,7 +344,7 @@ public final class Application {
 			final List<ArtifactUpdateVersion> artifactUpdateVersions;
 			try {
 				final var build = service.findBuild(buildFile);
-				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreSnapshots);
+				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreInherited, ignoreSnapshots);
 			} catch (final BuildResolveException | ArtifactAvailableVersionsResolveException e) {
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(file)).reset());
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(e)).reset());

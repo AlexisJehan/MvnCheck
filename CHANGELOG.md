@@ -4,6 +4,7 @@
 
 ### New features
 - Display artifacts with an inherited version in parentheses
+- Add the `--ignore-inherited` option to ignore build file artifacts with an inherited version
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.6`
