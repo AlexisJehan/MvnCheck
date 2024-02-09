@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.6.0 (unreleased)
+
 ## [1.5.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.5.0) (2024-02-09)
 
 ### New features
