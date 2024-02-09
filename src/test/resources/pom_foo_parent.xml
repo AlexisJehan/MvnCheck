@@ -6,4 +6,14 @@
 	<artifactId>foo-parent-artifact-id</artifactId>
 	<version>foo-parent-version</version>
 	<packaging>pom</packaging>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>foo-parent-dependency-management-dependency-group-id</groupId>
+				<artifactId>foo-parent-dependency-management-dependency-artifact-id</artifactId>
+				<version>foo-parent-dependency-management-dependency-version</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

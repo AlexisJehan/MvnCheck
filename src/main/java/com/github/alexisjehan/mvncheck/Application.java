@@ -327,7 +327,10 @@ public final class Application {
 									.fgBrightBlue()
 									.a(toString(artifact.getType()))
 									.reset()
-									.a("] " + toString(artifact.getIdentifier()) + " ")
+									.a("] ")
+									.a(artifact.isVersionInherited() ? "(" : "")
+									.a(toString(artifact.getIdentifier()))
+									.a(" ")
 									.fgBrightYellow()
 									.a(artifact.getOptionalVersion().orElseThrow())
 									.reset()
@@ -335,6 +338,7 @@ public final class Application {
 									.fgBrightGreen()
 									.a(updateVersion)
 									.reset()
+									.a(artifact.isVersionInherited() ? ")" : "")
 					);
 					++artifactsUpdatesCount;
 				}

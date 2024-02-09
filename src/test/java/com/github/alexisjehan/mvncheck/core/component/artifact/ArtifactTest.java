@@ -37,31 +37,98 @@ final class ArtifactTest {
 			"foo-artifact-id"
 	);
 	private static final String VERSION = "foo-version";
+	private static final boolean VERSION_INHERITED = true;
 	private static final MavenArtifactType OTHER_TYPE = MavenArtifactType.BUILD_PLUGIN;
 	private static final ArtifactIdentifier OTHER_IDENTIFIER = new ArtifactIdentifier(
 			"bar-group-id",
 			"bar-artifact-id"
 	);
+	private static final String OTHER_VERSION = "bar-version";
+	private static final boolean OTHER_VERSION_INHERITED = false;
 
-	private final Artifact<MavenArtifactType> artifact = new Artifact<>(TYPE, IDENTIFIER, VERSION);
+	private final Artifact<MavenArtifactType> artifact = new Artifact<>(TYPE, IDENTIFIER, VERSION, VERSION_INHERITED);
 
 	@Test
-	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new Artifact<>(null, IDENTIFIER, VERSION));
-		assertThatNullPointerException().isThrownBy(() -> new Artifact<>(TYPE, null, VERSION));
+	void testConstructor() {
+		assertThat(new Artifact<>(TYPE, IDENTIFIER)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(IDENTIFIER);
+			assertThat(otherArtifact.getOptionalVersion()).isEmpty();
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(Artifact.DEFAULT_VERSION_INHERITED);
+		});
+		assertThat(new Artifact<>(TYPE, IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(IDENTIFIER);
+			assertThat(otherArtifact.getOptionalVersion()).hasValue(VERSION);
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(Artifact.DEFAULT_VERSION_INHERITED);
+		});
 	}
 
 	@Test
+	void testConstructorInvalid() {
+		assertThatNullPointerException()
+				.isThrownBy(() -> new Artifact<>(null, IDENTIFIER, VERSION, VERSION_INHERITED));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new Artifact<>(TYPE, null, VERSION, VERSION_INHERITED));
+	}
+
+	@Test
+	@Deprecated
 	void testWith() {
 		assertThat(artifact.with(TYPE)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
 			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
 			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
 		});
 		assertThat(artifact.with(OTHER_TYPE)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact.getType()).isEqualTo(OTHER_TYPE);
 			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
 			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
+		});
+	}
+
+	@Test
+	@Deprecated
+	void testWithInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> artifact.with(null));
+	}
+
+	@Test
+	void testWithType() {
+		assertThat(artifact.withType(TYPE)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
+		});
+		assertThat(artifact.withType(OTHER_TYPE)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(OTHER_TYPE);
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
+		});
+	}
+
+	@Test
+	void testWithTypeInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> artifact.withType(null));
+	}
+
+	@Test
+	void testWithVersionInherited() {
+		assertThat(artifact.withVersionInherited(VERSION_INHERITED)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(artifact.getType());
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(VERSION_INHERITED);
+		});
+		assertThat(artifact.withVersionInherited(OTHER_VERSION_INHERITED)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact.getType()).isEqualTo(artifact.getType());
+			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
+			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
+			assertThat(otherArtifact.isVersionInherited()).isEqualTo(OTHER_VERSION_INHERITED);
 		});
 	}
 
@@ -69,25 +136,31 @@ final class ArtifactTest {
 	void testEqualsAndHashCodeAndToString() {
 		assertThat(artifact.equals(artifact)).isTrue();
 		assertThat(artifact).isNotEqualTo(new Object());
-		assertThat(new Artifact<>(TYPE, IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
+		assertThat(new Artifact<>(TYPE, IDENTIFIER, VERSION, VERSION_INHERITED)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact).isNotSameAs(artifact);
 			assertThat(otherArtifact).isEqualTo(artifact);
 			assertThat(otherArtifact).hasSameHashCodeAs(artifact);
 			assertThat(otherArtifact).hasToString(artifact.toString());
 		});
-		assertThat(new Artifact<>(OTHER_TYPE, IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
+		assertThat(new Artifact<>(OTHER_TYPE, IDENTIFIER, VERSION, VERSION_INHERITED)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact).isNotSameAs(artifact);
 			assertThat(otherArtifact).isNotEqualTo(artifact);
 			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
 			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
 		});
-		assertThat(new Artifact<>(TYPE, OTHER_IDENTIFIER, VERSION)).satisfies(otherArtifact -> {
+		assertThat(new Artifact<>(TYPE, OTHER_IDENTIFIER, VERSION, VERSION_INHERITED)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact).isNotSameAs(artifact);
 			assertThat(otherArtifact).isNotEqualTo(artifact);
 			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
 			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
 		});
-		assertThat(new Artifact<>(TYPE, IDENTIFIER)).satisfies(otherArtifact -> {
+		assertThat(new Artifact<>(TYPE, IDENTIFIER, OTHER_VERSION, VERSION_INHERITED)).satisfies(otherArtifact -> {
+			assertThat(otherArtifact).isNotSameAs(artifact);
+			assertThat(otherArtifact).isNotEqualTo(artifact);
+			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
+			assertThat(otherArtifact).doesNotHaveToString(artifact.toString());
+		});
+		assertThat(new Artifact<>(TYPE, IDENTIFIER, VERSION, OTHER_VERSION_INHERITED)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact).isNotSameAs(artifact);
 			assertThat(otherArtifact).isNotEqualTo(artifact);
 			assertThat(otherArtifact).doesNotHaveSameHashCodeAs(artifact);
@@ -108,5 +181,10 @@ final class ArtifactTest {
 	@Test
 	void testGetOptionalVersion() {
 		assertThat(artifact.getOptionalVersion()).hasValue(VERSION);
+	}
+
+	@Test
+	void testIsVersionInherited() {
+		assertThat(artifact.isVersionInherited()).isEqualTo(VERSION_INHERITED);
 	}
 }

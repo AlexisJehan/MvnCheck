@@ -51,6 +51,7 @@ import org.apache.maven.model.building.ModelBuildingResult;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -115,6 +116,7 @@ public final class MavenBuildResolver implements BuildResolver {
 			throw new BuildResolveException(e);
 		}
 		final var effectiveModel = result.getEffectiveModel();
+		final var rawModel = result.getRawModel();
 
 		logger.trace("Extracting repositories");
 		final var repositories = extractRepositories(effectiveModel);
@@ -131,7 +133,7 @@ public final class MavenBuildResolver implements BuildResolver {
 		);
 
 		logger.trace("Extracting raw artifacts");
-		final var rawArtifacts = extractArtifacts(result.getRawModel());
+		final var rawArtifacts = extractArtifacts(rawModel);
 		logger.debug("Extracted raw artifacts:");
 		rawArtifacts.forEach(
 				rawArtifact -> logger.debug("- {}", () -> ToString.toString(rawArtifact))
@@ -281,15 +283,22 @@ public final class MavenBuildResolver implements BuildResolver {
 			final List<Artifact<MavenArtifactType>> rawArtifacts
 	) {
 		return effectiveArtifacts.stream()
-				.filter(effectiveArtifact -> {
+				.map(effectiveArtifact -> {
 					final var effectiveArtifactType = effectiveArtifact.getType();
 					final var effectiveArtifactIdentifier = effectiveArtifact.getIdentifier();
 					return rawArtifacts.stream()
-							.anyMatch(
+							.filter(
 									rawArtifact -> rawArtifact.getType() == effectiveArtifactType
 											&& rawArtifact.getIdentifier().equals(effectiveArtifactIdentifier)
-							);
+							)
+							.map(
+									rawArtifact -> rawArtifact.getOptionalVersion()
+											.map(version -> effectiveArtifact)
+											.orElse(effectiveArtifact.withVersionInherited(true))
+							)
+							.findAny();
 				})
+				.flatMap(Optional::stream)
 				.collect(Collectors.toUnmodifiableList());
 	}
 

@@ -37,6 +37,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>foo-parent-dependency-management-dependency-group-id</groupId>
+			<artifactId>foo-parent-dependency-management-dependency-artifact-id</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>foo-dependency-group-id</groupId>
 			<artifactId>foo-dependency-artifact-id</artifactId>
 			<version>foo-dependency-version</version>

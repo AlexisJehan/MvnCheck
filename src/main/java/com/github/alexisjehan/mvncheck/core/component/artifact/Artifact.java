@@ -42,6 +42,12 @@ import java.util.Optional;
 public final class Artifact<T extends ArtifactType> {
 
 	/**
+	 * <p>Default value on whether the version is inherited or not.</p>
+	 * @since 1.5.0
+	 */
+	static final boolean DEFAULT_VERSION_INHERITED = false;
+
+	/**
 	 * <p>Type.</p>
 	 * @since 1.0.0
 	 */
@@ -60,13 +66,22 @@ public final class Artifact<T extends ArtifactType> {
 	private final String version;
 
 	/**
+	 * <p>Whether the version is inherited or not.</p>
+	 * @since 1.5.0
+	 */
+	private final boolean versionInherited;
+
+	/**
 	 * <p>Constructor without a version.</p>
 	 * @param type a type
 	 * @param identifier an identifier
 	 * @throws NullPointerException if the type or the identifier is {@code null}
 	 * @since 1.0.0
 	 */
-	public Artifact(final T type, final ArtifactIdentifier identifier) {
+	public Artifact(
+			final T type,
+			final ArtifactIdentifier identifier
+	) {
 		this(type, identifier, null);
 	}
 
@@ -78,12 +93,35 @@ public final class Artifact<T extends ArtifactType> {
 	 * @throws NullPointerException if the type or the identifier is {@code null}
 	 * @since 1.0.0
 	 */
-	public Artifact(final T type, final ArtifactIdentifier identifier, final String version) {
+	public Artifact(
+			final T type,
+			final ArtifactIdentifier identifier,
+			final String version
+	) {
+		this(type, identifier, version, DEFAULT_VERSION_INHERITED);
+	}
+
+	/**
+	 * <p>Constructor with a version and whether it is inherited or not.</p>
+	 * @param type a type
+	 * @param identifier an identifier
+	 * @param version a version or {@code null}
+	 * @param versionInherited {@code true} if the version is inherited
+	 * @throws NullPointerException if the type or the identifier is {@code null}
+	 * @since 1.5.0
+	 */
+	public Artifact(
+			final T type,
+			final ArtifactIdentifier identifier,
+			final String version,
+			final boolean versionInherited
+	) {
 		Ensure.notNull("type", type);
 		Ensure.notNull("identifier", identifier);
 		this.type = type;
 		this.identifier = identifier;
 		this.version = version;
+		this.versionInherited = versionInherited;
 	}
 
 	/**
@@ -91,11 +129,34 @@ public final class Artifact<T extends ArtifactType> {
 	 * @param type a type
 	 * @return the copy of the current artifact
 	 * @throws NullPointerException if the type is {@code null}
+	 * @deprecated since 1.5.0, use {@link #withType(ArtifactType)} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.5.0")
 	public Artifact<T> with(final T type) {
+		return withType(type);
+	}
+
+	/**
+	 * <p>Return a copy of the current artifact with the given type.</p>
+	 * @param type a type
+	 * @return the copy of the current artifact
+	 * @throws NullPointerException if the type is {@code null}
+	 * @since 1.5.0
+	 */
+	public Artifact<T> withType(final T type) {
 		Ensure.notNull("type", type);
-		return new Artifact<>(type, identifier, version);
+		return new Artifact<>(type, identifier, version, versionInherited);
+	}
+
+	/**
+	 * <p>Return a copy of the current artifact with whether the version is inherited or not.</p>
+	 * @param versionInherited {@code true} if the version is inherited
+	 * @return the copy of the current artifact
+	 * @since 1.5.0
+	 */
+	public Artifact<T> withVersionInherited(final boolean versionInherited) {
+		return new Artifact<>(type, identifier, version, versionInherited);
 	}
 
 	/**
@@ -113,7 +174,8 @@ public final class Artifact<T extends ArtifactType> {
 		final var other = (Artifact<?>) object;
 		return Equals.equals(type, other.type)
 				&& Equals.equals(identifier, other.identifier)
-				&& Equals.equals(version, other.version);
+				&& Equals.equals(version, other.version)
+				&& Equals.equals(versionInherited, other.versionInherited);
 	}
 
 	/**
@@ -125,7 +187,8 @@ public final class Artifact<T extends ArtifactType> {
 		return HashCode.of(
 				HashCode.hashCode(type),
 				HashCode.hashCode(identifier),
-				HashCode.hashCode(version)
+				HashCode.hashCode(version),
+				HashCode.hashCode(versionInherited)
 		);
 	}
 
@@ -139,7 +202,8 @@ public final class Artifact<T extends ArtifactType> {
 				this,
 				Pair.of("type", ToString.toString(type)),
 				Pair.of("identifier", ToString.toString(identifier)),
-				Pair.of("version", ToString.toString(version))
+				Pair.of("version", ToString.toString(version)),
+				Pair.of("versionInherited", ToString.toString(versionInherited))
 		);
 	}
 
@@ -168,5 +232,14 @@ public final class Artifact<T extends ArtifactType> {
 	 */
 	public Optional<String> getOptionalVersion() {
 		return Optional.ofNullable(version);
+	}
+
+	/**
+	 * <p>Get if the version is inherited.</p>
+	 * @return {@code true} if the version is inherited
+	 * @since 1.5.0
+	 */
+	public boolean isVersionInherited() {
+		return versionInherited;
 	}
 }

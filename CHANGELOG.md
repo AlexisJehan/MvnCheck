@@ -2,6 +2,9 @@
 
 ## 1.5.0 (unreleased)
 
+### New features
+- Display artifacts with an inherited version in parentheses
+
 ### Notes
 - Update the `maven-core` dependency to `3.9.6`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.18`

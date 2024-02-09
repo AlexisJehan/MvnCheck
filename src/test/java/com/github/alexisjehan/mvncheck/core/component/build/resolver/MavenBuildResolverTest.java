@@ -99,7 +99,16 @@ final class MavenBuildResolverTest {
 							"https://repo.maven.apache.org/maven2"
 					)
 			);
-			assertThat(build.getArtifacts()).isEmpty();
+			assertThat(build.getArtifacts()).containsExactly(
+					new Artifact<>(
+							MavenArtifactType.DEPENDENCY_MANAGEMENT_DEPENDENCY,
+							new ArtifactIdentifier(
+									"foo-parent-dependency-management-dependency-group-id",
+									"foo-parent-dependency-management-dependency-artifact-id"
+							),
+							"foo-parent-dependency-management-dependency-version"
+					)
+			);
 		});
 		assertThat(
 				new BuildFile(
@@ -147,6 +156,15 @@ final class MavenBuildResolverTest {
 									"foo-dependency-management-dependency-artifact-id"
 							),
 							"foo-dependency-management-dependency-version"
+					),
+					new Artifact<>(
+							MavenArtifactType.DEPENDENCY,
+							new ArtifactIdentifier(
+									"foo-parent-dependency-management-dependency-group-id",
+									"foo-parent-dependency-management-dependency-artifact-id"
+							),
+							"foo-parent-dependency-management-dependency-version",
+							true
 					),
 					new Artifact<>(
 							MavenArtifactType.DEPENDENCY,
