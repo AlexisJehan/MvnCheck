@@ -76,11 +76,13 @@ mvnchk --version
 
 ## Usage
 ```
-usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [-s] [-v]
+usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [--ignore-inherited] [-s] [-v]
  -d,--max-depth <arg>    Maximum depth of subdirectories to find build
                          files (a non-negative integer)
  -h,--help               Display help information
  -i,--ignore-snapshots   Ignore build file artifacts with a snapshot
+                         version
+    --ignore-inherited   Ignore build file artifacts with an inherited
                          version
  -s,--short              Only show build files with at least one artifact
                          update
