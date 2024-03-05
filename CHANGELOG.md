@@ -5,6 +5,7 @@
 ### Notes
 - Update the `github-api` dependency to `1.319`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.23.0`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.11.0`
 
 ## [1.5.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.5.0) (2024-02-09)
 
