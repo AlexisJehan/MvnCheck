@@ -119,7 +119,7 @@ public final class ArtifactFilterParser {
 		final var identifiersVersions = new HashMap<ArtifactIdentifier, Set<Pattern>>();
 		try (var bufferedReader = Readers.buffered(reader)) {
 			String line;
-			long lineNumber = 1L;
+			var lineNumber = 1L;
 			while (null != (line = bufferedReader.readLine())) {
 				line = Strings.substringBefore(line, COMMENT_START).trim();
 				if (line.isEmpty()) {
