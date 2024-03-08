@@ -71,6 +71,9 @@ final class ApplicationIT {
 							+ "3 build file\\(s\\) found, checking for artifact updates\\R"
 							+ "\\R"
 							+ ".+[/\\\\]pom\\.xml\\R"
+							+ "\\[DEPENDENCY MANAGEMENT DEPENDENCY] "
+							+ "org\\.springframework\\.boot:spring-boot-dependencies 1\\.0\\.0\\.RELEASE -> "
+							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "\\[DEPENDENCY] com\\.google\\.android\\.material:material 1\\.0\\.0 -> "
 							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "\\[DEPENDENCY] com\\.google\\.guava:guava 10\\.0 -> \\d+\\.\\d+(?:\\.\\d+)?-jre\\R"
@@ -80,7 +83,7 @@ final class ApplicationIT {
 							+ "\\d+\\.\\d+(?:\\.\\d+)?-jre\\R"
 							+ "\\[PROFILE DEPENDENCY] com\\.google\\.guava:guava 23\\.1-android -> "
 							+ "\\d+\\.\\d+(?:\\.\\d+)?-android\\R"
-							+ "5 artifact update\\(s\\) available\\R"
+							+ "6 artifact update\\(s\\) available\\R"
 							+ "\\R"
 							+ ".+[/\\\\]groovy[/\\\\]build\\.gradle\\R"
 							+ "\\[COMPILE ONLY] com\\.google\\.android\\.material:material 1\\.0\\.0 -> "
@@ -104,7 +107,7 @@ final class ApplicationIT {
 							+ "\\d+\\.\\d+\\.\\d+\\R"
 							+ "5 artifact update\\(s\\) available\\R"
 							+ "\\R"
-							+ "3/3 build file\\(s\\) checked, 15 artifact update\\(s\\) available\\R"
+							+ "3/3 build file\\(s\\) checked, 16 artifact update\\(s\\) available\\R"
 							+ "$"
 			);
 		}

@@ -2,6 +2,9 @@
 
 ## 1.6.0 (unreleased)
 
+### Bug fixes
+- Fix missing artifacts from a _Maven_ dependency with the `import` scope
+
 ### Notes
 - Update the `github-api` dependency to `1.319`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.23.0`

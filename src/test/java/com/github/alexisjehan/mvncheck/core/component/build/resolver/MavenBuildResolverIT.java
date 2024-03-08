@@ -68,6 +68,11 @@ final class MavenBuildResolverIT {
 		);
 		assertThat(build.getArtifacts()).containsExactly(
 				new Artifact<>(
+						MavenArtifactType.DEPENDENCY_MANAGEMENT_DEPENDENCY,
+						new ArtifactIdentifier("org.springframework.boot", "spring-boot-dependencies"),
+						"1.0.0.RELEASE"
+				),
+				new Artifact<>(
 						MavenArtifactType.DEPENDENCY,
 						new ArtifactIdentifier("com.google.android.material", "material"),
 						"1.0.0"

@@ -47,11 +47,12 @@ import org.apache.maven.model.building.DefaultModelBuildingRequest;
 import org.apache.maven.model.building.ModelBuildingException;
 import org.apache.maven.model.building.ModelBuildingRequest;
 import org.apache.maven.model.building.ModelBuildingResult;
+import org.apache.maven.model.interpolation.DefaultModelVersionProcessor;
+import org.apache.maven.model.interpolation.StringVisitorModelInterpolator;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -116,13 +117,20 @@ public final class MavenBuildResolver implements BuildResolver {
 			throw new BuildResolveException(e);
 		}
 		final var effectiveModel = result.getEffectiveModel();
-		final var rawModel = result.getRawModel();
+		final var modelInterpolator = new StringVisitorModelInterpolator()
+				.setVersionPropertiesProcessor(new DefaultModelVersionProcessor());
+		final var rawModel = modelInterpolator.interpolateModel(
+				result.getRawModel(),
+				null,
+				request,
+				ignored -> {}
+		);
 
-		logger.trace("Extracting repositories");
-		final var repositories = extractRepositories(effectiveModel);
-		logger.debug("Extracted repositories:");
-		repositories.forEach(
-				repository -> logger.debug("- {}", () -> ToString.toString(repository))
+		logger.trace("Extracting effective repositories");
+		final var effectiveRepositories = extractRepositories(effectiveModel);
+		logger.debug("Extracted effective repositories:");
+		effectiveRepositories.forEach(
+				effectiveRepository -> logger.debug("- {}", () -> ToString.toString(effectiveRepository))
 		);
 
 		logger.trace("Extracting effective artifacts");
@@ -139,14 +147,14 @@ public final class MavenBuildResolver implements BuildResolver {
 				rawArtifact -> logger.debug("- {}", () -> ToString.toString(rawArtifact))
 		);
 
-		logger.trace("Filtering artifacts");
-		final var filteredArtifacts = filter(effectiveArtifacts, rawArtifacts);
-		logger.debug("Filtered artifacts:");
-		filteredArtifacts.forEach(
-				filteredArtifact -> logger.debug("- {}", () -> ToString.toString(filteredArtifact))
+		logger.trace("Inheriting artifacts");
+		final var inheritedArtifacts = inherit(rawArtifacts, effectiveArtifacts);
+		logger.debug("Inherited artifacts:");
+		inheritedArtifacts.forEach(
+				inheritedArtifact -> logger.debug("- {}", () -> ToString.toString(inheritedArtifact))
 		);
 
-		return new Build(file, repositories, filteredArtifacts);
+		return new Build(file, effectiveRepositories, inheritedArtifacts);
 	}
 
 	/**
@@ -272,33 +280,36 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Filter a {@link List} of effective artifacts using a {@link List} of raw artifacts.</p>
-	 * @param effectiveArtifacts a {@link List} of effective artifacts
+	 * <p>Inherit a {@link List} of raw artifacts using a {@link List} of effective artifacts.</p>
 	 * @param rawArtifacts a {@link List} of raw artifacts
+	 * @param effectiveArtifacts a {@link List} of effective artifacts
 	 * @return the {@link List} of artifacts
 	 * @since 1.0.0
 	 */
-	private static List<Artifact<MavenArtifactType>> filter(
-			final List<Artifact<MavenArtifactType>> effectiveArtifacts,
-			final List<Artifact<MavenArtifactType>> rawArtifacts
+	private static List<Artifact<MavenArtifactType>> inherit(
+			final List<Artifact<MavenArtifactType>> rawArtifacts,
+			final List<Artifact<MavenArtifactType>> effectiveArtifacts
 	) {
-		return effectiveArtifacts.stream()
-				.map(effectiveArtifact -> {
-					final var effectiveArtifactType = effectiveArtifact.getType();
-					final var effectiveArtifactIdentifier = effectiveArtifact.getIdentifier();
-					return rawArtifacts.stream()
-							.filter(
-									rawArtifact -> rawArtifact.getType() == effectiveArtifactType
-											&& rawArtifact.getIdentifier().equals(effectiveArtifactIdentifier)
-							)
-							.map(
-									rawArtifact -> rawArtifact.getOptionalVersion()
-											.map(version -> effectiveArtifact)
-											.orElse(effectiveArtifact.withVersionInherited(true))
-							)
-							.findAny();
+		return rawArtifacts.stream()
+				.map(rawArtifact -> {
+					final var rawArtifactType = rawArtifact.getType();
+					final var rawArtifactIdentifier = rawArtifact.getIdentifier();
+					if (rawArtifact.getOptionalVersion().isEmpty()) {
+						final var optionalInheritedArtifact = effectiveArtifacts.stream()
+								.filter(
+										effectiveArtifact -> rawArtifactType == effectiveArtifact.getType()
+												&& rawArtifactIdentifier.equals(effectiveArtifact.getIdentifier())
+								)
+								.map(
+										effectiveArtifact -> effectiveArtifact.withVersionInherited(true)
+								)
+								.findAny();
+						if (optionalInheritedArtifact.isPresent()) {
+							return optionalInheritedArtifact.get();
+						}
+					}
+					return rawArtifact;
 				})
-				.flatMap(Optional::stream)
 				.collect(Collectors.toUnmodifiableList());
 	}
 
