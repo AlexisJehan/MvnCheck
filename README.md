@@ -1,4 +1,6 @@
-<image src="logo.png" align="right" width="200"/>
+<p align="center">
+	<img src="logo.png" alt="Logo" width="200"/>
+</p>
 
 # MvnCheck
 [![release](https://img.shields.io/github/v/release/AlexisJehan/MvnCheck?display_name=tag)](https://github.com/AlexisJehan/MvnCheck/releases/latest)
