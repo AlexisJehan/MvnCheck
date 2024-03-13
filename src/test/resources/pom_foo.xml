@@ -158,5 +158,15 @@
 				</plugins>
 			</reporting>
 		</profile>
+		<profile>
+			<id>bar-profile-id</id>
+			<dependencies>
+				<dependency>
+					<groupId>foo-profile-dependency-group-id</groupId>
+					<artifactId>foo-profile-dependency-artifact-id</artifactId>
+					<version>bar-profile-dependency-version</version>
+				</dependency>
+			</dependencies>
+		</profile>
 	</profiles>
 </project>

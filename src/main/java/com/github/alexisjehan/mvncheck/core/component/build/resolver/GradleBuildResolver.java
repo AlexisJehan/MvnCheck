@@ -293,7 +293,7 @@ public final class GradleBuildResolver implements BuildResolver {
 							}
 							var parts = Strings.split(" -> ", artifactString);
 							artifactString = parts.get(0);
-							var version = 2 == parts.size()
+							final var resolvedVersion = 2 == parts.size()
 									? parts.get(1)
 									: null;
 							frequency = Strings.frequency(artifactString, ':');
@@ -303,9 +303,9 @@ public final class GradleBuildResolver implements BuildResolver {
 							parts = Strings.split(':', artifactString);
 							final var groupId = parts.get(0);
 							final var artifactId = parts.get(1);
-							if (3 == parts.size()) {
-								version = parts.get(2);
-							}
+							final var version = 3 == parts.size()
+									? parts.get(2)
+									: resolvedVersion;
 							artifacts.add(
 									new Artifact<>(
 											artifactType,

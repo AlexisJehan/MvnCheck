@@ -277,6 +277,14 @@ final class MavenBuildResolverTest {
 									"foo-profile-reporting-plugin-artifact-id"
 							),
 							"foo-profile-reporting-plugin-version"
+					),
+					new Artifact<>(
+							MavenArtifactType.PROFILE_DEPENDENCY,
+							new ArtifactIdentifier(
+									"foo-profile-dependency-group-id",
+									"foo-profile-dependency-artifact-id"
+							),
+							"bar-profile-dependency-version"
 					)
 			);
 		});

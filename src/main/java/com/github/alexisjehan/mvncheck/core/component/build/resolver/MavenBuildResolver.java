@@ -47,11 +47,13 @@ import org.apache.maven.model.building.DefaultModelBuildingRequest;
 import org.apache.maven.model.building.ModelBuildingException;
 import org.apache.maven.model.building.ModelBuildingRequest;
 import org.apache.maven.model.building.ModelBuildingResult;
+import org.apache.maven.model.building.PublicDefaultModelProblemCollector;
 import org.apache.maven.model.interpolation.DefaultModelVersionProcessor;
 import org.apache.maven.model.interpolation.StringVisitorModelInterpolator;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -123,7 +125,7 @@ public final class MavenBuildResolver implements BuildResolver {
 				result.getRawModel(),
 				null,
 				request,
-				ignored -> {}
+				new PublicDefaultModelProblemCollector(result)
 		);
 
 		logger.trace("Extracting effective repositories");
@@ -294,21 +296,27 @@ public final class MavenBuildResolver implements BuildResolver {
 				.map(rawArtifact -> {
 					final var rawArtifactType = rawArtifact.getType();
 					final var rawArtifactIdentifier = rawArtifact.getIdentifier();
-					if (rawArtifact.getOptionalVersion().isEmpty()) {
-						final var optionalInheritedArtifact = effectiveArtifacts.stream()
-								.filter(
-										effectiveArtifact -> rawArtifactType == effectiveArtifact.getType()
-												&& rawArtifactIdentifier.equals(effectiveArtifact.getIdentifier())
-								)
-								.map(
-										effectiveArtifact -> effectiveArtifact.withVersionInherited(true)
-								)
-								.findAny();
-						if (optionalInheritedArtifact.isPresent()) {
-							return optionalInheritedArtifact.get();
-						}
-					}
-					return rawArtifact;
+					final var rawArtifactOptionalVersion = rawArtifact.getOptionalVersion();
+					return effectiveArtifacts.stream()
+							.filter(
+									effectiveArtifact -> rawArtifactType == effectiveArtifact.getType()
+											&& rawArtifactIdentifier.equals(effectiveArtifact.getIdentifier())
+							)
+							.sorted(
+									Comparator.comparing(
+											effectiveArtifact -> rawArtifactOptionalVersion.equals(
+													effectiveArtifact.getOptionalVersion()
+											),
+											Comparator.reverseOrder()
+									)
+							)
+							.map(
+									effectiveArtifact -> effectiveArtifact.withVersionInherited(
+											rawArtifactOptionalVersion.isEmpty()
+									)
+							)
+							.findAny()
+							.orElse(rawArtifact);
 				})
 				.collect(Collectors.toUnmodifiableList());
 	}
