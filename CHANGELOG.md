@@ -7,8 +7,10 @@
 
 ### Notes
 - Update the `github-api` dependency to `1.319`
-- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.23.0`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.23.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.11.0`
+- Update the `maven-assembly-plugin` plugin to `3.7.0`
+- Update the `maven-gpg-plugin` plugin to `3.2.0`
 
 ## [1.5.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.5.0) (2024-02-09)
 
