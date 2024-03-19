@@ -9,6 +9,7 @@
 - Update the `github-api` dependency to `1.320`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.23.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.11.0`
+- Update the `maven-compiler-plugin` plugin to `3.13.0`
 - Update the `maven-assembly-plugin` plugin to `3.7.1`
 - Update the `maven-gpg-plugin` plugin to `3.2.1`
 
