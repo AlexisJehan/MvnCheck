@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.6.0 (unreleased)
+## [1.6.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.0) (2024-04-02)
 
 ### Bug fixes
 - Fix missing artifacts from a _Maven_ dependency with the `import` scope
