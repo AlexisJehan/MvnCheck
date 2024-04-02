@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.7.0 (unreleased)
+
 ## [1.6.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.0) (2024-04-02)
 
 ### Bug fixes
