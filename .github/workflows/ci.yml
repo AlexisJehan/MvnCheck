@@ -23,9 +23,6 @@ jobs:
           distribution: ${{ matrix.distribution }}
           java-version: ${{ matrix.java-version }}
           cache: maven
-      - uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: current
       - run: mvn --batch-mode verify -Dgpg.skip
       - uses: codecov/codecov-action@v4
         with:
