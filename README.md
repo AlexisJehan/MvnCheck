@@ -134,7 +134,7 @@ version of a build tool may still be compatible.
 |      1.0.1       |     3.8.7     |      7.6       |
 |      1.0.0       |     3.8.6     |      7.6       |
 
-Note: _Gradle_ is compatible starting with _Gradle 4.8_.
+Note: _Gradle_ is compatible starting with _Gradle 5.0_.
 
 ## License
 This project is licensed under the [MIT License](LICENSE.txt).

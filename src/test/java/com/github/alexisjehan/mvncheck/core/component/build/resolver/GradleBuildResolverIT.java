@@ -48,6 +48,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// https://docs.gradle.org/current/userguide/compatibility.html#java
 @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 final class GradleBuildResolverIT {
 
@@ -59,8 +60,15 @@ final class GradleBuildResolverIT {
 	}
 
 	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_11)
+	@ValueSource(strings = {"5.0", "5.1", "5.2", "5.3"})
+	void testResolveUntilGradle67UntilJava11(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveUntilGradle67(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_12)
-	@ValueSource(strings = {"4.8", "4.9", "4.10", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6"})
+	@ValueSource(strings = {"5.4", "5.5", "5.6"})
 	void testResolveUntilGradle67UntilJava12(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveUntilGradle67(gradleVersion, tmpDirectory);
 	}
@@ -73,8 +81,15 @@ final class GradleBuildResolverIT {
 	}
 
 	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_14)
+	@ValueSource(strings = {"6.3", "6.4", "6.5", "6.6"})
+	void testResolveUntilGradle67UntilJava14(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveUntilGradle67(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_15)
-	@ValueSource(strings = {"6.3", "6.4", "6.5", "6.6", "6.7"})
+	@ValueSource(strings = "6.7")
 	void testResolveUntilGradle67UntilJava15(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveUntilGradle67(gradleVersion, tmpDirectory);
 	}
@@ -88,42 +103,43 @@ final class GradleBuildResolverIT {
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_16)
-	@ValueSource(strings = {"7.0", "7.1"})
+	@ValueSource(strings = {"7.0", "7.1", "7.2"})
 	void testResolveSinceGradle68UntilJava16(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_17)
-	@ValueSource(strings = "7.2")
+	@ValueSource(strings = {"7.3", "7.4"})
 	void testResolveSinceGradle68UntilJava17(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_18)
-	@ValueSource(strings = {"7.3", "7.4", "7.5"})
+	@ValueSource(strings = "7.5")
 	void testResolveSinceGradle68UntilJava18(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_19)
-	@ValueSource(strings = {"7.6", "8.0"})
+	@ValueSource(strings = {"7.6", "8.0", "8.1", "8.2"})
 	void testResolveSinceGradle68UntilJava19(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_20)
-	@ValueSource(strings = "8.1")
+	@ValueSource(strings = {"8.3", "8.4"})
 	void testResolveSinceGradle68UntilJava20(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"8.2", "8.3", "8.4", "8.5", "8.6", "8.7"})
-	void testResolveSinceGradle68UntilJavaLatest(final String gradleVersion, @TempDir final Path tmpDirectory) {
+	@EnabledForJreRange(max = JRE.JAVA_21)
+	@ValueSource(strings = {"8.5", "8.6", "8.7"})
+	void testResolveSinceGradle68UntilJava21(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 
