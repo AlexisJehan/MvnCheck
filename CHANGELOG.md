@@ -2,6 +2,10 @@
 
 ## 1.7.0 (unreleased)
 
+### Notes
+- Update the `jacoco-maven-plugin` plugin to `0.8.12`
+- Update the `maven-source-plugin` plugin to `3.3.1`
+
 ## [1.6.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.0) (2024-04-02)
 
 ### Bug fixes
