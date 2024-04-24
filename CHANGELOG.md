@@ -3,8 +3,11 @@
 ## 1.7.0 (unreleased)
 
 ### Notes
+- Update the `commons-cli` dependency to `1.7.0`
 - Update the `jacoco-maven-plugin` plugin to `0.8.12`
+- Update the `maven-jar-plugin` plugin to `3.4.1`
 - Update the `maven-source-plugin` plugin to `3.3.1`
+- Update the `maven-gpg-plugin` plugin to `3.2.4`
 
 ## [1.6.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.0) (2024-04-02)
 
