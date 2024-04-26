@@ -4,6 +4,8 @@
 
 ### Notes
 - Update the `commons-cli` dependency to `1.7.0`
+- Update the `maven-pmd-plugin` plugin to `3.22.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.1.0`
 - Update the `jacoco-maven-plugin` plugin to `0.8.12`
 - Update the `maven-jar-plugin` plugin to `3.4.1`
 - Update the `maven-source-plugin` plugin to `3.3.1`
