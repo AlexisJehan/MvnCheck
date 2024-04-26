@@ -165,7 +165,7 @@ public enum MavenArtifactType implements ArtifactType {
 	 * @since 1.0.0
 	 */
 	@Override
-	public final RepositoryType getRepositoryType() {
+	public RepositoryType getRepositoryType() {
 		return repositoryType;
 	}
 }

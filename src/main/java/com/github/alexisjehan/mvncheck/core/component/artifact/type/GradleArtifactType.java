@@ -194,7 +194,7 @@ public enum GradleArtifactType implements ArtifactType {
 	 * @return the name
 	 * @since 1.0.0
 	 */
-	public final String dependenciesTaskName() {
+	public String dependenciesTaskName() {
 		return CaseStyle.CAMEL.of(name(), CaseStyle.MACRO);
 	}
 
@@ -203,7 +203,7 @@ public enum GradleArtifactType implements ArtifactType {
 	 * @return {@code true} if this is a classpath artifact type
 	 * @since 1.0.0
 	 */
-	public final boolean isClasspath() {
+	public boolean isClasspath() {
 		return properties.contains(Property.CLASSPATH);
 	}
 
@@ -212,7 +212,7 @@ public enum GradleArtifactType implements ArtifactType {
 	 * @return {@code true} if this is a deprecated artifact type
 	 * @since 1.0.0
 	 */
-	public final boolean isDeprecated() {
+	public boolean isDeprecated() {
 		return properties.contains(Property.DEPRECATED);
 	}
 }

@@ -72,7 +72,7 @@ public enum BuildFileType {
 	 * @return the file name
 	 * @since 1.0.0
 	 */
-	public final String getFileName() {
+	public String getFileName() {
 		return fileName;
 	}
 
