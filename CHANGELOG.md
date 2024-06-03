@@ -3,12 +3,19 @@
 ## 1.7.0 (unreleased)
 
 ### Notes
-- Update the `commons-cli` dependency to `1.7.0`
+- Update the `maven-core` dependency to `3.9.7`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.20`
+- Update the `gradle-tooling-api` dependency to `8.8`
+- Update the `commons-cli` dependency to `1.8.0`
+- Update the `assertj-core` dependency to `3.26.0`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.12.0`
+- Update the `license-maven-plugin` plugin to `4.5`
 - Update the `maven-pmd-plugin` plugin to `3.22.0`
-- Update `pmd-core` and `pmd-java` dependencies to `7.1.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.2.0`
 - Update the `jacoco-maven-plugin` plugin to `0.8.12`
 - Update the `maven-jar-plugin` plugin to `3.4.1`
 - Update the `maven-source-plugin` plugin to `3.3.1`
+- Update the `maven-javadoc-plugin` plugin to `3.7.0`
 - Update the `maven-gpg-plugin` plugin to `3.2.4`
 
 ## [1.6.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.0) (2024-04-02)
