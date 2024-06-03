@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.7.0 (unreleased)
+## [1.6.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.1) (2024-06-03)
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.7`
