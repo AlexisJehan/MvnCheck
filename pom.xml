@@ -222,7 +222,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.22.0</version>
+				<version>3.23.0</version>
 				<executions>
 					<execution>
 						<id>pmd-check</id>
@@ -259,14 +259,18 @@
 					<showDeprecation>true</showDeprecation>
 					<compilerArgs>
 						<compilerArg>-Xlint:all</compilerArg>
-						<compilerArg>-Xlint:-processing</compilerArg>
 					</compilerArgs>
+					<proc>none</proc>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.5</version>
+				<configuration>
+					<!--suppress UnresolvedMavenProperty -->
+					<argLine>${argLine} -Xshare:off -XX:+EnableDynamicAgentLoading</argLine>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -287,6 +291,8 @@
 					</execution>
 				</executions>
 				<configuration>
+					<!--suppress UnresolvedMavenProperty -->
+					<argLine>${argLine} -Xshare:off -XX:+EnableDynamicAgentLoading</argLine>
 					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
 				</configuration>
 			</plugin>
