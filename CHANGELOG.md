@@ -3,8 +3,11 @@
 ## 1.7.0 (unreleased)
 
 ### Notes
+- Update the `maven-core` dependency to `3.9.8`
+- Update the `github-api` dependency to `1.322`
 - Update the `maven-pmd-plugin` plugin to `3.23.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.3.0`
+- Update the `maven-jar-plugin` plugin to `3.4.2`
 
 ## [1.6.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.1) (2024-06-03)
 
