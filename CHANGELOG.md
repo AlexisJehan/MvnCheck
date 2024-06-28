@@ -5,7 +5,9 @@
 ### Notes
 - Update the `maven-core` dependency to `3.9.8`
 - Update the `github-api` dependency to `1.322`
+- Update the `junit-jupiter` dependency to `5.10.3`
 - Update the `maven-pmd-plugin` plugin to `3.23.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.3.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.3.0`
 - Update the `maven-jar-plugin` plugin to `3.4.2`
 
