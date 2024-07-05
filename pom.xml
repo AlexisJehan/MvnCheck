@@ -94,18 +94,18 @@
 		<dependency>
 			<groupId>org.kohsuke</groupId>
 			<artifactId>github-api</artifactId>
-			<version>1.322</version>
+			<version>1.323</version>
 		</dependency>
 		<dependency>
 			<groupId>com.infradna.tool</groupId>
 			<artifactId>bridge-method-annotation</artifactId> <!-- From the "jenkins" repository -->
-			<version>1.29</version> <!-- Based on "org.kohsuke:github-api:1.322" -->
+			<version>1.29</version> <!-- Based on "org.kohsuke:github-api:1.323" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>4.7.3</version> <!-- Based on "org.kohsuke:github-api:1.322" -->
+			<version>4.8.6</version> <!-- Based on "org.kohsuke:github-api:1.323" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

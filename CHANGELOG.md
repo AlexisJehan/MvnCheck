@@ -4,7 +4,8 @@
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.8`
-- Update the `github-api` dependency to `1.322`
+- Update the `github-api` dependency to `1.323`
+- Update the `spotbugs-annotations` dependency to `4.8.6`
 - Update the `junit-jupiter` dependency to `5.10.3`
 - Update the `maven-pmd-plugin` plugin to `3.23.0`
 - Update `pmd-core` and `pmd-java` dependencies to `7.3.0`
