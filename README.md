@@ -86,6 +86,8 @@ usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [--ignore-inherited] [-s] [-v]
                          version
     --ignore-inherited   Ignore build file artifacts with an inherited
                          version
+ -f,--filter             RegEx to filter out build file artifacts 
+                         with a non mathing group name
  -s,--short              Only show build files with at least one artifact
                          update
  -v,--version            Display version information
@@ -109,6 +111,16 @@ com.google.guava:guava:*-android
 
 # Ignore artifact update versions using the "any single character" wildcard
 com.google.guava:guava:30.?-android
+```
+
+## Filter
+_MvnCheck_ allows to ignore artifacts based on a regular expression pattern for the group name.
+This allows to search only for artifact update with the given group pattern.
+
+Here is an example of how to only search for artifact 
+with the group name suffix `com.github.alexisjehan`:
+```
+- filter com.github.alexisjehan.*
 ```
 
 ## Compatibility matrix
