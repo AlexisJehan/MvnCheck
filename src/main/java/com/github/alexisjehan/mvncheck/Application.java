@@ -49,6 +49,10 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  * <p>Class that describes the application.</p>
@@ -91,6 +95,12 @@ public final class Application {
 	 * @since 1.0.0
 	 */
 	static final String OPTION_VERSION = "version";
+
+	/**
+	 * <p>Short option long name.</p>
+	 * @since 1.7.0
+	 */
+	static final String OPTION_FILTER = "filter";
 
 	/**
 	 * <p>Title.</p>
@@ -163,6 +173,12 @@ public final class Application {
 				OPTION_IGNORE_SNAPSHOTS,
 				false,
 				"Ignore build file artifacts with a snapshot version"
+		);
+		options.addOption(
+				"f",
+				OPTION_FILTER,
+				true,
+				"Filter packages by group name with a regular expression"
 		);
 		options.addOption(
 				"s",
@@ -259,7 +275,8 @@ public final class Application {
 								: DEFAULT_MAX_DEPTH,
 						commandLine.hasOption(OPTION_IGNORE_INHERITED),
 						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS),
-						commandLine.hasOption(OPTION_SHORT)
+						commandLine.hasOption(OPTION_SHORT),
+						commandLine.getOptionValue(OPTION_FILTER)
 				);
 			}
 		} catch (final Exception e) {
@@ -269,13 +286,14 @@ public final class Application {
 
 	/**
 	 * <p>Run the program.</p>
-	 * @param path a path
+	 * 
+	 * @param path            a path
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
+	 * @param short0          {@code true} if only build files with at least one artifact update should be shown
+	 * @throws IOException          might occur with input/output operations
 	 * @throws NullPointerException if the path is {@code null}
-	 * @deprecated since 1.1.0, use {@link #run(Path, int, boolean, boolean)} instead
 	 * @since 1.0.0
+	 * @deprecated since 1.1.0, use {@link #run(Path, int, boolean, boolean)} instead
 	 */
 	@Deprecated(since = "1.1.0")
 	void run(
@@ -288,15 +306,16 @@ public final class Application {
 
 	/**
 	 * <p>Run the program.</p>
-	 * @param path a path
-	 * @param maxDepth a maximum depth
+	 *
+	 * @param path            a path
+	 * @param maxDepth        a maximum depth
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
+	 * @param short0          {@code true} if only build files with at least one artifact update should be shown
+	 * @throws IOException              might occur with input/output operations
+	 * @throws NullPointerException     if the path is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
-	 * @deprecated since 1.5.0, use {@link #run(Path, int, boolean, boolean, boolean)} instead
 	 * @since 1.1.0
+	 * @deprecated since 1.5.0, use {@link #run(Path, int, boolean, boolean, boolean)} instead
 	 */
 	@Deprecated(since = "1.5.0")
 	void run(
@@ -310,13 +329,14 @@ public final class Application {
 
 	/**
 	 * <p>Run the program.</p>
-	 * @param path a path
-	 * @param maxDepth a maximum depth
+	 *
+	 * @param path            a path
+	 * @param maxDepth        a maximum depth
 	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
+	 * @param short0          {@code true} if only build files with at least one artifact update should be shown
+	 * @throws IOException              might occur with input/output operations
+	 * @throws NullPointerException     if the path is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
 	 * @since 1.5.0
 	 */
@@ -325,10 +345,39 @@ public final class Application {
 			final int maxDepth,
 			final boolean ignoreInherited,
 			final boolean ignoreSnapshots,
-			final boolean short0
+			final boolean short0)
+			throws IOException {
+		run(path, maxDepth, false, ignoreSnapshots, short0, null);
+}
+
+	/**
+	 * <p>Run the program.</p>
+	 * @param path a path
+	 * @param maxDepth a maximum depth
+	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
+	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
+	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
+	 *                              
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the path is {@code null}
+	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
+	 * @throws PatternSyntaxException if the specified filter regex is invalid
+	 * @since 1.7.0
+	 */
+	void run(
+			final Path path,
+			final int maxDepth,
+			final boolean ignoreInherited,
+			final boolean ignoreSnapshots,
+			final boolean short0,
+			final String groupFilter
 	) throws IOException {
 		Ensure.notNull("path", path);
 		Ensure.greaterThanOrEqualTo("maxDepth", maxDepth, 0);
+		Pattern filter =  null;
+		if(isNotEmpty(groupFilter)){
+			filter = Pattern.compile(groupFilter, Pattern.CASE_INSENSITIVE);
+		}
 		final var service = createService();
 		final var buildFiles = service.findBuildFiles(path, maxDepth);
 		if (buildFiles.isEmpty()) {
@@ -344,7 +393,7 @@ public final class Application {
 			final List<ArtifactUpdateVersion> artifactUpdateVersions;
 			try {
 				final var build = service.findBuild(buildFile);
-				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreInherited, ignoreSnapshots);
+				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreInherited, ignoreSnapshots, filter);
 			} catch (final BuildResolveException | ArtifactAvailableVersionsResolveException e) {
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(file)).reset());
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(e)).reset());
