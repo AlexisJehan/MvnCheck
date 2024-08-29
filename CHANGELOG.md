@@ -2,6 +2,9 @@
 
 ## 1.7.0 (unreleased)
 
+### Bug fixes
+- [[#3](https://github.com/AlexisJehan/MvnCheck/issues/3)] Fix parsing errors related to the BOM character of the UTF-8 with BOM encoding (thanks to [TobseF](https://github.com/TobseF))
+
 ### Notes
 - Update the `maven-core` dependency to `3.9.9`
 - Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.22`
