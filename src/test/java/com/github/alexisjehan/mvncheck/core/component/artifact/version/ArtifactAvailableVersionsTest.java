@@ -58,9 +58,11 @@ final class ArtifactAvailableVersionsTest {
 	@Test
 	void testConstructorImmutable() {
 		final var availableVersions = new ArrayList<>(AVAILABLE_VERSIONS);
-		final var artifactAvailableVersions = new ArtifactAvailableVersions(ARTIFACT, availableVersions);
-		availableVersions.clear();
-		assertThat(artifactAvailableVersions.getAvailableVersions()).isEqualTo(AVAILABLE_VERSIONS);
+		assertThat(new ArtifactAvailableVersions(ARTIFACT, availableVersions))
+				.satisfies(immutableArtifactAvailableVersions -> {
+					availableVersions.clear();
+					assertThat(immutableArtifactAvailableVersions.getAvailableVersions()).isEqualTo(AVAILABLE_VERSIONS);
+				});
 	}
 
 	@Test

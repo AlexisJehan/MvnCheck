@@ -48,11 +48,12 @@ final class DecryptedSettingsTest {
 	void testConstructorImmutable() {
 		final var proxies = new ArrayList<>(PROXIES);
 		final var servers = new ArrayList<>(SERVERS);
-		final var decryptedSettings = new DecryptedSettings(proxies, servers);
-		proxies.clear();
-		servers.clear();
-		assertThat(decryptedSettings.getProxies()).isEqualTo(PROXIES);
-		assertThat(decryptedSettings.getServers()).isEqualTo(SERVERS);
+		assertThat(new DecryptedSettings(proxies, servers)).satisfies(immutableDecryptedSettings -> {
+			proxies.clear();
+			servers.clear();
+			assertThat(immutableDecryptedSettings.getProxies()).isEqualTo(PROXIES);
+			assertThat(immutableDecryptedSettings.getServers()).isEqualTo(SERVERS);
+		});
 	}
 
 	@Test

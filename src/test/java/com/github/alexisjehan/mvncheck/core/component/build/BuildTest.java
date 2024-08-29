@@ -72,11 +72,12 @@ final class BuildTest {
 	void testConstructorImmutable() {
 		final var repositories = new ArrayList<>(REPOSITORIES);
 		final var artifacts = new ArrayList<>(ARTIFACTS);
-		final var build = new Build(FILE, repositories, artifacts);
-		repositories.clear();
-		artifacts.clear();
-		assertThat(build.getRepositories()).isEqualTo(REPOSITORIES);
-		assertThat(build.getArtifacts()).isEqualTo(ARTIFACTS);
+		assertThat(new Build(FILE, repositories, artifacts)).satisfies(immutableBuild -> {
+			repositories.clear();
+			artifacts.clear();
+			assertThat(immutableBuild.getRepositories()).isEqualTo(REPOSITORIES);
+			assertThat(immutableBuild.getArtifacts()).isEqualTo(ARTIFACTS);
+		});
 	}
 
 	@Test
