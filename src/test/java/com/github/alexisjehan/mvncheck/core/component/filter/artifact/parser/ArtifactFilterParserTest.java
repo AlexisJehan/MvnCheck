@@ -54,6 +54,9 @@ final class ArtifactFilterParserTest {
 		assertThatNoException().isThrownBy(
 				() -> ArtifactFilterParser.parse(Path.of("src", "test", "resources", ".mvnchk-ignore_foo"))
 		);
+		assertThatNoException().isThrownBy(
+				() -> ArtifactFilterParser.parse(Path.of("src", "test", "resources", ".mvnchk-ignore_bom"))
+		);
 	}
 
 	@Test

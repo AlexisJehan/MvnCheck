@@ -98,6 +98,10 @@ public final class ArtifactFilterParser {
 		Ensure.notNullAndFile("ignoreFile", ignoreFile);
 		logger.info("Parsing the {} ignore file", () -> ToString.toString(ignoreFile));
 		try (var reader = Readers.of(ignoreFile)) {
+			reader.mark(1);
+			if ('\ufeff' != reader.read()) { // UTF-8 BOM character
+				reader.reset();
+			}
 			return parse(reader);
 		} catch (final ArtifactFilterParseException e) {
 			throw e.with(ignoreFile);
