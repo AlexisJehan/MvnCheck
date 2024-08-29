@@ -3,8 +3,18 @@
 ## 1.7.0 (unreleased)
 
 ### Notes
+- Update the `maven-core` dependency to `3.9.9`
+- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.22`
+- Update the `gradle-tooling-api` dependency to `8.10`
+- Update the `github-api` dependency to `1.324`
+- Update the `commons-cli` dependency to `1.9.0`
+- Update the `junit-jupiter` dependency to `5.11.0`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.13.0`
+- Update the `maven-pmd-plugin` plugin to `3.25.0`
 - Update `pmd-core` and `pmd-java` dependencies to `7.4.0`
-- Update the `maven-javadoc-plugin` plugin to `3.8.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.0`
+- Update the `maven-javadoc-plugin` plugin to `3.10.0`
+- Update the `maven-gpg-plugin` plugin to `3.2.5`
 
 ## [1.6.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.2) (2024-07-16)
 
