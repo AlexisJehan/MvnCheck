@@ -2,12 +2,20 @@
 
 ## 1.7.0 (unreleased)
 
+### New features
+- [[#5](https://github.com/AlexisJehan/MvnCheck/issues/5)] Generate an executable JAR as an extra release file (thanks
+  to [TobseF](https://github.com/TobseF))
+
 ### Bug fixes
-- [[#3](https://github.com/AlexisJehan/MvnCheck/issues/3)] Fix parsing errors related to the BOM character of the UTF-8 with BOM encoding (thanks to [TobseF](https://github.com/TobseF))
+- [[#3](https://github.com/AlexisJehan/MvnCheck/issues/3)] Fix parsing errors related to the BOM character of the UTF-8
+  with BOM encoding (thanks to [TobseF](https://github.com/TobseF))
+
+### Improvements
+- Improve the _Maven Artifact Resolver_ usage by migrating from `Eclipse Sisu` to `Supplier`
 
 ### Notes
+- Add the `maven-resolver-supplier` dependency
 - Update the `maven-core` dependency to `3.9.9`
-- Update `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies to `1.9.22`
 - Update the `gradle-tooling-api` dependency to `8.10`
 - Update the `github-api` dependency to `1.324`
 - Update the `commons-cli` dependency to `1.9.0`
@@ -18,6 +26,7 @@
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.0`
 - Update the `maven-javadoc-plugin` plugin to `3.10.0`
 - Update the `maven-gpg-plugin` plugin to `3.2.5`
+- Remove `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies
 
 ## [1.6.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.2) (2024-07-16)
 
@@ -207,7 +216,7 @@
 
 ### Improvements
 - Improve resolving the _Maven_ version
-- Improve _Maven_ dependency injection by migrating from `ServiceLocator` to `Eclipse Sisu`
+- Improve the _Maven Artifact Resolver_ usage by migrating from `ServiceLocator` to `Eclipse Sisu`
 - Improve exceptions output
 - Improve some log levels
 

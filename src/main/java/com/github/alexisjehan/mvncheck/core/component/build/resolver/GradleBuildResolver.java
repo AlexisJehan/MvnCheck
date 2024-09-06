@@ -47,10 +47,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -62,10 +65,22 @@ import java.util.stream.Collectors;
 public final class GradleBuildResolver implements BuildResolver {
 
 	/**
+	 * <p>Prefix of the initialisation file name.</p>
+	 * @since 1.7.0
+	 */
+	private static final String INIT_FILE_NAME_PREFIX = "init";
+
+	/**
+	 * <p>Suffix of the initialisation file name.</p>
+	 * @since 1.7.0
+	 */
+	private static final String INIT_FILE_NAME_SUFFIX = ".gradle";
+
+	/**
 	 * <p>Initialisation file name.</p>
 	 * @since 1.0.0
 	 */
-	private static final String INIT_FILE_NAME = "init.gradle";
+	private static final String INIT_FILE_NAME = INIT_FILE_NAME_PREFIX + INIT_FILE_NAME_SUFFIX;
 
 	/**
 	 * <p>{@link Set} of file types.</p>
@@ -126,11 +141,21 @@ public final class GradleBuildResolver implements BuildResolver {
 					connector.useInstallation(installation.toFile());
 				});
 		try (var connection = connector.connect()) {
-			connection.newBuild()
-					.forTasks("repositories", "dependencies")
-					.withArguments("--init-script=" + getClass().getClassLoader().getResource(INIT_FILE_NAME))
-					.setStandardOutput(outputStream)
-					.run();
+			final var initTempFile = Files.createTempFile(INIT_FILE_NAME_PREFIX, INIT_FILE_NAME_SUFFIX);
+			try {
+				Files.copy(
+						Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(INIT_FILE_NAME)),
+						initTempFile,
+						StandardCopyOption.REPLACE_EXISTING
+				);
+				connection.newBuild()
+						.forTasks("repositories", "dependencies")
+						.withArguments("--init-script=" + initTempFile)
+						.setStandardOutput(outputStream)
+						.run();
+			} finally {
+				Files.delete(initTempFile);
+			}
 		} catch (final GradleConnectionException e) {
 			throw new BuildResolveException(e);
 		} finally {
