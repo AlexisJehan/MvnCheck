@@ -5,6 +5,8 @@
 ### New features
 - [[#5](https://github.com/AlexisJehan/MvnCheck/issues/5)] Generate an executable JAR as an extra release file (thanks
   to [TobseF](https://github.com/TobseF))
+- Add the `--include-output`/`-o` option to include build files from output directories (`target` for _Maven_ and
+  `build` for _Gradle_, note that this was the default behavior in previous releases)
 
 ### Bug fixes
 - [[#3](https://github.com/AlexisJehan/MvnCheck/issues/3)] Fix parsing errors related to the BOM character of the UTF-8
@@ -12,6 +14,7 @@
 
 ### Improvements
 - Improve the _Maven Artifact Resolver_ usage by migrating from `Eclipse Sisu` to `Supplier`
+- Build files from output directories (`target` for _Maven_ and `build` for _Gradle_) are now excluded by default
 
 ### Notes
 - Add the `maven-resolver-supplier` dependency

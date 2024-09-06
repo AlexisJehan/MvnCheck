@@ -38,6 +38,11 @@ final class BuildFileTypeTest {
 	}
 
 	@Test
+	void testGetOutputDirectoryName() {
+		assertThat(BuildFileType.MAVEN.getOutputDirectoryName()).isEqualTo("target");
+	}
+
+	@Test
 	void testOptionalValueOf() {
 		assertThat(BuildFileType.optionalValueOf("pom.xml")).hasValue(BuildFileType.MAVEN);
 		assertThat(BuildFileType.optionalValueOf("unknown")).isEmpty();

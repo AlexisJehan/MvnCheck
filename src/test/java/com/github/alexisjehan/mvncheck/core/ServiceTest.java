@@ -243,6 +243,24 @@ final class ServiceTest {
 	}
 
 	@Test
+	void testFilterBuildFiles() throws IOException {
+		final var service = new Service(mockedMavenSession);
+		final var fooBuildFile = new BuildFile(BuildFileType.MAVEN, Path.of("pom.xml"));
+		final var barBuildFile = new BuildFile(BuildFileType.MAVEN, Path.of("target", "pom.xml"));
+		assertThat(service.filterBuildFiles(List.of())).isEmpty();
+		assertThat(service.filterBuildFiles(List.of(fooBuildFile))).containsExactly(fooBuildFile);
+		assertThat(service.filterBuildFiles(List.of(barBuildFile))).containsExactly(barBuildFile);
+		assertThat(service.filterBuildFiles(List.of(fooBuildFile, barBuildFile))).containsExactly(fooBuildFile);
+	}
+
+	@Test
+	void testFilterBuildFilesInvalid() throws IOException {
+		final var service = new Service(mockedMavenSession);
+		assertThatNullPointerException().isThrownBy(() -> service.filterBuildFiles(null));
+		assertThatNullPointerException().isThrownBy(() -> service.filterBuildFiles(Collections.singletonList(null)));
+	}
+
+	@Test
 	void testFindBuild() throws IOException {
 		Mockito.when(mockedMavenBuildResolver.resolve(Mockito.notNull()))
 				.then(invocation -> new Build(invocation.getArgument(0), List.of(), List.of()));

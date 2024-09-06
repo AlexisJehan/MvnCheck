@@ -69,16 +69,22 @@ public final class Application {
 	static final String OPTION_HELP = "help";
 
 	/**
+	 * <p>Ignore snapshots option long name.</p>
+	 * @since 1.0.0
+	 */
+	static final String OPTION_IGNORE_SNAPSHOTS = "ignore-snapshots";
+
+	/**
 	 * <p>Ignore inherited option long name.</p>
 	 * @since 1.5.0
 	 */
 	static final String OPTION_IGNORE_INHERITED = "ignore-inherited";
 
 	/**
-	 * <p>Ignore snapshots option long name.</p>
-	 * @since 1.0.0
+	 * <p>Include output option long name.</p>
+	 * @since 1.7.0
 	 */
-	static final String OPTION_IGNORE_SNAPSHOTS = "ignore-snapshots";
+	static final String OPTION_INCLUDE_OUTPUT = "include-output";
 
 	/**
 	 * <p>Short option long name.</p>
@@ -153,16 +159,22 @@ public final class Application {
 				"Display help information"
 		);
 		options.addOption(
+				"i",
+				OPTION_IGNORE_SNAPSHOTS,
+				false,
+				"Ignore build file artifacts with a snapshot version"
+		);
+		options.addOption(
 				null,
 				OPTION_IGNORE_INHERITED,
 				false,
 				"Ignore build file artifacts with an inherited version"
 		);
 		options.addOption(
-				"i",
-				OPTION_IGNORE_SNAPSHOTS,
+				"o",
+				OPTION_INCLUDE_OUTPUT,
 				false,
-				"Ignore build file artifacts with a snapshot version"
+				"Include build files inside output directories"
 		);
 		options.addOption(
 				"s",
@@ -257,8 +269,9 @@ public final class Application {
 						commandLine.hasOption(OPTION_MAX_DEPTH)
 								? Integer.parseUnsignedInt(commandLine.getOptionValue(OPTION_MAX_DEPTH))
 								: DEFAULT_MAX_DEPTH,
-						commandLine.hasOption(OPTION_IGNORE_INHERITED),
 						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS),
+						commandLine.hasOption(OPTION_IGNORE_INHERITED),
+						commandLine.hasOption(OPTION_INCLUDE_OUTPUT),
 						commandLine.hasOption(OPTION_SHORT)
 				);
 			}
@@ -318,8 +331,10 @@ public final class Application {
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the path is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
+	 * @deprecated since 1.7.0, use {@link #run(Path, int, boolean, boolean, boolean, boolean)} instead
 	 * @since 1.5.0
 	 */
+	@Deprecated(since = "1.7.0")
 	void run(
 			final Path path,
 			final int maxDepth,
@@ -327,10 +342,37 @@ public final class Application {
 			final boolean ignoreSnapshots,
 			final boolean short0
 	) throws IOException {
+		run(path, maxDepth, ignoreSnapshots, ignoreInherited, true, short0);
+	}
+
+	/**
+	 * <p>Run the program.</p>
+	 * @param path a path
+	 * @param maxDepth a maximum depth
+	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
+	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
+	 * @param includeOutput {@code true} if build files inside output directories should be included
+	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the path is {@code null}
+	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
+	 * @since 1.7.0
+	 */
+	void run(
+			final Path path,
+			final int maxDepth,
+			final boolean ignoreSnapshots,
+			final boolean ignoreInherited,
+			final boolean includeOutput,
+			final boolean short0
+	) throws IOException {
 		Ensure.notNull("path", path);
 		Ensure.greaterThanOrEqualTo("maxDepth", maxDepth, 0);
 		final var service = createService();
-		final var buildFiles = service.findBuildFiles(path, maxDepth);
+		var buildFiles = service.findBuildFiles(path, maxDepth);
+		if (!includeOutput) {
+			buildFiles = service.filterBuildFiles(buildFiles);
+		}
 		if (buildFiles.isEmpty()) {
 			outputStream.println("No build file found");
 			return;

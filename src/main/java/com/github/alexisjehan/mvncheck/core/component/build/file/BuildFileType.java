@@ -38,19 +38,19 @@ public enum BuildFileType {
 	 * <p>The <i>Maven</i> build file type.</p>
 	 * @since 1.0.0
 	 */
-	MAVEN("pom.xml"),
+	MAVEN("pom.xml", "target"),
 
 	/**
 	 * <p>The <i>Gradle Groovy</i> build file type.</p>
 	 * @since 1.0.0
 	 */
-	GRADLE_GROOVY("build.gradle"),
+	GRADLE_GROOVY("build.gradle", "build"),
 
 	/**
 	 * <p>The <i>Gradle Kotlin</i> build file type.</p>
 	 * @since 1.0.0
 	 */
-	GRADLE_KOTLIN("build.gradle.kts");
+	GRADLE_KOTLIN("build.gradle.kts", "build");
 
 	/**
 	 * <p>File name.</p>
@@ -59,12 +59,20 @@ public enum BuildFileType {
 	private final String fileName;
 
 	/**
+	 * <p>Output directory name.</p>
+	 * @since 1.7.0
+	 */
+	private final String outputDirectoryName;
+
+	/**
 	 * <p>Constructor.</p>
 	 * @param fileName a file name
-	 * @since 1.0.0
+	 * @param outputDirectoryName an output directory name
+	 * @since 1.7.0
 	 */
-	BuildFileType(final String fileName) {
+	BuildFileType(final String fileName, final String outputDirectoryName) {
 		this.fileName = fileName;
+		this.outputDirectoryName = outputDirectoryName;
 	}
 
 	/**
@@ -74,6 +82,15 @@ public enum BuildFileType {
 	 */
 	public String getFileName() {
 		return fileName;
+	}
+
+	/**
+	 * <p>Get the output directory name.</p>
+	 * @return the output directory name
+	 * @since 1.7.0
+	 */
+	public String getOutputDirectoryName() {
+		return outputDirectoryName;
 	}
 
 	/**

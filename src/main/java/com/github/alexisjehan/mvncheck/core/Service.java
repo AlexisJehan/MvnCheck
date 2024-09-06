@@ -184,6 +184,23 @@ public final class Service {
 	}
 
 	/**
+	 * <p>Filter a {@link List} of build files to ignore those inside output directories.</p>
+	 * @param buildFiles a {@link List} of build files
+	 * @return the {@link List} of build files
+	 * @throws NullPointerException if the {@link List} of build files or any of them is {@code null}
+	 * @since 1.7.0
+	 */
+	public List<BuildFile> filterBuildFiles(final List<BuildFile> buildFiles) {
+		Ensure.notNullAndNotNullElements("buildFiles", buildFiles);
+		final var outputDirectories = buildFiles.stream()
+				.map(buildFile -> buildFile.getFile().resolveSibling(buildFile.getType().getOutputDirectoryName()))
+				.collect(Collectors.toUnmodifiableList());
+		return buildFiles.stream()
+				.filter(buildFile -> outputDirectories.stream().noneMatch(buildFile.getFile()::startsWith))
+				.collect(Collectors.toUnmodifiableList());
+	}
+
+	/**
 	 * <p>Find the build for the given build file.</p>
 	 * @param buildFile a build file
 	 * @return the build
