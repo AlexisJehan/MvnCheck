@@ -76,15 +76,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.resolver</groupId>
-			<artifactId>maven-resolver-connector-basic</artifactId>
+			<artifactId>maven-resolver-supplier</artifactId>
 			<version>1.9.22</version> <!-- Based on "org.apache.maven:maven-core:3.9.9" -->
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.resolver</groupId>
-			<artifactId>maven-resolver-transport-http</artifactId>
-			<version>1.9.22</version> <!-- Based on "org.apache.maven:maven-core:3.9.9" -->
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.gradle</groupId>
@@ -419,19 +412,41 @@
 				<version>3.7.1</version>
 				<executions>
 					<execution>
-						<id>assembly-single</id>
+						<id>assembly-single-bin</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/bin.xml</descriptor>
+							</descriptors>
+							<outputTimestamp>${maven.build.timestamp}</outputTimestamp>
+						</configuration>
+					</execution>
+					<execution>
+						<id>assembly-single-bin-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<mainClass>com.github.alexisjehan.mvncheck.Application</mainClass>
+								</manifest>
+								<manifestEntries>
+									<Multi-Release>true</Multi-Release>
+								</manifestEntries>
+							</archive>
+							<descriptors>
+								<descriptor>src/main/assembly/bin-jar.xml</descriptor>
+							</descriptors>
+							<outputTimestamp>${maven.build.timestamp}</outputTimestamp>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/bin.xml</descriptor>
-					</descriptors>
-					<outputTimestamp>${maven.build.timestamp}</outputTimestamp>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

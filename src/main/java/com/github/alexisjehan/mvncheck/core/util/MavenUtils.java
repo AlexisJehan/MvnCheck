@@ -25,8 +25,6 @@ package com.github.alexisjehan.mvncheck.core.util;
 
 import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
@@ -42,6 +40,9 @@ import org.eclipse.aether.DefaultRepositoryCache;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.impl.RemoteRepositoryManager;
+import org.eclipse.aether.internal.impl.DefaultChecksumPolicyProvider;
+import org.eclipse.aether.internal.impl.DefaultRemoteRepositoryManager;
+import org.eclipse.aether.internal.impl.DefaultUpdatePolicyAnalyzer;
 import org.eclipse.aether.repository.AuthenticationSelector;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.repository.MirrorSelector;
@@ -50,14 +51,13 @@ import org.eclipse.aether.repository.ProxySelector;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.repository.RepositoryPolicy;
 import org.eclipse.aether.spi.locator.ServiceLocator;
+import org.eclipse.aether.supplier.RepositorySystemSupplier;
 import org.eclipse.aether.util.repository.AuthenticationBuilder;
 import org.eclipse.aether.util.repository.ConservativeAuthenticationSelector;
 import org.eclipse.aether.util.repository.ConservativeProxySelector;
 import org.eclipse.aether.util.repository.DefaultAuthenticationSelector;
 import org.eclipse.aether.util.repository.DefaultMirrorSelector;
 import org.eclipse.aether.util.repository.DefaultProxySelector;
-import org.eclipse.sisu.launch.Main;
-import org.eclipse.sisu.space.BeanScanning;
 import org.sonatype.plexus.components.cipher.DefaultPlexusCipher;
 import org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher;
 
@@ -121,10 +121,10 @@ public final class MavenUtils {
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Dependency injector.</p>
-	 * @since 1.1.0
+	 * <p>Repository system supplier.</p>
+	 * @since 1.7.0
 	 */
-	private static final Injector injector = Guice.createInjector(Main.wire(BeanScanning.INDEX));
+	private static final RepositorySystemSupplier repositorySystemSupplier = new RepositorySystemSupplier();
 
 	/**
 	 * <p>Constructor.</p>
@@ -247,7 +247,7 @@ public final class MavenUtils {
 	 * @since 1.1.0
 	 */
 	public static RepositorySystem makeRepositorySystem() {
-		return injector.getInstance(RepositorySystem.class);
+		return repositorySystemSupplier.get();
 	}
 
 	/**
@@ -270,7 +270,10 @@ public final class MavenUtils {
 	 * @since 1.1.0
 	 */
 	public static RemoteRepositoryManager makeRemoteRepositoryManager() {
-		return injector.getInstance(RemoteRepositoryManager.class);
+		return new DefaultRemoteRepositoryManager(
+				new DefaultUpdatePolicyAnalyzer(),
+				new DefaultChecksumPolicyProvider()
+		);
 	}
 
 	/**
