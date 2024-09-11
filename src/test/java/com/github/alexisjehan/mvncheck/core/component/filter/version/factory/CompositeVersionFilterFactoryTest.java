@@ -64,8 +64,8 @@ final class CompositeVersionFilterFactoryTest {
 
 	@Test
 	void testCreateAcceptInvalid() {
-		final var versionFilter = compositeVersionFilterFactory.create("1.0.0");
-		assertThatNullPointerException().isThrownBy(() -> versionFilter.accept(null));
-		assertThatIllegalArgumentException().isThrownBy(() -> versionFilter.accept(Strings.EMPTY));
+		final var compositeVersionFilter = compositeVersionFilterFactory.create("1.0.0");
+		assertThatNullPointerException().isThrownBy(() -> compositeVersionFilter.accept(null));
+		assertThatIllegalArgumentException().isThrownBy(() -> compositeVersionFilter.accept(Strings.EMPTY));
 	}
 }

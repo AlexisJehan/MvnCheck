@@ -43,97 +43,97 @@ final class QualifierVersionFilterFactoryTest {
 	@Test
 	void testCreateAccept() {
 		// No qualifier
-		assertThat(qualifierVersionFilterFactory.create("1.0.0")).satisfies(versionFilter -> {
-			assertThat(versionFilter.accept("1.2.3")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO-123")).isTrue();
+		assertThat(qualifierVersionFilterFactory.create("1.0.0")).satisfies(qualifierVersionFilter -> {
+			assertThat(qualifierVersionFilter.accept("1.2.3")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO-123")).isTrue();
 		});
 
 		// Same qualifier
-		assertThat(qualifierVersionFilterFactory.create("1.0.0-foo")).satisfies(versionFilter -> {
-			assertThat(versionFilter.accept("1.2.3")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3FOO-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3.FOO-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-foo-123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO.123")).isTrue();
-			assertThat(versionFilter.accept("1.2.3-FOO-123")).isTrue();
+		assertThat(qualifierVersionFilterFactory.create("1.0.0-foo")).satisfies(qualifierVersionFilter -> {
+			assertThat(qualifierVersionFilter.accept("1.2.3")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo-123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO.123")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO-123")).isTrue();
 		});
 
 		// Not same qualifier
-		assertThat(qualifierVersionFilterFactory.create("1.0.0-bar")).satisfies(versionFilter -> {
-			assertThat(versionFilter.accept("1.2.3")).isTrue();
-			assertThat(versionFilter.accept("1.2.3foo")).isFalse();
-			assertThat(versionFilter.accept("1.2.3foo123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3foo.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3foo-123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3FOO")).isFalse();
-			assertThat(versionFilter.accept("1.2.3FOO123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3FOO.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3FOO-123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.foo")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.foo123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.foo.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.foo-123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.FOO")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.FOO123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.FOO.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3.FOO-123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-foo")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-foo123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-foo.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-foo-123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-FOO")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-FOO123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-FOO.123")).isFalse();
-			assertThat(versionFilter.accept("1.2.3-FOO-123")).isFalse();
+		assertThat(qualifierVersionFilterFactory.create("1.0.0-bar")).satisfies(qualifierVersionFilter -> {
+			assertThat(qualifierVersionFilter.accept("1.2.3")).isTrue();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3foo-123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3FOO-123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.foo-123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3.FOO-123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-foo-123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO.123")).isFalse();
+			assertThat(qualifierVersionFilter.accept("1.2.3-FOO-123")).isFalse();
 		});
 	}
 
 	@Test
 	void testCreateAcceptInvalid() {
-		final var versionFilter = qualifierVersionFilterFactory.create("1.0.0");
-		assertThatNullPointerException().isThrownBy(() -> versionFilter.accept(null));
-		assertThatIllegalArgumentException().isThrownBy(() -> versionFilter.accept(Strings.EMPTY));
+		final var qualifierVersionFilter = qualifierVersionFilterFactory.create("1.0.0");
+		assertThatNullPointerException().isThrownBy(() -> qualifierVersionFilter.accept(null));
+		assertThatIllegalArgumentException().isThrownBy(() -> qualifierVersionFilter.accept(Strings.EMPTY));
 	}
 }
