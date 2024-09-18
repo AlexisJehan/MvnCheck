@@ -20,7 +20,7 @@
 - Add the `maven-resolver-supplier` dependency
 - Update the `maven-core` dependency to `3.9.9`
 - Update the `gradle-tooling-api` dependency to `8.10.1`
-- Update the `github-api` dependency to `1.324`
+- Update the `github-api` dependency to `1.326`
 - Update the `commons-cli` dependency to `1.9.0`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.24.0`
 - Update the `junit-jupiter` dependency to `5.11.0`
@@ -29,7 +29,7 @@
 - Update `pmd-core` and `pmd-java` dependencies to `7.5.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.0`
 - Update the `maven-javadoc-plugin` plugin to `3.10.0`
-- Update the `maven-gpg-plugin` plugin to `3.2.5`
+- Update the `maven-gpg-plugin` plugin to `3.2.6`
 - Remove `maven-resolver-connector-basic` and `maven-resolver-transport-http` dependencies
 
 ## [1.6.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.6.2) (2024-07-16)

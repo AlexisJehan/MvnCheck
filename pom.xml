@@ -87,18 +87,18 @@
 		<dependency>
 			<groupId>org.kohsuke</groupId>
 			<artifactId>github-api</artifactId>
-			<version>1.324</version>
+			<version>1.326</version>
 		</dependency>
 		<dependency>
 			<groupId>com.infradna.tool</groupId>
 			<artifactId>bridge-method-annotation</artifactId> <!-- From the "jenkins" repository -->
-			<version>1.29</version> <!-- Based on "org.kohsuke:github-api:1.324" -->
+			<version>1.29</version> <!-- Based on "org.kohsuke:github-api:1.326" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>4.8.6</version> <!-- Based on "org.kohsuke:github-api:1.324" -->
+			<version>4.8.6</version> <!-- Based on "org.kohsuke:github-api:1.326" -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -451,7 +451,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>3.2.5</version>
+				<version>3.2.6</version>
 				<executions>
 					<execution>
 						<id>gpg-sign</id>
