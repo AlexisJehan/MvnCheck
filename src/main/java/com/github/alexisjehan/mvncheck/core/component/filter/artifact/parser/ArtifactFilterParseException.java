@@ -23,6 +23,7 @@
  */
 package com.github.alexisjehan.mvncheck.core.component.filter.artifact.parser;
 
+import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 
@@ -40,7 +41,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 * <p>Serial version unique identifier.</p>
 	 * @since 1.0.0
 	 */
-	private static final long serialVersionUID = 8647765091802310213L;
+	private static final long serialVersionUID = -5557892849559209991L;
 
 	/**
 	 * <p>Reason.</p>
@@ -49,16 +50,16 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	private final String reason;
 
 	/**
-	 * <p>Line.</p>
-	 * @since 1.0.0
+	 * <p>Expression.</p>
+	 * @since 1.7.0
 	 */
-	private final String line;
+	private final String expression;
 
 	/**
 	 * <p>Line number.</p>
 	 * @since 1.0.0
 	 */
-	private final long lineNumber;
+	private final Long lineNumber;
 
 	/**
 	 * <p>File.</p>
@@ -67,53 +68,87 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	private final transient Path file;
 
 	/**
-	 * <p>Constructor without a file.</p>
+	 * <p>Constructor with an expression.</p>
 	 * @param reason a reason
-	 * @param line a line
-	 * @param lineNumber a line number
-	 * @throws NullPointerException if the reason or the line is {@code null}
-	 * @throws IllegalArgumentException if the reason or the line is empty or if the line number is lower than or equal
-	 *         to 0
-	 * @since 1.0.0
+	 * @param expression an expression
+	 * @throws NullPointerException if the reason or the expression is {@code null}
+	 * @throws IllegalArgumentException if the reason or the expression is empty
+	 * @since 1.7.0
 	 */
 	ArtifactFilterParseException(
 			final String reason,
-			final String line,
-			final long lineNumber
+			final String expression
 	) {
-		this(reason, line, lineNumber, null);
+		this(reason, expression, null, null);
 	}
 
 	/**
-	 * <p>Constructor with a file.</p>
+	 * <p>Constructor with an expression at a line number.</p>
 	 * @param reason a reason
-	 * @param line a line
-	 * @param lineNumber a line number
+	 * @param expression an expression
+	 * @param lineNumber a line number or {@code null}
+	 * @throws NullPointerException if the reason or the expression is {@code null}
+	 * @throws IllegalArgumentException if the reason or the expression is empty or if the line number is lower than or
+	 *         equal to 0
+	 * @deprecated since 1.7.0, use {@link #ArtifactFilterParseException(String, String)} instead
+	 * @since 1.0.0
+	 */
+	@Deprecated(since = "1.7.0")
+	ArtifactFilterParseException(
+			final String reason,
+			final String expression,
+			final Long lineNumber
+	) {
+		this(reason, expression, lineNumber, null);
+	}
+
+	/**
+	 * <p>Constructor with an expression at a line number of a file.</p>
+	 * @param reason a reason
+	 * @param expression an expression
+	 * @param lineNumber a line number or {@code null}
 	 * @param file a file or {@code null}
-	 * @throws NullPointerException if the reason or the line is {@code null}
-	 * @throws IllegalArgumentException if the reason or the line is empty or if the line number is lower than or equal
-	 *         to 0
+	 * @throws NullPointerException if the reason or the expression is {@code null}
+	 * @throws IllegalArgumentException if the reason or the expression is empty or if the line number is lower than or
+	 *         equal to 0
 	 * @since 1.0.0
 	 */
 	private ArtifactFilterParseException(
 			final String reason,
-			final String line,
-			final long lineNumber,
+			final String expression,
+			final Long lineNumber,
 			final Path file
 	) {
 		super(
 				Ensure.notNullAndNotEmpty("reason", reason)
 						+ ": "
-						+ ToString.toString(Ensure.notNullAndNotEmpty("line", line))
-						+ " ("
-						+ "at line " + Ensure.greaterThan("lineNumber", lineNumber, 0L)
-						+ (null != file ? " of the " + ToString.toString(file) + " file" : "")
-						+ ")"
+						+ ToString.toString(Ensure.notNullAndNotEmpty("expression", expression))
+						+ (
+						null != lineNumber
+								? " (at line " + Ensure.greaterThan("lineNumber", lineNumber, 0L)
+								+ (null != file ? " of the " + ToString.toString(file) + " file" : Strings.EMPTY)
+								+ ")"
+								: Strings.EMPTY
+				)
 		);
 		this.reason = reason;
-		this.line = line;
+		this.expression = expression;
 		this.lineNumber = lineNumber;
 		this.file = file;
+	}
+
+	/**
+	 * <p>Return a copy of the current exception with the given line number.</p>
+	 * @param lineNumber a line number
+	 * @return the copy of the current exception
+	 * @throws NullPointerException if the line number is {@code null}
+	 * @throws IllegalArgumentException if the line number is lower than or equal to 0
+	 * @since 1.7.0
+	 */
+	public ArtifactFilterParseException with(final Long lineNumber) {
+		Ensure.notNull("lineNumber", lineNumber);
+		Ensure.greaterThan("lineNumber", lineNumber, 0L);
+		return new ArtifactFilterParseException(reason, expression, lineNumber, file);
 	}
 
 	/**
@@ -125,7 +160,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 */
 	public ArtifactFilterParseException with(final Path file) {
 		Ensure.notNull("file", file);
-		return new ArtifactFilterParseException(reason, line, lineNumber, file);
+		return new ArtifactFilterParseException(reason, expression, lineNumber, file);
 	}
 
 	/**
@@ -138,21 +173,43 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get the line.</p>
-	 * @return the line
+	 * <p>Get the expression.</p>
+	 * @return the expression
+	 * @deprecated since 1.7.0, use {@link #getExpression()} instead
 	 * @since 1.0.0
 	 */
+	@Deprecated(since = "1.7.0")
 	public String getLine() {
-		return line;
+		return getExpression();
+	}
+
+	/**
+	 * <p>Get the expression.</p>
+	 * @return the expression
+	 * @since 1.7.0
+	 */
+	public String getExpression() {
+		return expression;
 	}
 
 	/**
 	 * <p>Get the line number.</p>
 	 * @return the line number
+	 * @deprecated since 1.7.0, use {@link #getOptionalLineNumber()} instead
 	 * @since 1.0.0
 	 */
-	public long getLineNumber() {
-		return lineNumber;
+	@Deprecated(since = "1.7.0")
+	public Long getLineNumber() {
+		return getOptionalLineNumber().orElse(null);
+	}
+
+	/**
+	 * <p>Get an {@link Optional} of the line number.</p>
+	 * @return the {@link Optional} of the line number
+	 * @since 1.7.0
+	 */
+	public Optional<Long> getOptionalLineNumber() {
+		return Optional.ofNullable(lineNumber);
 	}
 
 	/**

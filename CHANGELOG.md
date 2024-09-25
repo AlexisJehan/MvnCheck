@@ -14,6 +14,8 @@
 
 ### Improvements
 - Improve the _Maven Artifact Resolver_ usage by migrating from `Eclipse Sisu` to `Supplier`
+- Improve artifact filtering, wildcard characters are now supported in the group identifier and the artifact identifier
+  as well as in the update version
 - Build files from output directories (`target` for _Maven_ and `build` for _Gradle_) are now excluded by default
 
 ### Notes

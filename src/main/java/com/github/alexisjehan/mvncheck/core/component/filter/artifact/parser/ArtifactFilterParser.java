@@ -27,9 +27,9 @@ import com.github.alexisjehan.javanilla.io.Readers;
 import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
-import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
-import com.github.alexisjehan.mvncheck.core.component.artifact.ArtifactIdentifier;
 import com.github.alexisjehan.mvncheck.core.component.filter.artifact.ArtifactFilter;
+import com.github.alexisjehan.mvncheck.core.component.filter.artifact.CompositeArtifactFilter;
+import com.github.alexisjehan.mvncheck.core.component.filter.artifact.WildcardArtifactFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,10 +37,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * <p>Class that describes an artifact filter parser.</p>
@@ -59,18 +56,6 @@ public final class ArtifactFilterParser {
 	 * @since 1.0.0
 	 */
 	private static final char SEPARATOR = ':';
-
-	/**
-	 * <p>Single character wildcard.</p>
-	 * @since 1.0.0
-	 */
-	private static final char WILDCARD_SINGLE = '?';
-
-	/**
-	 * <p>Any characters wildcard.</p>
-	 * @since 1.0.0
-	 */
-	private static final char WILDCARD_ANY = '*';
 
 	/**
 	 * <p>Logger.</p>
@@ -119,86 +104,76 @@ public final class ArtifactFilterParser {
 	 */
 	static ArtifactFilter parse(final Reader reader) throws IOException {
 		Ensure.notNull("reader", reader);
-		final var identifiers = new HashSet<ArtifactIdentifier>();
-		final var identifiersVersions = new HashMap<ArtifactIdentifier, Set<Pattern>>();
+		final var artifactFilters = new HashSet<ArtifactFilter>();
 		try (var bufferedReader = Readers.buffered(reader)) {
 			String line;
 			var lineNumber = 1L;
 			while (null != (line = bufferedReader.readLine())) {
-				line = Strings.substringBefore(line, COMMENT_START).trim();
-				if (line.isEmpty()) {
+				final var expression = Strings.substringBefore(line, COMMENT_START).trim();
+				if (expression.isEmpty()) {
 					continue;
 				}
-				final var frequency = Strings.frequency(line, SEPARATOR);
-				if (1 != frequency && 2 != frequency) {
-					throw new ArtifactFilterParseException("Unexpected format", line, lineNumber);
-				}
-				final var parts = Strings.split(SEPARATOR, line);
-				final var groupId = parts.get(0);
-				if (groupId.isEmpty()) {
-					throw new ArtifactFilterParseException("Unexpected format, empty groupId", line, lineNumber);
-				}
-				final var artifactId = parts.get(1);
-				if (artifactId.isEmpty()) {
-					throw new ArtifactFilterParseException("Unexpected format, empty artifactId", line, lineNumber);
-				}
-				final var identifier = new ArtifactIdentifier(groupId, artifactId);
-				if (2 == parts.size()) {
-					logger.debug("Ignoring the {} artifact identifier", () -> ToString.toString(identifier));
-					identifiers.add(identifier);
-				} else {
-					final var versionExpression = parts.get(2);
-					if (versionExpression.isEmpty()) {
-						throw new ArtifactFilterParseException(
-								"Unexpected format, empty version expression",
-								line,
-								lineNumber
-						);
-					}
-					logger.debug(
-							"Ignoring the {} artifact identifier with {} version expression",
-							() -> ToString.toString(identifier),
-							() -> ToString.toString(versionExpression)
-					);
-					identifiersVersions.computeIfAbsent(identifier, key -> new HashSet<>()).add(
-							Pattern.compile(
-									"^" + Pattern.quote(versionExpression)
-											.replace(String.valueOf(WILDCARD_SINGLE), "\\E.\\Q")
-											.replace(String.valueOf(WILDCARD_ANY), "\\E.*\\Q") + "$",
-									Pattern.CASE_INSENSITIVE
-							)
-					);
+				try {
+					artifactFilters.add(parse(expression));
+				} catch (final ArtifactFilterParseException e) {
+					throw e.with(lineNumber);
 				}
 				++lineNumber;
 			}
 		}
-		return new ArtifactFilter() {
+		if (artifactFilters.isEmpty()) {
+			return ArtifactFilter.NONE;
+		}
+		return CompositeArtifactFilter.none(artifactFilters.toArray(ArtifactFilter[]::new));
+	}
 
-			/**
-			 * {@inheritDoc}
-			 * @throws NullPointerException if the artifact is {@code null}
-			 * @since 1.0.0
-			 */
-			@Override
-			public boolean accept(final Artifact<?> artifact) {
-				Ensure.notNull("artifact", artifact);
-				return !identifiers.contains(artifact.getIdentifier());
-			}
-
-			/**
-			 * {@inheritDoc}
-			 * @throws NullPointerException if the artifact or the update version is {@code null}
-			 * @throws IllegalArgumentException if the update version is empty
-			 * @since 1.0.0
-			 */
-			@Override
-			public boolean accept(final Artifact<?> artifact, final String updateVersion) {
-				Ensure.notNull("artifact", artifact);
-				Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
-				final var identifierVersions = identifiersVersions.get(artifact.getIdentifier());
-				return null == identifierVersions
-						|| identifierVersions.stream().noneMatch(pattern -> pattern.matcher(updateVersion).matches());
-			}
-		};
+	/**
+	 * <p>Parse an artifact filter from the given expression.</p>
+	 * @param expression an expression
+	 * @return the artifact filter
+	 * @throws NullPointerException if the expression is {@code null}
+	 * @throws IllegalArgumentException if the expression is empty
+	 * @throws ArtifactFilterParseException if the content is unexpected
+	 * @since 1.7.0
+	 */
+	public static ArtifactFilter parse(final String expression) {
+		Ensure.notNullAndNotEmpty("expression", expression);
+		logger.debug("Parsing the {} expression", () -> ToString.toString(expression));
+		final var frequency = Strings.frequency(expression, SEPARATOR);
+		if (2 < frequency) {
+			throw new ArtifactFilterParseException(
+					"Unexpected expression format",
+					expression
+			);
+		}
+		final var parts = Strings.split(SEPARATOR, expression);
+		final var groupIdExpression = parts.get(0);
+		if (groupIdExpression.isEmpty()) {
+			throw new ArtifactFilterParseException(
+					"Unexpected expression format, the groupId is empty",
+					expression
+			);
+		}
+		if (1 == parts.size()) {
+			return new WildcardArtifactFilter(groupIdExpression);
+		}
+		final var artifactIdExpression = parts.get(1);
+		if (artifactIdExpression.isEmpty()) {
+			throw new ArtifactFilterParseException(
+					"Unexpected expression format, the artifactId is empty",
+					expression
+			);
+		}
+		if (2 == parts.size()) {
+			return new WildcardArtifactFilter(groupIdExpression, artifactIdExpression);
+		}
+		final var updateVersionExpression = parts.get(2);
+		if (updateVersionExpression.isEmpty()) {
+			throw new ArtifactFilterParseException(
+					"Unexpected expression format, the update version is empty",
+					expression
+			);
+		}
+		return new WildcardArtifactFilter(groupIdExpression, artifactIdExpression, updateVersionExpression);
 	}
 }

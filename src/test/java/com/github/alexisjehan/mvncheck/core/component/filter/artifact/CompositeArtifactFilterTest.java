@@ -42,9 +42,18 @@ final class CompositeArtifactFilterTest {
 	);
 	private static final String UPDATE_VERSION = "foo-version";
 
-	private final CompositeArtifactFilter compositeArtifactFilter = new CompositeArtifactFilter(ArtifactFilter.ALL);
+	private final CompositeArtifactFilter compositeArtifactFilter = CompositeArtifactFilter.all(ArtifactFilter.ALL);
 
 	@Test
+	@Deprecated
+	void testConstructor() {
+		final var otherCompositeArtifactFilter = new CompositeArtifactFilter(ArtifactFilter.ALL);
+		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT)).isFalse();
+		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT, UPDATE_VERSION)).isFalse();
+	}
+
+	@Test
+	@Deprecated
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> new CompositeArtifactFilter((ArtifactFilter[]) null));
 		assertThatIllegalArgumentException().isThrownBy(CompositeArtifactFilter::new);
@@ -53,11 +62,51 @@ final class CompositeArtifactFilterTest {
 
 	@Test
 	void testAccept() {
-		assertThat(new CompositeArtifactFilter(ArtifactFilter.ALL).accept(ARTIFACT)).isFalse();
-		assertThat(new CompositeArtifactFilter(ArtifactFilter.NONE).accept(ARTIFACT)).isTrue();
-		assertThat(new CompositeArtifactFilter(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)).isFalse();
-		assertThat(new CompositeArtifactFilter(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)).isFalse();
-		assertThat(new CompositeArtifactFilter(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)).isTrue();
+		assertThat(
+				CompositeArtifactFilter.all(ArtifactFilter.ALL).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.all(ArtifactFilter.NONE).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.all(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.NONE).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.NONE).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+		).isFalse();
 	}
 
 	@Test
@@ -68,20 +117,50 @@ final class CompositeArtifactFilterTest {
 	@Test
 	void testAcceptUpdateVersion() {
 		assertThat(
-				new CompositeArtifactFilter(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				new CompositeArtifactFilter(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				new CompositeArtifactFilter(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				new CompositeArtifactFilter(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				new CompositeArtifactFilter(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.any(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+		).isTrue();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isFalse();
+		assertThat(
+				CompositeArtifactFilter.none(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+		).isFalse();
 	}
 
 	@Test
@@ -89,5 +168,26 @@ final class CompositeArtifactFilterTest {
 		assertThatNullPointerException().isThrownBy(() -> compositeArtifactFilter.accept(null, UPDATE_VERSION));
 		assertThatNullPointerException().isThrownBy(() -> compositeArtifactFilter.accept(ARTIFACT, null));
 		assertThatIllegalArgumentException().isThrownBy(() -> compositeArtifactFilter.accept(ARTIFACT, Strings.EMPTY));
+	}
+
+	@Test
+	void testAllInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.all((ArtifactFilter[]) null));
+		assertThatIllegalArgumentException().isThrownBy(CompositeArtifactFilter::all);
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.all((ArtifactFilter) null));
+	}
+
+	@Test
+	void testAnyInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.any((ArtifactFilter[]) null));
+		assertThatIllegalArgumentException().isThrownBy(CompositeArtifactFilter::any);
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.any((ArtifactFilter) null));
+	}
+
+	@Test
+	void testNoneInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.none((ArtifactFilter[]) null));
+		assertThatIllegalArgumentException().isThrownBy(CompositeArtifactFilter::none);
+		assertThatNullPointerException().isThrownBy(() -> CompositeArtifactFilter.none((ArtifactFilter) null));
 	}
 }

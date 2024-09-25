@@ -23,6 +23,7 @@
  */
 package com.github.alexisjehan.mvncheck;
 
+import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.lang.Throwables;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
@@ -411,7 +412,7 @@ public final class Application {
 									.a(toString(artifact.getType()))
 									.reset()
 									.a("] ")
-									.a(artifact.isVersionInherited() ? "(" : "")
+									.a(artifact.isVersionInherited() ? "(" : Strings.EMPTY)
 									.a(toString(artifact.getIdentifier()))
 									.a(" ")
 									.fgBrightYellow()
@@ -421,7 +422,7 @@ public final class Application {
 									.fgBrightGreen()
 									.a(updateVersion)
 									.reset()
-									.a(artifact.isVersionInherited() ? ")" : "")
+									.a(artifact.isVersionInherited() ? ")" : Strings.EMPTY)
 					);
 					++artifactsUpdatesCount;
 				}

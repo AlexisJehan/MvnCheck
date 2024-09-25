@@ -250,7 +250,7 @@ public final class Service {
 			final boolean ignoreSnapshots
 	) throws IOException {
 		Ensure.notNull("build", build);
-		final var artifactFilter = new CompositeArtifactFilter(
+		final var artifactFilter = CompositeArtifactFilter.all(
 				userArtifactFilter,
 				createBuildArtifactFilter(build.getFile())
 		);

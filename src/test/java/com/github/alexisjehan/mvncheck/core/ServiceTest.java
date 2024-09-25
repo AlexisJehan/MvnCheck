@@ -507,7 +507,7 @@ final class ServiceTest {
 	void testCreateUserArtifactFilter(@TempDir final Path tmpDirectory) throws IOException {
 		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
 		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
-			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.notNull()))
+			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<Path>notNull()))
 					.thenReturn(ArtifactFilter.ALL);
 			try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 				mockedStaticSystemUtils.when(SystemUtils::getUserHomeDirectory)
@@ -523,7 +523,7 @@ final class ServiceTest {
 	void testCreateBuildArtifactFilter(@TempDir final Path tmpDirectory) throws IOException {
 		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
 		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
-			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.notNull()))
+			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<Path>notNull()))
 					.thenReturn(ArtifactFilter.ALL);
 			final var buildFile = new BuildFile(BuildFileType.MAVEN, tmpDirectory.resolve("pom.xml"));
 			assertThat(Service.createBuildArtifactFilter(buildFile)).isSameAs(ArtifactFilter.NONE);

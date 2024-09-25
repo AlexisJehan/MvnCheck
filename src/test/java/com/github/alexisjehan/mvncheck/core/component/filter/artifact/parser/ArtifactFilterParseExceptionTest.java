@@ -36,23 +36,48 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class ArtifactFilterParseExceptionTest {
 
 	private static final String REASON = "foo-reason";
-	private static final String LINE = "foo-line";
-	private static final long LINE_NUMBER = 1L;
+	private static final String EXPRESSION = "foo-expression";
+	private static final Long LINE_NUMBER = 1L;
 	private static final Path FILE = Path.of("foo-file");
 
 	private final ArtifactFilterParseException artifactFilterParseException = new ArtifactFilterParseException(
 			REASON,
-			LINE,
-			LINE_NUMBER
+			EXPRESSION
 	);
 
 	@Test
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(null, LINE, LINE_NUMBER);
+			throw new ArtifactFilterParseException(null, EXPRESSION);
 		});
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(Strings.EMPTY, LINE, LINE_NUMBER);
+			throw new ArtifactFilterParseException(Strings.EMPTY, EXPRESSION);
+		});
+		assertThatNullPointerException().isThrownBy(() -> {
+			throw new ArtifactFilterParseException(REASON, null);
+		});
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			throw new ArtifactFilterParseException(REASON, Strings.EMPTY);
+		});
+	}
+
+	@Test
+	@Deprecated
+	void testConstructorDeprecated() {
+		final var otherArtifactFilterParseException = new ArtifactFilterParseException(REASON, EXPRESSION, LINE_NUMBER);
+		assertThat(otherArtifactFilterParseException.getReason()).isEqualTo(REASON);
+		assertThat(otherArtifactFilterParseException.getExpression()).isEqualTo(EXPRESSION);
+		assertThat(otherArtifactFilterParseException.getOptionalLineNumber()).hasValue(LINE_NUMBER);
+	}
+
+	@Test
+	@Deprecated
+	void testConstructorDeprecatedInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> {
+			throw new ArtifactFilterParseException(null, EXPRESSION, LINE_NUMBER);
+		});
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			throw new ArtifactFilterParseException(Strings.EMPTY, EXPRESSION, LINE_NUMBER);
 		});
 		assertThatNullPointerException().isThrownBy(() -> {
 			throw new ArtifactFilterParseException(REASON, null, LINE_NUMBER);
@@ -61,35 +86,57 @@ final class ArtifactFilterParseExceptionTest {
 			throw new ArtifactFilterParseException(REASON, Strings.EMPTY, LINE_NUMBER);
 		});
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(REASON, LINE, 0L);
+			throw new ArtifactFilterParseException(REASON, EXPRESSION, 0L);
 		});
 	}
 
 	@Test
-	void testWith() {
+	void testWithLineNumber() {
+		final var otherArtifactFilterParseException = artifactFilterParseException.with(LINE_NUMBER);
+		assertThat(otherArtifactFilterParseException.getOptionalLineNumber())
+				.hasValue(LINE_NUMBER);
+		assertThat(artifactFilterParseException.getReason())
+				.isEqualTo(otherArtifactFilterParseException.getReason());
+		assertThat(artifactFilterParseException.getExpression())
+				.isEqualTo(otherArtifactFilterParseException.getExpression());
+		assertThat(artifactFilterParseException.getOptionalFile())
+				.isEqualTo(otherArtifactFilterParseException.getOptionalFile());
+	}
+
+	@Test
+	void testWithLineNumberInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> artifactFilterParseException.with((Long) null));
+		assertThatIllegalArgumentException().isThrownBy(() -> artifactFilterParseException.with(0L));
+	}
+
+	@Test
+	void testWithFile() {
 		final var otherArtifactFilterParseException = artifactFilterParseException.with(FILE);
 		assertThat(otherArtifactFilterParseException.getOptionalFile())
 				.hasValue(FILE);
 		assertThat(artifactFilterParseException.getReason())
 				.isEqualTo(otherArtifactFilterParseException.getReason());
-		assertThat(artifactFilterParseException.getLine())
-				.isEqualTo(otherArtifactFilterParseException.getLine());
-		assertThat(artifactFilterParseException.getLineNumber())
-				.isEqualTo(otherArtifactFilterParseException.getLineNumber());
+		assertThat(artifactFilterParseException.getExpression())
+				.isEqualTo(otherArtifactFilterParseException.getExpression());
+		assertThat(artifactFilterParseException.getOptionalLineNumber())
+				.isEqualTo(otherArtifactFilterParseException.getOptionalLineNumber());
 	}
 
 	@Test
-	void testWithInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> artifactFilterParseException.with(null));
+	void testWithFileInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> artifactFilterParseException.with((Path) null));
 	}
 
 	@Test
 	void testGetMessage() {
 		assertThat(artifactFilterParseException.getMessage()).isEqualTo(
-				REASON + ": \"" + LINE + "\" (at line " + LINE_NUMBER + ")"
+				REASON + ": \"" + EXPRESSION + "\""
 		);
-		assertThat(artifactFilterParseException.with(FILE).getMessage()).isEqualTo(
-				REASON + ": \"" + LINE + "\" (at line " + LINE_NUMBER + " of the " + FILE + " file)"
+		assertThat(artifactFilterParseException.with(LINE_NUMBER).getMessage()).isEqualTo(
+				REASON + ": \"" + EXPRESSION + "\" (at line " + LINE_NUMBER + ")"
+		);
+		assertThat(artifactFilterParseException.with(LINE_NUMBER).with(FILE).getMessage()).isEqualTo(
+				REASON + ": \"" + EXPRESSION + "\" (at line " + LINE_NUMBER + " of the " + FILE + " file)"
 		);
 	}
 
@@ -99,13 +146,25 @@ final class ArtifactFilterParseExceptionTest {
 	}
 
 	@Test
+	@Deprecated
 	void testGetLine() {
-		assertThat(artifactFilterParseException.getLine()).isEqualTo(LINE);
+		assertThat(artifactFilterParseException.getLine()).isEqualTo(EXPRESSION);
 	}
 
 	@Test
+	void testGetExpression() {
+		assertThat(artifactFilterParseException.getExpression()).isEqualTo(EXPRESSION);
+	}
+
+	@Test
+	@Deprecated
 	void testGetLineNumber() {
-		assertThat(artifactFilterParseException.getLineNumber()).isEqualTo(LINE_NUMBER);
+		assertThat(artifactFilterParseException.getLineNumber()).isNull();
+	}
+
+	@Test
+	void testGetOptionalLineNumber() {
+		assertThat(artifactFilterParseException.getOptionalLineNumber()).isEmpty();
 	}
 
 	@Test
