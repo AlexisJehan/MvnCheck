@@ -19,12 +19,13 @@
 ### Notes
 - Add the `maven-resolver-supplier` dependency
 - Update the `maven-core` dependency to `3.9.9`
-- Update the `gradle-tooling-api` dependency to `8.10.1`
+- Update the `gradle-tooling-api` dependency to `8.10.2`
 - Update the `github-api` dependency to `1.326`
 - Update the `commons-cli` dependency to `1.9.0`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.24.0`
-- Update the `junit-jupiter` dependency to `5.11.0`
+- Update the `junit-jupiter` dependency to `5.11.1`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.13.0`
+- Update the `license-maven-plugin` plugin to `4.6`
 - Update the `maven-pmd-plugin` plugin to `3.25.0`
 - Update `pmd-core` and `pmd-java` dependencies to `7.5.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.0`
