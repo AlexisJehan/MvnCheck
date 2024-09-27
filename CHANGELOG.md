@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.7.0 (unreleased)
+## [1.7.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.0) (2024-09-27)
 
 ### New features
 - [[#2](https://github.com/AlexisJehan/MvnCheck/pull/2)] Add the `--filter` option to filter build file artifacts with a

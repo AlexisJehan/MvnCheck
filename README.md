@@ -30,11 +30,11 @@ most relevant update version for an artifact.
 2 build file(s) found, checking for artifact updates
 
 my-gradle-project\build.gradle
-[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.2.1-android
+[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.3.1-android
 1 artifact update(s) available
 
 my-maven-project\pom.xml
-[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.14.0
+[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.17.0
 [BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.13.0
 2 artifact update(s) available
 
@@ -59,16 +59,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-1.6.2-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-1.6.2/bin
+sudo tar -xvzf mvn-check-1.7.0-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-1.7.0/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.6.2`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.7.0`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.6.2\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.7.0\bin` at the end
 
 #### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -86,14 +86,19 @@ java -jar mvn-check-1.7.0-bin.jar
 
 ## Usage
 ```
-usage: mvnchk [<path>] [-d <arg>] [-h] [-i] [--ignore-inherited] [-s] [-v]
+usage: mvnchk [<path>] [-d <arg>] [-f <arg>] [-h] [-i]
+       [--ignore-inherited] [-o] [-s] [-v]
  -d,--max-depth <arg>    Maximum depth of subdirectories to find build
                          files (a non-negative integer)
+ -f,--filter <arg>       Filter build file artifacts with a
+                         "groupId[:artifactId[:updateVersion]]" expression
+                         ('?' and '*' wildcards are allowed)
  -h,--help               Display help information
  -i,--ignore-snapshots   Ignore build file artifacts with a snapshot
                          version
     --ignore-inherited   Ignore build file artifacts with an inherited
                          version
+ -o,--include-output     Include build files inside output directories
  -s,--short              Only show build files with at least one artifact
                          update
  -v,--version            Display version information
@@ -128,6 +133,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      1.7.0       |     3.9.9     |     8.10.2     |
 |      1.6.2       |     3.9.8     |      8.9       |
 |      1.6.1       |     3.9.7     |      8.8       |
 |      1.6.0       |     3.9.6     |      8.7       |
