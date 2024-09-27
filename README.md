@@ -21,7 +21,7 @@ most relevant update version for an artifact.
 - Compact and comprehensible output
 - Smart filtering to exclude non-release versions
 - Smart filtering to select versions with the same qualifier (if any)
-- Possibility to filter specific artifacts or update versions using ignore files
+- Possibility to filter specific artifacts or update versions using a command line option or ignore files
 - Use any already installed _Maven_ configuration and repository
 - Use any already installed _Gradle_ installation if available, or download a wrapper distribution
 
@@ -70,10 +70,18 @@ Extract the content of the downloaded archive file and move the extracted folder
 - In the new window, click on "Environment Variables..."
 - Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.6.2\bin` at the end
 
-### Verify
+#### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
 ```console
 mvnchk --version
+```
+
+### Using without installation
+Alternatively, you could use _MvnCheck_ by downloading the executable JAR instead.
+
+This way, you simply have to execute this command to run it:
+```console
+java -jar mvn-check-1.7.0-bin.jar
 ```
 
 ## Usage
@@ -98,6 +106,9 @@ _MvnCheck_ allows to ignore artifacts or update versions by having a `.mvnchk-ig
 
 Here is an example of how to write it:
 ```
+# Ignore a specific group
+com.google.guava
+
 # Ignore a specific artifact
 com.google.guava:guava
 
