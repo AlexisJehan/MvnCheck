@@ -43,21 +43,75 @@ final class ArtifactFilterTest {
 	private static final String UPDATE_VERSION = "foo-version";
 
 	@Test
+	void testAcceptAllAccept() {
+		assertThat(ArtifactFilter.ACCEPT_ALL.accept(ARTIFACT)).isTrue();
+	}
+
+	@Test
+	void testAcceptAllAcceptInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.ACCEPT_ALL.accept(null));
+	}
+
+	@Test
+	void testAcceptAllAcceptUpdateVersion() {
+		assertThat(ArtifactFilter.ACCEPT_ALL.accept(ARTIFACT, UPDATE_VERSION)).isTrue();
+	}
+
+	@Test
+	void testAcceptAllAcceptUpdateVersionInvalid() {
+		assertThatNullPointerException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_ALL.accept(null, UPDATE_VERSION));
+		assertThatNullPointerException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_ALL.accept(ARTIFACT, null));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_ALL.accept(ARTIFACT, Strings.EMPTY));
+	}
+
+	@Test
+	void testAcceptNoneAccept() {
+		assertThat(ArtifactFilter.ACCEPT_NONE.accept(ARTIFACT)).isFalse();
+	}
+
+	@Test
+	void testAcceptNoneAcceptInvalid() {
+		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.ACCEPT_NONE.accept(null));
+	}
+
+	@Test
+	void testAcceptNoneAcceptUpdateVersion() {
+		assertThat(ArtifactFilter.ACCEPT_NONE.accept(ARTIFACT, UPDATE_VERSION)).isFalse();
+	}
+
+	@Test
+	void testAcceptNoneAcceptUpdateVersionInvalid() {
+		assertThatNullPointerException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_NONE.accept(null, UPDATE_VERSION));
+		assertThatNullPointerException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_NONE.accept(ARTIFACT, null));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> ArtifactFilter.ACCEPT_NONE.accept(ARTIFACT, Strings.EMPTY));
+	}
+
+	@Test
+	@Deprecated
 	void testAllAccept() {
 		assertThat(ArtifactFilter.ALL.accept(ARTIFACT)).isFalse();
 	}
 
 	@Test
+	@Deprecated
 	void testAllAcceptInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.ALL.accept(null));
 	}
 
 	@Test
+	@Deprecated
 	void testAllAcceptUpdateVersion() {
 		assertThat(ArtifactFilter.ALL.accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 	}
 
 	@Test
+	@Deprecated
 	void testAllAcceptUpdateVersionInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.ALL.accept(null, UPDATE_VERSION));
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.ALL.accept(ARTIFACT, null));
@@ -65,21 +119,25 @@ final class ArtifactFilterTest {
 	}
 
 	@Test
+	@Deprecated
 	void testNoneAccept() {
 		assertThat(ArtifactFilter.NONE.accept(ARTIFACT)).isTrue();
 	}
 
 	@Test
+	@Deprecated
 	void testNoneAcceptInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.NONE.accept(null));
 	}
 
 	@Test
+	@Deprecated
 	void testNoneAcceptUpdateVersion() {
 		assertThat(ArtifactFilter.NONE.accept(ARTIFACT, UPDATE_VERSION)).isTrue();
 	}
 
 	@Test
+	@Deprecated
 	void testNoneAcceptUpdateVersionInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.NONE.accept(null, UPDATE_VERSION));
 		assertThatNullPointerException().isThrownBy(() -> ArtifactFilter.NONE.accept(ARTIFACT, null));

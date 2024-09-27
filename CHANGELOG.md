@@ -3,6 +3,8 @@
 ## 1.7.0 (unreleased)
 
 ### New features
+- [[#2](https://github.com/AlexisJehan/MvnCheck/pull/2)] Add the `--filter` option to filter build file artifacts with a
+  `groupId[:artifactId[:updateVersion]]` expression (thanks to [TobseF](https://github.com/TobseF))
 - [[#5](https://github.com/AlexisJehan/MvnCheck/issues/5)] Generate an executable JAR as an extra release file (thanks
   to [TobseF](https://github.com/TobseF))
 - Add the `--include-output`/`-o` option to include build files from output directories (`target` for _Maven_ and

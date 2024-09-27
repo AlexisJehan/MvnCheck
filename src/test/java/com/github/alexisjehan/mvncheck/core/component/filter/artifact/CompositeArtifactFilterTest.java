@@ -42,12 +42,14 @@ final class CompositeArtifactFilterTest {
 	);
 	private static final String UPDATE_VERSION = "foo-version";
 
-	private final CompositeArtifactFilter compositeArtifactFilter = CompositeArtifactFilter.all(ArtifactFilter.ALL);
+	private final CompositeArtifactFilter compositeArtifactFilter = CompositeArtifactFilter.all(
+			ArtifactFilter.ACCEPT_NONE
+	);
 
 	@Test
 	@Deprecated
 	void testConstructor() {
-		final var otherCompositeArtifactFilter = new CompositeArtifactFilter(ArtifactFilter.ALL);
+		final var otherCompositeArtifactFilter = new CompositeArtifactFilter(ArtifactFilter.ACCEPT_NONE);
 		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT)).isFalse();
 		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT, UPDATE_VERSION)).isFalse();
 	}
@@ -63,49 +65,49 @@ final class CompositeArtifactFilterTest {
 	@Test
 	void testAccept() {
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL).accept(ARTIFACT)
 		).isFalse();
 	}
 
@@ -117,49 +119,64 @@ final class CompositeArtifactFilterTest {
 	@Test
 	void testAcceptUpdateVersion() {
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.all(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.any(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.any(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.ALL).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_NONE)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isTrue();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.ALL, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_NONE, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 		assertThat(
-				CompositeArtifactFilter.none(ArtifactFilter.NONE, ArtifactFilter.NONE).accept(ARTIFACT, UPDATE_VERSION)
+				CompositeArtifactFilter.none(ArtifactFilter.ACCEPT_ALL, ArtifactFilter.ACCEPT_ALL)
+						.accept(ARTIFACT, UPDATE_VERSION)
 		).isFalse();
 	}
 

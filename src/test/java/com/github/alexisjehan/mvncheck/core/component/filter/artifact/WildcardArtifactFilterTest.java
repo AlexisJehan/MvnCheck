@@ -60,78 +60,24 @@ final class WildcardArtifactFilterTest {
 
 	@Test
 	void testAccept() {
-		assertThat(
-				new WildcardArtifactFilter("foo-group-id")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter("bar-group-id")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter("FOO-GROUP-ID")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-id?")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-?")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-??")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-id*")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-*")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter("foo-group-**")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "bar-artifact-id")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "FOO-ARTIFACT-ID")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id?")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-?")
-						.accept(ARTIFACT)
-		).isFalse();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-??")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id*")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-*")
-						.accept(ARTIFACT)
-		).isTrue();
-		assertThat(
-				new WildcardArtifactFilter(GROUP_ID, "foo-artifact-**")
-						.accept(ARTIFACT)
-		).isTrue();
+		assertThat(new WildcardArtifactFilter("foo-group-id").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter("bar-group-id").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter("FOO-GROUP-ID").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter("foo-group-id?").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter("foo-group-?").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter("foo-group-??").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter("foo-group-id*").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter("foo-group-*").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter("foo-group-**").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "bar-artifact-id").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "FOO-ARTIFACT-ID").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id?").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-?").accept(ARTIFACT)).isFalse();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-??").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id*").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-*").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-**").accept(ARTIFACT)).isTrue();
 	}
 
 	@Test

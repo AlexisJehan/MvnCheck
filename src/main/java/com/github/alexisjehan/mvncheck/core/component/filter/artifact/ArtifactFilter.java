@@ -33,15 +33,46 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 public interface ArtifactFilter {
 
 	/**
-	 * <p>Artifact filter that reject all artifacts.</p>
-	 * @since 1.0.0
+	 * <p>Artifact filter that accept all artifacts.</p>
+	 * @since 1.7.0
 	 */
-	ArtifactFilter ALL = new ArtifactFilter() {
+	ArtifactFilter ACCEPT_ALL = new ArtifactFilter() {
 
 		/**
 		 * {@inheritDoc}
 		 * @throws NullPointerException if the artifact is {@code null}
-		 * @since 1.0.0
+		 * @since 1.7.0
+		 */
+		@Override
+		public boolean accept(final Artifact<?> artifact) {
+			Ensure.notNull("artifact", artifact);
+			return true;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * @throws NullPointerException if the artifact or the update version is {@code null}
+		 * @throws IllegalArgumentException if the update version is empty
+		 * @since 1.7.0
+		 */
+		@Override
+		public boolean accept(final Artifact<?> artifact, final String updateVersion) {
+			Ensure.notNull("artifact", artifact);
+			Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
+			return true;
+		}
+	};
+
+	/**
+	 * <p>Artifact filter that accept no artifacts.</p>
+	 * @since 1.7.0
+	 */
+	ArtifactFilter ACCEPT_NONE = new ArtifactFilter() {
+
+		/**
+		 * {@inheritDoc}
+		 * @throws NullPointerException if the artifact is {@code null}
+		 * @since 1.7.0
 		 */
 		@Override
 		public boolean accept(final Artifact<?> artifact) {
@@ -53,7 +84,7 @@ public interface ArtifactFilter {
 		 * {@inheritDoc}
 		 * @throws NullPointerException if the artifact or the update version is {@code null}
 		 * @throws IllegalArgumentException if the update version is empty
-		 * @since 1.0.0
+		 * @since 1.7.0
 		 */
 		@Override
 		public boolean accept(final Artifact<?> artifact, final String updateVersion) {
@@ -64,35 +95,20 @@ public interface ArtifactFilter {
 	};
 
 	/**
-	 * <p>Artifact filter that accept all artifacts.</p>
+	 * <p>Artifact filter that reject all artifacts.</p>
+	 * @deprecated since 1.7.0, use {@link #ACCEPT_NONE} instead
 	 * @since 1.0.0
 	 */
-	ArtifactFilter NONE = new ArtifactFilter() {
+	@Deprecated(since = "1.7.0")
+	ArtifactFilter ALL = ACCEPT_NONE;
 
-		/**
-		 * {@inheritDoc}
-		 * @throws NullPointerException if the artifact is {@code null}
-		 * @since 1.0.0
-		 */
-		@Override
-		public boolean accept(final Artifact<?> artifact) {
-			Ensure.notNull("artifact", artifact);
-			return true;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 * @throws NullPointerException if the artifact or the update version is {@code null}
-		 * @throws IllegalArgumentException if the update version is empty
-		 * @since 1.0.0
-		 */
-		@Override
-		public boolean accept(final Artifact<?> artifact, final String updateVersion) {
-			Ensure.notNull("artifact", artifact);
-			Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
-			return true;
-		}
-	};
+	/**
+	 * <p>Artifact filter that accept all artifacts.</p>
+	 * @deprecated since 1.7.0, use {@link #ACCEPT_ALL} instead
+	 * @since 1.0.0
+	 */
+	@Deprecated(since = "1.7.0")
+	ArtifactFilter NONE = ACCEPT_ALL;
 
 	/**
 	 * <p>Test if an artifact is accepted.</p>

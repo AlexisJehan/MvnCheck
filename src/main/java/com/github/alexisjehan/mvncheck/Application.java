@@ -34,6 +34,7 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.version.ArtifactU
 import com.github.alexisjehan.mvncheck.core.component.artifact.version.resolver.ArtifactAvailableVersionsResolveException;
 import com.github.alexisjehan.mvncheck.core.component.build.file.BuildFileType;
 import com.github.alexisjehan.mvncheck.core.component.build.resolver.BuildResolveException;
+import com.github.alexisjehan.mvncheck.core.component.filter.artifact.WildcardArtifactFilter;
 import com.github.alexisjehan.mvncheck.core.component.session.MavenSession;
 import com.github.alexisjehan.mvncheck.core.util.GithubUtils;
 import com.github.alexisjehan.mvncheck.core.util.GradleUtils;
@@ -50,6 +51,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>Class that describes the application.</p>
@@ -62,6 +64,12 @@ public final class Application {
 	 * @since 1.1.0
 	 */
 	static final String OPTION_MAX_DEPTH = "max-depth";
+
+	/**
+	 * <p>Filter option long name.</p>
+	 * @since 1.7.0
+	 */
+	static final String OPTION_FILTER = "filter";
 
 	/**
 	 * <p>Help option long name.</p>
@@ -152,6 +160,14 @@ public final class Application {
 				OPTION_MAX_DEPTH,
 				true,
 				"Maximum depth of subdirectories to find build files (a non-negative integer)"
+		);
+		options.addOption(
+				"f",
+				OPTION_FILTER,
+				true,
+				"Filter build file artifacts with a \"groupId[:artifactId[:updateVersion]]\" expression ("
+						+ ToString.toString(WildcardArtifactFilter.WILDCARD_SINGLE) + " and "
+						+ ToString.toString(WildcardArtifactFilter.WILDCARD_ANY) + " wildcards are allowed)"
 		);
 		options.addOption(
 				"h",
@@ -270,6 +286,9 @@ public final class Application {
 						commandLine.hasOption(OPTION_MAX_DEPTH)
 								? Integer.parseUnsignedInt(commandLine.getOptionValue(OPTION_MAX_DEPTH))
 								: DEFAULT_MAX_DEPTH,
+						commandLine.hasOption(OPTION_FILTER)
+								? Set.of(commandLine.getOptionValues(OPTION_FILTER))
+								: Set.of(),
 						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS),
 						commandLine.hasOption(OPTION_IGNORE_INHERITED),
 						commandLine.hasOption(OPTION_INCLUDE_OUTPUT),
@@ -292,11 +311,7 @@ public final class Application {
 	 * @since 1.0.0
 	 */
 	@Deprecated(since = "1.1.0")
-	void run(
-			final Path path,
-			final boolean ignoreSnapshots,
-			final boolean short0
-	) throws IOException {
+	void run(final Path path, final boolean ignoreSnapshots, final boolean short0) throws IOException {
 		run(path, DEFAULT_MAX_DEPTH, ignoreSnapshots, short0);
 	}
 
@@ -332,7 +347,7 @@ public final class Application {
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the path is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
-	 * @deprecated since 1.7.0, use {@link #run(Path, int, boolean, boolean, boolean, boolean)} instead
+	 * @deprecated since 1.7.0, use {@link #run(Path, int, Set, boolean, boolean, boolean, boolean)} instead
 	 * @since 1.5.0
 	 */
 	@Deprecated(since = "1.7.0")
@@ -343,25 +358,27 @@ public final class Application {
 			final boolean ignoreSnapshots,
 			final boolean short0
 	) throws IOException {
-		run(path, maxDepth, ignoreSnapshots, ignoreInherited, true, short0);
+		run(path, maxDepth, Set.of(), ignoreSnapshots, ignoreInherited, true, short0);
 	}
 
 	/**
 	 * <p>Run the program.</p>
 	 * @param path a path
 	 * @param maxDepth a maximum depth
+	 * @param filters a {@link Set} of filters
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
 	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
 	 * @param includeOutput {@code true} if build files inside output directories should be included
 	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
 	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
+	 * @throws NullPointerException if the path, the {@link Set} of filters or any of them is {@code null}
 	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
 	 * @since 1.7.0
 	 */
 	void run(
 			final Path path,
 			final int maxDepth,
+			final Set<String> filters,
 			final boolean ignoreSnapshots,
 			final boolean ignoreInherited,
 			final boolean includeOutput,
@@ -369,6 +386,7 @@ public final class Application {
 	) throws IOException {
 		Ensure.notNull("path", path);
 		Ensure.greaterThanOrEqualTo("maxDepth", maxDepth, 0);
+		Ensure.notNullAndNotNullElements("filters", filters);
 		final var service = createService();
 		var buildFiles = service.findBuildFiles(path, maxDepth);
 		if (!includeOutput) {
@@ -387,7 +405,12 @@ public final class Application {
 			final List<ArtifactUpdateVersion> artifactUpdateVersions;
 			try {
 				final var build = service.findBuild(buildFile);
-				artifactUpdateVersions = service.findArtifactUpdateVersions(build, ignoreInherited, ignoreSnapshots);
+				artifactUpdateVersions = service.findArtifactUpdateVersions(
+						build,
+						filters,
+						ignoreSnapshots,
+						ignoreInherited
+				);
 			} catch (final BuildResolveException | ArtifactAvailableVersionsResolveException e) {
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(file)).reset());
 				outputStream.println(Ansi.ansi().fgBrightRed().a(toString(e)).reset());

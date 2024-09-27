@@ -56,13 +56,13 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	private final String expression;
 
 	/**
-	 * <p>Line number.</p>
+	 * <p>Line number or {@code null}.</p>
 	 * @since 1.0.0
 	 */
 	private final Long lineNumber;
 
 	/**
-	 * <p>File.</p>
+	 * <p>File or {@code null}.</p>
 	 * @since 1.0.0
 	 */
 	private final transient Path file;
@@ -75,10 +75,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 * @throws IllegalArgumentException if the reason or the expression is empty
 	 * @since 1.7.0
 	 */
-	ArtifactFilterParseException(
-			final String reason,
-			final String expression
-	) {
+	ArtifactFilterParseException(final String reason, final String expression) {
 		this(reason, expression, null, null);
 	}
 
@@ -94,11 +91,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 * @since 1.0.0
 	 */
 	@Deprecated(since = "1.7.0")
-	ArtifactFilterParseException(
-			final String reason,
-			final String expression,
-			final Long lineNumber
-	) {
+	ArtifactFilterParseException(final String reason, final String expression, final Long lineNumber) {
 		this(reason, expression, lineNumber, null);
 	}
 

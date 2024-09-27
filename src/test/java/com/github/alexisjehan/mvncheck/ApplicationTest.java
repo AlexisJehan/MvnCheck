@@ -46,8 +46,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -109,6 +111,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build1::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -117,6 +120,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build2::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -232,6 +236,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build1::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -240,6 +245,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build2::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -359,6 +365,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build1::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -367,6 +374,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build2::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -515,6 +523,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build1::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -523,6 +532,7 @@ final class ApplicationTest {
 		Mockito.when(
 						mockedService.findArtifactUpdateVersions(
 								Mockito.argThat(build2::equals),
+								Mockito.anySet(),
 								Mockito.anyBoolean(),
 								Mockito.anyBoolean()
 						)
@@ -558,6 +568,9 @@ final class ApplicationTest {
 							() -> application.run("--" + Application.OPTION_MAX_DEPTH, "0")
 					);
 					assertThatNoException().isThrownBy(
+							() -> application.run("--" + Application.OPTION_FILTER, "*")
+					);
+					assertThatNoException().isThrownBy(
 							() -> application.run("--" + Application.OPTION_HELP)
 					);
 					assertThatNoException().isThrownBy(
@@ -591,6 +604,7 @@ final class ApplicationTest {
 							() -> application.run(
 									path1,
 									0,
+									Set.of("*"),
 									true,
 									true,
 									false,
@@ -601,6 +615,7 @@ final class ApplicationTest {
 							() -> application.run(
 									path2,
 									0,
+									Set.of("*"),
 									true,
 									true,
 									false,
@@ -611,6 +626,7 @@ final class ApplicationTest {
 							() -> application.run(
 									path3,
 									0,
+									Set.of("*"),
 									true,
 									true,
 									false,
@@ -636,6 +652,7 @@ final class ApplicationTest {
 					() -> application.run(
 							null,
 							0,
+							Set.of("*"),
 							false,
 							false,
 							true,
@@ -646,6 +663,29 @@ final class ApplicationTest {
 					() -> application.run(
 							Path.of("path"),
 							-1,
+							Set.of("*"),
+							false,
+							false,
+							true,
+							false
+					)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run(
+							Path.of("path"),
+							0,
+							null,
+							false,
+							false,
+							true,
+							false
+					)
+			);
+			assertThatNullPointerException().isThrownBy(
+					() -> application.run(
+							Path.of("path"),
+							0,
+							Collections.singleton(null),
 							false,
 							false,
 							true,

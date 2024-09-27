@@ -38,13 +38,13 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	 * <p>Single character wildcard.</p>
 	 * @since 1.7.0
 	 */
-	private static final char WILDCARD_SINGLE = '?';
+	public static final char WILDCARD_SINGLE = '?';
 
 	/**
 	 * <p>Any characters wildcard.</p>
 	 * @since 1.7.0
 	 */
-	private static final char WILDCARD_ANY = '*';
+	public static final char WILDCARD_ANY = '*';
 
 	/**
 	 * <p>{@link Pattern} of the group identifier.</p>
@@ -71,9 +71,7 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	 * @throws IllegalArgumentException if the group identifier expression is empty
 	 * @since 1.7.0
 	 */
-	public WildcardArtifactFilter(
-			final String groupIdExpression
-	) {
+	public WildcardArtifactFilter(final String groupIdExpression) {
 		this(groupIdExpression, null);
 	}
 
@@ -86,10 +84,7 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	 *         empty
 	 * @since 1.7.0
 	 */
-	public WildcardArtifactFilter(
-			final String groupIdExpression,
-			final String artifactIdExpression
-	) {
+	public WildcardArtifactFilter(final String groupIdExpression, final String artifactIdExpression) {
 		this(groupIdExpression, artifactIdExpression, null);
 	}
 
@@ -157,7 +152,7 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	/**
 	 * <p>Create a {@link Pattern} from an expression.</p>
 	 * @param expression an expression
-	 * @return the {@link Pattern}
+	 * @return the created {@link Pattern}
 	 * @since 1.7.0
 	 */
 	private static Pattern createPattern(final String expression) {

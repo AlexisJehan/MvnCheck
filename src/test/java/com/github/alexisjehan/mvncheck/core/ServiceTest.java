@@ -356,7 +356,7 @@ final class ServiceTest {
 
 	@Test
 	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecated() throws IOException {
+	void testFindArtifactUpdateVersionsDeprecated1() throws IOException {
 		final var service = new Service(
 				Set.of(mockedMavenBuildResolver, mockedGradleBuildResolver),
 				mockedArtifactAvailableVersionsResolver
@@ -413,14 +413,15 @@ final class ServiceTest {
 
 	@Test
 	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecatedInvalid() throws IOException {
+	void testFindArtifactUpdateVersionsDeprecated1Invalid() throws IOException {
 		final var service = new Service(mockedMavenSession);
 		assertThatNullPointerException()
 				.isThrownBy(() -> service.findArtifactUpdateVersions(null, false));
 	}
 
 	@Test
-	void testFindArtifactUpdateVersions() throws IOException {
+	@Deprecated
+	void testFindArtifactUpdateVersionsDeprecated2() throws IOException {
 		final var service = new Service(
 				Set.of(mockedMavenBuildResolver, mockedGradleBuildResolver),
 				mockedArtifactAvailableVersionsResolver
@@ -496,7 +497,8 @@ final class ServiceTest {
 	}
 
 	@Test
-	void testFindArtifactUpdateVersionsInvalid() throws IOException {
+	@Deprecated
+	void testFindArtifactUpdateVersionsDeprecated2Invalid() throws IOException {
 		final var service = new Service(mockedMavenSession);
 		assertThatNullPointerException().isThrownBy(
 				() -> service.findArtifactUpdateVersions(null, false, false)
@@ -504,17 +506,162 @@ final class ServiceTest {
 	}
 
 	@Test
+	void testFindArtifactUpdateVersions() throws IOException {
+		final var service = new Service(
+				Set.of(mockedMavenBuildResolver, mockedGradleBuildResolver),
+				mockedArtifactAvailableVersionsResolver
+		);
+		final var fooIdentifier = new ArtifactIdentifier("foo-group-id", "foo-artifact-id");
+		final var barIdentifier = new ArtifactIdentifier("bar-group-id", "bar-artifact-id");
+		Mockito
+				.when(
+						mockedArtifactAvailableVersionsResolver.resolve(
+								Mockito.argThat(
+										artifact -> null != artifact && fooIdentifier.equals(artifact.getIdentifier())
+								),
+								Mockito.notNull()
+						)
+				)
+				.then(
+						invocation -> new ArtifactAvailableVersions(
+								invocation.getArgument(0),
+								List.of("1.0.0", "2.0.0")
+						)
+				);
+		Mockito
+				.when(
+						mockedArtifactAvailableVersionsResolver.resolve(
+								Mockito.argThat(
+										artifact -> null != artifact && barIdentifier.equals(artifact.getIdentifier())
+								),
+								Mockito.notNull()
+						)
+				)
+				.then(
+						invocation -> new ArtifactAvailableVersions(
+								invocation.getArgument(0),
+								List.of()
+						)
+				);
+		final var fooArtifact1 = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				fooIdentifier,
+				"1.0.0",
+				true
+		);
+		final var fooArtifact2 = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				fooIdentifier,
+				"2.0.0-SNAPSHOT"
+		);
+		final var fooArtifact3 = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				fooIdentifier,
+				"2.0.0"
+		);
+		final var barArtifact = new Artifact<>(
+				MavenArtifactType.DEPENDENCY,
+				barIdentifier,
+				"1.1.0"
+		);
+		final var build = new Build(
+				new BuildFile(BuildFileType.MAVEN, Path.of("src", "test", "resources", "pom.xml")),
+				List.of(),
+				List.of(fooArtifact1, fooArtifact2, fooArtifact3, barArtifact)
+		);
+		assertThat(
+				service.findArtifactUpdateVersions(
+						build,
+						Set.of(),
+						false,
+						false
+				)
+		).containsExactly(
+				new ArtifactUpdateVersion(fooArtifact1, "2.0.0"),
+				new ArtifactUpdateVersion(fooArtifact2, "2.0.0")
+		);
+		assertThat(
+				service.findArtifactUpdateVersions(
+						build,
+						Set.of(),
+						false,
+						true
+				)
+		).containsExactly(
+				new ArtifactUpdateVersion(fooArtifact2, "2.0.0")
+		);
+		assertThat(
+				service.findArtifactUpdateVersions(
+						build,
+						Set.of(),
+						true,
+						false
+				)
+		).containsExactly(
+				new ArtifactUpdateVersion(fooArtifact1, "2.0.0")
+		);
+	}
+
+	@Test
+	void testFindArtifactUpdateVersionsInvalid() throws IOException {
+		final var service = new Service(mockedMavenSession);
+		final var build = new Build(new BuildFile(BuildFileType.MAVEN, Path.of("pom.xml")), List.of(), List.of());
+		assertThatNullPointerException().isThrownBy(
+				() -> service.findArtifactUpdateVersions(
+						null,
+						Set.of(),
+						false,
+						false
+				)
+		);
+		assertThatNullPointerException().isThrownBy(
+				() -> service.findArtifactUpdateVersions(
+						build,
+						null,
+						false,
+						false
+				)
+		);
+		assertThatNullPointerException().isThrownBy(
+				() -> service.findArtifactUpdateVersions(
+						build,
+						Collections.singleton(null),
+						false,
+						false
+				)
+		);
+	}
+
+	@Test
+	void testCreateOptionArtifactFilter() {
+		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
+			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<String>notNull()))
+					.thenReturn(ArtifactFilter.ACCEPT_ALL);
+			assertThat(Service.createOptionArtifactFilter(Set.of())).isSameAs(ArtifactFilter.ACCEPT_ALL);
+			assertThat(Service.createOptionArtifactFilter(Set.of("*"))).isNotSameAs(ArtifactFilter.ACCEPT_ALL);
+		}
+	}
+
+	@Test
+	void testCreateOptionArtifactFilterInvalid() {
+		assertThatNullPointerException()
+				.isThrownBy(() -> Service.createOptionArtifactFilter(null));
+		assertThatNullPointerException()
+				.isThrownBy(() -> Service.createOptionArtifactFilter(Collections.singleton(null)));
+	}
+
+	@Test
 	void testCreateUserArtifactFilter(@TempDir final Path tmpDirectory) throws IOException {
 		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
 		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
 			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<Path>notNull()))
-					.thenReturn(ArtifactFilter.ALL);
+					.thenReturn(ArtifactFilter.ACCEPT_NONE);
 			try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
 				mockedStaticSystemUtils.when(SystemUtils::getUserHomeDirectory)
 						.thenReturn(tmpDirectory);
-				assertThat(Service.createUserArtifactFilter()).isSameAs(ArtifactFilter.NONE);
+				assertThat(Service.createUserArtifactFilter()).isSameAs(ArtifactFilter.ACCEPT_ALL);
 				Files.createFile(ignoreFile);
-				assertThat(Service.createUserArtifactFilter()).isSameAs(ArtifactFilter.ALL);
+				assertThat(Service.createUserArtifactFilter()).isNotSameAs(ArtifactFilter.ACCEPT_ALL);
 			}
 		}
 	}
@@ -524,11 +671,11 @@ final class ServiceTest {
 		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
 		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
 			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<Path>notNull()))
-					.thenReturn(ArtifactFilter.ALL);
+					.thenReturn(ArtifactFilter.ACCEPT_NONE);
 			final var buildFile = new BuildFile(BuildFileType.MAVEN, tmpDirectory.resolve("pom.xml"));
-			assertThat(Service.createBuildArtifactFilter(buildFile)).isSameAs(ArtifactFilter.NONE);
+			assertThat(Service.createBuildArtifactFilter(buildFile)).isSameAs(ArtifactFilter.ACCEPT_ALL);
 			Files.createFile(ignoreFile);
-			assertThat(Service.createBuildArtifactFilter(buildFile)).isSameAs(ArtifactFilter.ALL);
+			assertThat(Service.createBuildArtifactFilter(buildFile)).isNotSameAs(ArtifactFilter.ACCEPT_ALL);
 		}
 	}
 

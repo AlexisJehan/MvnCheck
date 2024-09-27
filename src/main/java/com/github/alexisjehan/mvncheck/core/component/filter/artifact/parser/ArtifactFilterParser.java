@@ -122,7 +122,7 @@ public final class ArtifactFilterParser {
 			}
 		}
 		if (artifactFilters.isEmpty()) {
-			return ArtifactFilter.NONE;
+			return ArtifactFilter.ACCEPT_ALL;
 		}
 		return CompositeArtifactFilter.none(artifactFilters.toArray(ArtifactFilter[]::new));
 	}
@@ -150,7 +150,7 @@ public final class ArtifactFilterParser {
 		final var groupIdExpression = parts.get(0);
 		if (groupIdExpression.isEmpty()) {
 			throw new ArtifactFilterParseException(
-					"Unexpected expression format, the groupId is empty",
+					"Unexpected expression format, the group identifier is empty",
 					expression
 			);
 		}
@@ -160,7 +160,7 @@ public final class ArtifactFilterParser {
 		final var artifactIdExpression = parts.get(1);
 		if (artifactIdExpression.isEmpty()) {
 			throw new ArtifactFilterParseException(
-					"Unexpected expression format, the artifactId is empty",
+					"Unexpected expression format, the artifact identifier is empty",
 					expression
 			);
 		}

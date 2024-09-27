@@ -32,6 +32,7 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -67,6 +68,7 @@ final class ApplicationIT {
 				application.run(
 						tmpDirectory,
 						1,
+						Set.of(),
 						false,
 						false,
 						true,

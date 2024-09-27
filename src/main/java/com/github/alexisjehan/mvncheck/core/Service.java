@@ -165,12 +165,12 @@ public final class Service {
 					.filter(Files::isRegularFile)
 					.map(file -> {
 						final var fileName = file.getFileName().toString();
-						return BuildFileType.optionalValueOf(fileName).map(type -> new BuildFile(type, file));
+						return BuildFileType.optionalValueOf(fileName)
+								.map(type -> new BuildFile(type, file));
 					})
 					.flatMap(Optional::stream)
 					.sorted(
-							Comparator
-									.<BuildFile, String>comparing(
+							Comparator.<BuildFile, String>comparing(
 											buildFile -> buildFile.getFile().getParent().toString(),
 											Comparators.NUMBER_AWARE
 									)
@@ -242,17 +242,41 @@ public final class Service {
 	 * @return the {@link List} of artifact update versions
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the build is {@code null}
+	 * @deprecated since 1.7.0, use {@link #findArtifactUpdateVersions(Build, Set, boolean, boolean)} instead
 	 * @since 1.5.0
 	 */
+	@Deprecated(since = "1.7.0")
 	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
 			final Build build,
 			final boolean ignoreInherited,
 			final boolean ignoreSnapshots
 	) throws IOException {
+		return findArtifactUpdateVersions(build, Set.of(), ignoreSnapshots, ignoreInherited);
+	}
+
+	/**
+	 * <p>Find a {@link List} of artifact update versions for the given build.</p>
+	 * @param build a build
+	 * @param filters a {@link Set} of filters
+	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
+	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
+	 * @return the {@link List} of artifact update versions
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the build, the {@link Set} of filters or any of them is {@code null}
+	 * @since 1.7.0
+	 */
+	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
+			final Build build,
+			final Set<String> filters,
+			final boolean ignoreSnapshots,
+			final boolean ignoreInherited
+	) throws IOException {
 		Ensure.notNull("build", build);
+		Ensure.notNullAndNotNullElements("filters", filters);
 		final var artifactFilter = CompositeArtifactFilter.all(
 				userArtifactFilter,
-				createBuildArtifactFilter(build.getFile())
+				createBuildArtifactFilter(build.getFile()),
+				createOptionArtifactFilter(filters)
 		);
 		return build.getArtifacts()
 				.parallelStream()
@@ -284,6 +308,25 @@ public final class Service {
 	}
 
 	/**
+	 * <p>Create the option artifact filter for given filters.</p>
+	 * @param filters a {@link Set} of filters
+	 * @return the option artifact filter
+	 * @throws NullPointerException if the {@link Set} of filters or any of them is {@code null}
+	 * @since 1.7.0
+	 */
+	static ArtifactFilter createOptionArtifactFilter(final Set<String> filters) {
+		Ensure.notNullAndNotNullElements("filters", filters);
+		if (filters.isEmpty()) {
+			return ArtifactFilter.ACCEPT_ALL;
+		}
+		return CompositeArtifactFilter.any(
+				filters.stream()
+						.map(ArtifactFilterParser::parse)
+						.toArray(ArtifactFilter[]::new)
+		);
+	}
+
+	/**
 	 * <p>Create the user artifact filter.</p>
 	 * @return the user artifact filter
 	 * @throws IOException might occur with input/output operations
@@ -291,9 +334,10 @@ public final class Service {
 	 */
 	static ArtifactFilter createUserArtifactFilter() throws IOException {
 		final var userIgnoreFile = SystemUtils.getUserHomeDirectory().resolve(IGNORE_FILE_NAME);
-		return Files.isRegularFile(userIgnoreFile)
-				? ArtifactFilterParser.parse(userIgnoreFile)
-				: ArtifactFilter.NONE;
+		if (!Files.isRegularFile(userIgnoreFile)) {
+			return ArtifactFilter.ACCEPT_ALL;
+		}
+		return ArtifactFilterParser.parse(userIgnoreFile);
 	}
 
 	/**
@@ -307,8 +351,9 @@ public final class Service {
 	static ArtifactFilter createBuildArtifactFilter(final BuildFile buildFile) throws IOException {
 		Ensure.notNull("buildFile", buildFile);
 		final var buildIgnoreFile = buildFile.getFile().getParent().resolve(IGNORE_FILE_NAME);
-		return Files.isRegularFile(buildIgnoreFile)
-				? ArtifactFilterParser.parse(buildIgnoreFile)
-				: ArtifactFilter.NONE;
+		if (!Files.isRegularFile(buildIgnoreFile)) {
+			return ArtifactFilter.ACCEPT_ALL;
+		}
+		return ArtifactFilterParser.parse(buildIgnoreFile);
 	}
 }
