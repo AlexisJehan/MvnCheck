@@ -275,7 +275,7 @@
 				<version>3.5.0</version>
 				<configuration>
 					<!--suppress UnresolvedMavenProperty -->
-					<argLine>${argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+					<argLine>${argLine} -javaagent:${org.mockito:mockito-core:jar} -Xshare:off</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -298,7 +298,7 @@
 				</executions>
 				<configuration>
 					<!--suppress UnresolvedMavenProperty -->
-					<argLine>${argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+					<argLine>${argLine} -javaagent:${org.mockito:mockito-core:jar} -Xshare:off</argLine>
 					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
 				</configuration>
 			</plugin>
