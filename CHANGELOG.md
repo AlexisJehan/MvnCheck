@@ -8,6 +8,7 @@
 - Update the `junit-jupiter` dependency to `5.11.2`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.14.1`
 - Update `pmd-core` and `pmd-java` dependencies to `7.6.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.1`
 - Update the `maven-javadoc-plugin` plugin to `3.10.1`
 - Update the `maven-gpg-plugin` plugin to `3.2.7`
 
