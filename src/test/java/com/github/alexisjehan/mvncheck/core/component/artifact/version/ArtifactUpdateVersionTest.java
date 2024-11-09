@@ -40,11 +40,14 @@ final class ArtifactUpdateVersionTest {
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier("foo-group-id", "foo-artifact-id")
 	);
+
 	private static final String UPDATE_VERSION = "foo-version";
+
 	private static final Artifact<ArtifactType> OTHER_ARTIFACT = new Artifact<>(
 			MavenArtifactType.BUILD_PLUGIN,
 			new ArtifactIdentifier("bar-group-id", "bar-artifact-id")
 	);
+
 	private static final String OTHER_UPDATE_VERSION = "bar-version";
 
 	private final ArtifactUpdateVersion artifactUpdateVersion = new ArtifactUpdateVersion(ARTIFACT, UPDATE_VERSION);

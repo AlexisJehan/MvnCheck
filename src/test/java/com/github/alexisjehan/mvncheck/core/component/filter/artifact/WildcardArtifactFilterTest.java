@@ -37,11 +37,14 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class WildcardArtifactFilterTest {
 
 	private static final String GROUP_ID = "foo-group-id";
+
 	private static final String ARTIFACT_ID = "foo-artifact-id";
+
 	private static final Artifact<ArtifactType> ARTIFACT = new Artifact<>(
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier(GROUP_ID, ARTIFACT_ID)
 	);
+
 	private static final String UPDATE_VERSION = "foo-version";
 
 	private final WildcardArtifactFilter wildcardArtifactFilter = new WildcardArtifactFilter("*");

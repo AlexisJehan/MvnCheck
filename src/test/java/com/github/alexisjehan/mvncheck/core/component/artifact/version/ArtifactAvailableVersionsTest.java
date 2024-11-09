@@ -43,11 +43,14 @@ final class ArtifactAvailableVersionsTest {
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier("foo-group-id", "foo-artifact-id")
 	);
+
 	private static final List<String> AVAILABLE_VERSIONS = List.of("foo-version");
+
 	private static final Artifact<ArtifactType> OTHER_ARTIFACT = new Artifact<>(
 			MavenArtifactType.BUILD_PLUGIN,
 			new ArtifactIdentifier("bar-group-id", "bar-artifact-id")
 	);
+
 	private static final List<String> OTHER_AVAILABLE_VERSIONS = List.of();
 
 	private final ArtifactAvailableVersions artifactAvailableVersions = new ArtifactAvailableVersions(

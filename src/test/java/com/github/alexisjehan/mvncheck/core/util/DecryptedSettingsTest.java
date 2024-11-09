@@ -38,8 +38,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class DecryptedSettingsTest {
 
 	private static final List<Proxy> PROXIES = List.of(new Proxy());
+
 	private static final List<Server> SERVERS = List.of(new Server());
+
 	private static final List<Proxy> OTHER_PROXIES = List.of();
+
 	private static final List<Server> OTHER_SERVERS = List.of();
 
 	private final DecryptedSettings decryptedSettings = new DecryptedSettings(PROXIES, SERVERS);

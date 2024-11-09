@@ -45,9 +45,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class BuildTest {
 
 	private static final BuildFile FILE = new BuildFile(BuildFileType.MAVEN, Path.of("foo-file"));
+
 	private static final List<Repository> REPOSITORIES = List.of(
 			new Repository(RepositoryType.NORMAL, "foo-id", "https://foo-host")
 	);
+
 	private static final List<Artifact<ArtifactType>> ARTIFACTS = List.of(
 			new Artifact<>(
 					MavenArtifactType.DEPENDENCY,
@@ -55,10 +57,13 @@ final class BuildTest {
 					"foo-version"
 			)
 	);
+
 	private static final BuildFile OTHER_FILE = new BuildFile(BuildFileType.GRADLE_GROOVY, Path.of("bar-file"));
+
 	private static final List<Repository> OTHER_REPOSITORIES = List.of(
 			new Repository(RepositoryType.PLUGIN, "bar-id", "https://bar-host")
 	);
+
 	private static final List<Artifact<ArtifactType>> OTHER_ARTIFACTS = List.of(
 			new Artifact<>(
 					MavenArtifactType.BUILD_PLUGIN,

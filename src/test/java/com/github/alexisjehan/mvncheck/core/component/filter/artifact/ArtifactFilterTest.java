@@ -40,6 +40,7 @@ final class ArtifactFilterTest {
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier("foo-group-id", "foo-artifact-id")
 	);
+
 	private static final String UPDATE_VERSION = "foo-version";
 
 	@Test

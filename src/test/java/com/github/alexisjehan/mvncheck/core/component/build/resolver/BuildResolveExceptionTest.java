@@ -34,9 +34,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class BuildResolveExceptionTest {
 
 	private static final String MESSAGE = "foo-message";
+
 	private static final Exception CAUSE = new Exception("foo-cause");
 
 	private final BuildResolveException buildResolveException1 = new BuildResolveException(MESSAGE);
+
 	private final BuildResolveException buildResolveException2 = new BuildResolveException(CAUSE);
 
 	@Test

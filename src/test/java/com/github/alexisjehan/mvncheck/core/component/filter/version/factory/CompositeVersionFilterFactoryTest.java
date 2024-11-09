@@ -33,6 +33,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class CompositeVersionFilterFactoryTest {
 
 	private static final VersionFilterFactory ALL = artifactVersion -> version -> false;
+
 	private static final VersionFilterFactory NONE = artifactVersion -> version -> true;
 
 	private final CompositeVersionFilterFactory compositeVersionFilterFactory = new CompositeVersionFilterFactory(ALL);

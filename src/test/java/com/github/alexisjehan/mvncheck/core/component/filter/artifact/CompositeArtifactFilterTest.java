@@ -40,6 +40,7 @@ final class CompositeArtifactFilterTest {
 			MavenArtifactType.DEPENDENCY,
 			new ArtifactIdentifier("foo-group-id", "foo-artifact-id")
 	);
+
 	private static final String UPDATE_VERSION = "foo-version";
 
 	private final CompositeArtifactFilter compositeArtifactFilter = CompositeArtifactFilter.all(

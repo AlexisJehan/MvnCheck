@@ -33,8 +33,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class ArtifactIdentifierTest {
 
 	private static final String GROUP_ID = "foo-group-id";
+
 	private static final String ARTIFACT_ID = "foo-artifact-id";
+
 	private static final String OTHER_GROUP_ID = "bar-group-id";
+
 	private static final String OTHER_ARTIFACT_ID = "bar-artifact-id";
 
 	private final ArtifactIdentifier artifactIdentifier = new ArtifactIdentifier(GROUP_ID, ARTIFACT_ID);

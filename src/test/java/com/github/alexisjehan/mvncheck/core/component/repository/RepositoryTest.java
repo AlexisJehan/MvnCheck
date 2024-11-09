@@ -33,10 +33,15 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class RepositoryTest {
 
 	private static final RepositoryType TYPE = RepositoryType.NORMAL;
+
 	private static final String ID = "foo-id";
+
 	private static final String URL = "https://foo-host";
+
 	private static final RepositoryType OTHER_TYPE = RepositoryType.PLUGIN;
+
 	private static final String OTHER_ID = "bar-id";
+
 	private static final String OTHER_URL = "https://bar-host";
 
 	private final Repository repository = new Repository(TYPE, ID, URL);

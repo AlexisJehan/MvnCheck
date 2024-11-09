@@ -36,8 +36,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class ArtifactFilterParseExceptionTest {
 
 	private static final String REASON = "foo-reason";
+
 	private static final String EXPRESSION = "foo-expression";
+
 	private static final Long LINE_NUMBER = 1L;
+
 	private static final Path FILE = Path.of("foo-file");
 
 	private final ArtifactFilterParseException artifactFilterParseException = new ArtifactFilterParseException(

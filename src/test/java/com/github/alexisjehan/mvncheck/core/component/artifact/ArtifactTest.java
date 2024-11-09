@@ -32,18 +32,25 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class ArtifactTest {
 
 	private static final MavenArtifactType TYPE = MavenArtifactType.DEPENDENCY;
+
 	private static final ArtifactIdentifier IDENTIFIER = new ArtifactIdentifier(
 			"foo-group-id",
 			"foo-artifact-id"
 	);
+
 	private static final String VERSION = "foo-version";
+
 	private static final boolean VERSION_INHERITED = true;
+
 	private static final MavenArtifactType OTHER_TYPE = MavenArtifactType.BUILD_PLUGIN;
+
 	private static final ArtifactIdentifier OTHER_IDENTIFIER = new ArtifactIdentifier(
 			"bar-group-id",
 			"bar-artifact-id"
 	);
+
 	private static final String OTHER_VERSION = "bar-version";
+
 	private static final boolean OTHER_VERSION_INHERITED = false;
 
 	private final Artifact<MavenArtifactType> artifact = new Artifact<>(TYPE, IDENTIFIER, VERSION, VERSION_INHERITED);

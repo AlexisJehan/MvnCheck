@@ -33,8 +33,11 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class BuildFileTest {
 
 	private static final BuildFileType TYPE = BuildFileType.MAVEN;
+
 	private static final Path FILE = Path.of("foo-file");
+
 	private static final BuildFileType OTHER_TYPE = BuildFileType.GRADLE_GROOVY;
+
 	private static final Path OTHER_FILE = Path.of("bar-file");
 
 	private final BuildFile buildFile = new BuildFile(TYPE, FILE);
