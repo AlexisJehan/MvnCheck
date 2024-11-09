@@ -5,11 +5,12 @@
 ### Notes
 - Add the `maven-dependency-plugin` plugin
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.24.1`
-- Update the `junit-jupiter` dependency to `5.11.2`
-- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.14.1`
-- Update `pmd-core` and `pmd-java` dependencies to `7.6.0`
-- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.1`
-- Update the `maven-javadoc-plugin` plugin to `3.10.1`
+- Update the `junit-jupiter` dependency to `5.11.3`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.14.2`
+- Update the `maven-pmd-plugin` plugin to `3.26.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.7.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.2`
+- Update the `maven-javadoc-plugin` plugin to `3.11.1`
 - Update the `maven-gpg-plugin` plugin to `3.2.7`
 
 ## [1.7.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.0) (2024-09-27)
