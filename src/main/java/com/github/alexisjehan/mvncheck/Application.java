@@ -54,68 +54,68 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>Class that describes the application.</p>
+ * Class that describes the application.
  * @since 1.0.0
  */
 public final class Application {
 
 	/**
-	 * <p>Maximum depth option long name.</p>
+	 * Maximum depth option long name.
 	 * @since 1.1.0
 	 */
 	static final String OPTION_MAX_DEPTH = "max-depth";
 
 	/**
-	 * <p>Filter option long name.</p>
+	 * Filter option long name.
 	 * @since 1.7.0
 	 */
 	static final String OPTION_FILTER = "filter";
 
 	/**
-	 * <p>Help option long name.</p>
+	 * Help option long name.
 	 * @since 1.0.0
 	 */
 	static final String OPTION_HELP = "help";
 
 	/**
-	 * <p>Ignore snapshots option long name.</p>
+	 * Ignore snapshots option long name.
 	 * @since 1.0.0
 	 */
 	static final String OPTION_IGNORE_SNAPSHOTS = "ignore-snapshots";
 
 	/**
-	 * <p>Ignore inherited option long name.</p>
+	 * Ignore inherited option long name.
 	 * @since 1.5.0
 	 */
 	static final String OPTION_IGNORE_INHERITED = "ignore-inherited";
 
 	/**
-	 * <p>Include output option long name.</p>
+	 * Include output option long name.
 	 * @since 1.7.0
 	 */
 	static final String OPTION_INCLUDE_OUTPUT = "include-output";
 
 	/**
-	 * <p>Short option long name.</p>
+	 * Short option long name.
 	 * @since 1.0.0
 	 */
 	static final String OPTION_SHORT = "short";
 
 	/**
-	 * <p>Version option long name.</p>
+	 * Version option long name.
 	 * @since 1.0.0
 	 */
 	static final String OPTION_VERSION = "version";
 
 	/**
-	 * <p>Title.</p>
+	 * Title.
 	 * @since 1.4.0
 	 */
 	private static final String TITLE = Constants.NAME + " " + Constants.VERSION
 			+ " (built with Maven " + MavenUtils.VERSION + " and Gradle " + GradleUtils.VERSION + ")";
 
 	/**
-	 * <p>Description.</p>
+	 * Description.
 	 * @since 1.0.0
 	 */
 	private static final String DESCRIPTION = "Check for artifact updates of every "
@@ -125,31 +125,31 @@ public final class Application {
 			+ "path recursively.";
 
 	/**
-	 * <p>Command name.</p>
+	 * Command name.
 	 * @since 1.0.0
 	 */
 	private static final String COMMAND_NAME = "mvnchk";
 
 	/**
-	 * <p>Default value depending on whether ANSI should be enabled or not.</p>
+	 * Default value depending on whether ANSI should be enabled.
 	 * @since 1.0.0
 	 */
 	private static final boolean DEFAULT_ANSI = false;
 
 	/**
-	 * <p>Default path.</p>
+	 * Default path.
 	 * @since 1.0.0
 	 */
 	private static final Path DEFAULT_PATH = Path.of(".");
 
 	/**
-	 * <p>Default maximum depth.</p>
+	 * Default maximum depth.
 	 * @since 1.1.0
 	 */
 	private static final int DEFAULT_MAX_DEPTH = Integer.MAX_VALUE;
 
 	/**
-	 * <p>Options.</p>
+	 * Options.
 	 * @since 1.0.0
 	 */
 	private static final Options options = new Options();
@@ -208,19 +208,19 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Standard output {@link PrintStream}.</p>
+	 * Standard output {@link PrintStream}.
 	 * @since 1.0.0
 	 */
 	private final PrintStream outputStream;
 
 	/**
-	 * <p>Error output {@link PrintStream}.</p>
+	 * Error output {@link PrintStream}.
 	 * @since 1.0.0
 	 */
 	private final PrintStream errorStream;
 
 	/**
-	 * <p>Constructor with a single {@link PrintStream} for standard and error outputs.</p>
+	 * Constructor with a single {@link PrintStream} for standard and error outputs.
 	 * @param printStream a {@link PrintStream}
 	 * @throws NullPointerException if the {@link PrintStream} is {@code null}
 	 * @since 1.0.0
@@ -230,7 +230,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Constructor with distinct {@link PrintStream}s for standard and error outputs.</p>
+	 * Constructor with distinct {@link PrintStream}s for standard and error outputs.
 	 * @param outputStream a standard output {@link PrintStream}
 	 * @param errorStream an error output {@link PrintStream}
 	 * @param ansi {@code true} if ANSI should be enabled
@@ -247,7 +247,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Run the command-line interface.</p>
+	 * Run the command-line interface.
 	 * @param args an array of arguments
 	 * @throws NullPointerException if the array of arguments or any of them is {@code null}
 	 * @since 1.0.0
@@ -301,7 +301,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Run the program.</p>
+	 * Run the program.
 	 * @param path a path
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
 	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
@@ -316,7 +316,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Run the program.</p>
+	 * Run the program.
 	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
@@ -338,7 +338,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Run the program.</p>
+	 * Run the program.
 	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
@@ -362,7 +362,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Run the program.</p>
+	 * Run the program.
 	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @param filters a {@link Set} of filters
@@ -477,7 +477,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Create a service.</p>
+	 * Create a service.
 	 * @return the service
 	 * @throws IOException might occur with input/output operations
 	 * @since 1.0.0
@@ -487,7 +487,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Convert an {@link Exception} to a {@link String}.</p>
+	 * Convert an {@link Exception} to a {@link String}.
 	 * @param exception an {@link Exception}
 	 * @return the {@link String}
 	 * @throws NullPointerException if the {@link Exception} is {@code null}
@@ -499,7 +499,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Convert a file to a {@link String}.</p>
+	 * Convert a file to a {@link String}.
 	 * @param file a file
 	 * @return the {@link String}
 	 * @throws NullPointerException if the file is {@code null}
@@ -511,7 +511,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Convert an artifact type to a {@link String}.</p>
+	 * Convert an artifact type to a {@link String}.
 	 * @param artifactType an artifact type
 	 * @return the {@link String}
 	 * @throws NullPointerException if the artifact type is {@code null}
@@ -523,7 +523,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Convert an artifact identifier to a {@link String}.</p>
+	 * Convert an artifact identifier to a {@link String}.
 	 * @param artifactIdentifier an artifact identifier
 	 * @return the {@link String}
 	 * @throws NullPointerException if the artifact identifier is {@code null}
@@ -535,7 +535,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Get the current version.</p>
+	 * Get the current version.
 	 * @return the current version
 	 * @since 1.4.0
 	 */
@@ -544,7 +544,7 @@ public final class Application {
 	}
 
 	/**
-	 * <p>Main entrance.</p>
+	 * Main entrance.
 	 * @param args an array of arguments
 	 * @since 1.0.0
 	 */

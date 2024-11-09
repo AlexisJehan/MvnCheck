@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>{@link org.apache.maven.model.building} additional custom classes.</p>
+ * {@link org.apache.maven.model.building} additional custom classes.
  * @since 1.6.0
  */
 package org.apache.maven.model.building;

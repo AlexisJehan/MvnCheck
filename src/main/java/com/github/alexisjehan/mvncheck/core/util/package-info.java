@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Utilities.</p>
+ * Utilities.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.util;

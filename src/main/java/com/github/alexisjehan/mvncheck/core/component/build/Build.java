@@ -36,7 +36,8 @@ import com.github.alexisjehan.mvncheck.core.component.repository.Repository;
 import java.util.List;
 
 /**
- * <p>Class that describes a build.</p>
+ * Class that describes a build.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -44,25 +45,25 @@ import java.util.List;
 public final class Build {
 
 	/**
-	 * <p>File.</p>
+	 * File.
 	 * @since 1.0.0
 	 */
 	private final BuildFile file;
 
 	/**
-	 * <p>{@link List} of repositories.</p>
+	 * {@link List} of repositories.
 	 * @since 1.0.0
 	 */
 	private final List<Repository> repositories;
 
 	/**
-	 * <p>{@link List} of artifacts.</p>
+	 * {@link List} of artifacts.
 	 * @since 1.0.0
 	 */
 	private final List<Artifact<ArtifactType>> artifacts;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param file a file
 	 * @param repositories a {@link List} of repositories
 	 * @param artifacts a {@link List} of artifacts
@@ -130,7 +131,7 @@ public final class Build {
 	}
 
 	/**
-	 * <p>Get the file.</p>
+	 * Get the file.
 	 * @return the file
 	 * @since 1.0.0
 	 */
@@ -139,7 +140,7 @@ public final class Build {
 	}
 
 	/**
-	 * <p>Get the {@link List} of repositories.</p>
+	 * Get the {@link List} of repositories.
 	 * @return the {@link List} of repositories
 	 * @since 1.0.0
 	 */
@@ -148,7 +149,7 @@ public final class Build {
 	}
 
 	/**
-	 * <p>Get the {@link List} of artifacts.</p>
+	 * Get the {@link List} of artifacts.
 	 * @return the {@link List} of artifacts
 	 * @since 1.0.0
 	 */

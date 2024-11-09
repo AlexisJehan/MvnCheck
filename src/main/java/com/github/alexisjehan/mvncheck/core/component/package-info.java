@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Components.</p>
+ * Components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component;

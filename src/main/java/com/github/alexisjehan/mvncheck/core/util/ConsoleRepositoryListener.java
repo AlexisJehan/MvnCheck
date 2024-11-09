@@ -33,7 +33,7 @@ import org.eclipse.aether.RepositoryListener;
 import java.lang.invoke.MethodHandles;
 
 /**
- * <p>Class that describes a <i>Maven</i> console repository listener.</p>
+ * Class that describes a <i>Maven</i> console repository listener.
  * @deprecated since 1.3.0, don't use anymore
  * @since 1.0.0
  */
@@ -41,7 +41,7 @@ import java.lang.invoke.MethodHandles;
 final class ConsoleRepositoryListener implements RepositoryListener {
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());

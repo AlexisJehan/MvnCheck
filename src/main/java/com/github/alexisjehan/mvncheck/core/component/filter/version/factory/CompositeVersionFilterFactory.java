@@ -31,19 +31,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <p>Class that describes a composite version filter factory.</p>
+ * Class that describes a composite version filter factory.
  * @since 1.0.0
  */
 public final class CompositeVersionFilterFactory implements VersionFilterFactory {
 
 	/**
-	 * <p>{@link Set} of version filter factories.</p>
+	 * {@link Set} of version filter factories.
 	 * @since 1.0.0
 	 */
 	private final Set<VersionFilterFactory> factories;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param factories an array of factories
 	 * @throws NullPointerException if the array of factories or any of them is {@code null}
 	 * @throws IllegalArgumentException if the array of factories is empty

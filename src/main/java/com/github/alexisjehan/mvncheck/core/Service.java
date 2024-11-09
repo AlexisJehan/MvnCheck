@@ -57,31 +57,31 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <p>Class that describes the service.</p>
+ * Class that describes the service.
  * @since 1.0.0
  */
 public final class Service {
 
 	/**
-	 * <p>Ignore file name.</p>
+	 * Ignore file name.
 	 * @since 1.0.0
 	 */
 	private static final String IGNORE_FILE_NAME = ".mvnchk-ignore";
 
 	/**
-	 * <p>{@link Set} of build resolvers.</p>
+	 * {@link Set} of build resolvers.
 	 * @since 1.0.0
 	 */
 	private final Set<BuildResolver> buildResolvers;
 
 	/**
-	 * <p>Artifact available versions resolver.</p>
+	 * Artifact available versions resolver.
 	 * @since 1.0.0
 	 */
 	private final ArtifactAvailableVersionsResolver artifactAvailableVersionsResolver;
 
 	/**
-	 * <p>Version filter factory.</p>
+	 * Version filter factory.
 	 * @since 1.0.0
 	 */
 	private final VersionFilterFactory versionFilterFactory = new CompositeVersionFilterFactory(
@@ -90,13 +90,13 @@ public final class Service {
 	);
 
 	/**
-	 * <p>User artifact filter.</p>
+	 * User artifact filter.
 	 * @since 1.0.0
 	 */
 	private final ArtifactFilter userArtifactFilter;
 
 	/**
-	 * <p>Constructor with a <i>Maven</i> session.</p>
+	 * Constructor with a <i>Maven</i> session.
 	 * @param mavenSession a <i>Maven</i> session
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the <i>Maven</i> session is {@code null}
@@ -113,7 +113,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Constructor with a {@link Set} of build resolvers and an artifact available versions resolver.</p>
+	 * Constructor with a {@link Set} of build resolvers and an artifact available versions resolver.
 	 * @param buildResolvers a {@link Set} of build resolvers
 	 * @param artifactAvailableVersionsResolver an artifact available versions resolver
 	 * @throws IOException might occur with input/output operations
@@ -133,7 +133,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find a {@link List} of build files in the given path, recursively.</p>
+	 * Find a {@link List} of build files in the given path, recursively.
 	 * @param path a path
 	 * @return the {@link List} of build files
 	 * @throws IOException might occur with input/output operations
@@ -148,7 +148,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find a {@link List} of build files in the given path, recursively.</p>
+	 * Find a {@link List} of build files in the given path, recursively.
 	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @return the {@link List} of build files
@@ -184,7 +184,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Filter a {@link List} of build files to ignore those inside output directories.</p>
+	 * Filter a {@link List} of build files to ignore those inside output directories.
 	 * @param buildFiles a {@link List} of build files
 	 * @return the {@link List} of build files
 	 * @throws NullPointerException if the {@link List} of build files or any of them is {@code null}
@@ -201,7 +201,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find the build for the given build file.</p>
+	 * Find the build for the given build file.
 	 * @param buildFile a build file
 	 * @return the build
 	 * @throws NullPointerException if the build file is {@code null}
@@ -217,7 +217,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find a {@link List} of artifact update versions for the given build.</p>
+	 * Find a {@link List} of artifact update versions for the given build.
 	 * @param build a build
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
 	 * @return the {@link List} of artifact update versions
@@ -235,7 +235,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find a {@link List} of artifact update versions for the given build.</p>
+	 * Find a {@link List} of artifact update versions for the given build.
 	 * @param build a build
 	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
@@ -255,7 +255,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Find a {@link List} of artifact update versions for the given build.</p>
+	 * Find a {@link List} of artifact update versions for the given build.
 	 * @param build a build
 	 * @param filters a {@link Set} of filters
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
@@ -308,7 +308,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Create the option artifact filter for given filters.</p>
+	 * Create the option artifact filter for given filters.
 	 * @param filters a {@link Set} of filters
 	 * @return the option artifact filter
 	 * @throws NullPointerException if the {@link Set} of filters or any of them is {@code null}
@@ -327,7 +327,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Create the user artifact filter.</p>
+	 * Create the user artifact filter.
 	 * @return the user artifact filter
 	 * @throws IOException might occur with input/output operations
 	 * @since 1.0.0
@@ -341,7 +341,7 @@ public final class Service {
 	}
 
 	/**
-	 * <p>Create the build artifact filter for the given build file.</p>
+	 * Create the build artifact filter for the given build file.
 	 * @param buildFile a build file
 	 * @return the build artifact filter
 	 * @throws IOException might occur with input/output operations

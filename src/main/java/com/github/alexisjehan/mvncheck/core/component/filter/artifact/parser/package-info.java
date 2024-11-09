@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Artifact filter parsing components.</p>
+ * Artifact filter parsing components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.filter.artifact.parser;

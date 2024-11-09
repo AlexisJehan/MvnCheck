@@ -30,7 +30,8 @@ import com.github.alexisjehan.mvncheck.core.component.repository.Repository;
 import java.util.List;
 
 /**
- * <p>Interface that describes a resolver of available versions for an artifact.</p>
+ * Interface that describes a resolver of available versions for an artifact.
+ *
  * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
  * {@link #resolve(Artifact, List)}.</p>
  * @since 1.0.0
@@ -39,7 +40,7 @@ import java.util.List;
 public interface ArtifactAvailableVersionsResolver {
 
 	/**
-	 * <p>Resolve available versions for an artifact.</p>
+	 * Resolve available versions for an artifact.
 	 * @param artifact an artifact
 	 * @param repositories a {@link List} of repositories
 	 * @return available versions

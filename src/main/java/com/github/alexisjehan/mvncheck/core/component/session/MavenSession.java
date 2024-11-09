@@ -44,43 +44,43 @@ import org.eclipse.aether.resolution.VersionRangeResult;
 import java.util.List;
 
 /**
- * <p>Class that describes a <i>Maven</i> session.</p>
+ * Class that describes a <i>Maven</i> session.
  * @since 1.0.0
  */
 public final class MavenSession {
 
 	/**
-	 * <p>Repository system.</p>
+	 * Repository system.
 	 * @since 1.0.0
 	 */
 	private final RepositorySystem repositorySystem;
 
 	/**
-	 * <p>Repository system session.</p>
+	 * Repository system session.
 	 * @since 1.0.0
 	 */
 	private final RepositorySystemSession repositorySystemSession;
 
 	/**
-	 * <p>{@link List} of remote repositories.</p>
+	 * {@link List} of remote repositories.
 	 * @since 1.0.0
 	 */
 	private final List<RemoteRepository> remoteRepositories;
 
 	/**
-	 * <p>Model resolver.</p>
+	 * Model resolver.
 	 * @since 1.0.0
 	 */
 	private final ModelResolver modelResolver;
 
 	/**
-	 * <p>Model cache.</p>
+	 * Model cache.
 	 * @since 1.0.0
 	 */
 	private final ModelCache modelCache;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @throws MavenSessionException might occur while resolving <i>Maven</i> settings
 	 * @since 1.0.0
 	 */
@@ -108,7 +108,7 @@ public final class MavenSession {
 	}
 
 	/**
-	 * <p>Resolve remote repositories using the repository system session.</p>
+	 * Resolve remote repositories using the repository system session.
 	 * @param remoteRepositories a {@link List} of remote repositories
 	 * @return the {@link List} of remote repositories
 	 * @throws NullPointerException if the {@link List} of remote repositories or any of them is {@code null}
@@ -123,7 +123,7 @@ public final class MavenSession {
 	}
 
 	/**
-	 * <p>Request a version range using the repository system session.</p>
+	 * Request a version range using the repository system session.
 	 * @param request a request
 	 * @return the result
 	 * @throws VersionRangeResolutionException might occur while requesting an invalid version range
@@ -136,7 +136,7 @@ public final class MavenSession {
 	}
 
 	/**
-	 * <p>Get the model resolver.</p>
+	 * Get the model resolver.
 	 * @return the model resolver
 	 * @since 1.0.0
 	 */
@@ -145,7 +145,7 @@ public final class MavenSession {
 	}
 
 	/**
-	 * <p>Get the model cache.</p>
+	 * Get the model cache.
 	 * @return the model cache
 	 * @since 1.0.0
 	 */

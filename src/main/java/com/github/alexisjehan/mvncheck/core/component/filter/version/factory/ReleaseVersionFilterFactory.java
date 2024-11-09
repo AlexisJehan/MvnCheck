@@ -29,13 +29,13 @@ import com.github.alexisjehan.mvncheck.core.component.filter.version.VersionFilt
 import java.util.regex.Pattern;
 
 /**
- * <p>Enumeration of a singleton release version filter factory.</p>
+ * Enumeration of a singleton release version filter factory.
  * @since 1.0.0
  */
 public final class ReleaseVersionFilterFactory implements VersionFilterFactory {
 
 	/**
-	 * <p>Singleton instance.</p>
+	 * Singleton instance.
 	 * @deprecated since 1.5.0, use {@link #ReleaseVersionFilterFactory()} instead, this is not a singleton anymore!
 	 * @since 1.0.0
 	 */
@@ -43,7 +43,7 @@ public final class ReleaseVersionFilterFactory implements VersionFilterFactory {
 	public static final ReleaseVersionFilterFactory INSTANCE = new ReleaseVersionFilterFactory();
 
 	/**
-	 * <p>Pattern to match pre-release versions.</p>
+	 * Pattern to match pre-release versions.
 	 * @since 1.0.0
 	 */
 	private static final Pattern PATTERN = Pattern.compile(
@@ -52,7 +52,7 @@ public final class ReleaseVersionFilterFactory implements VersionFilterFactory {
 	);
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.5.0
 	 */
 	public ReleaseVersionFilterFactory() {

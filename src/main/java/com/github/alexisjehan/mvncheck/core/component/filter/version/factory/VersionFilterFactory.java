@@ -26,7 +26,8 @@ package com.github.alexisjehan.mvncheck.core.component.filter.version.factory;
 import com.github.alexisjehan.mvncheck.core.component.filter.version.VersionFilter;
 
 /**
- * <p>Interface that describes a version filter factory.</p>
+ * Interface that describes a version filter factory.
+ *
  * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #create(String)}.</p>
  * @since 1.0.0
  */
@@ -34,7 +35,7 @@ import com.github.alexisjehan.mvncheck.core.component.filter.version.VersionFilt
 public interface VersionFilterFactory {
 
 	/**
-	 * <p>Create a version filter for the given artifact version.</p>
+	 * Create a version filter for the given artifact version.
 	 * @param artifactVersion an artifact version
 	 * @return the version filter
 	 * @since 1.0.0

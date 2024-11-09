@@ -60,31 +60,31 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * <p>Class that describes a <i>Maven</i> resolver of the build for a file.</p>
+ * Class that describes a <i>Maven</i> resolver of the build for a file.
  * @since 1.0.0
  */
 public final class MavenBuildResolver implements BuildResolver {
 
 	/**
-	 * <p>{@link Set} of file types.</p>
+	 * {@link Set} of file types.
 	 * @since 1.0.0
 	 */
 	private static final Set<BuildFileType> FILE_TYPES = Set.of(BuildFileType.MAVEN);
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p><i>Maven</i> session.</p>
+	 * <i>Maven</i> session.
 	 * @since 1.0.0
 	 */
 	private final MavenSession session;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param session a <i>Maven</i> session
 	 * @throws NullPointerException if the <i>Maven</i> session is {@code null}
 	 * @since 1.0.0
@@ -169,7 +169,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Extract a {@link List} of repositories from a <i>Maven</i> model.</p>
+	 * Extract a {@link List} of repositories from a <i>Maven</i> model.
 	 * @param model a <i>Maven</i> model
 	 * @return the {@link List} of repositories
 	 * @since 1.0.0
@@ -186,7 +186,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Extract a {@link List} of artifacts from a <i>Maven</i> model.</p>
+	 * Extract a {@link List} of artifacts from a <i>Maven</i> model.
 	 * @param model a <i>Maven</i> model
 	 * @return the {@link List} of artifacts
 	 * @since 1.0.0
@@ -282,7 +282,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Inherit a {@link List} of raw artifacts using a {@link List} of effective artifacts.</p>
+	 * Inherit a {@link List} of raw artifacts using a {@link List} of effective artifacts.
 	 * @param rawArtifacts a {@link List} of raw artifacts
 	 * @param effectiveArtifacts a {@link List} of effective artifacts
 	 * @return the {@link List} of artifacts
@@ -322,7 +322,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create a repository from a type and a <i>Maven</i> repository.</p>
+	 * Create a repository from a type and a <i>Maven</i> repository.
 	 * @param type a type
 	 * @param repository a <i>Maven</i> repository
 	 * @return the repository
@@ -336,7 +336,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create an artifact from a <i>Maven</i> parent.</p>
+	 * Create an artifact from a <i>Maven</i> parent.
 	 * @param parent a <i>Maven</i> parent
 	 * @return the artifact
 	 * @since 1.0.0
@@ -350,7 +350,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create an artifact from a type and a <i>Maven</i> dependency.</p>
+	 * Create an artifact from a type and a <i>Maven</i> dependency.
 	 * @param type a type
 	 * @param dependency a <i>Maven</i> dependency
 	 * @return the artifact
@@ -365,7 +365,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create an artifact from a <i>Maven</i> extension.</p>
+	 * Create an artifact from a <i>Maven</i> extension.
 	 * @param extension a <i>Maven</i> extension
 	 * @return the artifact
 	 * @since 1.0.0
@@ -379,7 +379,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create an artifact from a type and a <i>Maven</i> plugin.</p>
+	 * Create an artifact from a type and a <i>Maven</i> plugin.
 	 * @param type a type
 	 * @param plugin a <i>Maven</i> plugin
 	 * @return the artifact
@@ -394,7 +394,7 @@ public final class MavenBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Create an artifact from a type and a <i>Maven</i> report plugin.</p>
+	 * Create an artifact from a type and a <i>Maven</i> report plugin.
 	 * @param type a type
 	 * @param reportPlugin a <i>Maven</i> report plugin
 	 * @return the artifact

@@ -31,19 +31,19 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
- * <p>Utility class that helps dealing with <i>Gradle</i>.</p>
+ * Utility class that helps to deal with <i>Gradle</i>.
  * @since 1.0.0
  */
 public final class GradleUtils {
 
 	/**
-	 * <p><i>Gradle</i> version.</p>
+	 * <i>Gradle</i> version.
 	 * @since 1.0.0
 	 */
 	public static final String VERSION = GradleVersion.current().getVersion();
 
 	/**
-	 * <p>Pattern to extract the <i>Gradle</i> home from the {@code PATH} environment variable.</p>
+	 * Pattern to extract the <i>Gradle</i> home from the {@code PATH} environment variable.
 	 * @since 1.0.0
 	 */
 	private static final Pattern PATH_PATTERN = Pattern.compile(
@@ -51,13 +51,13 @@ public final class GradleUtils {
 	);
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	private GradleUtils() {}
 
 	/**
-	 * <p>Retrieve an {@link Optional} of the <i>Gradle</i> home.</p>
+	 * Retrieve an {@link Optional} of the <i>Gradle</i> home.
 	 * @return the {@link Optional} of the <i>Gradle</i> home
 	 * @since 1.0.0
 	 */
@@ -80,7 +80,7 @@ public final class GradleUtils {
 	}
 
 	/**
-	 * <p>Get the <i>Gradle</i> version.</p>
+	 * Get the <i>Gradle</i> version.
 	 * @return the <i>Gradle</i> version
 	 * @deprecated since 1.4.0, use {@link #VERSION} instead
 	 * @since 1.0.0

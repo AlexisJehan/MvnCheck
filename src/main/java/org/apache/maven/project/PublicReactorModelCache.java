@@ -24,13 +24,13 @@
 package org.apache.maven.project;
 
 /**
- * <p>Public access to the {@link ReactorModelCache} class.</p>
+ * Public access to the {@link ReactorModelCache} class.
  * @since 1.0.0
  */
 public final class PublicReactorModelCache extends ReactorModelCache {
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelCache() {

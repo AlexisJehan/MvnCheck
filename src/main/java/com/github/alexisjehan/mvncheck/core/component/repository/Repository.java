@@ -30,7 +30,8 @@ import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 
 /**
- * <p>Class that describes a repository.</p>
+ * Class that describes a repository.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -38,28 +39,28 @@ import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 public final class Repository {
 
 	/**
-	 * <p>Type.</p>
+	 * Type.
 	 * @since 1.0.0
 	 */
 	private final RepositoryType type;
 
 	/**
-	 * <p>Identifier.</p>
+	 * Identifier.
 	 * @since 1.0.0
 	 */
 	private final String id;
 
 	/**
-	 * <p>URL.</p>
+	 * URL.
 	 * @since 1.0.0
 	 */
 	private final String url;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param type a type
 	 * @param id an identifier
-	 * @param url an URL
+	 * @param url a URL
 	 * @throws NullPointerException if the type, the identifier or the URL is {@code null}
 	 * @throws IllegalArgumentException if the identifier or the URL is empty
 	 * @since 1.0.0
@@ -119,7 +120,7 @@ public final class Repository {
 	}
 
 	/**
-	 * <p>Get the type.</p>
+	 * Get the type.
 	 * @return the type
 	 * @since 1.0.0
 	 */
@@ -128,7 +129,7 @@ public final class Repository {
 	}
 
 	/**
-	 * <p>Get the identifier.</p>
+	 * Get the identifier.
 	 * @return the identifier
 	 * @since 1.0.0
 	 */
@@ -137,7 +138,7 @@ public final class Repository {
 	}
 
 	/**
-	 * <p>Get the URL.</p>
+	 * Get the URL.
 	 * @return the URL
 	 * @since 1.0.0
 	 */

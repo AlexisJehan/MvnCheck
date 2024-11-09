@@ -29,31 +29,31 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 /**
- * <p>Utility class that helps dealing with the system.</p>
+ * Utility class that helps to deal with the system.
  * @since 1.0.0
  */
 public final class SystemUtils {
 
 	/**
-	 * <p>{@code PATH} environment variable.</p>
+	 * {@code PATH} environment variable.
 	 * @since 1.0.0
 	 */
 	private static final String PATH_ENVIRONMENT_VARIABLE = System.getenv("PATH");
 
 	/**
-	 * <p>User home directory.</p>
+	 * User home directory.
 	 * @since 1.0.0
 	 */
 	private static final Path USER_HOME_DIRECTORY = Path.of(System.getProperty("user.home"));
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	private SystemUtils() {}
 
 	/**
-	 * <p>Get an {@link Optional} environment variable for the given name.</p>
+	 * Get an {@link Optional} environment variable for the given name.
 	 * @param name a name
 	 * @return the {@link Optional} environment variable
 	 * @throws NullPointerException if the name is {@code null}
@@ -66,7 +66,7 @@ public final class SystemUtils {
 	}
 
 	/**
-	 * <p>Get the {@code PATH} environment variable.</p>
+	 * Get the {@code PATH} environment variable.
 	 * @return the {@code PATH} environment variable
 	 * @since 1.0.0
 	 */
@@ -75,7 +75,7 @@ public final class SystemUtils {
 	}
 
 	/**
-	 * <p>Get the user home directory.</p>
+	 * Get the user home directory.
 	 * @return the user home directory
 	 * @since 1.0.0
 	 */

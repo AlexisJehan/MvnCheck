@@ -31,25 +31,25 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * <p>Utility class that helps dealing with <i>GitHub</i>.</p>
+ * Utility class that helps to deal with <i>GitHub</i>.
  * @since 1.4.0
  */
 public final class GithubUtils {
 
 	/**
-	 * <p>Threshold of the rate limit number of remaining requests available.</p>
+	 * Threshold of the rate limit number of remaining requests available.
 	 * @since 1.4.0
 	 */
 	private static final int RATE_LIMIT_REMAINING_THRESHOLD = 3;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.4.0
 	 */
 	private GithubUtils() {}
 
 	/**
-	 * <p>Retrieve an {@link Optional} of the latest release name.</p>
+	 * Retrieve an {@link Optional} of the latest release name.
 	 * @param ownerName an owner name
 	 * @param repositoryName a repository name
 	 * @return the {@link Optional} of the latest release name

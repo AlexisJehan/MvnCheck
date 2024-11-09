@@ -34,7 +34,8 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.type.ArtifactType
 import java.util.List;
 
 /**
- * <p>Class that describes available versions for an artifact.</p>
+ * Class that describes available versions for an artifact.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -42,19 +43,19 @@ import java.util.List;
 public final class ArtifactAvailableVersions {
 
 	/**
-	 * <p>Artifact.</p>
+	 * Artifact.
 	 * @since 1.0.0
 	 */
 	private final Artifact<ArtifactType> artifact;
 
 	/**
-	 * <p>{@link List} of available versions.</p>
+	 * {@link List} of available versions.
 	 * @since 1.0.0
 	 */
 	private final List<String> availableVersions;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param artifact an artifact
 	 * @param availableVersions a {@link List} of available versions
 	 * @throws NullPointerException if the artifact, the {@link List} of available versions or any of them is
@@ -112,7 +113,7 @@ public final class ArtifactAvailableVersions {
 	}
 
 	/**
-	 * <p>Get the artifact.</p>
+	 * Get the artifact.
 	 * @return the artifact
 	 * @since 1.0.0
 	 */
@@ -121,7 +122,7 @@ public final class ArtifactAvailableVersions {
 	}
 
 	/**
-	 * <p>Get the {@link List} of available versions.</p>
+	 * Get the {@link List} of available versions.
 	 * @return the {@link List} of available versions
 	 * @since 1.0.0
 	 */

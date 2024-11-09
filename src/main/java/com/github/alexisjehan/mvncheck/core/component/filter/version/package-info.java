@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Version filtering components.</p>
+ * Version filtering components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.filter.version;

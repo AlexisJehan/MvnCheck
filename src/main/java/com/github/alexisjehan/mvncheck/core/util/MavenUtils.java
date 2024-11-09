@@ -71,19 +71,19 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
- * <p>Utility class that helps dealing with <i>Maven</i>.</p>
+ * Utility class that helps to deal with <i>Maven</i>.
  * @since 1.0.0
  */
 public final class MavenUtils {
 
 	/**
-	 * <p><i>Maven</i> version.</p>
+	 * <i>Maven</i> version.
 	 * @since 1.0.0
 	 */
 	public static final String VERSION = new DefaultRuntimeInformation().getMavenVersion();
 
 	/**
-	 * <p>Pattern to extract the <i>Maven</i> home from the {@code PATH} environment variable.</p>
+	 * Pattern to extract the <i>Maven</i> home from the {@code PATH} environment variable.
 	 * @since 1.0.0
 	 */
 	private static final Pattern PATH_PATTERN = Pattern.compile(
@@ -91,7 +91,7 @@ public final class MavenUtils {
 	);
 
 	/**
-	 * <p>User {@code repository} directory.</p>
+	 * User {@code repository} directory.
 	 * @since 1.0.0
 	 */
 	private static final Path USER_REPOSITORY_DIRECTORY = SystemUtils.getUserHomeDirectory().resolve(
@@ -99,7 +99,7 @@ public final class MavenUtils {
 	);
 
 	/**
-	 * <p>User {@code settings.xml} file.</p>
+	 * User {@code settings.xml} file.
 	 * @since 1.0.0
 	 */
 	private static final Path USER_SETTINGS_FILE = SystemUtils.getUserHomeDirectory().resolve(
@@ -107,7 +107,7 @@ public final class MavenUtils {
 	);
 
 	/**
-	 * <p>User {@code settings-security.xml} file.</p>
+	 * User {@code settings-security.xml} file.
 	 * @since 1.0.0
 	 */
 	private static final Path USER_SETTINGS_SECURITY_FILE = SystemUtils.getUserHomeDirectory().resolve(
@@ -115,25 +115,25 @@ public final class MavenUtils {
 	);
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Repository system supplier.</p>
+	 * Repository system supplier.
 	 * @since 1.7.0
 	 */
 	private static final RepositorySystemSupplier repositorySystemSupplier = new RepositorySystemSupplier();
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	private MavenUtils() {}
 
 	/**
-	 * <p>Retrieve an {@link Optional} of the <i>Maven</i> home.</p>
+	 * Retrieve an {@link Optional} of the <i>Maven</i> home.
 	 * @return the {@link Optional} of the <i>Maven</i> home
 	 * @since 1.0.0
 	 */
@@ -152,7 +152,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Retrieve an {@link Optional} of the global {@code settings.xml} file.</p>
+	 * Retrieve an {@link Optional} of the global {@code settings.xml} file.
 	 * @return the {@link Optional} of the global {@code settings.xml} file
 	 * @since 1.0.0
 	 */
@@ -162,9 +162,9 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Create a remote repository from an identifier and an URL.</p>
+	 * Create a remote repository from an identifier and a URL.
 	 * @param id an identifier
-	 * @param url an URL
+	 * @param url a URL
 	 * @return the remote repository
 	 * @throws NullPointerException if the identifier or the URL is {@code null}
 	 * @throws IllegalArgumentException if the identifier or the URL is empty
@@ -180,7 +180,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Convert a repository to a remote repository.</p>
+	 * Convert a repository to a remote repository.
 	 * @param repository a repository
 	 * @return the remote repository
 	 * @throws NullPointerException if the repository is {@code null}
@@ -217,7 +217,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a service locator.</p>
+	 * Make a service locator.
 	 * @return the service locator
 	 * @deprecated since 1.1.0, don't use anymore
 	 * @since 1.0.0
@@ -228,7 +228,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a repository system.</p>
+	 * Make a repository system.
 	 * @param serviceLocator a service locator
 	 * @return the repository system
 	 * @throws NullPointerException if the service locator is {@code null}
@@ -242,7 +242,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a repository system.</p>
+	 * Make a repository system.
 	 * @return the repository system
 	 * @since 1.1.0
 	 */
@@ -251,7 +251,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a remote repository manager.</p>
+	 * Make a remote repository manager.
 	 * @param serviceLocator a service locator
 	 * @return the remote repository manager
 	 * @throws NullPointerException if the service locator is {@code null}
@@ -265,7 +265,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a remote repository manager.</p>
+	 * Make a remote repository manager.
 	 * @return the remote repository manager
 	 * @since 1.1.0
 	 */
@@ -277,7 +277,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make settings using default global and user {@code settings.xml} files.</p>
+	 * Make settings using default global and user {@code settings.xml} files.
 	 * @return settings
 	 * @throws SettingsBuildingException might occur while resolving settings
 	 * @since 1.0.0
@@ -287,7 +287,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make settings using custom global and user {@code settings.xml} files.</p>
+	 * Make settings using custom global and user {@code settings.xml} files.
 	 * @param globalSettingsFile a global {@code settings.xml} file or {@code null}
 	 * @param userSettingsFile a user {@code settings.xml} file or {@code null}
 	 * @return settings
@@ -321,7 +321,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make decrypted settings using the default user {@code settings-security.xml} file.</p>
+	 * Make decrypted settings using the default user {@code settings-security.xml} file.
 	 * @param settings settings
 	 * @return decrypted settings
 	 * @throws NullPointerException if settings are {@code null}
@@ -332,7 +332,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make decrypted settings using a custom user {@code settings-security.xml} file.</p>
+	 * Make decrypted settings using a custom user {@code settings-security.xml} file.
 	 * @param settings settings
 	 * @param userSettingsSecurityFile a user {@code settings-security.xml} file or {@code null}
 	 * @return decrypted settings
@@ -360,7 +360,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a local repository.</p>
+	 * Make a local repository.
 	 * @param settings settings
 	 * @return the local repository
 	 * @throws NullPointerException if settings are {@code null}
@@ -376,7 +376,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a proxy selector.</p>
+	 * Make a proxy selector.
 	 * @param decryptedSettings decrypted settings
 	 * @return the proxy selector
 	 * @throws NullPointerException if decrypted settings are {@code null}
@@ -403,7 +403,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make an authentication selector.</p>
+	 * Make an authentication selector.
 	 * @param decryptedSettings decrypted settings
 	 * @return the authentication selector
 	 * @throws NullPointerException if decrypted settings are {@code null}
@@ -426,7 +426,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a mirror selector.</p>
+	 * Make a mirror selector.
 	 * @param settings settings
 	 * @return the mirror selector
 	 * @throws NullPointerException if settings are {@code null}
@@ -450,7 +450,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a repository system session.</p>
+	 * Make a repository system session.
 	 * @param settings settings
 	 * @param decryptedSettings decrypted settings
 	 * @param repositorySystem a repository system
@@ -483,7 +483,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Make a {@link List} of remote repositories.</p>
+	 * Make a {@link List} of remote repositories.
 	 * @param settings settings
 	 * @return the {@link List} of remote repositories
 	 * @throws NullPointerException if settings are {@code null}
@@ -510,7 +510,7 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * <p>Get the <i>Maven</i> version.</p>
+	 * Get the <i>Maven</i> version.
 	 * @return the <i>Maven</i> version
 	 * @deprecated since 1.4.0, use {@link #VERSION} instead
 	 * @since 1.0.0

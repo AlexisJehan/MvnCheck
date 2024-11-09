@@ -44,25 +44,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>Class that describes a <i>Maven</i> resolver of available versions for an artifact.</p>
+ * Class that describes a <i>Maven</i> resolver of available versions for an artifact.
  * @since 1.0.0
  */
 public final class MavenArtifactAvailableVersionsResolver implements ArtifactAvailableVersionsResolver {
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p><i>Maven</i> session.</p>
+	 * <i>Maven</i> session.
 	 * @since 1.0.0
 	 */
 	private final MavenSession session;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param session a <i>Maven</i> session
 	 * @since 1.0.0
 	 */

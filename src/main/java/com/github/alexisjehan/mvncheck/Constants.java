@@ -26,37 +26,37 @@ package com.github.alexisjehan.mvncheck;
 import java.lang.invoke.MethodHandles;
 
 /**
- * <p>Class that holds constants.</p>
+ * Class that holds constants.
  * @since 1.4.0
  */
 final class Constants {
 
 	/**
-	 * <p>Name.</p>
+	 * Name.
 	 * @since 1.4.0
 	 */
 	static final String NAME = MethodHandles.lookup().lookupClass().getPackage().getImplementationTitle();
 
 	/**
-	 * <p>Version.</p>
+	 * Version.
 	 * @since 1.4.0
 	 */
 	static final String VERSION = MethodHandles.lookup().lookupClass().getPackage().getImplementationVersion();
 
 	/**
-	 * <p><i>GitHub</i> owner name.</p>
+	 * <i>GitHub</i> owner name.
 	 * @since 1.4.0
 	 */
 	static final String GITHUB_OWNER_NAME = "AlexisJehan";
 
 	/**
-	 * <p><i>GitHub</i> repository name.</p>
+	 * <i>GitHub</i> repository name.
 	 * @since 1.4.0
 	 */
 	static final String GITHUB_REPOSITORY_NAME = "MvnCheck";
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.4.0
 	 */
 	private Constants() {}

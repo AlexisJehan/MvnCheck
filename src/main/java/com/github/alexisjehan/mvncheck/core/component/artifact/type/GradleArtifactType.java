@@ -28,7 +28,8 @@ import com.github.alexisjehan.javanilla.misc.CaseStyle;
 import java.util.Set;
 
 /**
- * <p>Enumeration of <i>Gradle</i> artifact types.</p>
+ * Enumeration of <i>Gradle</i> artifact types.
+ *
  * <p><b>Note</b>: Based on {@code org.gradle:gradle-tooling-api:8.10}.</p>
  * @see <a href="https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management">https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management</a>
  * @see <a href="https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph">https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph</a>
@@ -37,151 +38,162 @@ import java.util.Set;
 public enum GradleArtifactType implements ArtifactType {
 
 	/**
-	 * <p>Annotation processors and their dependency artifacts.</p>
+	 * Annotation processors and their dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Added since <i>Gradle 4.6</i>.</p>
 	 * @since 1.0.0
 	 */
 	ANNOTATION_PROCESSOR,
 
 	/**
-	 * <p>API dependency artifacts.</p>
+	 * API dependency artifacts.
 	 * @since 1.0.0
 	 */
 	API,
 
 	/**
-	 * <p>Dependency artifacts.</p>
+	 * Dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
+	 *
 	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #IMPLEMENTATION}).</p>
 	 * @since 1.0.0
 	 */
 	COMPILE(Property.DEPRECATED),
 
 	/**
-	 * <p>Compile classpath artifacts.</p>
+	 * Compile classpath artifacts.
 	 * @since 1.0.0
 	 */
 	COMPILE_CLASSPATH(Property.CLASSPATH),
 
 	/**
-	 * <p>Compile only dependency artifacts.</p>
+	 * Compile only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	COMPILE_ONLY,
 
 	/**
-	 * <p>Compile only API dependency artifacts.</p>
+	 * Compile only API dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Added since <i>Gradle 6.7</i>.</p>
 	 * @since 1.0.0
 	 */
 	COMPILE_ONLY_API,
 
 	/**
-	 * <p>Implementation only dependency artifacts.</p>
+	 * Implementation only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	IMPLEMENTATION,
 
 	/**
-	 * <p>Runtime dependency artifacts.</p>
+	 * Runtime dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
+	 *
 	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #RUNTIME_ONLY}).</p>
 	 * @since 1.0.0
 	 */
 	RUNTIME(Property.DEPRECATED),
 
 	/**
-	 * <p>Runtime classpath artifacts.</p>
+	 * Runtime classpath artifacts.
 	 * @since 1.0.0
 	 */
 	RUNTIME_CLASSPATH(Property.CLASSPATH),
 
 	/**
-	 * <p>Runtime only dependency artifacts.</p>
+	 * Runtime only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	RUNTIME_ONLY,
 
 	/**
-	 * <p>Test annotation processors and their dependency artifacts.</p>
+	 * Test annotation processors and their dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Added since <i>Gradle 4.6</i>.</p>
 	 * @since 1.0.0
 	 */
 	TEST_ANNOTATION_PROCESSOR,
 
 	/**
-	 * <p>Test dependency artifacts.</p>
+	 * Test dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
+	 *
 	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #TEST_IMPLEMENTATION}).</p>
 	 * @since 1.0.0
 	 */
 	TEST_COMPILE(Property.DEPRECATED),
 
 	/**
-	 * <p>Test compile classpath artifacts.</p>
+	 * Test compile classpath artifacts.
 	 * @since 1.0.0
 	 */
 	TEST_COMPILE_CLASSPATH(Property.CLASSPATH),
 
 	/**
-	 * <p>Test compile only dependency artifacts.</p>
+	 * Test compile only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	TEST_COMPILE_ONLY,
 
 	/**
-	 * <p>Test implementation only dependency artifacts.</p>
+	 * Test implementation only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	TEST_IMPLEMENTATION,
 
 	/**
-	 * <p>Test runtime dependency artifacts.</p>
+	 * Test runtime dependency artifacts.
+	 *
 	 * <p><b>Note</b>: Deprecated since <i>Gradle 4.7</i>.</p>
+	 *
 	 * <p><b>Note</b>: Removed since <i>Gradle 7.0</i> (Superseded by {@link #TEST_RUNTIME_ONLY}).</p>
 	 * @since 1.0.0
 	 */
 	TEST_RUNTIME(Property.DEPRECATED),
 
 	/**
-	 * <p>Test runtime classpath artifacts.</p>
+	 * Test runtime classpath artifacts.
 	 * @since 1.0.0
 	 */
 	TEST_RUNTIME_CLASSPATH(Property.CLASSPATH),
 
 	/**
-	 * <p>Test runtime only dependency artifacts.</p>
+	 * Test runtime only dependency artifacts.
 	 * @since 1.0.0
 	 */
 	TEST_RUNTIME_ONLY;
 
 	/**
-	 * <p>Enumeration of properties.</p>
+	 * Enumeration of properties.
 	 * @since 1.0.0
 	 */
 	private enum Property {
 
 		/**
-		 * <p>Flagged as a classpath artifact type.</p>
+		 * Flagged as a classpath artifact type.
 		 * @since 1.0.0
 		 */
 		CLASSPATH,
 
 		/**
-		 * <p>Flagged as a deprecated artifact type.</p>
+		 * Flagged as a deprecated artifact type.
 		 * @since 1.0.0
 		 */
 		DEPRECATED
 	}
 
 	/**
-	 * <p>{@link Set} of properties.</p>
+	 * {@link Set} of properties.
 	 * @since 1.0.0
 	 */
 	private final Set<Property> properties;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param properties an array of properties
 	 * @since 1.0.0
 	 */
@@ -190,7 +202,7 @@ public enum GradleArtifactType implements ArtifactType {
 	}
 
 	/**
-	 * <p>Return the name printed by the <i>Gradle</i> {@code :dependencies} task.</p>
+	 * Return the name printed by the <i>Gradle</i> {@code :dependencies} task.
 	 * @return the name
 	 * @since 1.0.0
 	 */
@@ -199,7 +211,7 @@ public enum GradleArtifactType implements ArtifactType {
 	}
 
 	/**
-	 * <p>Get if this is a classpath artifact type.</p>
+	 * Get if this is a classpath artifact type.
 	 * @return {@code true} if this is a classpath artifact type
 	 * @since 1.0.0
 	 */
@@ -208,7 +220,7 @@ public enum GradleArtifactType implements ArtifactType {
 	}
 
 	/**
-	 * <p>Get if this is a deprecated artifact type.</p>
+	 * Get if this is a deprecated artifact type.
 	 * @return {@code true} if this is a deprecated artifact type
 	 * @since 1.0.0
 	 */

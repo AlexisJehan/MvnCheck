@@ -29,43 +29,43 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * <p>Enumeration of build file types.</p>
+ * Enumeration of build file types.
  * @since 1.0.0
  */
 public enum BuildFileType {
 
 	/**
-	 * <p>The <i>Maven</i> build file type.</p>
+	 * The <i>Maven</i> build file type.
 	 * @since 1.0.0
 	 */
 	MAVEN("pom.xml", "target"),
 
 	/**
-	 * <p>The <i>Gradle Groovy</i> build file type.</p>
+	 * The <i>Gradle Groovy</i> build file type.
 	 * @since 1.0.0
 	 */
 	GRADLE_GROOVY("build.gradle", "build"),
 
 	/**
-	 * <p>The <i>Gradle Kotlin</i> build file type.</p>
+	 * The <i>Gradle Kotlin</i> build file type.
 	 * @since 1.0.0
 	 */
 	GRADLE_KOTLIN("build.gradle.kts", "build");
 
 	/**
-	 * <p>File name.</p>
+	 * File name.
 	 * @since 1.0.0
 	 */
 	private final String fileName;
 
 	/**
-	 * <p>Output directory name.</p>
+	 * Output directory name.
 	 * @since 1.7.0
 	 */
 	private final String outputDirectoryName;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param fileName a file name
 	 * @param outputDirectoryName an output directory name
 	 * @since 1.7.0
@@ -76,7 +76,7 @@ public enum BuildFileType {
 	}
 
 	/**
-	 * <p>Get the file name.</p>
+	 * Get the file name.
 	 * @return the file name
 	 * @since 1.0.0
 	 */
@@ -85,7 +85,7 @@ public enum BuildFileType {
 	}
 
 	/**
-	 * <p>Get the output directory name.</p>
+	 * Get the output directory name.
 	 * @return the output directory name
 	 * @since 1.7.0
 	 */
@@ -94,7 +94,7 @@ public enum BuildFileType {
 	}
 
 	/**
-	 * <p>Return an {@link Optional} of the value for the given file name.</p>
+	 * Return an {@link Optional} of the value for the given file name.
 	 * @param fileName a file name
 	 * @return the {@link Optional} of the value
 	 * @throws NullPointerException if the file name is {@code null}

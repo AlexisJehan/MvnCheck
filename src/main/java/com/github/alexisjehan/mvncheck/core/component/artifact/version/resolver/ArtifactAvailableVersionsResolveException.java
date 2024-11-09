@@ -26,20 +26,21 @@ package com.github.alexisjehan.mvncheck.core.component.artifact.version.resolver
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
- * <p>Unchecked {@link Exception} related to available versions resolving.</p>
+ * Unchecked {@link Exception} related to available versions resolving.
+ *
  * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.2.0
  */
 public final class ArtifactAvailableVersionsResolveException extends RuntimeException {
 
 	/**
-	 * <p>Serial version unique identifier.</p>
+	 * Serial version unique identifier.
 	 * @since 1.2.0
 	 */
-	private static final long serialVersionUID = -5535968052576747258L;
+	private static final long serialVersionUID = -2028419088909362668L;
 
 	/**
-	 * <p>Constructor with a message.</p>
+	 * Constructor with a message.
 	 * @param message a message
 	 * @throws NullPointerException if the message is {@code null}
 	 * @throws IllegalArgumentException if the message is empty

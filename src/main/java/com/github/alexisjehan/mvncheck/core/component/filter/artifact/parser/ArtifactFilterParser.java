@@ -40,37 +40,37 @@ import java.nio.file.Path;
 import java.util.HashSet;
 
 /**
- * <p>Class that describes an artifact filter parser.</p>
+ * Class that describes an artifact filter parser.
  * @since 1.0.0
  */
 public final class ArtifactFilterParser {
 
 	/**
-	 * <p>Start of a comment line.</p>
+	 * Start of a comment line.
 	 * @since 1.0.0
 	 */
 	private static final char COMMENT_START = '#';
 
 	/**
-	 * <p>Separator.</p>
+	 * Separator.
 	 * @since 1.0.0
 	 */
 	private static final char SEPARATOR = ':';
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	private ArtifactFilterParser() {}
 
 	/**
-	 * <p>Parse an artifact filter from the given ignore file.</p>
+	 * Parse an artifact filter from the given ignore file.
 	 * @param ignoreFile an ignore file
 	 * @return the artifact filter
 	 * @throws IOException might occur with input/output operations
@@ -94,7 +94,7 @@ public final class ArtifactFilterParser {
 	}
 
 	/**
-	 * <p>Parse an artifact filter from the given {@link Reader}.</p>
+	 * Parse an artifact filter from the given {@link Reader}.
 	 * @param reader a {@link Reader}
 	 * @return the artifact filter
 	 * @throws IOException might occur with input/output operations
@@ -128,7 +128,7 @@ public final class ArtifactFilterParser {
 	}
 
 	/**
-	 * <p>Parse an artifact filter from the given expression.</p>
+	 * Parse an artifact filter from the given expression.
 	 * @param expression an expression
 	 * @return the artifact filter
 	 * @throws NullPointerException if the expression is {@code null}

@@ -27,13 +27,13 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 
 /**
- * <p>Interface that describes an artifact filter.</p>
+ * Interface that describes an artifact filter.
  * @since 1.0.0
  */
 public interface ArtifactFilter {
 
 	/**
-	 * <p>Artifact filter that accept all artifacts.</p>
+	 * Artifact filter that accept all artifacts.
 	 * @since 1.7.0
 	 */
 	ArtifactFilter ACCEPT_ALL = new ArtifactFilter() {
@@ -64,7 +64,7 @@ public interface ArtifactFilter {
 	};
 
 	/**
-	 * <p>Artifact filter that accept no artifacts.</p>
+	 * Artifact filter that accept no artifacts.
 	 * @since 1.7.0
 	 */
 	ArtifactFilter ACCEPT_NONE = new ArtifactFilter() {
@@ -95,7 +95,7 @@ public interface ArtifactFilter {
 	};
 
 	/**
-	 * <p>Artifact filter that reject all artifacts.</p>
+	 * Artifact filter that reject all artifacts.
 	 * @deprecated since 1.7.0, use {@link #ACCEPT_NONE} instead
 	 * @since 1.0.0
 	 */
@@ -103,7 +103,7 @@ public interface ArtifactFilter {
 	ArtifactFilter ALL = ACCEPT_NONE;
 
 	/**
-	 * <p>Artifact filter that accept all artifacts.</p>
+	 * Artifact filter that accept all artifacts.
 	 * @deprecated since 1.7.0, use {@link #ACCEPT_ALL} instead
 	 * @since 1.0.0
 	 */
@@ -111,7 +111,7 @@ public interface ArtifactFilter {
 	ArtifactFilter NONE = ACCEPT_ALL;
 
 	/**
-	 * <p>Test if an artifact is accepted.</p>
+	 * Test if an artifact is accepted.
 	 * @param artifact an artifact
 	 * @return {@code true} if the artifact is accepted
 	 * @since 1.0.0
@@ -119,7 +119,7 @@ public interface ArtifactFilter {
 	boolean accept(Artifact<?> artifact);
 
 	/**
-	 * <p>Test if an artifact and an update version are accepted.</p>
+	 * Test if an artifact and an update version are accepted.
 	 * @param artifact an artifact
 	 * @param updateVersion an update version
 	 * @return {@code true} if the artifact and the update version are accepted

@@ -28,31 +28,31 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 
 import java.util.Arrays;
 import java.util.Set;
-import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * <p>Class that describes a composite artifact filter.</p>
+ * Class that describes a composite artifact filter.
  * @since 1.0.0
  */
 public final class CompositeArtifactFilter implements ArtifactFilter {
 
 	/**
-	 * <p>Match {@link BiFunction}.</p>
+	 * Match {@link BiPredicate}.
 	 * @since 1.7.0
 	 */
-	private final BiFunction<Stream<ArtifactFilter>, Predicate<ArtifactFilter>, Boolean> matchFunction;
+	private final BiPredicate<Stream<ArtifactFilter>, Predicate<ArtifactFilter>> matchFunction;
 
 	/**
-	 * <p>{@link Set} of artifact filters.</p>
+	 * {@link Set} of artifact filters.
 	 * @since 1.0.0
 	 */
 	private final Set<ArtifactFilter> filters;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param filters an array of artifact filters
 	 * @throws NullPointerException if the array of artifacts or any of them is {@code null}
 	 * @throws IllegalArgumentException if the array of artifacts is empty
@@ -68,13 +68,13 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Private constructor.</p>
-	 * @param matchFunction a match {@link BiFunction}
+	 * Private constructor.
+	 * @param matchFunction a match {@link BiPredicate}
 	 * @param filters an array of artifact filters
 	 * @since 1.7.0
 	 */
 	private CompositeArtifactFilter(
-			final BiFunction<Stream<ArtifactFilter>, Predicate<ArtifactFilter>, Boolean> matchFunction,
+			final BiPredicate<Stream<ArtifactFilter>, Predicate<ArtifactFilter>> matchFunction,
 			final ArtifactFilter... filters
 	) {
 		this.matchFunction = matchFunction;
@@ -90,7 +90,7 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	@Override
 	public boolean accept(final Artifact<?> artifact) {
 		Ensure.notNull("artifact", artifact);
-		return matchFunction.apply(filters.stream(), filter -> filter.accept(artifact));
+		return matchFunction.test(filters.stream(), filter -> filter.accept(artifact));
 	}
 
 	/**
@@ -103,11 +103,11 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	public boolean accept(final Artifact<?> artifact, final String updateVersion) {
 		Ensure.notNull("artifact", artifact);
 		Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
-		return matchFunction.apply(filters.stream(), filter -> filter.accept(artifact, updateVersion));
+		return matchFunction.test(filters.stream(), filter -> filter.accept(artifact, updateVersion));
 	}
 
 	/**
-	 * <p>Create an instance that test whether all filters are accepted.</p>
+	 * Create an instance that test whether all filters are accepted.
 	 * @param filters an array of artifact filters
 	 * @return the created instance
 	 * @throws NullPointerException if the array of artifacts or any of them is {@code null}
@@ -121,7 +121,7 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Create an instance that test whether any filters are accepted.</p>
+	 * Create an instance that test whether any filters are accepted.
 	 * @param filters an array of artifact filters
 	 * @return the created instance
 	 * @throws NullPointerException if the array of artifacts or any of them is {@code null}
@@ -135,7 +135,7 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Create an instance that test whether no filters are accepted.</p>
+	 * Create an instance that test whether no filters are accepted.
 	 * @param filters an array of artifact filters
 	 * @return the created instance
 	 * @throws NullPointerException if the array of artifacts or any of them is {@code null}

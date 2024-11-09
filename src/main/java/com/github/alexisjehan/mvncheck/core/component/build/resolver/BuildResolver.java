@@ -30,13 +30,13 @@ import com.github.alexisjehan.mvncheck.core.component.build.file.BuildFileType;
 import java.util.Set;
 
 /**
- * <p>Interface that describes a resolver of the build for a file.</p>
+ * Interface that describes a resolver of the build for a file.
  * @since 1.0.0
  */
 public interface BuildResolver {
 
 	/**
-	 * <p>Resolve the build for a file.</p>
+	 * Resolve the build for a file.
 	 * @param file a file
 	 * @return the build
 	 * @throws BuildResolveException might occur while resolving the build
@@ -45,7 +45,7 @@ public interface BuildResolver {
 	Build resolve(BuildFile file);
 
 	/**
-	 * <p>Get the {@link Set} of file types.</p>
+	 * Get the {@link Set} of file types.
 	 * @return the {@link Set} of file types
 	 * @since 1.0.0
 	 */

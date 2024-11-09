@@ -26,7 +26,8 @@ package com.github.alexisjehan.mvncheck.core.component.filter.version;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
- * <p>Interface that describes a version filter.</p>
+ * Interface that describes a version filter.
+ *
  * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #accept(String)}.</p>
  * @since 1.0.0
  */
@@ -34,7 +35,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 public interface VersionFilter {
 
 	/**
-	 * <p>Version filter that reject snapshots.</p>
+	 * Version filter that reject snapshots.
 	 * @since 1.0.0
 	 */
 	VersionFilter SNAPSHOT = version -> {
@@ -43,7 +44,7 @@ public interface VersionFilter {
 	};
 
 	/**
-	 * <p>Test if a version is accepted.</p>
+	 * Test if a version is accepted.
 	 * @param version a version
 	 * @return {@code true} if the version is accepted
 	 * @since 1.0.0

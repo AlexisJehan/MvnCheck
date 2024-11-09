@@ -24,13 +24,13 @@
 package org.apache.maven.project;
 
 /**
- * <p>Public access to the {@link ReactorModelPool} class.</p>
+ * Public access to the {@link ReactorModelPool} class.
  * @since 1.0.0
  */
 public final class PublicReactorModelPool extends ReactorModelPool {
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	public PublicReactorModelPool() {

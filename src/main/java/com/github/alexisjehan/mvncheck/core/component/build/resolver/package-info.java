@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Build resolving components.</p>
+ * Build resolving components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.build.resolver;

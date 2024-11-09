@@ -26,7 +26,8 @@ package com.github.alexisjehan.mvncheck.core.component.artifact.type;
 import com.github.alexisjehan.mvncheck.core.component.repository.RepositoryType;
 
 /**
- * <p>Enumeration of <i>Maven</i> artifact types.</p>
+ * Enumeration of <i>Maven</i> artifact types.
+ *
  * <p><b>Note</b>: Based on {@code org.apache.maven:maven-core:3.9.9}.</p>
  * @see <a href="https://maven.apache.org/ref/current/maven-model/maven.html">https://maven.apache.org/ref/current/maven-model/maven.html</a>
  * @since 1.0.0
@@ -34,115 +35,115 @@ import com.github.alexisjehan.mvncheck.core.component.repository.RepositoryType;
 public enum MavenArtifactType implements ArtifactType {
 
 	/**
-	 * <p>The parent artifact.</p>
+	 * The parent artifact.
 	 * @since 1.0.0
 	 */
 	PARENT,
 
 	/**
-	 * <p>Dependency management dependency artifacts.</p>
+	 * Dependency management dependency artifacts.
 	 * @since 1.0.0
 	 */
 	DEPENDENCY_MANAGEMENT_DEPENDENCY,
 
 	/**
-	 * <p>Dependency artifacts.</p>
+	 * Dependency artifacts.
 	 * @since 1.0.0
 	 */
 	DEPENDENCY,
 
 	/**
-	 * <p>Build extension artifacts.</p>
+	 * Build extension artifacts.
 	 * @since 1.0.0
 	 */
 	BUILD_EXTENSION,
 
 	/**
-	 * <p>Build plugin management plugin artifacts.</p>
+	 * Build plugin management plugin artifacts.
 	 * @since 1.0.0
 	 */
 	BUILD_PLUGIN_MANAGEMENT_PLUGIN(true),
 
 	/**
-	 * <p>Build plugin management plugin dependency artifacts.</p>
+	 * Build plugin management plugin dependency artifacts.
 	 * @since 1.0.0
 	 */
 	BUILD_PLUGIN_MANAGEMENT_PLUGIN_DEPENDENCY,
 
 	/**
-	 * <p>Build plugin artifacts.</p>
+	 * Build plugin artifacts.
 	 * @since 1.0.0
 	 */
 	BUILD_PLUGIN(true),
 
 	/**
-	 * <p>Build plugin dependency artifacts.</p>
+	 * Build plugin dependency artifacts.
 	 * @since 1.0.0
 	 */
 	BUILD_PLUGIN_DEPENDENCY,
 
 	/**
-	 * <p>Reporting plugin artifacts.</p>
+	 * Reporting plugin artifacts.
 	 * @since 1.0.0
 	 */
 	REPORTING_PLUGIN(true),
 
 	/**
-	 * <p>Profile build plugin management plugin artifacts.</p>
+	 * Profile build plugin management plugin artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_BUILD_PLUGIN_MANAGEMENT_PLUGIN(true),
 
 	/**
-	 * <p>Profile build plugin management plugin dependency artifacts.</p>
+	 * Profile build plugin management plugin dependency artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_BUILD_PLUGIN_MANAGEMENT_PLUGIN_DEPENDENCY,
 
 	/**
-	 * <p>Profile build plugin artifacts.</p>
+	 * Profile build plugin artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_BUILD_PLUGIN(true),
 
 	/**
-	 * <p>Profile build plugin dependency artifacts.</p>
+	 * Profile build plugin dependency artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_BUILD_PLUGIN_DEPENDENCY,
 
 	/**
-	 * <p>Profile dependency management dependency artifacts.</p>
+	 * Profile dependency management dependency artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_DEPENDENCY_MANAGEMENT_DEPENDENCY,
 
 	/**
-	 * <p>Profile dependency artifacts.</p>
+	 * Profile dependency artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_DEPENDENCY,
 
 	/**
-	 * <p>Profile reporting plugin artifacts.</p>
+	 * Profile reporting plugin artifacts.
 	 * @since 1.0.0
 	 */
 	PROFILE_REPORTING_PLUGIN(true);
 
 	/**
-	 * <p>Default value depending on whether any related artifact is a plugin or not.</p>
+	 * Default value depending on whether any related artifact is a plugin.
 	 * @since 1.0.0
 	 */
 	private static final boolean DEFAULT_PLUGIN = false;
 
 	/**
-	 * <p>Repository type.</p>
+	 * Repository type.
 	 * @since 1.0.0
 	 */
 	private final RepositoryType repositoryType;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	MavenArtifactType() {
@@ -150,7 +151,7 @@ public enum MavenArtifactType implements ArtifactType {
 	}
 
 	/**
-	 * <p>Constructor depending on whether any related artifact is a plugin or not.</p>
+	 * Constructor depending on whether any related artifact is a plugin.
 	 * @param plugin {@code true} if any related artifact is a plugin
 	 * @since 1.0.0
 	 */

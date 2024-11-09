@@ -26,20 +26,21 @@ package com.github.alexisjehan.mvncheck.core.component.session;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
- * <p>Unchecked {@link Exception} related to <i>Maven</i> sessions.</p>
+ * Unchecked {@link Exception} related to <i>Maven</i> sessions.
+ *
  * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.0.0
  */
 public final class MavenSessionException extends RuntimeException {
 
 	/**
-	 * <p>Serial version unique identifier.</p>
+	 * Serial version unique identifier.
 	 * @since 1.0.0
 	 */
-	private static final long serialVersionUID = -2024028478245530224L;
+	private static final long serialVersionUID = -560776400908084356L;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param cause a cause
 	 * @throws NullPointerException if the cause is {@code null}
 	 * @since 1.0.0

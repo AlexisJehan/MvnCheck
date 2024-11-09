@@ -24,13 +24,13 @@
 package org.apache.maven.model.building;
 
 /**
- * <p>Public access to the {@link DefaultModelProblemCollector} class.</p>
+ * Public access to the {@link DefaultModelProblemCollector} class.
  * @since 1.6.0
  */
 public final class PublicDefaultModelProblemCollector extends DefaultModelProblemCollector {
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param result a result
 	 * @since 1.6.0
 	 */

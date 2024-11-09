@@ -31,44 +31,45 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 /**
- * <p>Unchecked {@link Exception} related to artifact filter parsing.</p>
+ * Unchecked {@link Exception} related to artifact filter parsing.
+ *
  * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.0.0
  */
 public final class ArtifactFilterParseException extends RuntimeException {
 
 	/**
-	 * <p>Serial version unique identifier.</p>
+	 * Serial version unique identifier.
 	 * @since 1.0.0
 	 */
 	private static final long serialVersionUID = -5557892849559209991L;
 
 	/**
-	 * <p>Reason.</p>
+	 * Reason.
 	 * @since 1.0.0
 	 */
 	private final String reason;
 
 	/**
-	 * <p>Expression.</p>
+	 * Expression.
 	 * @since 1.7.0
 	 */
 	private final String expression;
 
 	/**
-	 * <p>Line number or {@code null}.</p>
+	 * Line number or {@code null}.
 	 * @since 1.0.0
 	 */
 	private final Long lineNumber;
 
 	/**
-	 * <p>File or {@code null}.</p>
+	 * File or {@code null}.
 	 * @since 1.0.0
 	 */
 	private final transient Path file;
 
 	/**
-	 * <p>Constructor with an expression.</p>
+	 * Constructor with an expression.
 	 * @param reason a reason
 	 * @param expression an expression
 	 * @throws NullPointerException if the reason or the expression is {@code null}
@@ -80,7 +81,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Constructor with an expression at a line number.</p>
+	 * Constructor with an expression at a line number.
 	 * @param reason a reason
 	 * @param expression an expression
 	 * @param lineNumber a line number or {@code null}
@@ -96,7 +97,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Constructor with an expression at a line number of a file.</p>
+	 * Constructor with an expression at a line number of a file.
 	 * @param reason a reason
 	 * @param expression an expression
 	 * @param lineNumber a line number or {@code null}
@@ -131,7 +132,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Return a copy of the current exception with the given line number.</p>
+	 * Return a copy of the current exception with the given line number.
 	 * @param lineNumber a line number
 	 * @return the copy of the current exception
 	 * @throws NullPointerException if the line number is {@code null}
@@ -145,7 +146,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Return a copy of the current exception with the given file.</p>
+	 * Return a copy of the current exception with the given file.
 	 * @param file a file
 	 * @return the copy of the current exception
 	 * @throws NullPointerException if the file is {@code null}
@@ -157,7 +158,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get the reason.</p>
+	 * Get the reason.
 	 * @return the reason
 	 * @since 1.0.0
 	 */
@@ -166,7 +167,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get the expression.</p>
+	 * Get the expression.
 	 * @return the expression
 	 * @deprecated since 1.7.0, use {@link #getExpression()} instead
 	 * @since 1.0.0
@@ -177,7 +178,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get the expression.</p>
+	 * Get the expression.
 	 * @return the expression
 	 * @since 1.7.0
 	 */
@@ -186,7 +187,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get the line number.</p>
+	 * Get the line number.
 	 * @return the line number
 	 * @deprecated since 1.7.0, use {@link #getOptionalLineNumber()} instead
 	 * @since 1.0.0
@@ -197,7 +198,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get an {@link Optional} of the line number.</p>
+	 * Get an {@link Optional} of the line number.
 	 * @return the {@link Optional} of the line number
 	 * @since 1.7.0
 	 */
@@ -206,7 +207,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	}
 
 	/**
-	 * <p>Get an {@link Optional} of the file.</p>
+	 * Get an {@link Optional} of the file.
 	 * @return the {@link Optional} of the file
 	 * @since 1.0.0
 	 */

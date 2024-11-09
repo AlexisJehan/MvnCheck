@@ -33,7 +33,8 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.type.ArtifactType
 import java.util.Optional;
 
 /**
- * <p>Class that describes an artifact.</p>
+ * Class that describes an artifact.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @param <T> the type
@@ -42,37 +43,37 @@ import java.util.Optional;
 public final class Artifact<T extends ArtifactType> {
 
 	/**
-	 * <p>Default value on whether the version is inherited or not.</p>
+	 * Default value on whether the version is inherited.
 	 * @since 1.5.0
 	 */
 	static final boolean DEFAULT_VERSION_INHERITED = false;
 
 	/**
-	 * <p>Type.</p>
+	 * Type.
 	 * @since 1.0.0
 	 */
 	private final T type;
 
 	/**
-	 * <p>Identifier.</p>
+	 * Identifier.
 	 * @since 1.0.0
 	 */
 	private final ArtifactIdentifier identifier;
 
 	/**
-	 * <p>Version.</p>
+	 * Version.
 	 * @since 1.0.0
 	 */
 	private final String version;
 
 	/**
-	 * <p>Whether the version is inherited or not.</p>
+	 * Whether the version is inherited.
 	 * @since 1.5.0
 	 */
 	private final boolean versionInherited;
 
 	/**
-	 * <p>Constructor without a version.</p>
+	 * Constructor without a version.
 	 * @param type a type
 	 * @param identifier an identifier
 	 * @throws NullPointerException if the type or the identifier is {@code null}
@@ -86,7 +87,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Constructor with a version.</p>
+	 * Constructor with a version.
 	 * @param type a type
 	 * @param identifier an identifier
 	 * @param version a version or {@code null}
@@ -102,7 +103,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Constructor with a version and whether it is inherited or not.</p>
+	 * Constructor with a version and whether it is inherited.
 	 * @param type a type
 	 * @param identifier an identifier
 	 * @param version a version or {@code null}
@@ -125,7 +126,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Return a copy of the current artifact with the given type.</p>
+	 * Return a copy of the current artifact with the given type.
 	 * @param type a type
 	 * @return the copy of the current artifact
 	 * @throws NullPointerException if the type is {@code null}
@@ -138,7 +139,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Return a copy of the current artifact with the given type.</p>
+	 * Return a copy of the current artifact with the given type.
 	 * @param type a type
 	 * @return the copy of the current artifact
 	 * @throws NullPointerException if the type is {@code null}
@@ -150,7 +151,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Return a copy of the current artifact with whether the version is inherited or not.</p>
+	 * Return a copy of the current artifact with whether the version is inherited.
 	 * @param versionInherited {@code true} if the version is inherited
 	 * @return the copy of the current artifact
 	 * @since 1.5.0
@@ -208,7 +209,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Get the type.</p>
+	 * Get the type.
 	 * @return the type
 	 * @since 1.0.0
 	 */
@@ -217,7 +218,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Get the identifier.</p>
+	 * Get the identifier.
 	 * @return the identifier
 	 * @since 1.0.0
 	 */
@@ -226,7 +227,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Get an {@link Optional} of the version.</p>
+	 * Get an {@link Optional} of the version.
 	 * @return the {@link Optional} of the version
 	 * @since 1.0.0
 	 */
@@ -235,7 +236,7 @@ public final class Artifact<T extends ArtifactType> {
 	}
 
 	/**
-	 * <p>Get if the version is inherited.</p>
+	 * Get if the version is inherited.
 	 * @return {@code true} if the version is inherited
 	 * @since 1.5.0
 	 */

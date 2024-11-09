@@ -34,7 +34,8 @@ import org.apache.maven.settings.Server;
 import java.util.List;
 
 /**
- * <p>Class that describes <i>Maven</i> decrypted settings.</p>
+ * Class that describes <i>Maven</i> decrypted settings.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -42,19 +43,19 @@ import java.util.List;
 public final class DecryptedSettings {
 
 	/**
-	 * <p>{@link List} of proxies.</p>
+	 * {@link List} of proxies.
 	 * @since 1.0.0
 	 */
 	private final List<Proxy> proxies;
 
 	/**
-	 * <p>{@link List} of servers.</p>
+	 * {@link List} of servers.
 	 * @since 1.0.0
 	 */
 	private final List<Server> servers;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param proxies a {@link List} of proxies
 	 * @param servers a {@link List} of servers
 	 * @throws NullPointerException if the {@link List} of proxies, any of them, the {@link List} of servers or any of
@@ -111,7 +112,7 @@ public final class DecryptedSettings {
 	}
 
 	/**
-	 * <p>Get the {@link List} of proxies.</p>
+	 * Get the {@link List} of proxies.
 	 * @return the {@link List} of proxies
 	 * @since 1.0.0
 	 */
@@ -120,7 +121,7 @@ public final class DecryptedSettings {
 	}
 
 	/**
-	 * <p>Get the {@link List} of servers.</p>
+	 * Get the {@link List} of servers.
 	 * @return the {@link List} of servers
 	 * @since 1.0.0
 	 */

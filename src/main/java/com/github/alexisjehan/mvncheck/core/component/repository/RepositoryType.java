@@ -24,19 +24,19 @@
 package com.github.alexisjehan.mvncheck.core.component.repository;
 
 /**
- * <p>Enumeration of repository types.</p>
+ * Enumeration of repository types.
  * @since 1.0.0
  */
 public enum RepositoryType {
 
 	/**
-	 * <p>Normal repositories.</p>
+	 * Normal repositories.
 	 * @since 1.0.0
 	 */
 	NORMAL,
 
 	/**
-	 * <p>Plugin repositories.</p>
+	 * Plugin repositories.
 	 * @since 1.0.0
 	 */
 	PLUGIN

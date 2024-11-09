@@ -32,7 +32,8 @@ import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 import java.nio.file.Path;
 
 /**
- * <p>Class that describes a build file.</p>
+ * Class that describes a build file.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -40,19 +41,19 @@ import java.nio.file.Path;
 public final class BuildFile {
 
 	/**
-	 * <p>Type.</p>
+	 * Type.
 	 * @since 1.0.0
 	 */
 	private final BuildFileType type;
 
 	/**
-	 * <p>File.</p>
+	 * File.
 	 * @since 1.0.0
 	 */
 	private final Path file;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param type a type
 	 * @param file a file
 	 * @throws NullPointerException if the type or the file is {@code null}
@@ -108,7 +109,7 @@ public final class BuildFile {
 	}
 
 	/**
-	 * <p>Get the type.</p>
+	 * Get the type.
 	 * @return the type
 	 * @since 1.0.0
 	 */
@@ -117,7 +118,7 @@ public final class BuildFile {
 	}
 
 	/**
-	 * <p>Get the file.</p>
+	 * Get the file.
 	 * @return the file
 	 * @since 1.0.0
 	 */

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Artifact version resolving components.</p>
+ * Artifact version resolving components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.artifact.version.resolver;

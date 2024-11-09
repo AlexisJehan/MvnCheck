@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Artifact type components.</p>
+ * Artifact type components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.artifact.type;

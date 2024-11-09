@@ -58,32 +58,33 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <p>Class that describes a <i>Gradle</i> resolver of the build for a file.</p>
+ * Class that describes a <i>Gradle</i> resolver of the build for a file.
+ *
  * <p><b>Note</b>: Compatible starting with <i>Gradle 4.8</i>.</p>
  * @since 1.0.0
  */
 public final class GradleBuildResolver implements BuildResolver {
 
 	/**
-	 * <p>Prefix of the initialisation file name.</p>
+	 * Prefix of the initialisation file name.
 	 * @since 1.7.0
 	 */
 	private static final String INIT_FILE_NAME_PREFIX = "init";
 
 	/**
-	 * <p>Suffix of the initialisation file name.</p>
+	 * Suffix of the initialisation file name.
 	 * @since 1.7.0
 	 */
 	private static final String INIT_FILE_NAME_SUFFIX = ".gradle";
 
 	/**
-	 * <p>Initialisation file name.</p>
+	 * Initialisation file name.
 	 * @since 1.0.0
 	 */
 	private static final String INIT_FILE_NAME = INIT_FILE_NAME_PREFIX + INIT_FILE_NAME_SUFFIX;
 
 	/**
-	 * <p>{@link Set} of file types.</p>
+	 * {@link Set} of file types.
 	 * @since 1.0.0
 	 */
 	private static final Set<BuildFileType> FILE_TYPES = Set.of(
@@ -92,13 +93,13 @@ public final class GradleBuildResolver implements BuildResolver {
 	);
 
 	/**
-	 * <p>Logger.</p>
+	 * Logger.
 	 * @since 1.0.0
 	 */
 	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @since 1.0.0
 	 */
 	public GradleBuildResolver() {
@@ -122,7 +123,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Resolve the build for a file using an {@link OutputStream}.</p>
+	 * Resolve the build for a file using an {@link OutputStream}.
 	 * @param file a file
 	 * @param outputStream an {@link OutputStream}
 	 * @return the build
@@ -204,8 +205,8 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Parse a {@link List} of repositories from a {@link BufferedReader} of the <i>Gradle</i> {@code :repositories}
-	 * task.</p>
+	 * Parse a {@link List} of repositories from a {@link BufferedReader} of the <i>Gradle</i> {@code :repositories}
+	 * task.
 	 * @param bufferedReader a {@link BufferedReader}
 	 * @return the {@link List} of repositories
 	 * @throws IOException might occur with input/output operations
@@ -247,8 +248,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Parse a {@link List} of artifacts from a {@link BufferedReader} of the <i>Gradle</i> {@code :dependencies}
-	 * task.</p>
+	 * Parse a {@link List} of artifacts from a {@link BufferedReader} of the <i>Gradle</i> {@code :dependencies} task.
 	 * @param bufferedReader a {@link BufferedReader}
 	 * @return the {@link List} of artifacts
 	 * @throws IOException might occur with input/output operations
@@ -348,7 +348,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Filter a modifiable {@link List} of repositories, removing irrelevant ones.</p>
+	 * Filter a modifiable {@link List} of repositories, removing irrelevant ones.
 	 * @param repositories a modifiable {@link List} of repositories
 	 * @return the {@link List} of repositories
 	 * @throws NullPointerException if the {@link List} of repositories or any of them is {@code null}
@@ -362,7 +362,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Filter a modifiable {@link List} of artifacts, removing redundant duplicates.</p>
+	 * Filter a modifiable {@link List} of artifacts, removing redundant duplicates.
 	 * @param artifacts a modifiable {@link List} of artifacts
 	 * @return the {@link List} of artifacts
 	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
@@ -375,7 +375,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * <p>Filter a modifiable {@link List} of artifacts, removing irrelevant ones.</p>
+	 * Filter a modifiable {@link List} of artifacts, removing irrelevant ones.
 	 * @param artifacts a modifiable {@link List} of artifacts
 	 * @return the {@link List} of artifacts
 	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}

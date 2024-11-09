@@ -32,7 +32,8 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 import com.github.alexisjehan.mvncheck.core.component.artifact.type.ArtifactType;
 
 /**
- * <p>Class that describes an update version for an artifact.</p>
+ * Class that describes an update version for an artifact.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -40,19 +41,19 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.type.ArtifactType
 public final class ArtifactUpdateVersion {
 
 	/**
-	 * <p>Artifact.</p>
+	 * Artifact.
 	 * @since 1.0.0
 	 */
 	private final Artifact<ArtifactType> artifact;
 
 	/**
-	 * <p>Update version.</p>
+	 * Update version.
 	 * @since 1.0.0
 	 */
 	private final String updateVersion;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param artifact an artifact
 	 * @param updateVersion an update version
 	 * @throws NullPointerException if the artifact or the update version is {@code null}
@@ -110,7 +111,7 @@ public final class ArtifactUpdateVersion {
 	}
 
 	/**
-	 * <p>Get the artifact.</p>
+	 * Get the artifact.
 	 * @return the artifact
 	 * @since 1.0.0
 	 */
@@ -119,7 +120,7 @@ public final class ArtifactUpdateVersion {
 	}
 
 	/**
-	 * <p>Get the update version.</p>
+	 * Get the update version.
 	 * @return the update version
 	 * @since 1.0.0
 	 */

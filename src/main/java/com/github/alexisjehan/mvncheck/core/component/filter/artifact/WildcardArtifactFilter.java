@@ -29,43 +29,43 @@ import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 import java.util.regex.Pattern;
 
 /**
- * <p>Class that describes an artifact filter based on expressions that can contain wildcard characters.</p>
+ * Class that describes an artifact filter based on expressions that can contain wildcard characters.
  * @since 1.7.0
  */
 public final class WildcardArtifactFilter implements ArtifactFilter {
 
 	/**
-	 * <p>Single character wildcard.</p>
+	 * Single character wildcard.
 	 * @since 1.7.0
 	 */
 	public static final char WILDCARD_SINGLE = '?';
 
 	/**
-	 * <p>Any characters wildcard.</p>
+	 * Any character wildcard.
 	 * @since 1.7.0
 	 */
 	public static final char WILDCARD_ANY = '*';
 
 	/**
-	 * <p>{@link Pattern} of the group identifier.</p>
+	 * {@link Pattern} of the group identifier.
 	 * @since 1.7.0
 	 */
 	private final Pattern groupIdPattern;
 
 	/**
-	 * <p>{@link Pattern} of the artifact identifier or {@code null}.</p>
+	 * {@link Pattern} of the artifact identifier or {@code null}.
 	 * @since 1.7.0
 	 */
 	private final Pattern artifactIdPattern;
 
 	/**
-	 * <p>{@link Pattern} of the update version or {@code null}.</p>
+	 * {@link Pattern} of the update version or {@code null}.
 	 * @since 1.7.0
 	 */
 	private final Pattern updateVersionPattern;
 
 	/**
-	 * <p>Constructor with a group identifier expression.</p>
+	 * Constructor with a group identifier expression.
 	 * @param groupIdExpression a group identifier expression
 	 * @throws NullPointerException if the group identifier expression is {@code null}
 	 * @throws IllegalArgumentException if the group identifier expression is empty
@@ -76,7 +76,7 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Constructor with a group identifier expression and an artifact identifier expression.</p>
+	 * Constructor with a group identifier expression and an artifact identifier expression.
 	 * @param groupIdExpression a group identifier expression
 	 * @param artifactIdExpression an artifact identifier expression or {@code null}
 	 * @throws NullPointerException if the group identifier expression is {@code null}
@@ -89,8 +89,8 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Constructor with a group identifier expression, an artifact identifier expression and an update version
-	 * expression.</p>
+	 * Constructor with a group identifier expression, an artifact identifier expression and an update version
+	 * expression.
 	 * @param groupIdExpression a group identifier expression
 	 * @param artifactIdExpression an artifact identifier expression or {@code null}
 	 * @param updateVersionExpression an update version expression or {@code null}
@@ -150,7 +150,7 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	}
 
 	/**
-	 * <p>Create a {@link Pattern} from an expression.</p>
+	 * Create a {@link Pattern} from an expression.
 	 * @param expression an expression
 	 * @return the created {@link Pattern}
 	 * @since 1.7.0

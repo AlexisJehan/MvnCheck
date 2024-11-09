@@ -30,7 +30,8 @@ import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 
 /**
- * <p>Class that describes an artifact identifier.</p>
+ * Class that describes an artifact identifier.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -38,19 +39,19 @@ import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 public final class ArtifactIdentifier {
 
 	/**
-	 * <p>Group identifier.</p>
+	 * Group identifier.
 	 * @since 1.0.0
 	 */
 	private final String groupId;
 
 	/**
-	 * <p>Artifact identifier.</p>
+	 * Artifact identifier.
 	 * @since 1.0.0
 	 */
 	private final String artifactId;
 
 	/**
-	 * <p>Constructor.</p>
+	 * Constructor.
 	 * @param groupId a group identifier
 	 * @param artifactId an artifact identifier
 	 * @throws NullPointerException if the group identifier or the artifact identifier is {@code null}
@@ -107,7 +108,7 @@ public final class ArtifactIdentifier {
 	}
 
 	/**
-	 * <p>Get the group identifier.</p>
+	 * Get the group identifier.
 	 * @return the group identifier
 	 * @since 1.0.0
 	 */
@@ -116,7 +117,7 @@ public final class ArtifactIdentifier {
 	}
 
 	/**
-	 * <p>Get the artifact identifier.</p>
+	 * Get the artifact identifier.
 	 * @return the artifact identifier
 	 * @since 1.0.0
 	 */

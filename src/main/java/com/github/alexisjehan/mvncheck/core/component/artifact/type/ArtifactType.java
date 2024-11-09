@@ -26,13 +26,13 @@ package com.github.alexisjehan.mvncheck.core.component.artifact.type;
 import com.github.alexisjehan.mvncheck.core.component.repository.RepositoryType;
 
 /**
- * <p>Interface that describes an artifact type.</p>
+ * Interface that describes an artifact type.
  * @since 1.0.0
  */
 public interface ArtifactType {
 
 	/**
-	 * <p>Get the repository type.</p>
+	 * Get the repository type.
 	 * @return the repository type
 	 * @since 1.0.0
 	 */

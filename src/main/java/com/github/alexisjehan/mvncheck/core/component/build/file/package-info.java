@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>Build file components.</p>
+ * Build file components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mvncheck.core.component.build.file;
