@@ -193,7 +193,11 @@ public final class Service {
 	public List<BuildFile> filterBuildFiles(final List<BuildFile> buildFiles) {
 		Ensure.notNullAndNotNullElements("buildFiles", buildFiles);
 		final var outputDirectories = buildFiles.stream()
-				.map(buildFile -> buildFile.getFile().resolveSibling(buildFile.getType().getOutputDirectoryName()))
+				.map(
+						buildFile -> buildFile.getFile().resolveSibling(
+								buildFile.getType().getOutputDirectoryName()
+						)
+				)
 				.collect(Collectors.toUnmodifiableList());
 		return buildFiles.stream()
 				.filter(buildFile -> outputDirectories.stream().noneMatch(buildFile.getFile()::startsWith))
@@ -287,7 +291,12 @@ public final class Service {
 								.filter(version -> !ignoreSnapshots || !VersionFilter.SNAPSHOT.accept(version))
 								.isPresent()
 				)
-				.map(artifact -> artifactAvailableVersionsResolver.resolve(artifact, build.getRepositories()))
+				.map(
+						artifact -> artifactAvailableVersionsResolver.resolve(
+								artifact,
+								build.getRepositories()
+						)
+				)
 				.map(artifactAvailableVersions -> {
 					final var artifact = artifactAvailableVersions.getArtifact();
 					final var artifactVersion = artifact.getOptionalVersion().orElseThrow();

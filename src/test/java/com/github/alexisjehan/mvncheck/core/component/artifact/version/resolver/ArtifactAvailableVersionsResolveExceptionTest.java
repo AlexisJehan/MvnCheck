@@ -35,8 +35,8 @@ final class ArtifactAvailableVersionsResolveExceptionTest {
 
 	private static final String MESSAGE = "foo-message";
 
-	private final ArtifactAvailableVersionsResolveException artifactAvailableVersionsResolveException
-			= new ArtifactAvailableVersionsResolveException(MESSAGE);
+	private final ArtifactAvailableVersionsResolveException artifactAvailableVersionsResolveException =
+			new ArtifactAvailableVersionsResolveException(MESSAGE);
 
 	@Test
 	void testConstructorInvalid() {

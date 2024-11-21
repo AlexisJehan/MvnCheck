@@ -132,28 +132,40 @@ public final class MavenBuildResolver implements BuildResolver {
 		final var effectiveRepositories = extractRepositories(effectiveModel);
 		logger.debug("Extracted effective repositories:");
 		effectiveRepositories.forEach(
-				effectiveRepository -> logger.debug("- {}", () -> ToString.toString(effectiveRepository))
+				effectiveRepository -> logger.debug(
+						"- {}",
+						() -> ToString.toString(effectiveRepository)
+				)
 		);
 
 		logger.trace("Extracting effective artifacts");
 		final var effectiveArtifacts = extractArtifacts(effectiveModel);
 		logger.debug("Extracted effective artifacts:");
 		effectiveArtifacts.forEach(
-				effectiveArtifact -> logger.debug("- {}", () -> ToString.toString(effectiveArtifact))
+				effectiveArtifact -> logger.debug(
+						"- {}",
+						() -> ToString.toString(effectiveArtifact)
+				)
 		);
 
 		logger.trace("Extracting raw artifacts");
 		final var rawArtifacts = extractArtifacts(rawModel);
 		logger.debug("Extracted raw artifacts:");
 		rawArtifacts.forEach(
-				rawArtifact -> logger.debug("- {}", () -> ToString.toString(rawArtifact))
+				rawArtifact -> logger.debug(
+						"- {}",
+						() -> ToString.toString(rawArtifact)
+				)
 		);
 
 		logger.trace("Inheriting artifacts");
 		final var inheritedArtifacts = inherit(rawArtifacts, effectiveArtifacts);
 		logger.debug("Inherited artifacts:");
 		inheritedArtifacts.forEach(
-				inheritedArtifact -> logger.debug("- {}", () -> ToString.toString(inheritedArtifact))
+				inheritedArtifact -> logger.debug(
+						"- {}",
+						() -> ToString.toString(inheritedArtifact)
+				)
 		);
 
 		return new Build(file, effectiveRepositories, inheritedArtifacts);
@@ -299,21 +311,22 @@ public final class MavenBuildResolver implements BuildResolver {
 					final var rawArtifactOptionalVersion = rawArtifact.getOptionalVersion();
 					return effectiveArtifacts.stream()
 							.filter(
-									effectiveArtifact -> rawArtifactType == effectiveArtifact.getType()
-											&& rawArtifactIdentifier.equals(effectiveArtifact.getIdentifier())
+									effectiveArtifact ->
+											rawArtifactType == effectiveArtifact.getType()
+													&& rawArtifactIdentifier.equals(effectiveArtifact.getIdentifier())
 							)
 							.sorted(
 									Comparator.comparing(
-											effectiveArtifact -> rawArtifactOptionalVersion.equals(
-													effectiveArtifact.getOptionalVersion()
-											),
+											effectiveArtifact ->
+													rawArtifactOptionalVersion.equals(
+															effectiveArtifact.getOptionalVersion()
+													),
 											Comparator.reverseOrder()
 									)
 							)
 							.map(
-									effectiveArtifact -> effectiveArtifact.withVersionInherited(
-											rawArtifactOptionalVersion.isEmpty()
-									)
+									effectiveArtifact ->
+											effectiveArtifact.withVersionInherited(rawArtifactOptionalVersion.isEmpty())
 							)
 							.findAny()
 							.orElse(rawArtifact);

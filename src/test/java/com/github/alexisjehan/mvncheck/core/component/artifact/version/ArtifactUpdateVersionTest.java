@@ -63,24 +63,27 @@ final class ArtifactUpdateVersionTest {
 	void testEqualsAndHashCodeAndToString() {
 		assertThat(artifactUpdateVersion.equals(artifactUpdateVersion)).isTrue();
 		assertThat(artifactUpdateVersion).isNotEqualTo(new Object());
-		assertThat(new ArtifactUpdateVersion(ARTIFACT, UPDATE_VERSION)).satisfies(otherArtifactUpdateVersion -> {
-			assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).isEqualTo(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).hasSameHashCodeAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).hasToString(artifactUpdateVersion.toString());
-		});
-		assertThat(new ArtifactUpdateVersion(OTHER_ARTIFACT, UPDATE_VERSION)).satisfies(otherArtifactUpdateVersion -> {
-			assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).isNotEqualTo(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).doesNotHaveSameHashCodeAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).doesNotHaveToString(artifactUpdateVersion.toString());
-		});
-		assertThat(new ArtifactUpdateVersion(ARTIFACT, OTHER_UPDATE_VERSION)).satisfies(otherArtifactUpdateVersion -> {
-			assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).isNotEqualTo(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).doesNotHaveSameHashCodeAs(artifactUpdateVersion);
-			assertThat(otherArtifactUpdateVersion).doesNotHaveToString(artifactUpdateVersion.toString());
-		});
+		assertThat(new ArtifactUpdateVersion(ARTIFACT, UPDATE_VERSION))
+				.satisfies(otherArtifactUpdateVersion -> {
+					assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).isEqualTo(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).hasSameHashCodeAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).hasToString(artifactUpdateVersion.toString());
+				});
+		assertThat(new ArtifactUpdateVersion(OTHER_ARTIFACT, UPDATE_VERSION))
+				.satisfies(otherArtifactUpdateVersion -> {
+					assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).isNotEqualTo(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).doesNotHaveSameHashCodeAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).doesNotHaveToString(artifactUpdateVersion.toString());
+				});
+		assertThat(new ArtifactUpdateVersion(ARTIFACT, OTHER_UPDATE_VERSION))
+				.satisfies(otherArtifactUpdateVersion -> {
+					assertThat(otherArtifactUpdateVersion).isNotSameAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).isNotEqualTo(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).doesNotHaveSameHashCodeAs(artifactUpdateVersion);
+					assertThat(otherArtifactUpdateVersion).doesNotHaveToString(artifactUpdateVersion.toString());
+				});
 	}
 
 	@Test

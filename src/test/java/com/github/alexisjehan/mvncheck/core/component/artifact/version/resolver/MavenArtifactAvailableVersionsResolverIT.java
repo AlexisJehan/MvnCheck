@@ -38,8 +38,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 final class MavenArtifactAvailableVersionsResolverIT {
 
-	private final MavenArtifactAvailableVersionsResolver mavenArtifactAvailableVersionsResolver
-			= new MavenArtifactAvailableVersionsResolver(new MavenSession());
+	private final MavenArtifactAvailableVersionsResolver mavenArtifactAvailableVersionsResolver =
+			new MavenArtifactAvailableVersionsResolver(new MavenSession());
 
 	@Test
 	void testResolve() {

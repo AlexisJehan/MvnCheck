@@ -167,28 +167,40 @@ public final class GradleBuildResolver implements BuildResolver {
 			final var repositories = parseRepositories(reader);
 			logger.debug("Parsed repositories:");
 			repositories.forEach(
-					repository -> logger.debug("- {}", () -> ToString.toString(repository))
+					repository -> logger.debug(
+							"- {}",
+							() -> ToString.toString(repository)
+					)
 			);
 
 			logger.trace("Filtering repositories");
 			final var filteredRepositories = filterRepositories(repositories);
 			logger.debug("Filtered repositories:");
 			filteredRepositories.forEach(
-					filteredRepository -> logger.debug("- {}", () -> ToString.toString(filteredRepository))
+					filteredRepository -> logger.debug(
+							"- {}",
+							() -> ToString.toString(filteredRepository)
+					)
 			);
 
 			logger.trace("Parsing artifacts");
 			final var artifacts = parseArtifacts(reader);
 			logger.debug("Parsed artifacts:");
 			artifacts.forEach(
-					artifact -> logger.debug("- {}", () -> ToString.toString(artifact))
+					artifact -> logger.debug(
+							"- {}",
+							() -> ToString.toString(artifact)
+					)
 			);
 
 			logger.trace("Filtering artifacts");
 			final var filteredArtifacts = filterArtifacts(artifacts);
 			logger.debug("Filtered artifacts:");
 			filteredArtifacts.forEach(
-					filteredArtifact -> logger.debug("- {}", () -> ToString.toString(filteredArtifact))
+					filteredArtifact -> logger.debug(
+							"- {}",
+							() -> ToString.toString(filteredArtifact)
+					)
 			);
 
 			return new Build(file, filteredRepositories, filteredArtifacts);
@@ -280,7 +292,10 @@ public final class GradleBuildResolver implements BuildResolver {
 					}
 					final var artifactTypeString = Strings.substringBefore(line, " - ");
 					final var optionalArtifactType = Arrays.stream(GradleArtifactType.values())
-							.filter(artifactType -> artifactType.dependenciesTaskName().equals(artifactTypeString))
+							.filter(
+									artifactType -> artifactType.dependenciesTaskName()
+											.equals(artifactTypeString)
+							)
 							.findAny();
 					if (optionalArtifactType.isEmpty()) {
 						while (null != (line = bufferedReader.readLine())) {
@@ -411,9 +426,16 @@ public final class GradleBuildResolver implements BuildResolver {
 					artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
 				});
 		artifacts.stream()
-				.filter(artifact -> GradleArtifactType.TEST_COMPILE_CLASSPATH == artifact.getType())
+				.filter(
+						artifact ->
+								GradleArtifactType.TEST_COMPILE_CLASSPATH == artifact.getType()
+				)
 				.collect(Collectors.toUnmodifiableList())
-				.forEach(artifact -> artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH)));
+				.forEach(
+						artifact -> artifacts.remove(
+								artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH)
+						)
+				);
 		return artifacts.stream()
 				.map(artifact -> {
 					switch (artifact.getType()) {

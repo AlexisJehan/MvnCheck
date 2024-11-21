@@ -282,60 +282,64 @@ final class GradleBuildResolverTest {
 			assertThat(BuildFileType.GRADLE_GROOVY).satisfies(buildFileType -> {
 				final var tmpBuildDirectory = tmpDirectory.resolve("groovy");
 				Files.createDirectory(tmpBuildDirectory);
-				assertThat(tmpBuildDirectory.resolve("build_not-found.gradle")).satisfies(tmpBuildFile -> {
-					final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-				});
-				assertThat(tmpBuildDirectory.resolve("build.gradle")).satisfies(tmpBuildFile -> {
-					final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
-					Files.copy(
-							Path.of("src", "test", "resources", "build_error.gradle"),
-							tmpBuildFile,
-							StandardCopyOption.REPLACE_EXISTING
-					);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-					Files.copy(
-							Path.of("src", "test", "resources", "build_foo.gradle"),
-							tmpBuildFile,
-							StandardCopyOption.REPLACE_EXISTING
-					);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-				});
+				assertThat(tmpBuildDirectory.resolve("build_not-found.gradle"))
+						.satisfies(tmpBuildFile -> {
+							final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+						});
+				assertThat(tmpBuildDirectory.resolve("build.gradle"))
+						.satisfies(tmpBuildFile -> {
+							final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
+							Files.copy(
+									Path.of("src", "test", "resources", "build_error.gradle"),
+									tmpBuildFile,
+									StandardCopyOption.REPLACE_EXISTING
+							);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+							Files.copy(
+									Path.of("src", "test", "resources", "build_foo.gradle"),
+									tmpBuildFile,
+									StandardCopyOption.REPLACE_EXISTING
+							);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+						});
 			});
 			assertThat(BuildFileType.GRADLE_KOTLIN).satisfies(buildFileType -> {
 				final var tmpBuildDirectory = tmpDirectory.resolve("kotlin");
 				Files.createDirectory(tmpBuildDirectory);
-				assertThat(tmpBuildDirectory.resolve("build_not-found.gradle.kts")).satisfies(tmpBuildFile -> {
-					final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-				});
-				assertThat(tmpBuildDirectory.resolve("build.gradle.kts")).satisfies(tmpBuildFile -> {
-					final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
-					Files.copy(
-							Path.of("src", "test", "resources", "build_error.gradle.kts"),
-							tmpBuildFile,
-							StandardCopyOption.REPLACE_EXISTING
-					);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-					Files.copy(
-							Path.of("src", "test", "resources", "build_foo.gradle.kts"),
-							tmpBuildFile,
-							StandardCopyOption.REPLACE_EXISTING
-					);
-					assertThatExceptionOfType(BuildResolveException.class)
-							.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
-							.withCauseInstanceOf(GradleConnectionException.class);
-				});
+				assertThat(tmpBuildDirectory.resolve("build_not-found.gradle.kts"))
+						.satisfies(tmpBuildFile -> {
+							final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+						});
+				assertThat(tmpBuildDirectory.resolve("build.gradle.kts"))
+						.satisfies(tmpBuildFile -> {
+							final var buildFile = new BuildFile(buildFileType, tmpBuildFile);
+							Files.copy(
+									Path.of("src", "test", "resources", "build_error.gradle.kts"),
+									tmpBuildFile,
+									StandardCopyOption.REPLACE_EXISTING
+							);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+							Files.copy(
+									Path.of("src", "test", "resources", "build_foo.gradle.kts"),
+									tmpBuildFile,
+									StandardCopyOption.REPLACE_EXISTING
+							);
+							assertThatExceptionOfType(BuildResolveException.class)
+									.isThrownBy(() -> gradleBuildResolver.resolve(buildFile))
+									.withCauseInstanceOf(GradleConnectionException.class);
+						});
 			});
 		}
 	}

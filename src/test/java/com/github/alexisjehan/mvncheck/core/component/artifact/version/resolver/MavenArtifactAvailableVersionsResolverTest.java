@@ -115,8 +115,9 @@ final class MavenArtifactAvailableVersionsResolverTest {
 						"foo-version"
 				)
 		).satisfies(
-				artifact -> assertThat(mavenArtifactAvailableVersionsResolver.resolve(artifact, repositories))
-						.isEqualTo(new ArtifactAvailableVersions(artifact, List.of("foo-version1", "foo-version2")))
+				artifact -> assertThat(
+						mavenArtifactAvailableVersionsResolver.resolve(artifact, repositories)
+				).isEqualTo(new ArtifactAvailableVersions(artifact, List.of("foo-version1", "foo-version2")))
 		);
 		assertThat(
 				new Artifact<>(
@@ -125,8 +126,9 @@ final class MavenArtifactAvailableVersionsResolverTest {
 						"foo-plugin-version"
 				)
 		).satisfies(
-				artifact -> assertThat(mavenArtifactAvailableVersionsResolver.resolve(artifact, repositories))
-						.isEqualTo(new ArtifactAvailableVersions(artifact, List.of("foo-version1", "foo-version2")))
+				artifact -> assertThat(
+						mavenArtifactAvailableVersionsResolver.resolve(artifact, repositories)
+				).isEqualTo(new ArtifactAvailableVersions(artifact, List.of("foo-version1", "foo-version2")))
 		);
 	}
 

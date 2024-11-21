@@ -411,12 +411,16 @@ final class MavenUtilsTest {
 						MavenUtils.makeSettings(null, null)
 				)
 		).satisfies(mirrorSelector -> {
-			assertThat(MavenUtils.createRemoteRepository("foo-id", "https://foo-host")).satisfies(
-					remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository)).isNull()
-			);
-			assertThat(MavenUtils.createRemoteRepository("bar-id", "https://bar-host")).satisfies(
-					remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository)).isNull()
-			);
+			assertThat(MavenUtils.createRemoteRepository("foo-id", "https://foo-host"))
+					.satisfies(
+							remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository))
+									.isNull()
+					);
+			assertThat(MavenUtils.createRemoteRepository("bar-id", "https://bar-host"))
+					.satisfies(
+							remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository))
+									.isNull()
+					);
 		});
 		assertThat(
 				MavenUtils.makeMirrorSelector(
@@ -426,14 +430,19 @@ final class MavenUtilsTest {
 						)
 				)
 		).satisfies(mirrorSelector -> {
-			assertThat(MavenUtils.createRemoteRepository("foo-id", "https://foo-host")).satisfies(
-					remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository)).isEqualTo(
-							remoteRepositoryBuilder.setMirroredRepositories(List.of(remoteRepository)).build()
-					)
-			);
-			assertThat(MavenUtils.createRemoteRepository("bar-id", "https://bar-host")).satisfies(
-					remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository)).isNull()
-			);
+			assertThat(MavenUtils.createRemoteRepository("foo-id", "https://foo-host"))
+					.satisfies(
+							remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository))
+									.isEqualTo(
+											remoteRepositoryBuilder.setMirroredRepositories(List.of(remoteRepository))
+													.build()
+									)
+					);
+			assertThat(MavenUtils.createRemoteRepository("bar-id", "https://bar-host"))
+					.satisfies(
+							remoteRepository -> assertThat(mirrorSelector.getMirror(remoteRepository))
+									.isNull()
+					);
 		});
 	}
 

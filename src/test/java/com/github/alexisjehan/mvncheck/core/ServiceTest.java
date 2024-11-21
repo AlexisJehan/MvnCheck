@@ -367,7 +367,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && fooIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& fooIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
@@ -382,7 +383,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && barIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& barIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
@@ -432,7 +434,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && fooIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& fooIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
@@ -447,7 +450,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && barIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& barIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
@@ -517,7 +521,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && fooIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& fooIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
@@ -532,7 +537,8 @@ final class ServiceTest {
 				.when(
 						mockedArtifactAvailableVersionsResolver.resolve(
 								Mockito.argThat(
-										artifact -> null != artifact && barIdentifier.equals(artifact.getIdentifier())
+										artifact -> null != artifact
+												&& barIdentifier.equals(artifact.getIdentifier())
 								),
 								Mockito.notNull()
 						)
