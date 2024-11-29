@@ -1,29 +1,29 @@
 settingsEvaluated {
-	settings -> allprojects {
-		task repositories {
-			doLast {
-				[
-						'NORMAL': [
-								'6.8' <= gradle.gradleVersion
-										? settings.dependencyResolutionManagement.repositories // Since Gradle 6.8
-										: [],
-								repositories
-						],
-						'PLUGIN': [
-								settings.pluginManagement.repositories
-						]
-				].each {
-					repositoryType, repositories ->
-						repositories
-								.flatten()
-								.findAll {
-									repository -> repository instanceof MavenArtifactRepository
-								}
-								.each {
-									repository -> println "$repositoryType:${repository.name}:${repository.url}"
-								}
+	settings ->
+		allprojects {
+			task repositories {
+				doLast {
+					[
+							'NORMAL': [
+									'6.8' <= gradle.gradleVersion
+											? settings.dependencyResolutionManagement.repositories // Since Gradle 6.8
+											: [],
+									repositories
+							],
+							'PLUGIN': [
+									settings.pluginManagement.repositories
+							]
+					].each {
+						repositoryType, repositories ->
+							repositories.flatten()
+									.findAll {
+										repository -> repository instanceof MavenArtifactRepository
+									}
+									.each {
+										repository -> println "$repositoryType:${repository.name}:${repository.url}"
+									}
+					}
 				}
 			}
 		}
-	}
 }
