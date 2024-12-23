@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.0 (unreleased)
+## [1.7.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.1) (2024-12-23)
 
 ### Notes
 - Add the `maven-dependency-plugin` plugin

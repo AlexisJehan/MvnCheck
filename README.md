@@ -30,7 +30,7 @@ most relevant update version for an artifact.
 2 build file(s) found, checking for artifact updates
 
 my-gradle-project\build.gradle
-[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.3.1-android
+[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.4.0-android
 1 artifact update(s) available
 
 my-maven-project\pom.xml
@@ -59,16 +59,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-1.7.0-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-1.7.0/bin
+sudo tar -xvzf mvn-check-1.7.1-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-1.7.1/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.7.0`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.7.1`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.7.0\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.7.1\bin` at the end
 
 #### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -81,7 +81,7 @@ Alternatively, you could use _MvnCheck_ by downloading the executable JAR instea
 
 This way, you simply have to execute this command to run it:
 ```console
-java -jar mvn-check-1.7.0-bin.jar
+java -jar mvn-check-1.7.1-bin.jar
 ```
 
 ## Usage
@@ -133,6 +133,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      1.7.1       |     3.9.9     |      8.12      |
 |      1.7.0       |     3.9.9     |     8.10.2     |
 |      1.6.2       |     3.9.8     |      8.9       |
 |      1.6.1       |     3.9.7     |      8.8       |
