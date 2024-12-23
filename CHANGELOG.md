@@ -4,9 +4,10 @@
 
 ### Notes
 - Add the `maven-dependency-plugin` plugin
-- Update the `gradle-tooling-api` dependency to `8.11.1`
+- Update the `gradle-tooling-api` dependency to `8.12`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.24.3`
 - Update the `junit-jupiter` dependency to `5.11.4`
+- Update the `assertj-core` dependency to `3.27.0`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.14.2`
 - Update the `maven-pmd-plugin` plugin to `3.26.0`
 - Update `pmd-core` and `pmd-java` dependencies to `7.8.0`
