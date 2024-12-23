@@ -4,7 +4,7 @@
 
 	<groupId>com.github.alexisjehan</groupId>
 	<artifactId>mvn-check</artifactId>
-	<version>1.7.1</version>
+	<version>1.8.0-SNAPSHOT</version>
 
 	<name>MvnCheck</name>
 	<description>A Java 11+ command line tool to check for artifact updates of Maven and Gradle projects.</description>
