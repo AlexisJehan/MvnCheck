@@ -2,6 +2,10 @@
 
 ## 1.8.0 (unreleased)
 
+### Notes
+- Update the `assertj-core` dependency to `3.27.1`
+- Update `pmd-core` and `pmd-java` dependencies to `7.9.0`
+
 ## [1.7.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.1) (2024-12-23)
 
 ### Notes
