@@ -3,7 +3,8 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
-- Update the `assertj-core` dependency to `3.27.1`
+- Update the `assertj-core` dependency to `3.27.2`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.15.2`
 - Update `pmd-core` and `pmd-java` dependencies to `7.9.0`
 
 ## [1.7.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.1) (2024-12-23)
