@@ -55,6 +55,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -372,7 +373,7 @@ public final class GradleBuildResolver implements BuildResolver {
 	static List<Repository> filterRepositories(final List<Repository> repositories) {
 		Ensure.notNullAndNotNullElements("repositories", repositories);
 		return repositories.stream()
-				.filter(repository -> !repository.getUrl().startsWith("file:"))
+				.filter(Predicate.not(repository -> repository.getUrl().startsWith("file:")))
 				.collect(Collectors.toUnmodifiableList());
 	}
 

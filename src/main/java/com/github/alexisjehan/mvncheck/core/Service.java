@@ -54,6 +54,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -285,10 +286,15 @@ public final class Service {
 		return build.getArtifacts()
 				.parallelStream()
 				.filter(artifactFilter::accept)
-				.filter(artifact -> !ignoreInherited || !artifact.isVersionInherited())
+				.filter(Predicate.not(artifact -> ignoreInherited && artifact.isVersionInherited()))
 				.filter(
 						artifact -> artifact.getOptionalVersion()
-								.filter(version -> !ignoreSnapshots || !VersionFilter.SNAPSHOT.accept(version))
+								.filter(
+										Predicate.not(
+												version -> ignoreSnapshots
+														&& VersionFilter.SNAPSHOT.accept(version)
+										)
+								)
 								.isPresent()
 				)
 				.map(
@@ -309,7 +315,7 @@ public final class Service {
 							.filter(updateVersion -> artifactFilter.accept(artifact, updateVersion))
 							.filter(versionFilterFactory.create(artifactVersion)::accept)
 							.findAny()
-							.filter(updateVersion -> !artifactVersion.equals(updateVersion))
+							.filter(Predicate.not(artifactVersion::equals))
 							.map(updateVersion -> new ArtifactUpdateVersion(artifact, updateVersion));
 				})
 				.flatMap(Optional::stream)
