@@ -188,13 +188,20 @@ public final class MavenBuildResolver implements BuildResolver {
 	 */
 	private static List<Repository> extractRepositories(final Model model) {
 		return Stream.concat(
-				model.getRepositories()
-						.stream()
-						.map(repository -> toRepository(RepositoryType.NORMAL, repository)),
-				model.getPluginRepositories()
-						.stream()
-						.map(pluginRepository -> toRepository(RepositoryType.PLUGIN, pluginRepository))
-		).collect(Collectors.toUnmodifiableList());
+						model.getRepositories()
+								.stream()
+								.map(
+										repository ->
+												toRepository(RepositoryType.NORMAL, repository)
+								),
+						model.getPluginRepositories()
+								.stream()
+								.map(
+										pluginRepository ->
+												toRepository(RepositoryType.PLUGIN, pluginRepository)
+								)
+				)
+				.collect(Collectors.toUnmodifiableList());
 	}
 
 	/**

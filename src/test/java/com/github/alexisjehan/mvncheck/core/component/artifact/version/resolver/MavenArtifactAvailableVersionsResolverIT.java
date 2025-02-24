@@ -51,15 +51,16 @@ final class MavenArtifactAvailableVersionsResolverIT {
 		).satisfies(artifact -> {
 			assertThat(
 					mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
-							List.of(
-									new Repository(
-											RepositoryType.NORMAL,
-											"central",
-											"https://repo.maven.apache.org/maven2"
+									artifact,
+									List.of(
+											new Repository(
+													RepositoryType.NORMAL,
+													"central",
+													"https://repo.maven.apache.org/maven2"
+											)
 									)
 							)
-					).getAvailableVersions()
+							.getAvailableVersions()
 			).isNotEmpty();
 			assertThatExceptionOfType(ArtifactAvailableVersionsResolveException.class).isThrownBy(
 					() -> mavenArtifactAvailableVersionsResolver.resolve(
@@ -82,27 +83,29 @@ final class MavenArtifactAvailableVersionsResolverIT {
 		).satisfies(artifact -> {
 			assertThat(
 					mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
-							List.of(
-									new Repository(
-											RepositoryType.NORMAL,
-											"central",
-											"https://repo.maven.apache.org/maven2"
+									artifact,
+									List.of(
+											new Repository(
+													RepositoryType.NORMAL,
+													"central",
+													"https://repo.maven.apache.org/maven2"
+											)
 									)
 							)
-					).getAvailableVersions()
+							.getAvailableVersions()
 			).isNotEmpty();
 			assertThat(
 					mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
-							List.of(
-									new Repository(
-											RepositoryType.PLUGIN,
-											"central",
-											"https://repo.maven.apache.org/maven2"
+									artifact,
+									List.of(
+											new Repository(
+													RepositoryType.PLUGIN,
+													"central",
+													"https://repo.maven.apache.org/maven2"
+											)
 									)
 							)
-					).getAvailableVersions()
+							.getAvailableVersions()
 			).isNotEmpty();
 		});
 	}

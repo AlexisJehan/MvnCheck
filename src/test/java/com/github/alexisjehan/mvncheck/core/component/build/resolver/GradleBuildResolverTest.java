@@ -880,17 +880,18 @@ final class GradleBuildResolverTest {
 	@Test
 	void testFilterRepositories() {
 		final var list = Stream.of(
-				new Repository(
-						RepositoryType.NORMAL,
-						"MavenLocal",
-						"file:/foo-repository-directory"
-				),
-				new Repository(
-						RepositoryType.NORMAL,
-						"foo-repository-name",
-						"https://foo-repository-host"
+						new Repository(
+								RepositoryType.NORMAL,
+								"MavenLocal",
+								"file:/foo-repository-directory"
+						),
+						new Repository(
+								RepositoryType.NORMAL,
+								"foo-repository-name",
+								"https://foo-repository-host"
+						)
 				)
-		).collect(Collectors.toList());
+				.collect(Collectors.toList());
 		assertThat(GradleBuildResolver.filterRepositories(list)).containsExactly(
 				new Repository(
 						RepositoryType.NORMAL,
@@ -912,166 +913,167 @@ final class GradleBuildResolverTest {
 	@Deprecated
 	void testFilter() {
 		final var list = Stream.of(
-				// Deprecated or classpath duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-implementation-group-id",
-								"foo-implementation-artifact-id"
+						// Deprecated or classpath duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-implementation-group-id",
+										"foo-implementation-artifact-id"
+								),
+								"foo-implementation-version"
 						),
-						"foo-implementation-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-only-group-id",
-								"foo-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-only-group-id",
+										"foo-runtime-only-artifact-id"
+								),
+								"foo-runtime-only-version"
 						),
-						"foo-runtime-only-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-implementation-group-id",
-								"foo-test-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-implementation-group-id",
+										"foo-test-implementation-artifact-id"
+								),
+								"foo-test-implementation-version"
 						),
-						"foo-test-implementation-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-runtime-only-group-id",
-								"foo-test-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-runtime-only-group-id",
+										"foo-test-runtime-only-artifact-id"
+								),
+								"foo-test-runtime-only-version"
 						),
-						"foo-test-runtime-only-version"
-				),
 
-				// "COMPILE_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						// "COMPILE_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
 
-				// "RUNTIME_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						// "RUNTIME_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
 
-				// "TEST_COMPILE_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-compile-classpath-group-id",
-								"foo-test-compile-classpath-artifact-id"
+						// "TEST_COMPILE_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-compile-classpath-group-id",
+										"foo-test-compile-classpath-artifact-id"
+								),
+								"foo-test-compile-classpath-version"
 						),
-						"foo-test-compile-classpath-version"
-				),
 
-				// "COMPILE_CLASSPATH" to "IMPLEMENTATION"
-				new Artifact<>(
-						GradleArtifactType.COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						// "COMPILE_CLASSPATH" to "IMPLEMENTATION"
+						new Artifact<>(
+								GradleArtifactType.COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.IMPLEMENTATION,
-						new ArtifactIdentifier(
-								"foo-implementation-group-id",
-								"foo-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.IMPLEMENTATION,
+								new ArtifactIdentifier(
+										"foo-implementation-group-id",
+										"foo-implementation-artifact-id"
+								),
+								"foo-implementation-version"
 						),
-						"foo-implementation-version"
-				),
 
-				// "RUNTIME_CLASSPATH" to "RUNTIME_ONLY"
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						// "RUNTIME_CLASSPATH" to "RUNTIME_ONLY"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_ONLY,
-						new ArtifactIdentifier(
-								"foo-runtime-only-group-id",
-								"foo-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_ONLY,
+								new ArtifactIdentifier(
+										"foo-runtime-only-group-id",
+										"foo-runtime-only-artifact-id"
+								),
+								"foo-runtime-only-version"
 						),
-						"foo-runtime-only-version"
-				),
 
-				// "TEST_COMPILE_CLASSPATH" to "TEST_IMPLEMENTATION"
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-compile-classpath-group-id",
-								"foo-test-compile-classpath-artifact-id"
+						// "TEST_COMPILE_CLASSPATH" to "TEST_IMPLEMENTATION"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-compile-classpath-group-id",
+										"foo-test-compile-classpath-artifact-id"
+								),
+								"foo-test-compile-classpath-version"
 						),
-						"foo-test-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_IMPLEMENTATION,
-						new ArtifactIdentifier(
-								"foo-test-implementation-group-id",
-								"foo-test-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_IMPLEMENTATION,
+								new ArtifactIdentifier(
+										"foo-test-implementation-group-id",
+										"foo-test-implementation-artifact-id"
+								),
+								"foo-test-implementation-version"
 						),
-						"foo-test-implementation-version"
-				),
 
-				// "TEST_RUNTIME_CLASSPATH" to "TEST_RUNTIME_ONLY"
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-runtime-classpath-group-id",
-								"foo-test-runtime-classpath-artifact-id"
+						// "TEST_RUNTIME_CLASSPATH" to "TEST_RUNTIME_ONLY"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-runtime-classpath-group-id",
+										"foo-test-runtime-classpath-artifact-id"
+								),
+								"foo-test-runtime-classpath-version"
 						),
-						"foo-test-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_ONLY,
-						new ArtifactIdentifier(
-								"foo-test-runtime-only-group-id",
-								"foo-test-runtime-only-artifact-id"
-						),
-						"foo-test-runtime-only-version"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_ONLY,
+								new ArtifactIdentifier(
+										"foo-test-runtime-only-group-id",
+										"foo-test-runtime-only-artifact-id"
+								),
+								"foo-test-runtime-only-version"
+						)
 				)
-		).collect(Collectors.toList());
+				.collect(Collectors.toList());
 		assertThat(GradleBuildResolver.filter(list)).containsExactly(
 				new Artifact<>(
 						GradleArtifactType.IMPLEMENTATION,
@@ -1150,166 +1152,167 @@ final class GradleBuildResolverTest {
 	@Test
 	void testFilterArtifacts() {
 		final var list = Stream.of(
-				// Deprecated or classpath duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-implementation-group-id",
-								"foo-implementation-artifact-id"
+						// Deprecated or classpath duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-implementation-group-id",
+										"foo-implementation-artifact-id"
+								),
+								"foo-implementation-version"
 						),
-						"foo-implementation-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-only-group-id",
-								"foo-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-only-group-id",
+										"foo-runtime-only-artifact-id"
+								),
+								"foo-runtime-only-version"
 						),
-						"foo-runtime-only-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-implementation-group-id",
-								"foo-test-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-implementation-group-id",
+										"foo-test-implementation-artifact-id"
+								),
+								"foo-test-implementation-version"
 						),
-						"foo-test-implementation-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-runtime-only-group-id",
-								"foo-test-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-runtime-only-group-id",
+										"foo-test-runtime-only-artifact-id"
+								),
+								"foo-test-runtime-only-version"
 						),
-						"foo-test-runtime-only-version"
-				),
 
-				// "COMPILE_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						// "COMPILE_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
 
-				// "RUNTIME_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						// "RUNTIME_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
 
-				// "TEST_COMPILE_CLASSPATH" duplicates to be removed
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-compile-classpath-group-id",
-								"foo-test-compile-classpath-artifact-id"
+						// "TEST_COMPILE_CLASSPATH" duplicates to be removed
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-compile-classpath-group-id",
+										"foo-test-compile-classpath-artifact-id"
+								),
+								"foo-test-compile-classpath-version"
 						),
-						"foo-test-compile-classpath-version"
-				),
 
-				// "COMPILE_CLASSPATH" to "IMPLEMENTATION"
-				new Artifact<>(
-						GradleArtifactType.COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-compile-classpath-group-id",
-								"foo-compile-classpath-artifact-id"
+						// "COMPILE_CLASSPATH" to "IMPLEMENTATION"
+						new Artifact<>(
+								GradleArtifactType.COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-compile-classpath-group-id",
+										"foo-compile-classpath-artifact-id"
+								),
+								"foo-compile-classpath-version"
 						),
-						"foo-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.IMPLEMENTATION,
-						new ArtifactIdentifier(
-								"foo-implementation-group-id",
-								"foo-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.IMPLEMENTATION,
+								new ArtifactIdentifier(
+										"foo-implementation-group-id",
+										"foo-implementation-artifact-id"
+								),
+								"foo-implementation-version"
 						),
-						"foo-implementation-version"
-				),
 
-				// "RUNTIME_CLASSPATH" to "RUNTIME_ONLY"
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-runtime-classpath-group-id",
-								"foo-runtime-classpath-artifact-id"
+						// "RUNTIME_CLASSPATH" to "RUNTIME_ONLY"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-runtime-classpath-group-id",
+										"foo-runtime-classpath-artifact-id"
+								),
+								"foo-runtime-classpath-version"
 						),
-						"foo-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.RUNTIME_ONLY,
-						new ArtifactIdentifier(
-								"foo-runtime-only-group-id",
-								"foo-runtime-only-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.RUNTIME_ONLY,
+								new ArtifactIdentifier(
+										"foo-runtime-only-group-id",
+										"foo-runtime-only-artifact-id"
+								),
+								"foo-runtime-only-version"
 						),
-						"foo-runtime-only-version"
-				),
 
-				// "TEST_COMPILE_CLASSPATH" to "TEST_IMPLEMENTATION"
-				new Artifact<>(
-						GradleArtifactType.TEST_COMPILE_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-compile-classpath-group-id",
-								"foo-test-compile-classpath-artifact-id"
+						// "TEST_COMPILE_CLASSPATH" to "TEST_IMPLEMENTATION"
+						new Artifact<>(
+								GradleArtifactType.TEST_COMPILE_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-compile-classpath-group-id",
+										"foo-test-compile-classpath-artifact-id"
+								),
+								"foo-test-compile-classpath-version"
 						),
-						"foo-test-compile-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_IMPLEMENTATION,
-						new ArtifactIdentifier(
-								"foo-test-implementation-group-id",
-								"foo-test-implementation-artifact-id"
+						new Artifact<>(
+								GradleArtifactType.TEST_IMPLEMENTATION,
+								new ArtifactIdentifier(
+										"foo-test-implementation-group-id",
+										"foo-test-implementation-artifact-id"
+								),
+								"foo-test-implementation-version"
 						),
-						"foo-test-implementation-version"
-				),
 
-				// "TEST_RUNTIME_CLASSPATH" to "TEST_RUNTIME_ONLY"
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_CLASSPATH,
-						new ArtifactIdentifier(
-								"foo-test-runtime-classpath-group-id",
-								"foo-test-runtime-classpath-artifact-id"
+						// "TEST_RUNTIME_CLASSPATH" to "TEST_RUNTIME_ONLY"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_CLASSPATH,
+								new ArtifactIdentifier(
+										"foo-test-runtime-classpath-group-id",
+										"foo-test-runtime-classpath-artifact-id"
+								),
+								"foo-test-runtime-classpath-version"
 						),
-						"foo-test-runtime-classpath-version"
-				),
-				new Artifact<>(
-						GradleArtifactType.TEST_RUNTIME_ONLY,
-						new ArtifactIdentifier(
-								"foo-test-runtime-only-group-id",
-								"foo-test-runtime-only-artifact-id"
-						),
-						"foo-test-runtime-only-version"
+						new Artifact<>(
+								GradleArtifactType.TEST_RUNTIME_ONLY,
+								new ArtifactIdentifier(
+										"foo-test-runtime-only-group-id",
+										"foo-test-runtime-only-artifact-id"
+								),
+								"foo-test-runtime-only-version"
+						)
 				)
-		).collect(Collectors.toList());
+				.collect(Collectors.toList());
 		assertThat(GradleBuildResolver.filterArtifacts(list)).containsExactly(
 				new Artifact<>(
 						GradleArtifactType.IMPLEMENTATION,

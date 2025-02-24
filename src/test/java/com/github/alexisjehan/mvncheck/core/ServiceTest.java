@@ -120,25 +120,26 @@ final class ServiceTest {
 		final var bar1GradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "1", "build.gradle"));
 		final var bar2GradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "2", "build.gradle.kts"));
 		Stream.of(
-				rootMavenFile,
-				fooMavenFile,
-				fooGradleGroovyFile,
-				fooGradleKotlinFile,
-				foo10MavenFile,
-				foo1GradleGroovyFile,
-				foo2GradleKotlinFile,
-				barMavenFile,
-				barGradleGroovyFile,
-				barGradleKotlinFile,
-				bar10MavenFile,
-				bar1GradleGroovyFile,
-				bar2GradleKotlinFile
-		).forEach(
-				ThrowableConsumer.sneaky(file -> {
-					Files.createDirectories(file.getParent());
-					Files.createFile(file);
-				})
-		);
+						rootMavenFile,
+						fooMavenFile,
+						fooGradleGroovyFile,
+						fooGradleKotlinFile,
+						foo10MavenFile,
+						foo1GradleGroovyFile,
+						foo2GradleKotlinFile,
+						barMavenFile,
+						barGradleGroovyFile,
+						barGradleKotlinFile,
+						bar10MavenFile,
+						bar1GradleGroovyFile,
+						bar2GradleKotlinFile
+				)
+				.forEach(
+						ThrowableConsumer.sneaky(file -> {
+							Files.createDirectories(file.getParent());
+							Files.createFile(file);
+						})
+				);
 		assertThat(service.findBuildFiles(tmpDirectory)).containsExactly(
 				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
 				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
@@ -183,25 +184,26 @@ final class ServiceTest {
 		final var bar1GradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "1", "build.gradle"));
 		final var bar2GradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "2", "build.gradle.kts"));
 		Stream.of(
-				rootMavenFile,
-				fooMavenFile,
-				fooGradleGroovyFile,
-				fooGradleKotlinFile,
-				foo10MavenFile,
-				foo1GradleGroovyFile,
-				foo2GradleKotlinFile,
-				barMavenFile,
-				barGradleGroovyFile,
-				barGradleKotlinFile,
-				bar10MavenFile,
-				bar1GradleGroovyFile,
-				bar2GradleKotlinFile
-		).forEach(
-				ThrowableConsumer.sneaky(file -> {
-					Files.createDirectories(file.getParent());
-					Files.createFile(file);
-				})
-		);
+						rootMavenFile,
+						fooMavenFile,
+						fooGradleGroovyFile,
+						fooGradleKotlinFile,
+						foo10MavenFile,
+						foo1GradleGroovyFile,
+						foo2GradleKotlinFile,
+						barMavenFile,
+						barGradleGroovyFile,
+						barGradleKotlinFile,
+						bar10MavenFile,
+						bar1GradleGroovyFile,
+						bar2GradleKotlinFile
+				)
+				.forEach(
+						ThrowableConsumer.sneaky(file -> {
+							Files.createDirectories(file.getParent());
+							Files.createFile(file);
+						})
+				);
 		assertThat(service.findBuildFiles(tmpDirectory, 0)).containsExactly(
 				new BuildFile(BuildFileType.MAVEN, rootMavenFile)
 		);
