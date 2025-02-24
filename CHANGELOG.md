@@ -3,9 +3,14 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
+- Update the `gradle-tooling-api` dependency to `8.12.1`
+- Update the `github-api` dependency to `1.327`
+- Update the `bridge-method-annotation` dependency to `1.30`
+- Update the `junit-jupiter` dependency to `5.12.0`
 - Update the `assertj-core` dependency to `3.27.3`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.15.2`
-- Update `pmd-core` and `pmd-java` dependencies to `7.9.0`
+- Update the `maven-compiler-plugin` plugin to `3.14.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.10.0`
 
 ## [1.7.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.1) (2024-12-23)
 
