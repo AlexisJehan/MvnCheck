@@ -302,16 +302,8 @@ public final class MavenUtils {
 				.newInstance()
 				.build(
 						new DefaultSettingsBuildingRequest()
-								.setGlobalSettingsFile(
-										null != globalSettingsFile
-												? globalSettingsFile.toFile()
-												: null
-								)
-								.setUserSettingsFile(
-										null != userSettingsFile
-												? userSettingsFile.toFile()
-												: null
-								)
+								.setGlobalSettingsFile(null != globalSettingsFile ? globalSettingsFile.toFile() : null)
+								.setUserSettingsFile(null != userSettingsFile ? userSettingsFile.toFile() : null)
 								.setSystemProperties(System.getProperties())
 				);
 		for (final var exception : result.getProblems()) {
@@ -348,9 +340,7 @@ public final class MavenUtils {
 				new DefaultSecDispatcher(
 						new DefaultPlexusCipher(),
 						Map.of(),
-						null != userSettingsSecurityFile
-								? userSettingsSecurityFile.toString()
-								: null
+						null != userSettingsSecurityFile ? userSettingsSecurityFile.toString() : null
 				)
 		).decrypt(new DefaultSettingsDecryptionRequest(settings));
 		for (final var exception : result.getProblems()) {

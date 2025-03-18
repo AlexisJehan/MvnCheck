@@ -86,8 +86,6 @@ public final class QualifierVersionFilterFactory implements VersionFilterFactory
 	 */
 	private static String extractQualifier(final String version) {
 		final var matcher = PATTERN.matcher(version);
-		return matcher.matches()
-				? matcher.group(1)
-				: null;
+		return matcher.matches() ? matcher.group(1) : null;
 	}
 }

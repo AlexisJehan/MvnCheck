@@ -156,9 +156,7 @@ public enum MavenArtifactType implements ArtifactType {
 	 * @since 1.0.0
 	 */
 	MavenArtifactType(final boolean plugin) {
-		repositoryType = plugin
-				? RepositoryType.PLUGIN
-				: RepositoryType.NORMAL;
+		repositoryType = plugin ? RepositoryType.PLUGIN : RepositoryType.NORMAL;
 	}
 
 	/**

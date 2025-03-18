@@ -334,9 +334,7 @@ public final class GradleBuildResolver implements BuildResolver {
 							}
 							var parts = Strings.split(" -> ", artifactString);
 							artifactString = parts.get(0);
-							final var resolvedVersion = 2 == parts.size()
-									? parts.get(1)
-									: null;
+							final var resolvedVersion = 2 == parts.size() ? parts.get(1) : null;
 							frequency = Strings.frequency(artifactString, ':');
 							if (1 > frequency || 2 < frequency) {
 								throw new BuildResolveException("Unexpected Gradle \":dependencies\" artifact format");
@@ -344,9 +342,7 @@ public final class GradleBuildResolver implements BuildResolver {
 							parts = Strings.split(':', artifactString);
 							final var groupId = parts.get(0);
 							final var artifactId = parts.get(1);
-							final var version = 3 == parts.size()
-									? parts.get(2)
-									: resolvedVersion;
+							final var version = 3 == parts.size() ? parts.get(2) : resolvedVersion;
 							artifacts.add(
 									new Artifact<>(
 											artifactType,
