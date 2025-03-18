@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.8.0 (unreleased)
+
 ## [1.7.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.2) (2025-03-18)
 
 ### Notes
