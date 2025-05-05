@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>org.gradle</groupId>
 			<artifactId>gradle-tooling-api</artifactId> <!-- From the "gradle" repository -->
-			<version>8.13</version>
+			<version>8.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kohsuke</groupId>
@@ -107,9 +107,9 @@
 			<version>1.9.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.fusesource.jansi</groupId>
+			<groupId>org.jline</groupId>
 			<artifactId>jansi</artifactId>
-			<version>2.4.1</version>
+			<version>3.29.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -138,7 +138,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.12.1</version>
+			<version>5.12.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -451,12 +451,12 @@
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-core</artifactId>
-						<version>7.12.0</version>
+						<version>7.13.0</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-java</artifactId>
-						<version>7.12.0</version>
+						<version>7.13.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>

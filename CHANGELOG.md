@@ -3,11 +3,14 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
+- Migrate the `jansi` dependency from `org.fusesource.jansi` to `org.jline`
+- Update the `gradle-tooling-api` dependency to `8.14`
+- Update the `junit-jupiter` dependency to `5.12.2`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.17.0`
 - Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.3`
 - Update the `jacoco-maven-plugin` plugin to `0.8.13`
 - Update the `license-maven-plugin` plugin to `5.0.0`
-- Update `pmd-core` and `pmd-java` dependencies to `7.12.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.13.0`
 
 ## [1.7.2](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.2) (2025-03-18)
 
