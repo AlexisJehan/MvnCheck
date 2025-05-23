@@ -2,6 +2,9 @@
 
 ## 1.8.0 (unreleased)
 
+### Notes
+- Migrate back the `jansi` dependency from `org.jline` to `org.fusesource.jansi`
+
 ## [1.7.3](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.3) (2025-05-05)
 
 ### Notes

@@ -43,8 +43,8 @@ import internal.ExcludeFromJacocoGeneratedReport;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
-import org.jline.jansi.Ansi;
-import org.jline.jansi.AnsiConsole;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
 import java.io.PrintStream;
