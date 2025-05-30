@@ -3,8 +3,8 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
-- Migrate back the `jansi` dependency from `org.jline` to `org.fusesource.jansi`
 - Update the `gradle-tooling-api` dependency to `8.14.1`
+- Update the `jansi` dependency to `3.30.4`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.18.0`
 
 ## [1.7.3](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.3) (2025-05-05)
