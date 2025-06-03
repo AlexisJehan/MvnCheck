@@ -5,7 +5,9 @@
 ### Notes
 - Update the `gradle-tooling-api` dependency to `8.14.1`
 - Update the `jansi` dependency to `3.30.4`
+- Update the `junit-jupiter` dependency to `5.13.0`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.18.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.14.0`
 
 ## [1.7.3](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.3) (2025-05-05)
 
