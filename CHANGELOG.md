@@ -3,7 +3,9 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
-- Update the `gradle-tooling-api` dependency to `8.14.1`
+- Update the `maven-core` dependency to `3.9.10`
+- Update the `maven-resolver-supplier` dependency to `1.9.23`
+- Update the `gradle-tooling-api` dependency to `8.14.2`
 - Update the `jansi` dependency to `3.30.4`
 - Update the `junit-jupiter` dependency to `5.13.0`
 - Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.18.0`
