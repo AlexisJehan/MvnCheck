@@ -2,6 +2,14 @@
 
 ## 1.8.0 (unreleased)
 
+### Notes
+- Update the `gradle-tooling-api` dependency to `8.14.3`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.0`
+- Update the `junit-jupiter` dependency to `5.13.3`
+- Update the `maven-pmd-plugin` plugin to `3.27.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.15.0`
+- Update the `maven-gpg-plugin` plugin to `3.2.8`
+
 ## [1.7.4](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.4) (2025-06-06)
 
 ### Notes
