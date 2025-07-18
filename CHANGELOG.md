@@ -3,8 +3,10 @@
 ## 1.8.0 (unreleased)
 
 ### Notes
+- Update the `maven-core` dependency to `3.9.11`
+- Update the `maven-resolver-supplier` dependency to `1.9.24`
 - Update the `gradle-tooling-api` dependency to `8.14.3`
-- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.0`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.1`
 - Update the `junit-jupiter` dependency to `5.13.3`
 - Update the `maven-pmd-plugin` plugin to `3.27.0`
 - Update `pmd-core` and `pmd-java` dependencies to `7.15.0`
