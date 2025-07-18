@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.0 (unreleased)
+## [1.7.5](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.5) (2025-07-18)
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.11`

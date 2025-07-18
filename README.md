@@ -34,7 +34,7 @@ my-gradle-project\build.gradle
 1 artifact update(s) available
 
 my-maven-project\pom.xml
-[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.17.0
+[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.18.0
 [BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.14.0
 2 artifact update(s) available
 
@@ -59,16 +59,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-1.7.4-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-1.7.4/bin
+sudo tar -xvzf mvn-check-1.7.5-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-1.7.5/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.7.4`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-1.7.5`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.7.4\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-1.7.5\bin` at the end
 
 #### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -79,9 +79,9 @@ mvnchk --version
 ### Using without installation
 Alternatively, you could use _MvnCheck_ by downloading the executable JAR instead.
 
-This way, you simply have to execute this command to run it:
+This way, you have to execute this command to run it:
 ```console
-java -jar mvn-check-1.7.4-bin.jar
+java -jar mvn-check-1.7.5-bin.jar
 ```
 
 ## Usage
@@ -133,6 +133,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      1.7.5       |    3.9.11     |     8.14.3     |
 |      1.7.4       |    3.9.10     |     8.14.2     |
 |      1.7.3       |     3.9.9     |      8.14      |
 |      1.7.2       |     3.9.9     |      8.13      |
