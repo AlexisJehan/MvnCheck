@@ -35,14 +35,6 @@ import java.util.regex.Pattern;
 public final class QualifierVersionFilterFactory implements VersionFilterFactory {
 
 	/**
-	 * Singleton instance.
-	 * @deprecated since 1.5.0, use {@link #QualifierVersionFilterFactory()} instead, this is not a singleton anymore!
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.5.0")
-	public static final QualifierVersionFilterFactory INSTANCE = new QualifierVersionFilterFactory();
-
-	/**
 	 * Pattern to extract the qualifier from a version.
 	 * @since 1.0.0
 	 */

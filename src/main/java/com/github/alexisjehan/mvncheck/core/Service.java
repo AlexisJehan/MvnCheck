@@ -135,21 +135,6 @@ public final class Service {
 	/**
 	 * Find a {@link List} of build files in the given path, recursively.
 	 * @param path a path
-	 * @return the {@link List} of build files
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
-	 * @throws IllegalArgumentException if the path does not exist
-	 * @deprecated since 1.1.0, use {@link #findBuildFiles(Path, int)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.1.0")
-	public List<BuildFile> findBuildFiles(final Path path) throws IOException {
-		return findBuildFiles(path, Integer.MAX_VALUE);
-	}
-
-	/**
-	 * Find a {@link List} of build files in the given path, recursively.
-	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @return the {@link List} of build files
 	 * @throws IOException might occur with input/output operations
@@ -218,44 +203,6 @@ public final class Service {
 				.findAny()
 				.map(buildResolver -> buildResolver.resolve(buildFile))
 				.orElseThrow();
-	}
-
-	/**
-	 * Find a {@link List} of artifact update versions for the given build.
-	 * @param build a build
-	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @return the {@link List} of artifact update versions
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the build is {@code null}
-	 * @deprecated since 1.5.0, use {@link #findArtifactUpdateVersions(Build, boolean, boolean)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.5.0")
-	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
-			final Build build,
-			final boolean ignoreSnapshots
-	) throws IOException {
-		return findArtifactUpdateVersions(build, false, ignoreSnapshots);
-	}
-
-	/**
-	 * Find a {@link List} of artifact update versions for the given build.
-	 * @param build a build
-	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
-	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @return the {@link List} of artifact update versions
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the build is {@code null}
-	 * @deprecated since 1.7.0, use {@link #findArtifactUpdateVersions(Build, Set, boolean, boolean)} instead
-	 * @since 1.5.0
-	 */
-	@Deprecated(since = "1.7.0")
-	public List<ArtifactUpdateVersion> findArtifactUpdateVersions(
-			final Build build,
-			final boolean ignoreInherited,
-			final boolean ignoreSnapshots
-	) throws IOException {
-		return findArtifactUpdateVersions(build, Set.of(), ignoreSnapshots, ignoreInherited);
 	}
 
 	/**

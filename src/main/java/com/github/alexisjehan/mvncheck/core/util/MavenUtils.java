@@ -50,7 +50,6 @@ import org.eclipse.aether.repository.Proxy;
 import org.eclipse.aether.repository.ProxySelector;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.repository.RepositoryPolicy;
-import org.eclipse.aether.spi.locator.ServiceLocator;
 import org.eclipse.aether.supplier.RepositorySystemSupplier;
 import org.eclipse.aether.util.repository.AuthenticationBuilder;
 import org.eclipse.aether.util.repository.ConservativeAuthenticationSelector;
@@ -217,51 +216,12 @@ public final class MavenUtils {
 	}
 
 	/**
-	 * Make a service locator.
-	 * @return the service locator
-	 * @deprecated since 1.1.0, don't use anymore
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.1.0")
-	public static ServiceLocator makeServiceLocator() {
-		return MavenRepositorySystemUtils.newServiceLocator();
-	}
-
-	/**
-	 * Make a repository system.
-	 * @param serviceLocator a service locator
-	 * @return the repository system
-	 * @throws NullPointerException if the service locator is {@code null}
-	 * @deprecated since 1.1.0, use {@link #makeRepositorySystem()} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.1.0")
-	public static RepositorySystem makeRepositorySystem(final ServiceLocator serviceLocator) {
-		Ensure.notNull("serviceLocator", serviceLocator);
-		return makeRepositorySystem();
-	}
-
-	/**
 	 * Make a repository system.
 	 * @return the repository system
 	 * @since 1.1.0
 	 */
 	public static RepositorySystem makeRepositorySystem() {
 		return repositorySystemSupplier.get();
-	}
-
-	/**
-	 * Make a remote repository manager.
-	 * @param serviceLocator a service locator
-	 * @return the remote repository manager
-	 * @throws NullPointerException if the service locator is {@code null}
-	 * @deprecated since 1.1.0, use {@link #makeRemoteRepositoryManager()} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.1.0")
-	public static RemoteRepositoryManager makeRemoteRepositoryManager(final ServiceLocator serviceLocator) {
-		Ensure.notNull("serviceLocator", serviceLocator);
-		return makeRemoteRepositoryManager();
 	}
 
 	/**
@@ -497,16 +457,5 @@ public final class MavenUtils {
 			}
 		}
 		return remoteRepositories;
-	}
-
-	/**
-	 * Get the <i>Maven</i> version.
-	 * @return the <i>Maven</i> version
-	 * @deprecated since 1.4.0, use {@link #VERSION} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.4.0")
-	public static String getVersion() {
-		return VERSION;
 	}
 }

@@ -373,19 +373,6 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * Filter a modifiable {@link List} of artifacts, removing redundant duplicates.
-	 * @param artifacts a modifiable {@link List} of artifacts
-	 * @return the {@link List} of artifacts
-	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
-	 * @deprecated since 1.2.0, use {@link #filterArtifacts(List)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.2.0")
-	static List<Artifact<GradleArtifactType>> filter(final List<Artifact<GradleArtifactType>> artifacts) {
-		return filterArtifacts(artifacts);
-	}
-
-	/**
 	 * Filter a modifiable {@link List} of artifacts, removing irrelevant ones.
 	 * @param artifacts a modifiable {@link List} of artifacts
 	 * @return the {@link List} of artifacts

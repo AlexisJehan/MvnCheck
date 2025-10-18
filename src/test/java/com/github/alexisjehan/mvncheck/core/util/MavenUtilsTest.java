@@ -163,38 +163,8 @@ final class MavenUtilsTest {
 	}
 
 	@Test
-	@Deprecated
-	void testMakeServiceLocator() {
-		assertThat(MavenUtils.makeServiceLocator()).isNotNull();
-	}
-
-	@Test
-	@Deprecated
-	void testMakeRepositorySystemDeprecated() {
-		assertThat(MavenUtils.makeRepositorySystem(MavenUtils.makeServiceLocator())).isNotNull();
-	}
-
-	@Test
-	@Deprecated
-	void testMakeRepositorySystemDeprecatedInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> MavenUtils.makeRepositorySystem(null));
-	}
-
-	@Test
 	void testMakeRepositorySystem() {
 		assertThat(MavenUtils.makeRepositorySystem()).isNotNull();
-	}
-
-	@Test
-	@Deprecated
-	void testMakeRemoteRepositoryManagerDeprecated() {
-		assertThat(MavenUtils.makeRemoteRepositoryManager(MavenUtils.makeServiceLocator())).isNotNull();
-	}
-
-	@Test
-	@Deprecated
-	void testMakeRemoteRepositoryManagerDeprecatedInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> MavenUtils.makeRemoteRepositoryManager(null));
 	}
 
 	@Test
@@ -510,11 +480,5 @@ final class MavenUtilsTest {
 	@Test
 	void testMakeRemoteRepositoriesInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> MavenUtils.makeRemoteRepositories(null));
-	}
-
-	@Test
-	@Deprecated
-	void testGetVersion() {
-		assertThat(MavenUtils.getVersion()).matches("^\\d+\\.\\d+\\.\\d+$");
 	}
 }

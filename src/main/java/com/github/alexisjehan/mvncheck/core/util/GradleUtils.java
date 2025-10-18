@@ -78,15 +78,4 @@ public final class GradleUtils {
 				.flatMap(Optional::stream)
 				.findAny();
 	}
-
-	/**
-	 * Get the <i>Gradle</i> version.
-	 * @return the <i>Gradle</i> version
-	 * @deprecated since 1.4.0, use {@link #VERSION} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.4.0")
-	public static String getVersion() {
-		return VERSION;
-	}
 }

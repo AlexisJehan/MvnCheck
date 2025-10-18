@@ -44,7 +44,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 * @since 1.0.0
 	 */
 	@Serial
-	private static final long serialVersionUID = -5557892849559209991L;
+	private static final long serialVersionUID = 6451886683486872381L;
 
 	/**
 	 * Reason.
@@ -80,22 +80,6 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 */
 	ArtifactFilterParseException(final String reason, final String expression) {
 		this(reason, expression, null, null);
-	}
-
-	/**
-	 * Constructor with an expression at a line number.
-	 * @param reason a reason
-	 * @param expression an expression
-	 * @param lineNumber a line number or {@code null}
-	 * @throws NullPointerException if the reason or the expression is {@code null}
-	 * @throws IllegalArgumentException if the reason or the expression is empty or if the line number is lower than or
-	 *         equal to 0
-	 * @deprecated since 1.7.0, use {@link #ArtifactFilterParseException(String, String)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	ArtifactFilterParseException(final String reason, final String expression, final Long lineNumber) {
-		this(reason, expression, lineNumber, null);
 	}
 
 	/**
@@ -171,32 +155,10 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	/**
 	 * Get the expression.
 	 * @return the expression
-	 * @deprecated since 1.7.0, use {@link #getExpression()} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	public String getLine() {
-		return getExpression();
-	}
-
-	/**
-	 * Get the expression.
-	 * @return the expression
 	 * @since 1.7.0
 	 */
 	public String getExpression() {
 		return expression;
-	}
-
-	/**
-	 * Get the line number.
-	 * @return the line number
-	 * @deprecated since 1.7.0, use {@link #getOptionalLineNumber()} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	public Long getLineNumber() {
-		return getOptionalLineNumber().orElse(null);
 	}
 
 	/**

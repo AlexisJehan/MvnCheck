@@ -130,19 +130,6 @@ public final class Artifact<T extends ArtifactType> {
 	 * @param type a type
 	 * @return the copy of the current artifact
 	 * @throws NullPointerException if the type is {@code null}
-	 * @deprecated since 1.5.0, use {@link #withType(ArtifactType)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.5.0")
-	public Artifact<T> with(final T type) {
-		return withType(type);
-	}
-
-	/**
-	 * Return a copy of the current artifact with the given type.
-	 * @param type a type
-	 * @return the copy of the current artifact
-	 * @throws NullPointerException if the type is {@code null}
 	 * @since 1.5.0
 	 */
 	public Artifact<T> withType(final T type) {

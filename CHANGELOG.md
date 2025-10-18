@@ -4,6 +4,7 @@
 
 ### Breaking backward compatibility
 - Migrate to _JDK 17_
+- Remove deprecated code
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `9.1.0`

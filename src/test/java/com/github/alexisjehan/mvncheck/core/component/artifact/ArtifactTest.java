@@ -80,29 +80,6 @@ final class ArtifactTest {
 	}
 
 	@Test
-	@Deprecated
-	void testWith() {
-		assertThat(artifact.with(TYPE)).satisfies(otherArtifact -> {
-			assertThat(otherArtifact.getType()).isEqualTo(TYPE);
-			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
-			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
-			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
-		});
-		assertThat(artifact.with(OTHER_TYPE)).satisfies(otherArtifact -> {
-			assertThat(otherArtifact.getType()).isEqualTo(OTHER_TYPE);
-			assertThat(otherArtifact.getIdentifier()).isEqualTo(artifact.getIdentifier());
-			assertThat(otherArtifact.getOptionalVersion()).isEqualTo(artifact.getOptionalVersion());
-			assertThat(otherArtifact.isVersionInherited()).isEqualTo(artifact.isVersionInherited());
-		});
-	}
-
-	@Test
-	@Deprecated
-	void testWithInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> artifact.with(null));
-	}
-
-	@Test
 	void testWithType() {
 		assertThat(artifact.withType(TYPE)).satisfies(otherArtifact -> {
 			assertThat(otherArtifact.getType()).isEqualTo(TYPE);

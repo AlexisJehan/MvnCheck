@@ -74,10 +74,4 @@ final class GradleUtilsTest {
 			assertThat(GradleUtils.retrieveOptionalHome()).contains(File.separator + "gradle-1.0");
 		}
 	}
-
-	@Test
-	@Deprecated
-	void testGetVersion() {
-		assertThat(GradleUtils.getVersion()).matches("^\\d+\\.\\d+(?:\\.\\d+)?$");
-	}
 }

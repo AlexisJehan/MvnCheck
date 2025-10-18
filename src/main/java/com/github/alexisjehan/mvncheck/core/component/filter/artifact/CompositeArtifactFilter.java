@@ -52,22 +52,6 @@ public final class CompositeArtifactFilter implements ArtifactFilter {
 	private final Set<ArtifactFilter> filters;
 
 	/**
-	 * Constructor.
-	 * @param filters an array of artifact filters
-	 * @throws NullPointerException if the array of artifacts or any of them is {@code null}
-	 * @throws IllegalArgumentException if the array of artifacts is empty
-	 * @deprecated since 1.7.0, use {@link #all(ArtifactFilter...)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	public CompositeArtifactFilter(final ArtifactFilter... filters) {
-		this(
-				Stream::allMatch,
-				Ensure.notNullAndNotNullElements("filters", Ensure.notNullAndNotEmpty("filters", filters))
-		);
-	}
-
-	/**
 	 * Private constructor.
 	 * @param matchFunction a match {@link BiPredicate}
 	 * @param filters an array of artifact filters

@@ -65,35 +65,6 @@ final class ArtifactFilterParseExceptionTest {
 	}
 
 	@Test
-	@Deprecated
-	void testConstructorDeprecated() {
-		final var otherArtifactFilterParseException = new ArtifactFilterParseException(REASON, EXPRESSION, LINE_NUMBER);
-		assertThat(otherArtifactFilterParseException.getReason()).isEqualTo(REASON);
-		assertThat(otherArtifactFilterParseException.getExpression()).isEqualTo(EXPRESSION);
-		assertThat(otherArtifactFilterParseException.getOptionalLineNumber()).hasValue(LINE_NUMBER);
-	}
-
-	@Test
-	@Deprecated
-	void testConstructorDeprecatedInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(null, EXPRESSION, LINE_NUMBER);
-		});
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(Strings.EMPTY, EXPRESSION, LINE_NUMBER);
-		});
-		assertThatNullPointerException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(REASON, null, LINE_NUMBER);
-		});
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(REASON, Strings.EMPTY, LINE_NUMBER);
-		});
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			throw new ArtifactFilterParseException(REASON, EXPRESSION, 0L);
-		});
-	}
-
-	@Test
 	void testWithLineNumber() {
 		final var otherArtifactFilterParseException = artifactFilterParseException.with(LINE_NUMBER);
 		assertThat(otherArtifactFilterParseException.getOptionalLineNumber())
@@ -149,20 +120,8 @@ final class ArtifactFilterParseExceptionTest {
 	}
 
 	@Test
-	@Deprecated
-	void testGetLine() {
-		assertThat(artifactFilterParseException.getLine()).isEqualTo(EXPRESSION);
-	}
-
-	@Test
 	void testGetExpression() {
 		assertThat(artifactFilterParseException.getExpression()).isEqualTo(EXPRESSION);
-	}
-
-	@Test
-	@Deprecated
-	void testGetLineNumber() {
-		assertThat(artifactFilterParseException.getLineNumber()).isNull();
 	}
 
 	@Test

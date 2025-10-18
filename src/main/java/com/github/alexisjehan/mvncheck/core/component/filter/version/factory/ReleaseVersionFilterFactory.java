@@ -35,14 +35,6 @@ import java.util.regex.Pattern;
 public final class ReleaseVersionFilterFactory implements VersionFilterFactory {
 
 	/**
-	 * Singleton instance.
-	 * @deprecated since 1.5.0, use {@link #ReleaseVersionFilterFactory()} instead, this is not a singleton anymore!
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.5.0")
-	public static final ReleaseVersionFilterFactory INSTANCE = new ReleaseVersionFilterFactory();
-
-	/**
 	 * Pattern to match pre-release versions.
 	 * @since 1.0.0
 	 */

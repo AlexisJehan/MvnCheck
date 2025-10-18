@@ -103,71 +103,6 @@ final class ServiceTest {
 	}
 
 	@Test
-	@Deprecated
-	void testFindBuildFilesDeprecated(@TempDir final Path tmpDirectory) throws IOException {
-		final var service = new Service(mockedMavenSession);
-		final var rootMavenFile = tmpDirectory.resolve(Path.of("pom.xml"));
-		final var fooMavenFile = tmpDirectory.resolve(Path.of("foo", "pom.xml"));
-		final var fooGradleGroovyFile = tmpDirectory.resolve(Path.of("foo", "build.gradle"));
-		final var fooGradleKotlinFile = tmpDirectory.resolve(Path.of("foo", "build.gradle.kts"));
-		final var foo10MavenFile = tmpDirectory.resolve(Path.of("foo", "10", "pom.xml"));
-		final var foo1GradleGroovyFile = tmpDirectory.resolve(Path.of("foo", "1", "build.gradle"));
-		final var foo2GradleKotlinFile = tmpDirectory.resolve(Path.of("foo", "2", "build.gradle.kts"));
-		final var barMavenFile = tmpDirectory.resolve(Path.of("bar", "pom.xml"));
-		final var barGradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "build.gradle"));
-		final var barGradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "build.gradle.kts"));
-		final var bar10MavenFile = tmpDirectory.resolve(Path.of("bar", "10", "pom.xml"));
-		final var bar1GradleGroovyFile = tmpDirectory.resolve(Path.of("bar", "1", "build.gradle"));
-		final var bar2GradleKotlinFile = tmpDirectory.resolve(Path.of("bar", "2", "build.gradle.kts"));
-		Stream.of(
-						rootMavenFile,
-						fooMavenFile,
-						fooGradleGroovyFile,
-						fooGradleKotlinFile,
-						foo10MavenFile,
-						foo1GradleGroovyFile,
-						foo2GradleKotlinFile,
-						barMavenFile,
-						barGradleGroovyFile,
-						barGradleKotlinFile,
-						bar10MavenFile,
-						bar1GradleGroovyFile,
-						bar2GradleKotlinFile
-				)
-				.forEach(
-						ThrowableConsumer.sneaky(file -> {
-							Files.createDirectories(file.getParent());
-							Files.createFile(file);
-						})
-				);
-		assertThat(service.findBuildFiles(tmpDirectory)).containsExactly(
-				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
-				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
-				new BuildFile(BuildFileType.GRADLE_KOTLIN, barGradleKotlinFile),
-				new BuildFile(BuildFileType.MAVEN, barMavenFile),
-				new BuildFile(BuildFileType.GRADLE_GROOVY, bar1GradleGroovyFile),
-				new BuildFile(BuildFileType.GRADLE_KOTLIN, bar2GradleKotlinFile),
-				new BuildFile(BuildFileType.MAVEN, bar10MavenFile),
-				new BuildFile(BuildFileType.GRADLE_GROOVY, fooGradleGroovyFile),
-				new BuildFile(BuildFileType.GRADLE_KOTLIN, fooGradleKotlinFile),
-				new BuildFile(BuildFileType.MAVEN, fooMavenFile),
-				new BuildFile(BuildFileType.GRADLE_GROOVY, foo1GradleGroovyFile),
-				new BuildFile(BuildFileType.GRADLE_KOTLIN, foo2GradleKotlinFile),
-				new BuildFile(BuildFileType.MAVEN, foo10MavenFile)
-		);
-	}
-
-	@Test
-	@Deprecated
-	void testFindBuildFilesDeprecatedInvalid() throws IOException {
-		final var service = new Service(mockedMavenSession);
-		assertThatNullPointerException()
-				.isThrownBy(() -> service.findBuildFiles(null));
-		assertThatIllegalArgumentException()
-				.isThrownBy(() -> service.findBuildFiles(Path.of("directory_not-found")));
-	}
-
-	@Test
 	void testFindBuildFiles(@TempDir final Path tmpDirectory) throws IOException {
 		final var service = new Service(mockedMavenSession);
 		final var rootMavenFile = tmpDirectory.resolve(Path.of("pom.xml"));
@@ -217,6 +152,21 @@ final class ServiceTest {
 				new BuildFile(BuildFileType.MAVEN, fooMavenFile)
 		);
 		assertThat(service.findBuildFiles(tmpDirectory, 2)).containsExactly(
+				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, barGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, barMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, bar1GradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, bar2GradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, bar10MavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, fooGradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, fooGradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, fooMavenFile),
+				new BuildFile(BuildFileType.GRADLE_GROOVY, foo1GradleGroovyFile),
+				new BuildFile(BuildFileType.GRADLE_KOTLIN, foo2GradleKotlinFile),
+				new BuildFile(BuildFileType.MAVEN, foo10MavenFile)
+		);
+		assertThat(service.findBuildFiles(tmpDirectory, Integer.MAX_VALUE)).containsExactly(
 				new BuildFile(BuildFileType.MAVEN, rootMavenFile),
 				new BuildFile(BuildFileType.GRADLE_GROOVY, barGradleGroovyFile),
 				new BuildFile(BuildFileType.GRADLE_KOTLIN, barGradleKotlinFile),
@@ -354,161 +304,6 @@ final class ServiceTest {
 	void testFindBuildInvalid() throws IOException {
 		final var service = new Service(mockedMavenSession);
 		assertThatNullPointerException().isThrownBy(() -> service.findBuild(null));
-	}
-
-	@Test
-	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecated1() throws IOException {
-		final var service = new Service(
-				Set.of(mockedMavenBuildResolver, mockedGradleBuildResolver),
-				mockedArtifactAvailableVersionsResolver
-		);
-		final var fooIdentifier = new ArtifactIdentifier("foo-group-id", "foo-artifact-id");
-		final var barIdentifier = new ArtifactIdentifier("bar-group-id", "bar-artifact-id");
-		Mockito
-				.when(
-						mockedArtifactAvailableVersionsResolver.resolve(
-								Mockito.argThat(
-										artifact -> null != artifact
-												&& fooIdentifier.equals(artifact.getIdentifier())
-								),
-								Mockito.notNull()
-						)
-				)
-				.then(
-						invocation -> new ArtifactAvailableVersions(
-								invocation.getArgument(0),
-								List.of("1.0.0", "2.0.0")
-						)
-				);
-		Mockito
-				.when(
-						mockedArtifactAvailableVersionsResolver.resolve(
-								Mockito.argThat(
-										artifact -> null != artifact
-												&& barIdentifier.equals(artifact.getIdentifier())
-								),
-								Mockito.notNull()
-						)
-				)
-				.then(
-						invocation -> new ArtifactAvailableVersions(
-								invocation.getArgument(0),
-								List.of()
-						)
-				);
-		final var fooArtifact1 = new Artifact<>(MavenArtifactType.DEPENDENCY, fooIdentifier, "1.0.0");
-		final var fooArtifact2 = new Artifact<>(MavenArtifactType.DEPENDENCY, fooIdentifier, "2.0.0-SNAPSHOT");
-		final var fooArtifact3 = new Artifact<>(MavenArtifactType.DEPENDENCY, fooIdentifier, "2.0.0");
-		final var barArtifact = new Artifact<>(MavenArtifactType.DEPENDENCY, barIdentifier, "1.1.0");
-		final var build = new Build(
-				new BuildFile(BuildFileType.MAVEN, Path.of("src", "test", "resources", "pom.xml")),
-				List.of(),
-				List.of(fooArtifact1, fooArtifact2, fooArtifact3, barArtifact)
-		);
-		assertThat(service.findArtifactUpdateVersions(build, false)).containsExactly(
-				new ArtifactUpdateVersion(fooArtifact1, "2.0.0"),
-				new ArtifactUpdateVersion(fooArtifact2, "2.0.0")
-		);
-		assertThat(service.findArtifactUpdateVersions(build, true)).containsExactly(
-				new ArtifactUpdateVersion(fooArtifact1, "2.0.0")
-		);
-	}
-
-	@Test
-	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecated1Invalid() throws IOException {
-		final var service = new Service(mockedMavenSession);
-		assertThatNullPointerException()
-				.isThrownBy(() -> service.findArtifactUpdateVersions(null, false));
-	}
-
-	@Test
-	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecated2() throws IOException {
-		final var service = new Service(
-				Set.of(mockedMavenBuildResolver, mockedGradleBuildResolver),
-				mockedArtifactAvailableVersionsResolver
-		);
-		final var fooIdentifier = new ArtifactIdentifier("foo-group-id", "foo-artifact-id");
-		final var barIdentifier = new ArtifactIdentifier("bar-group-id", "bar-artifact-id");
-		Mockito
-				.when(
-						mockedArtifactAvailableVersionsResolver.resolve(
-								Mockito.argThat(
-										artifact -> null != artifact
-												&& fooIdentifier.equals(artifact.getIdentifier())
-								),
-								Mockito.notNull()
-						)
-				)
-				.then(
-						invocation -> new ArtifactAvailableVersions(
-								invocation.getArgument(0),
-								List.of("1.0.0", "2.0.0")
-						)
-				);
-		Mockito
-				.when(
-						mockedArtifactAvailableVersionsResolver.resolve(
-								Mockito.argThat(
-										artifact -> null != artifact
-												&& barIdentifier.equals(artifact.getIdentifier())
-								),
-								Mockito.notNull()
-						)
-				)
-				.then(
-						invocation -> new ArtifactAvailableVersions(
-								invocation.getArgument(0),
-								List.of()
-						)
-				);
-		final var fooArtifact1 = new Artifact<>(
-				MavenArtifactType.DEPENDENCY,
-				fooIdentifier,
-				"1.0.0",
-				true
-		);
-		final var fooArtifact2 = new Artifact<>(
-				MavenArtifactType.DEPENDENCY,
-				fooIdentifier,
-				"2.0.0-SNAPSHOT"
-		);
-		final var fooArtifact3 = new Artifact<>(
-				MavenArtifactType.DEPENDENCY,
-				fooIdentifier,
-				"2.0.0"
-		);
-		final var barArtifact = new Artifact<>(
-				MavenArtifactType.DEPENDENCY,
-				barIdentifier,
-				"1.1.0"
-		);
-		final var build = new Build(
-				new BuildFile(BuildFileType.MAVEN, Path.of("src", "test", "resources", "pom.xml")),
-				List.of(),
-				List.of(fooArtifact1, fooArtifact2, fooArtifact3, barArtifact)
-		);
-		assertThat(service.findArtifactUpdateVersions(build, false, false)).containsExactly(
-				new ArtifactUpdateVersion(fooArtifact1, "2.0.0"),
-				new ArtifactUpdateVersion(fooArtifact2, "2.0.0")
-		);
-		assertThat(service.findArtifactUpdateVersions(build, true, false)).containsExactly(
-				new ArtifactUpdateVersion(fooArtifact2, "2.0.0")
-		);
-		assertThat(service.findArtifactUpdateVersions(build, false, true)).containsExactly(
-				new ArtifactUpdateVersion(fooArtifact1, "2.0.0")
-		);
-	}
-
-	@Test
-	@Deprecated
-	void testFindArtifactUpdateVersionsDeprecated2Invalid() throws IOException {
-		final var service = new Service(mockedMavenSession);
-		assertThatNullPointerException().isThrownBy(
-				() -> service.findArtifactUpdateVersions(null, false, false)
-		);
 	}
 
 	@Test

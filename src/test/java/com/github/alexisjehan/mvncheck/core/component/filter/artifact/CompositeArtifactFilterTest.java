@@ -48,22 +48,6 @@ final class CompositeArtifactFilterTest {
 	);
 
 	@Test
-	@Deprecated
-	void testConstructor() {
-		final var otherCompositeArtifactFilter = new CompositeArtifactFilter(ArtifactFilter.ACCEPT_NONE);
-		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT)).isFalse();
-		assertThat(otherCompositeArtifactFilter.accept(ARTIFACT, UPDATE_VERSION)).isFalse();
-	}
-
-	@Test
-	@Deprecated
-	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new CompositeArtifactFilter((ArtifactFilter[]) null));
-		assertThatIllegalArgumentException().isThrownBy(CompositeArtifactFilter::new);
-		assertThatNullPointerException().isThrownBy(() -> new CompositeArtifactFilter((ArtifactFilter) null));
-	}
-
-	@Test
 	void testAccept() {
 		assertThat(
 				CompositeArtifactFilter.all(ArtifactFilter.ACCEPT_NONE).accept(ARTIFACT)

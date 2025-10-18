@@ -95,22 +95,6 @@ public interface ArtifactFilter {
 	};
 
 	/**
-	 * Artifact filter that reject all artifacts.
-	 * @deprecated since 1.7.0, use {@link #ACCEPT_NONE} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	ArtifactFilter ALL = ACCEPT_NONE;
-
-	/**
-	 * Artifact filter that accept all artifacts.
-	 * @deprecated since 1.7.0, use {@link #ACCEPT_ALL} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.7.0")
-	ArtifactFilter NONE = ACCEPT_ALL;
-
-	/**
 	 * Test if an artifact is accepted.
 	 * @param artifact an artifact
 	 * @return {@code true} if the artifact is accepted

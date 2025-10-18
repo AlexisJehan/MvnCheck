@@ -303,67 +303,6 @@ public final class Application {
 	/**
 	 * Run the program.
 	 * @param path a path
-	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
-	 * @deprecated since 1.1.0, use {@link #run(Path, int, boolean, boolean)} instead
-	 * @since 1.0.0
-	 */
-	@Deprecated(since = "1.1.0")
-	void run(final Path path, final boolean ignoreSnapshots, final boolean short0) throws IOException {
-		run(path, DEFAULT_MAX_DEPTH, ignoreSnapshots, short0);
-	}
-
-	/**
-	 * Run the program.
-	 * @param path a path
-	 * @param maxDepth a maximum depth
-	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
-	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
-	 * @deprecated since 1.5.0, use {@link #run(Path, int, boolean, boolean, boolean)} instead
-	 * @since 1.1.0
-	 */
-	@Deprecated(since = "1.5.0")
-	void run(
-			final Path path,
-			final int maxDepth,
-			final boolean ignoreSnapshots,
-			final boolean short0
-	) throws IOException {
-		run(path, maxDepth, false, ignoreSnapshots, short0);
-	}
-
-	/**
-	 * Run the program.
-	 * @param path a path
-	 * @param maxDepth a maximum depth
-	 * @param ignoreInherited {@code true} if build file artifacts with an inherited version should be ignored
-	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
-	 * @param short0 {@code true} if only build files with at least one artifact update should be shown
-	 * @throws IOException might occur with input/output operations
-	 * @throws NullPointerException if the path is {@code null}
-	 * @throws IllegalArgumentException if the maximum depth is lower than {@code 0}
-	 * @deprecated since 1.7.0, use {@link #run(Path, int, Set, boolean, boolean, boolean, boolean)} instead
-	 * @since 1.5.0
-	 */
-	@Deprecated(since = "1.7.0")
-	void run(
-			final Path path,
-			final int maxDepth,
-			final boolean ignoreInherited,
-			final boolean ignoreSnapshots,
-			final boolean short0
-	) throws IOException {
-		run(path, maxDepth, Set.of(), ignoreSnapshots, ignoreInherited, true, short0);
-	}
-
-	/**
-	 * Run the program.
-	 * @param path a path
 	 * @param maxDepth a maximum depth
 	 * @param filters a {@link Set} of filters
 	 * @param ignoreSnapshots {@code true} if build file artifacts with a snapshot version should be ignored
