@@ -2,6 +2,23 @@
 
 ## 1.8.0 (unreleased)
 
+### Notes
+- Update the `gradle-tooling-api` dependency to `9.1.0`
+- Update the `github-api` dependency to `1.330`
+- Update the `commons-cli` dependency to `1.10.0`
+- Update the `jansi` dependency to `3.30.6`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.2`
+- Update the `junit-jupiter` dependency to `6.0.0`
+- Update the `assertj-core` dependency to `3.27.6`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.20.0`
+- Update the `maven-dependency-plugin` plugin to `3.9.0`
+- Update the `maven-compiler-plugin` plugin to `3.14.1`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.4`
+- Update the `jacoco-maven-plugin` plugin to `0.8.14`
+- Update the `maven-javadoc-plugin` plugin to `3.12.0`
+- Update the `maven-pmd-plugin` plugin to `3.28.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.17.0`
+
 ## [1.7.5](https://github.com/AlexisJehan/MvnCheck/releases/tag/v1.7.5) (2025-07-18)
 
 ### Notes

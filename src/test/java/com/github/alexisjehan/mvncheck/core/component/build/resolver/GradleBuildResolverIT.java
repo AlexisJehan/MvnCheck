@@ -56,7 +56,7 @@ final class GradleBuildResolverIT {
 
 	@Test
 	void testUpToDate() {
-		assertThat(GradleUtils.VERSION).startsWith("8.14"); // Ensure tests are up-to-date after updating Gradle
+		assertThat(GradleUtils.VERSION).startsWith("9.1"); // Ensure tests are up-to-date after updating Gradle
 	}
 
 	@ParameterizedTest
@@ -159,8 +159,15 @@ final class GradleBuildResolverIT {
 
 	@ParameterizedTest
 	@EnabledForJreRange(max = JRE.JAVA_24)
-	@ValueSource(strings = "8.14")
+	@ValueSource(strings = {"8.14", "9.0"})
 	void testResolveSinceGradle68UntilJava24(final String gradleVersion, @TempDir final Path tmpDirectory) {
+		testResolveSinceGradle68(gradleVersion, tmpDirectory);
+	}
+
+	@ParameterizedTest
+	@EnabledForJreRange(max = JRE.JAVA_25)
+	@ValueSource(strings = "9.1")
+	void testResolveSinceGradle68UntilJava25(final String gradleVersion, @TempDir final Path tmpDirectory) {
 		testResolveSinceGradle68(gradleVersion, tmpDirectory);
 	}
 

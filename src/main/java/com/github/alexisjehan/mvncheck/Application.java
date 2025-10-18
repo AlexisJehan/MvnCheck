@@ -41,8 +41,9 @@ import com.github.alexisjehan.mvncheck.core.util.GradleUtils;
 import com.github.alexisjehan.mvncheck.core.util.MavenUtils;
 import internal.ExcludeFromJacocoGeneratedReport;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.help.HelpFormatter;
+import org.apache.commons.cli.help.TextHelpAppendable;
 import org.jline.jansi.Ansi;
 import org.jline.jansi.AnsiConsole;
 
@@ -263,15 +264,14 @@ public final class Application {
 					outputStream.println(DESCRIPTION);
 					outputStream.println();
 					try (var writer = new PrintWriter(outputStream)) {
-						final var helpFormatter = new HelpFormatter();
+						final var helpFormatter = HelpFormatter.builder()
+								.setHelpAppendable(new TextHelpAppendable(writer))
+								.setShowSince(false)
+								.get();
 						helpFormatter.printHelp(
-								writer,
-								helpFormatter.getWidth(),
-								COMMAND_NAME + " [<path>]",
+								COMMAND_NAME + " [<glob>...]",
 								null,
 								options,
-								helpFormatter.getLeftPadding(),
-								helpFormatter.getDescPadding(),
 								null,
 								true
 						);
