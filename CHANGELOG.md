@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (unreleased)
+## [2.0.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.0.0) (2025-10-18)
 
 ### Breaking backward compatibility
 - Migrate to _JDK 17_
