@@ -5,9 +5,7 @@ settingsEvaluated {
 				doLast {
 					[
 							'NORMAL': [
-									'6.8' <= gradle.gradleVersion
-											? settings.dependencyResolutionManagement.repositories // Since Gradle 6.8
-											: [],
+									settings.dependencyResolutionManagement.repositories,
 									repositories
 							],
 							'PLUGIN': [

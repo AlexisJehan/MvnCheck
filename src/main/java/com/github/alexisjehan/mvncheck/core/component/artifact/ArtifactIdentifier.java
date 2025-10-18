@@ -74,10 +74,9 @@ public final class ArtifactIdentifier {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof ArtifactIdentifier)) {
+		if (!(object instanceof final ArtifactIdentifier other)) {
 			return false;
 		}
-		final var other = (ArtifactIdentifier) object;
 		return Equals.equals(groupId, other.groupId)
 				&& Equals.equals(artifactId, other.artifactId);
 	}

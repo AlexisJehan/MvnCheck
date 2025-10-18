@@ -94,10 +94,9 @@ public final class Build {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof Build)) {
+		if (!(object instanceof final Build other)) {
 			return false;
 		}
-		final var other = (Build) object;
 		return Equals.equals(file, other.file)
 				&& Equals.equals(repositories, other.repositories)
 				&& Equals.equals(artifacts, other.artifacts);

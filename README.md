@@ -8,7 +8,7 @@
 [![coverage](https://img.shields.io/codecov/c/github/AlexisJehan/MvnCheck)](https://codecov.io/gh/AlexisJehan/MvnCheck)
 [![license](https://img.shields.io/github/license/AlexisJehan/MvnCheck)](LICENSE.txt)
 
-A _Java 11+_ command line tool to check for artifact updates of _Maven_ and _Gradle_ projects.
+A _Java 17+_ command line tool to check for artifact updates of _Maven_ and _Gradle_ projects.
 
 ## Introduction
 **MvnCheck** aims to help developers to keep their projects up-to-date by checking for last available dependency and
@@ -44,7 +44,7 @@ my-maven-project\pom.xml
 ## Getting started
 
 ### Prerequisites
-_MvnCheck_ is running on most operating systems, it only requires _Java 11_ or higher to be installed.
+_MvnCheck_ is running on most operating systems, it only requires _Java 17_ or higher to be installed.
 
 You can check that _Java_ is available in your environment and its version using the following command:
 ```console

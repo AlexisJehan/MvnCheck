@@ -1,6 +1,9 @@
 # Changelog
 
-## 1.8.0 (unreleased)
+## 2.0.0 (unreleased)
+
+### Breaking backward compatibility
+- Migrate to _JDK 17_
 
 ### Notes
 - Update the `gradle-tooling-api` dependency to `9.1.0`

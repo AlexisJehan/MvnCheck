@@ -79,10 +79,9 @@ public final class ArtifactAvailableVersions {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof ArtifactAvailableVersions)) {
+		if (!(object instanceof final ArtifactAvailableVersions other)) {
 			return false;
 		}
-		final var other = (ArtifactAvailableVersions) object;
 		return Equals.equals(artifact, other.artifact)
 				&& Equals.equals(availableVersions, other.availableVersions);
 	}

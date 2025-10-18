@@ -27,6 +27,7 @@ import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 
+import java.io.Serial;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public final class ArtifactFilterParseException extends RuntimeException {
 	 * Serial version unique identifier.
 	 * @since 1.0.0
 	 */
+	@Serial
 	private static final long serialVersionUID = -5557892849559209991L;
 
 	/**

@@ -75,10 +75,9 @@ public final class BuildFile {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof BuildFile)) {
+		if (!(object instanceof final BuildFile other)) {
 			return false;
 		}
-		final var other = (BuildFile) object;
 		return Equals.equals(type, other.type)
 				&& Equals.equals(file, other.file);
 	}

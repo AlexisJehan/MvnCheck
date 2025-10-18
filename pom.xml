@@ -7,7 +7,7 @@
 	<version>1.8.0-SNAPSHOT</version>
 
 	<name>MvnCheck</name>
-	<description>A Java 11+ command line tool to check for artifact updates of Maven and Gradle projects.</description>
+	<description>A Java 17+ command line tool to check for artifact updates of Maven and Gradle projects.</description>
 	<url>https://github.com/AlexisJehan/MvnCheck</url>
 	<inceptionYear>2022</inceptionYear>
 	<licenses>
@@ -48,7 +48,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.release>11</maven.compiler.release>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 
 	<repositories>

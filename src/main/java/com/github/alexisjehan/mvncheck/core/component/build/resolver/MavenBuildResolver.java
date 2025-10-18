@@ -56,7 +56,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -201,7 +200,7 @@ public final class MavenBuildResolver implements BuildResolver {
 												toRepository(RepositoryType.PLUGIN, pluginRepository)
 								)
 				)
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 	}
 
 	/**
@@ -338,7 +337,7 @@ public final class MavenBuildResolver implements BuildResolver {
 							.findAny()
 							.orElse(rawArtifact);
 				})
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 	}
 
 	/**

@@ -25,6 +25,8 @@ package com.github.alexisjehan.mvncheck.core.component.session;
 
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
+import java.io.Serial;
+
 /**
  * Unchecked {@link Exception} related to <i>Maven</i> sessions.
  *
@@ -37,6 +39,7 @@ public final class MavenSessionException extends RuntimeException {
 	 * Serial version unique identifier.
 	 * @since 1.0.0
 	 */
+	@Serial
 	private static final long serialVersionUID = -560776400908084356L;
 
 	/**

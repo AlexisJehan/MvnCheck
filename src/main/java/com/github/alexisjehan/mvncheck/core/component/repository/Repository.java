@@ -83,10 +83,9 @@ public final class Repository {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof Repository)) {
+		if (!(object instanceof final Repository other)) {
 			return false;
 		}
-		final var other = (Repository) object;
 		return Equals.equals(type, other.type)
 				&& Equals.equals(id, other.id)
 				&& Equals.equals(url, other.url);

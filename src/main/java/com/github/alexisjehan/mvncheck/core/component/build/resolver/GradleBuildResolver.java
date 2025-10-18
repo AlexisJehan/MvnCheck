@@ -56,7 +56,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Class that describes a <i>Gradle</i> resolver of the build for a file.
@@ -370,7 +369,7 @@ public final class GradleBuildResolver implements BuildResolver {
 		Ensure.notNullAndNotNullElements("repositories", repositories);
 		return repositories.stream()
 				.filter(Predicate.not(repository -> repository.getUrl().startsWith("file:")))
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 	}
 
 	/**
@@ -400,7 +399,7 @@ public final class GradleBuildResolver implements BuildResolver {
 					final var artifactType = artifact.getType();
 					return !artifactType.isClasspath();
 				})
-				.collect(Collectors.toUnmodifiableList())
+				.toList()
 				.forEach(artifact -> {
 					artifacts.remove(artifact.withType(GradleArtifactType.COMPILE_CLASSPATH));
 					artifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
@@ -409,7 +408,7 @@ public final class GradleBuildResolver implements BuildResolver {
 				});
 		artifacts.stream()
 				.filter(artifact -> GradleArtifactType.COMPILE_CLASSPATH == artifact.getType())
-				.collect(Collectors.toUnmodifiableList())
+				.toList()
 				.forEach(artifact -> {
 					artifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
 					artifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
@@ -417,7 +416,7 @@ public final class GradleBuildResolver implements BuildResolver {
 				});
 		artifacts.stream()
 				.filter(artifact -> GradleArtifactType.RUNTIME_CLASSPATH == artifact.getType())
-				.collect(Collectors.toUnmodifiableList())
+				.toList()
 				.forEach(artifact -> {
 					artifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
 					artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
@@ -427,27 +426,22 @@ public final class GradleBuildResolver implements BuildResolver {
 						artifact ->
 								GradleArtifactType.TEST_COMPILE_CLASSPATH == artifact.getType()
 				)
-				.collect(Collectors.toUnmodifiableList())
+				.toList()
 				.forEach(
 						artifact -> artifacts.remove(
 								artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH)
 						)
 				);
 		return artifacts.stream()
-				.map(artifact -> {
-					switch (artifact.getType()) {
-						case COMPILE_CLASSPATH:
-							return artifact.withType(GradleArtifactType.IMPLEMENTATION);
-						case RUNTIME_CLASSPATH:
-							return artifact.withType(GradleArtifactType.RUNTIME_ONLY);
-						case TEST_COMPILE_CLASSPATH:
-							return artifact.withType(GradleArtifactType.TEST_IMPLEMENTATION);
-						case TEST_RUNTIME_CLASSPATH:
-							return artifact.withType(GradleArtifactType.TEST_RUNTIME_ONLY);
-						default:
-							return artifact;
-					}
-				})
-				.collect(Collectors.toUnmodifiableList());
+				.map(
+						artifact -> switch (artifact.getType()) {
+							case COMPILE_CLASSPATH -> artifact.withType(GradleArtifactType.IMPLEMENTATION);
+							case RUNTIME_CLASSPATH -> artifact.withType(GradleArtifactType.RUNTIME_ONLY);
+							case TEST_COMPILE_CLASSPATH -> artifact.withType(GradleArtifactType.TEST_IMPLEMENTATION);
+							case TEST_RUNTIME_CLASSPATH -> artifact.withType(GradleArtifactType.TEST_RUNTIME_ONLY);
+							default -> artifact;
+						}
+				)
+				.toList();
 	}
 }

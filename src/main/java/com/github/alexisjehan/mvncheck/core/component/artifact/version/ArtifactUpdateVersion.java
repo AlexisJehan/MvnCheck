@@ -77,10 +77,9 @@ public final class ArtifactUpdateVersion {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof ArtifactUpdateVersion)) {
+		if (!(object instanceof final ArtifactUpdateVersion other)) {
 			return false;
 		}
-		final var other = (ArtifactUpdateVersion) object;
 		return Equals.equals(artifact, other.artifact)
 				&& Equals.equals(updateVersion, other.updateVersion);
 	}

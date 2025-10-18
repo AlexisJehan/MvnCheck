@@ -25,6 +25,8 @@ package com.github.alexisjehan.mvncheck.core.component.artifact.version.resolver
 
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
+import java.io.Serial;
+
 /**
  * Unchecked {@link Exception} related to available versions resolving.
  *
@@ -37,6 +39,7 @@ public final class ArtifactAvailableVersionsResolveException extends RuntimeExce
 	 * Serial version unique identifier.
 	 * @since 1.2.0
 	 */
+	@Serial
 	private static final long serialVersionUID = -2028419088909362668L;
 
 	/**

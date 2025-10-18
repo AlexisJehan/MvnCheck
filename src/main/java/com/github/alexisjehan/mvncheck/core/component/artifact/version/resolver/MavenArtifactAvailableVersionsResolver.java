@@ -41,7 +41,6 @@ import org.eclipse.aether.version.Version;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Class that describes a <i>Maven</i> resolver of available versions for an artifact.
@@ -95,7 +94,7 @@ public final class MavenArtifactAvailableVersionsResolver implements ArtifactAva
 										repository.getUrl()
 								)
 						)
-						.collect(Collectors.toUnmodifiableList())
+						.toList()
 		);
 		if (resolvedRepositories.isEmpty()) {
 			throw new ArtifactAvailableVersionsResolveException("No remote repository has been resolved");
@@ -124,7 +123,7 @@ public final class MavenArtifactAvailableVersionsResolver implements ArtifactAva
 				result.getVersions()
 						.stream()
 						.map(Version::toString)
-						.collect(Collectors.toUnmodifiableList())
+						.toList()
 		);
 	}
 }

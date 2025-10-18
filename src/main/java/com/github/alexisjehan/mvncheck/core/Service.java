@@ -55,7 +55,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Class that describes the service.
@@ -114,7 +113,7 @@ public final class Service {
 	}
 
 	/**
-	 * Constructor with a {@link Set} of build resolvers and an artifact available versions resolver.
+	 * Constructor with a {@link Set} of build resolvers and an artifact available versions' resolver.
 	 * @param buildResolvers a {@link Set} of build resolvers
 	 * @param artifactAvailableVersionsResolver an artifact available versions resolver
 	 * @throws IOException might occur with input/output operations
@@ -180,7 +179,7 @@ public final class Service {
 											Comparators.NUMBER_AWARE
 									)
 					)
-					.collect(Collectors.toUnmodifiableList());
+					.toList();
 		}
 	}
 
@@ -199,10 +198,10 @@ public final class Service {
 								buildFile.getType().getOutputDirectoryName()
 						)
 				)
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 		return buildFiles.stream()
 				.filter(buildFile -> outputDirectories.stream().noneMatch(buildFile.getFile()::startsWith))
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 	}
 
 	/**
@@ -319,7 +318,7 @@ public final class Service {
 							.map(updateVersion -> new ArtifactUpdateVersion(artifact, updateVersion));
 				})
 				.flatMap(Optional::stream)
-				.collect(Collectors.toUnmodifiableList());
+				.toList();
 	}
 
 	/**

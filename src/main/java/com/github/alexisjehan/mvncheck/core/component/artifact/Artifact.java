@@ -169,10 +169,9 @@ public final class Artifact<T extends ArtifactType> {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof Artifact)) {
+		if (!(object instanceof final Artifact<?> other)) {
 			return false;
 		}
-		final var other = (Artifact<?>) object;
 		return Equals.equals(type, other.type)
 				&& Equals.equals(identifier, other.identifier)
 				&& Equals.equals(version, other.version)

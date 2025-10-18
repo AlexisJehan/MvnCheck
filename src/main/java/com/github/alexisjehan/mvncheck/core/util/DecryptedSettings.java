@@ -78,10 +78,9 @@ public final class DecryptedSettings {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof DecryptedSettings)) {
+		if (!(object instanceof final DecryptedSettings other)) {
 			return false;
 		}
-		final var other = (DecryptedSettings) object;
 		return Equals.equals(proxies, other.proxies)
 				&& Equals.equals(servers, other.servers);
 	}
