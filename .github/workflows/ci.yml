@@ -4,17 +4,16 @@ jobs:
   build:
     strategy:
       matrix:
-        distribution: ['temurin']
         java-version: ['17', '18', '19', '20', '21', '22', '23', '24', '25']
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
-          distribution: ${{ matrix.distribution }}
+          distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
           cache: maven
       - run: mvn --batch-mode verify -Dgpg.skip
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
