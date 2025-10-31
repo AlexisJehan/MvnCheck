@@ -2,6 +2,9 @@
 
 ## 2.1.0 (unreleased)
 
+### Notes
+- Update the `gradle-tooling-api` dependency to `9.2.0`
+
 ## [2.0.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.0.0) (2025-10-18)
 
 ### Breaking backward compatibility
