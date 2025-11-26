@@ -3,7 +3,11 @@
 ## 2.1.0 (unreleased)
 
 ### Notes
-- Update the `gradle-tooling-api` dependency to `9.2.0`
+- Update the `gradle-tooling-api` dependency to `9.2.1`
+- Update the `commons-cli` dependency to `1.11.0`
+- Update the `junit-jupiter` dependency to `6.0.1`
+- Update the `maven-jar-plugin` plugin to `3.5.0`
+- Update `pmd-core` and `pmd-java` dependencies to `7.18.0`
 
 ## [2.0.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.0.0) (2025-10-18)
 

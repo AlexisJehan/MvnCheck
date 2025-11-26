@@ -56,7 +56,7 @@ final class GradleBuildResolverIT {
 
 	@Test
 	void testUpToDate() {
-		assertThat(GradleUtils.VERSION).isEqualTo("9.2.0"); // Ensure tests are up-to-date
+		assertThat(GradleUtils.VERSION).isEqualTo("9.2.1"); // Ensure tests are up-to-date
 	}
 
 	@ParameterizedTest
