@@ -3,7 +3,7 @@
 .classpath
 .project
 
-# IntelliJ IDEA
+# JetBrains
 .idea/
 *.iml
 
