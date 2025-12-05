@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.0 (unreleased)
+## [2.1.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.1.0) (2025-12-05)
 
 ### Bug fixes
 - [[#7](https://github.com/AlexisJehan/MvnCheck/issues/7)] Fix artifact updates not displayed while having a filter
