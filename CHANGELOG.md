@@ -2,6 +2,11 @@
 
 ## 2.1.0 (unreleased)
 
+### Bug fixes
+- [[#7](https://github.com/AlexisJehan/MvnCheck/issues/7)] Fix artifact updates not displayed while having a filter
+  matching on both `groupId` and `artifactId` but not on `updateVersion` (thanks
+  to [mingelz](https://github.com/mingelz))
+
 ### Notes
 - Update the `gradle-tooling-api` dependency to `9.2.1`
 - Update the `commons-cli` dependency to `1.11.0`
