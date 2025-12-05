@@ -81,6 +81,8 @@ final class WildcardArtifactFilterTest {
 		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-id*").accept(ARTIFACT)).isTrue();
 		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-*").accept(ARTIFACT)).isTrue();
 		assertThat(new WildcardArtifactFilter(GROUP_ID, "foo-artifact-**").accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, ARTIFACT_ID).accept(ARTIFACT)).isTrue();
+		assertThat(new WildcardArtifactFilter(GROUP_ID, ARTIFACT_ID, UPDATE_VERSION).accept(ARTIFACT)).isFalse();
 	}
 
 	@Test

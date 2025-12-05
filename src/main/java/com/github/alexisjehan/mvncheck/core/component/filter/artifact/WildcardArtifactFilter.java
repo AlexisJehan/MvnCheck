@@ -132,7 +132,8 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 		final var groupId = artifactIdentifier.getGroupId();
 		final var artifactId = artifactIdentifier.getArtifactId();
 		return groupIdPattern.matcher(groupId).matches()
-				&& (null == artifactIdPattern || artifactIdPattern.matcher(artifactId).matches());
+				&& (null == artifactIdPattern || artifactIdPattern.matcher(artifactId).matches())
+				&& null == updateVersionPattern;
 	}
 
 	/**
@@ -145,7 +146,11 @@ public final class WildcardArtifactFilter implements ArtifactFilter {
 	public boolean accept(final Artifact<?> artifact, final String updateVersion) {
 		Ensure.notNull("artifact", artifact);
 		Ensure.notNullAndNotEmpty("updateVersion", updateVersion);
-		return accept(artifact)
+		final var artifactIdentifier = artifact.getIdentifier();
+		final var groupId = artifactIdentifier.getGroupId();
+		final var artifactId = artifactIdentifier.getArtifactId();
+		return groupIdPattern.matcher(groupId).matches()
+				&& (null == artifactIdPattern || artifactIdPattern.matcher(artifactId).matches())
 				&& (null == updateVersionPattern || updateVersionPattern.matcher(updateVersion).matches());
 	}
 
