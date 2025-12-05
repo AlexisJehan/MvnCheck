@@ -256,14 +256,12 @@
 				<executions>
 					<execution>
 						<id>jacoco-prepare-agent</id>
-						<phase>test-compile</phase>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>jacoco-report</id>
-						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
@@ -276,7 +274,6 @@
 					</execution>
 					<execution>
 						<id>jacoco-report-integration</id>
-						<phase>post-integration-test</phase>
 						<goals>
 							<goal>report-integration</goal>
 						</goals>
@@ -298,7 +295,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.3.1</version>
+				<version>3.4.0</version>
 				<executions>
 					<execution>
 						<id>source-jar-no-fork</id>
@@ -369,7 +366,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.7.1</version>
+				<version>3.8.0</version>
 				<configuration>
 					<outputTimestamp>${maven.build.timestamp}</outputTimestamp>
 				</configuration>
@@ -457,12 +454,12 @@
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-core</artifactId>
-						<version>7.18.0</version>
+						<version>7.19.0</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-java</artifactId>
-						<version>7.18.0</version>
+						<version>7.19.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
