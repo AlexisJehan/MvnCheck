@@ -1,5 +1,7 @@
 # Changelog
 
+## 2.3.0 (unreleased)
+
 ## [2.2.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.0) (2025-12-20)
 
 ### Improvements
