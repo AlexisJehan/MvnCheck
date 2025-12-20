@@ -1,9 +1,10 @@
 # Changelog
 
-## 2.2.0 (unreleased)
+## [2.2.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.0) (2025-12-20)
 
 ### Improvements
-- Hide the restricted method warning caused by the `jansi` dependency (thanks to [Polve](https://github.com/Polve))
+- [[#9](https://github.com/AlexisJehan/MvnCheck/issues/9)] Hide the restricted method warning caused by the `jansi`
+  dependency (thanks to [Polve](https://github.com/Polve))
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.12`

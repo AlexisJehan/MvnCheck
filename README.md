@@ -59,16 +59,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-2.1.0-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-2.1.0/bin
+sudo tar -xvzf mvn-check-2.2.0-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-2.2.0/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-2.1.0`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-2.2.0`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-2.1.0\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-2.2.0\bin` at the end
 
 #### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -81,7 +81,7 @@ Alternatively, you could use _MvnCheck_ by downloading the executable JAR instea
 
 This way, you have to execute this command to run it:
 ```console
-java -jar mvn-check-2.1.0-bin.jar
+java -jar mvn-check-2.2.0-bin.jar
 ```
 
 ## Usage
@@ -133,6 +133,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      2.2.0       |    3.9.12     |     9.2.1      |
 |      2.1.0       |    3.9.11     |     9.2.1      |
 |      2.0.0       |    3.9.11     |     9.1.0      |
 |      1.7.5       |    3.9.11     |     8.14.3     |
