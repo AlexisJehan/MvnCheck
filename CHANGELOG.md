@@ -5,6 +5,12 @@
 ### Improvements
 - Hide the restricted method warning caused by the `jansi` dependency (thanks to [Polve](https://github.com/Polve))
 
+### Notes
+- Update the `maven-core` dependency to `3.9.12`
+- Update the `maven-resolver-supplier` dependency to `1.9.25`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.3`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.21.0`
+
 ## [2.1.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.1.0) (2025-12-05)
 
 ### Bug fixes
