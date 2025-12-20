@@ -2,6 +2,9 @@
 
 ## 2.2.0 (unreleased)
 
+### Improvements
+- Hide the restricted method warning caused by the `jansi` dependency (thanks to [Polve](https://github.com/Polve))
+
 ## [2.1.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.1.0) (2025-12-05)
 
 ### Bug fixes

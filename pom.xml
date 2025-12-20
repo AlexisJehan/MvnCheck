@@ -339,7 +339,7 @@
 							<licenseHeaderFile>LICENSE.txt</licenseHeaderFile>
 						</program>
 					</programs>
-					<extraJvmArguments>-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager</extraJvmArguments>
+					<extraJvmArguments>-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager --enable-native-access=ALL-UNNAMED</extraJvmArguments>
 					<platforms>
 						<platform>unix</platform>
 						<platform>windows</platform>
