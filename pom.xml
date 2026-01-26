@@ -88,7 +88,7 @@
 		<dependency>
 			<groupId>org.gradle</groupId>
 			<artifactId>gradle-tooling-api</artifactId> <!-- From the "gradle" repository -->
-			<version>9.2.1</version>
+			<version>9.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kohsuke</groupId>
@@ -144,13 +144,13 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>6.0.1</version>
+			<version>6.0.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.27.6</version>
+			<version>3.27.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -454,12 +454,12 @@
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-core</artifactId>
-						<version>7.19.0</version>
+						<version>7.20.0</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-java</artifactId>
-						<version>7.19.0</version>
+						<version>7.20.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
