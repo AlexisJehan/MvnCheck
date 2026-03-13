@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.3.0 (unreleased)
+## [2.2.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.1) (2026-03-13)
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.14`
