@@ -3,12 +3,17 @@
 ## 2.3.0 (unreleased)
 
 ### Notes
-- Update the `gradle-tooling-api` dependency to `9.3.1`
-- Update the `junit-jupiter` dependency to `6.0.2`
+- Update the `maven-core` dependency to `3.9.14`
+- Update the `maven-resolver-supplier` dependency to `1.9.27`
+- Update the `gradle-tooling-api` dependency to `9.4.0`
+- Update the `jansi` dependency to `4.0.4`
+- Update the `junit-jupiter` dependency to `6.0.3`
 - Update the `assertj-core` dependency to `3.27.7`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.23.0`
 - Update the `maven-dependency-plugin` plugin to `3.10.0`
 - Update the `maven-compiler-plugin` plugin to `3.15.0`
-- Update `pmd-core` and `pmd-java` dependencies to `7.21.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.5`
+- Update `pmd-core` and `pmd-java` dependencies to `7.22.0`
 
 ## [2.2.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.0) (2025-12-20)
 
