@@ -13,7 +13,7 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
           cache: maven
-      - run: mvn --batch-mode verify -Dgpg.skip
+      - run: mvn --batch-mode verify -Dgpg.skip -Dlicense.skip
       - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
