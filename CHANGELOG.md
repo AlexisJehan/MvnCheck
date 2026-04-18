@@ -2,6 +2,12 @@
 
 ## 2.3.0 (unreleased)
 
+### Notes
+- Update the `gradle-tooling-api` dependency to `9.4.1`
+- Update the `jansi` dependency to `4.0.12`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.4`
+- Update `pmd-core` and `pmd-java` dependencies to `7.23.0`
+
 ## [2.2.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.1) (2026-03-13)
 
 ### Notes
