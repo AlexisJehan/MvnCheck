@@ -2,6 +2,9 @@
 
 ## 2.3.0 (unreleased)
 
+### Improvements
+- Hide the final field mutated reflectively warning caused by the `github-api` dependency
+
 ### Notes
 - Update the `gradle-tooling-api` dependency to `9.4.1`
 - Update the `jansi` dependency to `4.0.12`
