@@ -6,10 +6,15 @@
 - Hide the final field mutated reflectively warning caused by the `github-api` dependency
 
 ### Notes
-- Update the `gradle-tooling-api` dependency to `9.4.1`
-- Update the `jansi` dependency to `4.0.12`
-- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.25.4`
-- Update `pmd-core` and `pmd-java` dependencies to `7.23.0`
+- Update the `maven-core` dependency to `3.9.16`
+- Update the `gradle-tooling-api` dependency to `9.5.1`
+- Update the `jansi` dependency to `4.2.1`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.26.0`
+- Update the `junit-jupiter` dependency to `6.1.0`
+- Update the `maven-dependency-plugin` plugin to `3.11.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.5.6`
+- Update the `jacoco-maven-plugin` plugin to `0.8.15`
+- Update `pmd-core` and `pmd-java` dependencies to `7.25.0`
 
 ## [2.2.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.2.1) (2026-03-13)
 
