@@ -470,6 +470,22 @@ final class ServiceTest {
 	}
 
 	@Test
+	void testCreateXdgArtifactFilter(@TempDir final Path tmpDirectory) throws IOException {
+		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
+		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
+			mockedStaticArtifactFilterParser.when(() -> ArtifactFilterParser.parse(Mockito.<Path>notNull()))
+					.thenReturn(ArtifactFilter.ACCEPT_NONE);
+			try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+				mockedStaticSystemUtils.when(SystemUtils::getXdgConfigDirectories)
+						.thenReturn(List.of(tmpDirectory));
+				assertThat(Service.createXdgArtifactFilter()).isSameAs(ArtifactFilter.ACCEPT_ALL);
+				Files.createFile(ignoreFile);
+				assertThat(Service.createXdgArtifactFilter()).isNotSameAs(ArtifactFilter.ACCEPT_ALL);
+			}
+		}
+	}
+
+	@Test
 	void testCreateBuildArtifactFilter(@TempDir final Path tmpDirectory) throws IOException {
 		final var ignoreFile = tmpDirectory.resolve(Path.of(".mvnchk-ignore"));
 		try (var mockedStaticArtifactFilterParser = Mockito.mockStatic(ArtifactFilterParser.class)) {
