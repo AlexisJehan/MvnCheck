@@ -106,8 +106,9 @@ usage: mvnchk [<path>] [-d <arg>] [-f <arg>] [-h] [-i]
 
 ## Ignore file
 _MvnCheck_ allows ignoring artifacts or update versions by having a `.mvnchk-ignore` file:
-- globally in the user home
-- specifically in a project directory.
+- globally in the user home directory
+- globally in a [XDG-compliant](https://specifications.freedesktop.org/basedir) directory
+- specifically in a project directory
 
 Here is an example of how to write it:
 ```

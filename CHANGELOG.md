@@ -3,6 +3,9 @@
 ## 2.3.0 (unreleased)
 
 ### Improvements
+- [[#11](https://github.com/AlexisJehan/MvnCheck/issues/11)]
+  Add [XDG-compliant](https://specifications.freedesktop.org/basedir) directories as additional locations for global
+  ignore files (thanks to [mingelz](https://github.com/mingelz))
 - Hide the final field mutated reflectively warning caused by the `github-api` dependency
 
 ### Notes

@@ -25,6 +25,11 @@ package com.github.alexisjehan.mvncheck.core.util;
 
 import com.github.alexisjehan.javanilla.lang.Strings;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -52,5 +57,44 @@ final class SystemUtilsTest {
 	@Test
 	void testGetUserHomeDirectory() {
 		assertThat(SystemUtils.getUserHomeDirectory()).isDirectory();
+	}
+
+	@Test
+	void testGetXdgConfigDirectories() {
+		try (var mockedStaticSystemUtils = Mockito.mockStatic(SystemUtils.class)) {
+			mockedStaticSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("XDG_CONFIG_HOME"))
+					.thenReturn(
+							Optional.of(File.separatorChar + "xdg-config-home"),
+							Optional.of(Strings.EMPTY),
+							Optional.empty()
+					);
+			mockedStaticSystemUtils.when(() -> SystemUtils.getEnvironmentVariable("XDG_CONFIG_DIRS"))
+					.thenReturn(
+							Optional.of(
+									File.separatorChar + "xdg-config-dirs1"
+											+ File.pathSeparatorChar
+											+ File.separatorChar + "xdg-config-dirs2"
+							),
+							Optional.of(Strings.EMPTY),
+							Optional.empty()
+					);
+			mockedStaticSystemUtils.when(SystemUtils::getUserHomeDirectory)
+					.thenCallRealMethod();
+			mockedStaticSystemUtils.when(SystemUtils::getXdgConfigDirectories)
+					.thenCallRealMethod();
+			assertThat(SystemUtils.getXdgConfigDirectories()).containsExactly(
+					Path.of(File.separatorChar + "xdg-config-home").resolve(SystemUtils.XDG_DIRECTORY_NAME),
+					Path.of(File.separatorChar + "xdg-config-dirs1").resolve(SystemUtils.XDG_DIRECTORY_NAME),
+					Path.of(File.separatorChar + "xdg-config-dirs2").resolve(SystemUtils.XDG_DIRECTORY_NAME)
+			);
+			assertThat(SystemUtils.getXdgConfigDirectories()).containsExactly(
+					SystemUtils.getUserHomeDirectory().resolve(".config").resolve(SystemUtils.XDG_DIRECTORY_NAME),
+					Path.of("/etc/xdg").resolve(SystemUtils.XDG_DIRECTORY_NAME)
+			);
+			assertThat(SystemUtils.getXdgConfigDirectories()).containsExactly(
+					SystemUtils.getUserHomeDirectory().resolve(".config").resolve(SystemUtils.XDG_DIRECTORY_NAME),
+					Path.of("/etc/xdg").resolve(SystemUtils.XDG_DIRECTORY_NAME)
+			);
+		}
 	}
 }

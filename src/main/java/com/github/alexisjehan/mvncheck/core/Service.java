@@ -96,6 +96,12 @@ public final class Service {
 	private final ArtifactFilter userArtifactFilter;
 
 	/**
+	 * XDG artifact filter.
+	 * @since 2.3.0
+	 */
+	private final ArtifactFilter xdgArtifactFilter;
+
+	/**
 	 * Constructor with a <i>Maven</i> session.
 	 * @param mavenSession a <i>Maven</i> session
 	 * @throws IOException might occur with input/output operations
@@ -130,6 +136,7 @@ public final class Service {
 		this.buildResolvers = Set.copyOf(buildResolvers);
 		this.artifactAvailableVersionsResolver = artifactAvailableVersionsResolver;
 		userArtifactFilter = createUserArtifactFilter();
+		xdgArtifactFilter = createXdgArtifactFilter();
 	}
 
 	/**
@@ -226,6 +233,7 @@ public final class Service {
 		Ensure.notNullAndNotNullElements("filters", filters);
 		final var artifactFilter = CompositeArtifactFilter.all(
 				userArtifactFilter,
+				xdgArtifactFilter,
 				createBuildArtifactFilter(build.getFile()),
 				createOptionArtifactFilter(filters)
 		);
@@ -299,6 +307,25 @@ public final class Service {
 			return ArtifactFilter.ACCEPT_ALL;
 		}
 		return ArtifactFilterParser.parse(userIgnoreFile);
+	}
+
+	/**
+	 * Create the XDG artifact filter.
+	 * @return the XDG artifact filter
+	 * @throws IOException might occur with input/output operations
+	 * @since 2.3.0
+	 */
+	static ArtifactFilter createXdgArtifactFilter() throws IOException {
+		final var optionalXdgIgnoreFile = SystemUtils.getXdgConfigDirectories()
+				.stream()
+				.map(xdgDirectory -> xdgDirectory.resolve(IGNORE_FILE_NAME))
+				.filter(Files::isRegularFile)
+				.findFirst();
+		if (optionalXdgIgnoreFile.isEmpty()) {
+			return ArtifactFilter.ACCEPT_ALL;
+		}
+		final var xdgIgnoreFile = optionalXdgIgnoreFile.get();
+		return ArtifactFilterParser.parse(xdgIgnoreFile);
 	}
 
 	/**
