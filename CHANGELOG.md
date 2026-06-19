@@ -10,7 +10,7 @@
 
 ### Notes
 - Update the `maven-core` dependency to `3.9.16`
-- Update the `gradle-tooling-api` dependency to `9.5.1`
+- Update the `gradle-tooling-api` dependency to `9.6.0`
 - Update the `jansi` dependency to `4.2.1`
 - Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j-impl` dependencies to `2.26.0`
 - Update the `junit-jupiter` dependency to `6.1.0`
