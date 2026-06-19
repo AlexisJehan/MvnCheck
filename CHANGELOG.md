@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.0 (unreleased)
+## [2.3.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.3.1) (2026-06-19)
 
 ### Bug fixes
 - Revert hiding the final field mutated reflectively warning caused by the `github-api` dependency because the
