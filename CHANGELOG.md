@@ -2,6 +2,10 @@
 
 ## 2.4.0 (unreleased)
 
+### Bug fixes
+- Revert hiding the final field mutated reflectively warning caused by the `github-api` dependency because the
+  `--enable-final-field-mutation` parameter is not available from JRE 17 to JRE 25
+
 ## [2.3.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.3.0) (2026-06-19)
 
 ### Improvements
