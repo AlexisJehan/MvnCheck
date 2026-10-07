@@ -145,13 +145,13 @@ final class MavenUtilsTest {
 				.isEqualTo("https://foo-host");
 		assertThat(remoteRepository.getPolicy(false).isEnabled())
 				.isTrue();
-		assertThat(remoteRepository.getPolicy(false).getUpdatePolicy())
+		assertThat(remoteRepository.getPolicy(false).getArtifactUpdatePolicy())
 				.isEqualTo("foo-update-releases-policy");
 		assertThat(remoteRepository.getPolicy(false).getChecksumPolicy())
 				.isEqualTo("foo-checksum-releases-policy");
 		assertThat(remoteRepository.getPolicy(true).isEnabled())
 				.isFalse();
-		assertThat(remoteRepository.getPolicy(true).getUpdatePolicy())
+		assertThat(remoteRepository.getPolicy(true).getArtifactUpdatePolicy())
 				.isEqualTo("foo-update-snapshots-policy");
 		assertThat(remoteRepository.getPolicy(true).getChecksumPolicy())
 				.isEqualTo("foo-checksum-snapshots-policy");
@@ -247,7 +247,7 @@ final class MavenUtilsTest {
 
 	@Test
 	void testMakeLocalRepository() throws SettingsBuildingException {
-		final var localRepository = new LocalRepository("foo-directory");
+		final var localRepository = new LocalRepository(Path.of("foo-directory"));
 		assertThat(
 				MavenUtils.makeLocalRepository(
 						MavenUtils.makeSettings(null, null)
@@ -423,10 +423,7 @@ final class MavenUtilsTest {
 
 	@Test
 	void testMakeRepositorySystemSession() throws SettingsBuildingException {
-		final var settings = MavenUtils.makeSettings(
-				null,
-				Path.of("src", "test", "resources", "settings_foo.xml")
-		);
+		final var settings = MavenUtils.makeSettings(null, null);
 		final var decryptedSettings = MavenUtils.makeDecryptedSettings(
 				settings,
 				Path.of("src", "test", "resources", "settings-security.xml")
@@ -437,10 +434,7 @@ final class MavenUtilsTest {
 
 	@Test
 	void testMakeRepositorySystemSessionInvalid() throws SettingsBuildingException {
-		final var settings = MavenUtils.makeSettings(
-				null,
-				Path.of("src", "test", "resources", "settings_foo.xml")
-		);
+		final var settings = MavenUtils.makeSettings(null, null);
 		final var decryptedSettings = MavenUtils.makeDecryptedSettings(
 				settings,
 				Path.of("src", "test", "resources", "settings-security.xml")

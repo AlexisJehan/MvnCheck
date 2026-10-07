@@ -27,7 +27,6 @@ import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.rtinfo.internal.DefaultRuntimeInformation;
 import org.apache.maven.settings.Repository;
 import org.apache.maven.settings.Settings;
@@ -42,6 +41,7 @@ import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.impl.RemoteRepositoryManager;
 import org.eclipse.aether.internal.impl.DefaultChecksumPolicyProvider;
 import org.eclipse.aether.internal.impl.DefaultRemoteRepositoryManager;
+import org.eclipse.aether.internal.impl.DefaultRepositoryKeyFunctionFactory;
 import org.eclipse.aether.internal.impl.DefaultUpdatePolicyAnalyzer;
 import org.eclipse.aether.repository.AuthenticationSelector;
 import org.eclipse.aether.repository.LocalRepository;
@@ -232,7 +232,8 @@ public final class MavenUtils {
 	public static RemoteRepositoryManager makeRemoteRepositoryManager() {
 		return new DefaultRemoteRepositoryManager(
 				new DefaultUpdatePolicyAnalyzer(),
-				new DefaultChecksumPolicyProvider()
+				new DefaultChecksumPolicyProvider(),
+				new DefaultRepositoryKeyFunctionFactory()
 		);
 	}
 
@@ -320,9 +321,9 @@ public final class MavenUtils {
 		Ensure.notNull("settings", settings);
 		final var settingsLocalRepository = settings.getLocalRepository();
 		if (null != settingsLocalRepository) {
-			return new LocalRepository(settingsLocalRepository);
+			return new LocalRepository(Path.of(settingsLocalRepository));
 		}
-		return new LocalRepository(USER_REPOSITORY_DIRECTORY.toFile());
+		return new LocalRepository(USER_REPOSITORY_DIRECTORY);
 	}
 
 	/**
@@ -416,20 +417,15 @@ public final class MavenUtils {
 		Ensure.notNull("settings", settings);
 		Ensure.notNull("decryptedSettings", decryptedSettings);
 		Ensure.notNull("repositorySystem", repositorySystem);
-		final var repositorySystemSession = MavenRepositorySystemUtils.newSession();
-		return repositorySystemSession
+		return repositorySystem.createSessionBuilder()
+				.withLocalRepositories(makeLocalRepository(settings))
 				.setOffline(settings.isOffline())
-				.setLocalRepositoryManager(
-						repositorySystem.newLocalRepositoryManager(
-								repositorySystemSession,
-								makeLocalRepository(settings)
-						)
-				)
 				.setProxySelector(makeProxySelector(decryptedSettings))
 				.setAuthenticationSelector(makeAuthenticationSelector(decryptedSettings))
 				.setMirrorSelector(makeMirrorSelector(settings))
 				.setCache(new DefaultRepositoryCache())
-				.setSystemProperties(System.getProperties());
+				.setSystemProperties(System.getProperties())
+				.build();
 	}
 
 	/**

@@ -2,6 +2,22 @@
 
 ## 2.4.0 (unreleased)
 
+### Notes
+- Migrate the `maven-resolver-supplier` dependency to `maven-resolver-supplier-mvn3`
+- Migrate the `log4j-slf4j-impl` dependency to `log4j-slf4j2-impl`
+- Update the `maven-core` dependency to `3.10.0`
+- Update the `maven-resolver-supplier-mvn3` dependency to `2.0.24`
+- Update the `gradle-tooling-api` dependency to `9.8.0`
+- Update the `jansi` dependency to `4.4.7`
+- Update `log4j-api`, `log4j-core`, `log4j-jul` and `log4j-slf4j2-impl` dependencies to `2.26.1`
+- Update the `junit-jupiter` dependency to `6.1.3`
+- Update `mockito-core` and `mockito-junit-jupiter` dependencies to `5.24.0`
+- Update the `maven-compiler-plugin` plugin to `3.16.0`
+- Update `maven-surefire-plugin` and `maven-failsafe-plugin` plugins to `3.6.0`
+- Update the `maven-jar-plugin` plugin to `3.5.1`
+- Update the `license-maven-plugin` plugin to `5.1.2`
+- Update `pmd-core` and `pmd-java` dependencies to `7.28.0`
+
 ## [2.3.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.3.1) (2026-06-19)
 
 ### Bug fixes
