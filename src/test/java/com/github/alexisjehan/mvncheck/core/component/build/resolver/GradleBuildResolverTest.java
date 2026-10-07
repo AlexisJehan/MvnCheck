@@ -44,7 +44,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -357,7 +356,8 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"\n"
+								"""
+										"""
 						)
 				)
 		) {
@@ -366,9 +366,10 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :repositories\n"
-										+ "NORMAL:foo-repository-name:https://foo-repository-host\n"
-										+ "PLUGIN:foo-plugin-repository-name:https://foo-plugin-repository-host"
+								"""
+										> Task :repositories
+										NORMAL:foo-repository-name:https://foo-repository-host
+										PLUGIN:foo-plugin-repository-name:https://foo-plugin-repository-host"""
 						)
 				)
 		) {
@@ -394,8 +395,9 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :repositories\n"
-										+ "NORMAL:foo-repository-name"
+								"""
+										> Task :repositories
+										NORMAL:foo-repository-name"""
 						)
 				)
 		) {
@@ -405,8 +407,9 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :repositories\n"
-										+ "UNKNOWN:foo-repository-name:https://foo-repository-host"
+								"""
+										> Task :repositories
+										UNKNOWN:foo-repository-name:https://foo-repository-host"""
 						)
 				)
 		) {
@@ -420,7 +423,8 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"\n"
+								"""
+										"""
 						)
 				)
 		) {
@@ -429,13 +433,14 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										api - API dependencies for source set 'main'. (n)"""
 						)
 				)
 		) {
@@ -444,13 +449,17 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										api - API dependencies for source set 'main'. (n)
+										No dependencies
+										
+										apiElements - API elements for main. (n)"""
 						)
 				)
 		) {
@@ -459,150 +468,41 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "apiElements - API elements for main. (n)"
-						)
-				)
-		) {
-			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "apiElements - API elements for main. (n)"
-						)
-				)
-		) {
-			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "apiElements - API elements for main. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id FAILED\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id FAILED\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version (n)\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
-										+ "bar-compile-only-version (n)\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-resolved-version\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id -> "
-										+ "bar-compile-only-resolved-version\n"
-										+ "\\--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)\n"
-										+ "     \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
-										+ "bar-compile-only-version -> bar-compile-only-resolved-version (c)\n"
-										+ "\n"
-										+ "(c) - dependency constraint\n"
-										+ "\n"
-										+ "(n) - Not resolved (configuration is not meant to be resolved)\n"
-										+ "\n"
-										+ "A web-based, searchable dependency report is available by adding the --scan "
-										+ "option."
-						)
-				)
-		) {
-			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).containsExactly(
-					new Artifact<>(
-							GradleArtifactType.COMPILE_ONLY,
-							new ArtifactIdentifier(
-									"foo-compile-only-group-id",
-									"foo-compile-only-artifact-id"
-							)
-					),
-					new Artifact<>(
-							GradleArtifactType.COMPILE_ONLY,
-							new ArtifactIdentifier(
-									"foo-compile-only-group-id",
-									"foo-compile-only-artifact-id"
-							),
-							"foo-compile-only-version"
-					),
-					new Artifact<>(
-							GradleArtifactType.COMPILE_ONLY,
-							new ArtifactIdentifier(
-									"foo-compile-only-group-id",
-									"foo-compile-only-artifact-id"
-							),
-							"foo-compile-only-resolved-version"
-					),
-					new Artifact<>(
-							GradleArtifactType.COMPILE_ONLY,
-							new ArtifactIdentifier(
-									"foo-compile-only-group-id",
-									"foo-compile-only-artifact-id"
-							),
-							"foo-compile-only-version"
-					)
-			);
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "api - API dependencies for source set 'main'. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "apiElements - API elements for main. (n)\n"
-										+ "No dependencies\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id FAILED\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id FAILED\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version (n)\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
-										+ "bar-compile-only-version (n)\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-resolved-version\n"
-										+ "|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id -> "
-										+ "bar-compile-only-resolved-version\n"
-										+ "\\--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)\n"
-										+ "     \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:"
-										+ "bar-compile-only-version -> bar-compile-only-resolved-version (c)\n"
-										+ "\n"
-										+ "(c) - dependency constraint\n"
-										+ "\n"
-										+ "(n) - Not resolved (configuration is not meant to be resolved)\n"
-										+ "\n"
-										+ "A web-based, searchable dependency report is available by adding the --scan "
-										+ "option."
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										api - API dependencies for source set 'main'. (n)
+										No dependencies
+										
+										apiElements - API elements for main. (n)
+										No dependencies
+										
+										compileOnly - Compile only dependencies for source set 'main'.
+										+--- foo-compile-only-group-id:foo-compile-only-artifact-id FAILED
+										|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id FAILED
+										+--- foo-compile-only-group-id:foo-compile-only-artifact-id:\
+										foo-compile-only-version (n)
+										|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:\
+										bar-compile-only-version (n)
+										+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> \
+										foo-compile-only-resolved-version
+										|    \\--- bar-compile-only-group-id:bar-compile-only-artifact-id -> \
+										bar-compile-only-resolved-version
+										\\--- foo-compile-only-group-id:foo-compile-only-artifact-id:\
+										foo-compile-only-version -> foo-compile-only-resolved-version (c)
+										     \\--- bar-compile-only-group-id:bar-compile-only-artifact-id:\
+										bar-compile-only-version -> bar-compile-only-resolved-version (c)
+										
+										(c) - dependency constraint
+										
+										(n) - Not resolved (configuration is not meant to be resolved)
+										
+										A web-based, searchable dependency report is available by adding the --scan \
+										option."""
 						)
 				)
 		) {
@@ -649,7 +549,8 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies"
+								"""
+										> Task :dependencies"""
 						)
 				)
 		) {
@@ -659,8 +560,9 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
+								"""
+										> Task :dependencies
+										"""
 						)
 				)
 		) {
@@ -670,9 +572,10 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------"""
 						)
 				)
 		) {
@@ -682,10 +585,11 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project" // Until Gradle 6.7
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'"""
 						)
 				)
 		) {
@@ -695,10 +599,12 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'" // Since Gradle 6.8
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------"""
 						)
 				)
 		) {
@@ -708,11 +614,16 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										compileOnly - Compile only dependencies for source set 'main'.
+										???? foo-compile-only-group-id:foo-compile-only-artifact-id:\
+										foo-compile-only-version (n)"""
 						)
 				)
 		) {
@@ -722,11 +633,15 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										compileOnly - Compile only dependencies for source set 'main'.
+										+--- foo-compile-only-group-id (n)"""
 						)
 				)
 		) {
@@ -736,15 +651,16 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "???? foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version (n)"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										compileOnly - Compile only dependencies for source set 'main'.
+										+--- foo-compile-only-group-id:foo-compile-only-artifact-id:\
+										foo-compile-only-version:foo-compile-only-resolved-version (n)"""
 						)
 				)
 		) {
@@ -754,121 +670,16 @@ final class GradleBuildResolverTest {
 		try (
 				var bufferedReader = new BufferedReader(
 						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "???? foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id:"
-										+ "foo-compile-only-version:foo-compile-only-resolved-version (n)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project\n" // Until Gradle 6.7
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)"
-						)
-				)
-		) {
-			assertThatExceptionOfType(BuildResolveException.class)
-					.isThrownBy(() -> GradleBuildResolver.parseArtifacts(bufferedReader));
-		}
-		try (
-				var bufferedReader = new BufferedReader(
-						new StringReader(
-								"> Task :dependencies\n"
-										+ "\n"
-										+ "------------------------------------------------------------\n"
-										+ "Root project 'foo-project'\n" // Since Gradle 6.8
-										+ "------------------------------------------------------------\n"
-										+ "\n"
-										+ "compileOnly - Compile only dependencies for source set 'main'.\n"
-										+ "+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> "
-										+ "foo-compile-only-version -> foo-compile-only-resolved-version (c)"
+								"""
+										> Task :dependencies
+										
+										------------------------------------------------------------
+										Root project 'foo-project'
+										------------------------------------------------------------
+										
+										compileOnly - Compile only dependencies for source set 'main'.
+										+--- foo-compile-only-group-id:foo-compile-only-artifact-id -> \
+										foo-compile-only-version -> foo-compile-only-resolved-version (c)"""
 						)
 				)
 		) {
@@ -891,7 +702,7 @@ final class GradleBuildResolverTest {
 								"https://foo-repository-host"
 						)
 				)
-				.collect(Collectors.toList());
+				.toList();
 		assertThat(GradleBuildResolver.filterRepositories(list)).containsExactly(
 				new Repository(
 						RepositoryType.NORMAL,
@@ -1072,7 +883,7 @@ final class GradleBuildResolverTest {
 								"foo-test-runtime-only-version"
 						)
 				)
-				.collect(Collectors.toList());
+				.toList();
 		assertThat(GradleBuildResolver.filterArtifacts(list)).containsExactly(
 				new Artifact<>(
 						GradleArtifactType.IMPLEMENTATION,

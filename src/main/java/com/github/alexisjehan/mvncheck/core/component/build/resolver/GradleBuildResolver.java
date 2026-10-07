@@ -66,13 +66,13 @@ import java.util.function.Predicate;
 public final class GradleBuildResolver implements BuildResolver {
 
 	/**
-	 * Prefix of the initialisation file name.
+	 * Prefix of the initialization file name.
 	 * @since 1.7.0
 	 */
 	private static final String INIT_FILE_NAME_PREFIX = "init";
 
 	/**
-	 * Suffix of the initialisation file name.
+	 * Suffix of the initialization file name.
 	 * @since 1.7.0
 	 */
 	private static final String INIT_FILE_NAME_SUFFIX = ".gradle";
@@ -276,11 +276,7 @@ public final class GradleBuildResolver implements BuildResolver {
 			if ("> Task :dependencies".equals(line)) {
 				if (!Strings.EMPTY.equals(bufferedReader.readLine())
 						|| !"-".repeat(60).equals(bufferedReader.readLine())
-
-						// Until Gradle 6.7: "Root project"
-						// Since Gradle 6.8: "Root project 'foo'"
-						|| !Strings.nullToEmpty(bufferedReader.readLine()).startsWith("Root project")
-
+						|| !Strings.nullToEmpty(bufferedReader.readLine()).startsWith("Root project '")
 						|| !"-".repeat(60).equals(bufferedReader.readLine())
 						|| !Strings.EMPTY.equals(bufferedReader.readLine())) {
 					throw new BuildResolveException("Unexpected Gradle \":dependencies\" header format");
@@ -359,8 +355,8 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * Filter a modifiable {@link List} of repositories, removing irrelevant ones.
-	 * @param repositories a modifiable {@link List} of repositories
+	 * Filter a {@link List} of repositories, removing irrelevant ones.
+	 * @param repositories a {@link List} of repositories
 	 * @return the {@link List} of repositories
 	 * @throws NullPointerException if the {@link List} of repositories or any of them is {@code null}
 	 * @since 1.2.0
@@ -373,53 +369,54 @@ public final class GradleBuildResolver implements BuildResolver {
 	}
 
 	/**
-	 * Filter a modifiable {@link List} of artifacts, removing irrelevant ones.
-	 * @param artifacts a modifiable {@link List} of artifacts
+	 * Filter a {@link List} of artifacts, removing irrelevant ones.
+	 * @param artifacts a {@link List} of artifacts
 	 * @return the {@link List} of artifacts
 	 * @throws NullPointerException if the {@link List} of artifacts or any of them is {@code null}
 	 * @since 1.2.0
 	 */
 	static List<Artifact<GradleArtifactType>> filterArtifacts(final List<Artifact<GradleArtifactType>> artifacts) {
 		Ensure.notNullAndNotNullElements("artifacts", artifacts);
-		artifacts.stream()
+		final var filteredArtifacts = new ArrayList<>(artifacts);
+		filteredArtifacts.stream()
 				.filter(artifact -> {
 					final var artifactType = artifact.getType();
 					return !artifactType.isClasspath();
 				})
 				.toList()
 				.forEach(artifact -> {
-					artifacts.remove(artifact.withType(GradleArtifactType.COMPILE_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.COMPILE_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
 				});
-		artifacts.stream()
+		filteredArtifacts.stream()
 				.filter(artifact -> GradleArtifactType.COMPILE_CLASSPATH == artifact.getType())
 				.toList()
 				.forEach(artifact -> {
-					artifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.RUNTIME_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
 				});
-		artifacts.stream()
+		filteredArtifacts.stream()
 				.filter(artifact -> GradleArtifactType.RUNTIME_CLASSPATH == artifact.getType())
 				.toList()
 				.forEach(artifact -> {
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
-					artifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_COMPILE_CLASSPATH));
+					filteredArtifacts.remove(artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH));
 				});
-		artifacts.stream()
+		filteredArtifacts.stream()
 				.filter(
 						artifact ->
 								GradleArtifactType.TEST_COMPILE_CLASSPATH == artifact.getType()
 				)
 				.toList()
 				.forEach(
-						artifact -> artifacts.remove(
+						artifact -> filteredArtifacts.remove(
 								artifact.withType(GradleArtifactType.TEST_RUNTIME_CLASSPATH)
 						)
 				);
-		return artifacts.stream()
+		return filteredArtifacts.stream()
 				.map(
 						artifact -> switch (artifact.getType()) {
 							case COMPILE_CLASSPATH -> artifact.withType(GradleArtifactType.IMPLEMENTATION);

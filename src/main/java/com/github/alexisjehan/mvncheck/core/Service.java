@@ -75,7 +75,7 @@ public final class Service {
 	private final Set<BuildResolver> buildResolvers;
 
 	/**
-	 * Artifact available versions resolver.
+	 * Resolver of available versions for an artifact.
 	 * @since 1.0.0
 	 */
 	private final ArtifactAvailableVersionsResolver artifactAvailableVersionsResolver;
@@ -119,9 +119,9 @@ public final class Service {
 	}
 
 	/**
-	 * Constructor with a {@link Set} of build resolvers and an artifact available versions' resolver.
+	 * Constructor with a {@link Set} of build resolvers and a resolver of available versions for an artifact.
 	 * @param buildResolvers a {@link Set} of build resolvers
-	 * @param artifactAvailableVersionsResolver an artifact available versions resolver
+	 * @param artifactAvailableVersionsResolver a resolver of available versions for an artifact
 	 * @throws IOException might occur with input/output operations
 	 * @throws NullPointerException if the {@link Set} of build resolvers, any of them or the artifact available
 	 *         versions resolver is {@code null}
