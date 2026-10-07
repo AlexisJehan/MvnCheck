@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.0 (unreleased)
+## [2.4.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.4.0) (2026-10-07)
 
 ### Improvements
 - Add the `-S` short name to the `--ignore-snapshots` option (the `-i` short name is still available but deprecated)

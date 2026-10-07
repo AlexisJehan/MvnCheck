@@ -30,12 +30,12 @@ most relevant update version for an artifact.
 2 build file(s) found, checking for artifact updates
 
 my-gradle-project\build.gradle
-[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.6.0-android
+[COMPILE ONLY] com.google.guava:guava 31.0-android -> 33.7.2-android
 1 artifact update(s) available
 
 my-maven-project\pom.xml
-[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.20.0
-[BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.15.0
+[DEPENDENCY] org.apache.commons:commons-lang3 3.10 -> 3.21.0
+[BUILD PLUGIN] org.apache.maven.plugins:maven-compiler-plugin 3.10.0 -> 3.16.0
 2 artifact update(s) available
 
 2/2 build file(s) checked, 3 artifact update(s) available
@@ -59,16 +59,16 @@ You can download binaries for the latest version of _MvnCheck_ on the
 Execute following commands in the folder where the downloaded archive file is
 located:
 ```console
-sudo tar -xvzf mvn-check-2.3.1-bin.tar.gz --directory /opt
-export PATH=$PATH:/opt/mvn-check-2.3.1/bin
+sudo tar -xvzf mvn-check-2.4.0-bin.tar.gz --directory /opt
+export PATH=$PATH:/opt/mvn-check-2.4.0/bin
 ```
 
 #### Windows
-Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-2.3.1`, then:
+Extract the content of the downloaded archive file and move the extracted folder to `C:\mvn-check-2.4.0`, then:
 - Right-click on the _Windows_ icon and select "System"
 - On the right, click on "Advanced system settings"
 - In the new window, click on "Environment Variables..."
-- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-2.3.1\bin` at the end
+- Find the "Path" variable, choose "Edit", and add `;C:\mvn-check-2.4.0\bin` at the end
 
 #### Verify
 If _MvnCheck_ is correctly installed, this command should work as expected:
@@ -81,27 +81,32 @@ Alternatively, you could use _MvnCheck_ by downloading the executable JAR instea
 
 This way, you have to execute this command to run it:
 ```console
-java -jar mvn-check-2.3.1-bin.jar
+java -jar mvn-check-2.4.0-bin.jar
 ```
 
 ## Usage
 ```
-usage: mvnchk [<path>] [-d <arg>] [-f <arg>] [-h] [-i]
-       [--ignore-inherited] [-o] [-s] [-v]
- -d,--max-depth <arg>    Maximum depth of subdirectories to find build
-                         files (a non-negative integer)
- -f,--filter <arg>       Filter build file artifacts with a
-                         "groupId[:artifactId[:updateVersion]]" expression
-                         ('?' and '*' wildcards are allowed)
- -h,--help               Display help information
- -i,--ignore-snapshots   Ignore build file artifacts with a snapshot
-                         version
-    --ignore-inherited   Ignore build file artifacts with an inherited
-                         version
- -o,--include-output     Include build files inside output directories
- -s,--short              Only show build files with at least one artifact
-                         update
- -v,--version            Display version information
+ usage:  mvnchk [<glob>...] [-d <arg>] [-f <arg>] [-h] [-i] [-I] [-o] [-S]
+    [-s] [-v]
+
+        Options                               Description
+ -d, --max-depth <arg>      Maximum depth of subdirectories to find build
+                             files (a non-negative integer)
+ -f, --filter <arg>         Filter build file artifacts with a
+                             "groupId[:artifactId[:updateVersion]]"
+                            expression ('?' and '*' wildcards are allowed)
+ -h, --help                 Display help information
+ -i                         [Deprecated] Ignore build file artifacts with a
+                             snapshot version (will be removed in a future
+                             release, use "-S" instead)
+ -S, --ignore-snapshots     Ignore build file artifacts with a snapshot
+                             version
+ -I, --ignore-inherited     Ignore build file artifacts with an inherited
+                             version
+ -o, --include-output       Include build files inside output directories
+ -s, --short                Only show build files with at least one
+                             artifact update
+ -v, --version              Display version information
 ```
 
 ## Ignore file
@@ -134,6 +139,7 @@ version of a build tool may still be compatible.
 
 | MvnCheck version | Maven version | Gradle version |
 |:----------------:|:-------------:|:--------------:|
+|      2.4.0       |    3.10.0     |     9.8.0      |
 |      2.3.1       |    3.9.16     |     9.6.0      |
 |      2.3.0       |    3.9.16     |     9.6.0      |
 |      2.2.1       |    3.9.14     |     9.4.0      |
