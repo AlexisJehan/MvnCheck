@@ -357,6 +357,7 @@ final class GradleBuildResolverTest {
 				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"""
+										
 										"""
 						)
 				)
@@ -424,6 +425,7 @@ final class GradleBuildResolverTest {
 				var bufferedReader = new BufferedReader(
 						new StringReader(
 								"""
+										
 										"""
 						)
 				)
@@ -562,6 +564,7 @@ final class GradleBuildResolverTest {
 						new StringReader(
 								"""
 										> Task :dependencies
+										
 										"""
 						)
 				)
