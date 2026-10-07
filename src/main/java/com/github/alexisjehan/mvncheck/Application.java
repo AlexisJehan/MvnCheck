@@ -41,6 +41,7 @@ import com.github.alexisjehan.mvncheck.core.util.GradleUtils;
 import com.github.alexisjehan.mvncheck.core.util.MavenUtils;
 import internal.ExcludeFromJacocoGeneratedReport;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.help.HelpFormatter;
 import org.apache.commons.cli.help.TextHelpAppendable;
@@ -77,6 +78,14 @@ public final class Application {
 	 * @since 1.0.0
 	 */
 	static final String OPTION_HELP = "help";
+
+	/**
+	 * Ignore snapshots option legacy short name.
+	 * @deprecated since 2.4.0, use {@link OPTION_IGNORE_SNAPSHOTS} instead
+	 * @since 2.4.0
+	 */
+	@Deprecated(since = "2.4.0")
+	static final String OPTION_IGNORE_SNAPSHOTS_LEGACY_SHORT_NAME = "i";
 
 	/**
 	 * Ignore snapshots option long name.
@@ -122,8 +131,8 @@ public final class Application {
 	private static final String DESCRIPTION = "Check for artifact updates of every "
 			+ ToString.toString(BuildFileType.MAVEN.getFileName()) + ", "
 			+ ToString.toString(BuildFileType.GRADLE_GROOVY.getFileName()) + " and "
-			+ ToString.toString(BuildFileType.GRADLE_KOTLIN.getFileName()) + " build files in the given or current "
-			+ "path recursively.";
+			+ ToString.toString(BuildFileType.GRADLE_KOTLIN.getFileName()) + " build files in the given or current"
+			+ " path recursively.";
 
 	/**
 	 * Command name.
@@ -157,54 +166,67 @@ public final class Application {
 
 	static {
 		options.addOption(
-				"d",
-				OPTION_MAX_DEPTH,
-				true,
-				"Maximum depth of subdirectories to find build files (a non-negative integer)"
+				Option.builder("d")
+						.longOpt(OPTION_MAX_DEPTH)
+						.hasArg()
+						.desc("Maximum depth of subdirectories to find build files (a non-negative integer)")
+						.get()
 		);
 		options.addOption(
-				"f",
-				OPTION_FILTER,
-				true,
-				"Filter build file artifacts with a \"groupId[:artifactId[:updateVersion]]\" expression ("
-						+ ToString.toString(WildcardArtifactFilter.WILDCARD_SINGLE) + " and "
-						+ ToString.toString(WildcardArtifactFilter.WILDCARD_ANY) + " wildcards are allowed)"
+				Option.builder("f")
+						.longOpt(OPTION_FILTER)
+						.hasArg()
+						.desc(
+								"Filter build file artifacts with a \"groupId[:artifactId[:updateVersion]]\""
+										+ " expression (" + ToString.toString(WildcardArtifactFilter.WILDCARD_SINGLE)
+										+ " and " + ToString.toString(WildcardArtifactFilter.WILDCARD_ANY)
+										+ " wildcards are allowed)"
+						)
+						.get()
 		);
 		options.addOption(
-				"h",
-				OPTION_HELP,
-				false,
-				"Display help information"
+				Option.builder("h")
+						.longOpt(OPTION_HELP)
+						.desc("Display help information")
+						.get()
 		);
 		options.addOption(
-				"i",
-				OPTION_IGNORE_SNAPSHOTS,
-				false,
-				"Ignore build file artifacts with a snapshot version"
+				Option.builder(OPTION_IGNORE_SNAPSHOTS_LEGACY_SHORT_NAME)
+						.desc(
+								"[Deprecated] Ignore build file artifacts with a snapshot version"
+										+ " (will be removed in a future release, use \"-S\" instead)"
+						)
+						.get()
 		);
 		options.addOption(
-				null,
-				OPTION_IGNORE_INHERITED,
-				false,
-				"Ignore build file artifacts with an inherited version"
+				Option.builder("S")
+						.longOpt(OPTION_IGNORE_SNAPSHOTS)
+						.desc("Ignore build file artifacts with a snapshot version")
+						.get()
 		);
 		options.addOption(
-				"o",
-				OPTION_INCLUDE_OUTPUT,
-				false,
-				"Include build files inside output directories"
+				Option.builder("I")
+						.longOpt(OPTION_IGNORE_INHERITED)
+						.desc("Ignore build file artifacts with an inherited version")
+						.get()
 		);
 		options.addOption(
-				"s",
-				OPTION_SHORT,
-				false,
-				"Only show build files with at least one artifact update"
+				Option.builder("o")
+						.longOpt(OPTION_INCLUDE_OUTPUT)
+						.desc("Include build files inside output directories")
+						.get()
 		);
 		options.addOption(
-				"v",
-				OPTION_VERSION,
-				false,
-				"Display version information"
+				Option.builder("s")
+						.longOpt(OPTION_SHORT)
+						.desc("Only show build files with at least one artifact update")
+						.get()
+		);
+		options.addOption(
+				Option.builder("v")
+						.longOpt(OPTION_VERSION)
+						.desc("Display version information")
+						.get()
 		);
 	}
 
@@ -289,7 +311,8 @@ public final class Application {
 						commandLine.hasOption(OPTION_FILTER)
 								? Set.of(commandLine.getOptionValues(OPTION_FILTER))
 								: Set.of(),
-						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS),
+						commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS)
+								|| commandLine.hasOption(OPTION_IGNORE_SNAPSHOTS_LEGACY_SHORT_NAME),
 						commandLine.hasOption(OPTION_IGNORE_INHERITED),
 						commandLine.hasOption(OPTION_INCLUDE_OUTPUT),
 						commandLine.hasOption(OPTION_SHORT)

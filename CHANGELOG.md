@@ -2,6 +2,10 @@
 
 ## 2.4.0 (unreleased)
 
+### Improvements
+- Add the `-S` short name to the `--ignore-snapshots` option (the `-i` short name is still available but deprecated)
+- Add the `-I` short name to the `--ignore-inherited` option
+
 ### Notes
 - Migrate the `maven-resolver-supplier` dependency to `maven-resolver-supplier-mvn3`
 - Migrate the `log4j-slf4j-impl` dependency to `log4j-slf4j2-impl`

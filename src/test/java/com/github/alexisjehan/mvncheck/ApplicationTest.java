@@ -73,6 +73,7 @@ final class ApplicationTest {
 	}
 
 	@Test
+	@SuppressWarnings("deprecation")
 	void testRun() throws IOException {
 		final var path1 = Path.of("path1");
 		final var path2 = Path.of("path2");
@@ -173,6 +174,9 @@ final class ApplicationTest {
 					);
 					assertThatNoException().isThrownBy(
 							() -> application.run("--" + Application.OPTION_HELP)
+					);
+					assertThatNoException().isThrownBy(
+							() -> application.run("-" + Application.OPTION_IGNORE_SNAPSHOTS_LEGACY_SHORT_NAME)
 					);
 					assertThatNoException().isThrownBy(
 							() -> application.run("--" + Application.OPTION_IGNORE_SNAPSHOTS)
