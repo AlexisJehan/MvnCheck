@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.5.0 (unreleased)
+## [2.4.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.4.1) (2026-10-08)
 
 ### Bug fixes
 - [[#14](https://github.com/AlexisJehan/MvnCheck/issues/14)] Fix _Maven_ remote repositories resolution used while
