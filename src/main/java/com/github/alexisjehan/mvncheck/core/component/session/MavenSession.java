@@ -94,7 +94,10 @@ public final class MavenSession {
 		}
 		final var decryptedSettings = MavenUtils.makeDecryptedSettings(settings);
 		repositorySystemSession = MavenUtils.makeRepositorySystemSession(settings, decryptedSettings, repositorySystem);
-		remoteRepositories = MavenUtils.makeRemoteRepositories(settings);
+		remoteRepositories = repositorySystem.newResolutionRepositories(
+				repositorySystemSession,
+				MavenUtils.makeRemoteRepositories(settings)
+		);
 		modelResolver = new ProjectModelResolver(
 				repositorySystemSession,
 				null,

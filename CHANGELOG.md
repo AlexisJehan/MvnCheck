@@ -2,6 +2,10 @@
 
 ## 2.5.0 (unreleased)
 
+### Bug fixes
+- [[#14](https://github.com/AlexisJehan/MvnCheck/issues/14)] Fix _Maven_ remote repositories resolution used while
+  building the `pom.xml` model (thanks to [Polve](https://github.com/Polve))
+
 ## [2.4.0](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.4.0) (2026-10-07)
 
 ### Improvements

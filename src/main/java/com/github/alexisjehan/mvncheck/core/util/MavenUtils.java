@@ -126,6 +126,16 @@ public final class MavenUtils {
 	private static final RepositorySystemSupplier repositorySystemSupplier = new RepositorySystemSupplier();
 
 	/**
+	 * Central remote repository.
+	 * @since 2.4.1
+	 */
+	private static final RemoteRepository centralRemoteRepository = new RemoteRepository.Builder(
+			"central",
+			"default",
+			"https://repo.maven.apache.org/maven2"
+	).build();
+
+	/**
 	 * Constructor.
 	 * @since 1.0.0
 	 */
@@ -292,10 +302,7 @@ public final class MavenUtils {
 	 * @throws NullPointerException if settings are {@code null}
 	 * @since 1.0.0
 	 */
-	static DecryptedSettings makeDecryptedSettings(
-			final Settings settings,
-			final Path userSettingsSecurityFile
-	) {
+	static DecryptedSettings makeDecryptedSettings(final Settings settings, final Path userSettingsSecurityFile) {
 		Ensure.notNull("settings", settings);
 		final var result = new DefaultSettingsDecrypter(
 				new DefaultSecDispatcher(
@@ -438,6 +445,7 @@ public final class MavenUtils {
 	public static List<RemoteRepository> makeRemoteRepositories(final Settings settings) {
 		Ensure.notNull("settings", settings);
 		final var remoteRepositories = new ArrayList<RemoteRepository>();
+		remoteRepositories.add(centralRemoteRepository);
 		final var activeProfileIds = settings.getActiveProfiles();
 		for (final var entry : settings.getProfilesAsMap().entrySet()) {
 			final var id = entry.getKey();
