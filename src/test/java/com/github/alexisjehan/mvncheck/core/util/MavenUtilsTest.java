@@ -457,7 +457,9 @@ final class MavenUtilsTest {
 				MavenUtils.makeRemoteRepositories(
 						MavenUtils.makeSettings(null, null)
 				)
-		).isEmpty();
+		).containsExactly(
+				MavenUtils.createRemoteRepository("central", "https://repo.maven.apache.org/maven2")
+		);
 		assertThat(
 				MavenUtils.makeRemoteRepositories(
 						MavenUtils.makeSettings(
@@ -466,6 +468,7 @@ final class MavenUtilsTest {
 						)
 				)
 		).containsExactly(
+				MavenUtils.createRemoteRepository("central", "https://repo.maven.apache.org/maven2"),
 				MavenUtils.createRemoteRepository("foo-id", "https://foo-host"),
 				MavenUtils.createRemoteRepository("foo-plugin-id", "https://foo-plugin-host")
 		);

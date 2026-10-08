@@ -26,15 +26,12 @@ package com.github.alexisjehan.mvncheck.core.component.artifact.version.resolver
 import com.github.alexisjehan.mvncheck.core.component.artifact.Artifact;
 import com.github.alexisjehan.mvncheck.core.component.artifact.ArtifactIdentifier;
 import com.github.alexisjehan.mvncheck.core.component.artifact.type.MavenArtifactType;
-import com.github.alexisjehan.mvncheck.core.component.repository.Repository;
-import com.github.alexisjehan.mvncheck.core.component.repository.RepositoryType;
 import com.github.alexisjehan.mvncheck.core.component.session.MavenSession;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 final class MavenArtifactAvailableVersionsResolverIT {
 
@@ -44,69 +41,24 @@ final class MavenArtifactAvailableVersionsResolverIT {
 	@Test
 	void testResolve() {
 		assertThat(
-				new Artifact<>(
-						MavenArtifactType.DEPENDENCY,
-						new ArtifactIdentifier("org.apache.maven", "maven-core")
-				)
-		).satisfies(artifact -> {
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
-									artifact,
-									List.of(
-											new Repository(
-													RepositoryType.NORMAL,
-													"central",
-													"https://repo.maven.apache.org/maven2"
-											)
-									)
-							)
-							.getAvailableVersions()
-			).isNotEmpty();
-			assertThatExceptionOfType(ArtifactAvailableVersionsResolveException.class).isThrownBy(
-					() -> mavenArtifactAvailableVersionsResolver.resolve(
-							artifact,
-							List.of(
-									new Repository(
-											RepositoryType.PLUGIN,
-											"central",
-											"https://repo.maven.apache.org/maven2"
-									)
-							)
-					)
-			);
-		});
+				mavenArtifactAvailableVersionsResolver.resolve(
+								new Artifact<>(
+										MavenArtifactType.DEPENDENCY,
+										new ArtifactIdentifier("org.apache.maven", "maven-core")
+								),
+								List.of()
+						)
+						.getAvailableVersions()
+		).isNotEmpty();
 		assertThat(
-				new Artifact<>(
-						MavenArtifactType.BUILD_PLUGIN,
-						new ArtifactIdentifier("org.apache.maven.plugins", "maven-compiler-plugin")
-				)
-		).satisfies(artifact -> {
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
-									artifact,
-									List.of(
-											new Repository(
-													RepositoryType.NORMAL,
-													"central",
-													"https://repo.maven.apache.org/maven2"
-											)
-									)
-							)
-							.getAvailableVersions()
-			).isNotEmpty();
-			assertThat(
-					mavenArtifactAvailableVersionsResolver.resolve(
-									artifact,
-									List.of(
-											new Repository(
-													RepositoryType.PLUGIN,
-													"central",
-													"https://repo.maven.apache.org/maven2"
-											)
-									)
-							)
-							.getAvailableVersions()
-			).isNotEmpty();
-		});
+				mavenArtifactAvailableVersionsResolver.resolve(
+								new Artifact<>(
+										MavenArtifactType.BUILD_PLUGIN,
+										new ArtifactIdentifier("org.apache.maven.plugins", "maven-compiler-plugin")
+								),
+								List.of()
+						)
+						.getAvailableVersions()
+		).isNotEmpty();
 	}
 }
