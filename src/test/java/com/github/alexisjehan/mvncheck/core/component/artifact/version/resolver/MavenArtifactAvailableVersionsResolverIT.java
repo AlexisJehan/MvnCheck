@@ -44,7 +44,10 @@ final class MavenArtifactAvailableVersionsResolverIT {
 				mavenArtifactAvailableVersionsResolver.resolve(
 								new Artifact<>(
 										MavenArtifactType.DEPENDENCY,
-										new ArtifactIdentifier("org.apache.maven", "maven-core")
+										new ArtifactIdentifier(
+												"org.apache.maven",
+												"maven-core"
+										)
 								),
 								List.of()
 						)
@@ -54,7 +57,10 @@ final class MavenArtifactAvailableVersionsResolverIT {
 				mavenArtifactAvailableVersionsResolver.resolve(
 								new Artifact<>(
 										MavenArtifactType.BUILD_PLUGIN,
-										new ArtifactIdentifier("org.apache.maven.plugins", "maven-compiler-plugin")
+										new ArtifactIdentifier(
+												"org.apache.maven.plugins",
+												"maven-compiler-plugin"
+										)
 								),
 								List.of()
 						)
