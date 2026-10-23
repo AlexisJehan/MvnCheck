@@ -3,7 +3,7 @@
 ## 2.5.0 (unreleased)
 
 ### Notes
-- Update the `gradle-tooling-api` dependency to `9.8.1`
+- Update the `gradle-tooling-api` dependency to `9.8.2`
 - Update the `jansi` dependency to `4.4.8`
 
 ## [2.4.1](https://github.com/AlexisJehan/MvnCheck/releases/tag/v2.4.1) (2026-10-08)
