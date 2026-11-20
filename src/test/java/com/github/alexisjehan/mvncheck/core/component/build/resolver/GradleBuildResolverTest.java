@@ -78,6 +78,11 @@ final class GradleBuildResolverTest {
 							RepositoryType.NORMAL,
 							"foo-repository-name",
 							"https://foo-repository-host"
+					),
+					new Repository(
+							RepositoryType.PLUGIN,
+							"Gradle Central Plugin Repository",
+							"https://plugins.gradle.org/m2"
 					)
 			);
 			assertThat(build.getArtifacts()).containsExactly(
@@ -185,6 +190,11 @@ final class GradleBuildResolverTest {
 							RepositoryType.NORMAL,
 							"foo-repository-name",
 							"https://foo-repository-host"
+					),
+					new Repository(
+							RepositoryType.PLUGIN,
+							"Gradle Central Plugin Repository",
+							"https://plugins.gradle.org/m2"
 					)
 			);
 			assertThat(build.getArtifacts()).containsExactly(
@@ -541,6 +551,85 @@ final class GradleBuildResolverTest {
 							"foo-compile-only-version"
 					)
 			);
+		}
+	}
+
+	@Test
+	void testParseSubproject() throws IOException {
+		try (
+				var bufferedReader = new BufferedReader(
+						new StringReader(
+								"""
+										> Task :foo-subproject:repositories
+										NORMAL:foo-repository-name:https://foo-repository-host
+
+										> Task :foo-subproject:plugins
+										foo-plugin-id:foo-plugin-id.gradle.plugin:foo-plugin-version
+
+										> Task :foo-subproject:dependencies
+
+										------------------------------------------------------------
+										Project ':foo-subproject'
+										------------------------------------------------------------
+
+										implementation - Implementation dependencies for the 'main' feature. (n)
+										+--- project bar-subproject (n)
+										\\--- foo-group-id:foo-artifact-id:foo-version (n)
+
+										A web-based, searchable dependency report is available by adding the --scan \
+										option."""
+						)
+				)
+		) {
+			assertThat(GradleBuildResolver.parseRepositories(bufferedReader)).containsExactly(
+					new Repository(
+							RepositoryType.NORMAL,
+							"foo-repository-name",
+							"https://foo-repository-host"
+					)
+			);
+			assertThat(GradleBuildResolver.parsePlugins(bufferedReader)).containsExactly(
+					new Artifact<>(
+							GradleArtifactType.PLUGIN,
+							new ArtifactIdentifier("foo-plugin-id", "foo-plugin-id.gradle.plugin"),
+							"foo-plugin-version"
+					)
+			);
+			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).containsExactly(
+					new Artifact<>(
+							GradleArtifactType.IMPLEMENTATION,
+							new ArtifactIdentifier("foo-group-id", "foo-artifact-id"),
+							"foo-version"
+					)
+			);
+		}
+	}
+
+	@Test
+	void testParseTasksWithoutOutput() throws IOException {
+		try (
+				var bufferedReader = new BufferedReader(
+						new StringReader(
+								"""
+										> Task :foo-included-build:repositories
+										> Task :foo-included-build:plugins
+										> Task :foo-included-build:dependencies
+
+										------------------------------------------------------------
+										Root project 'foo-included-build'
+										------------------------------------------------------------
+
+										api - API dependencies for the 'main' feature. (n)
+										\\--- unspecified (n)
+
+										A web-based, searchable dependency report is available by adding the --scan \
+										option."""
+						)
+				)
+		) {
+			assertThat(GradleBuildResolver.parseRepositories(bufferedReader)).isEmpty();
+			assertThat(GradleBuildResolver.parsePlugins(bufferedReader)).isEmpty();
+			assertThat(GradleBuildResolver.parseArtifacts(bufferedReader)).isEmpty();
 		}
 	}
 

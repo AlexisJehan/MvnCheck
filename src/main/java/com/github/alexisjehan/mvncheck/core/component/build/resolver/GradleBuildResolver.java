@@ -54,8 +54,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Class that describes a <i>Gradle</i> resolver of the build for a file.
@@ -82,6 +84,21 @@ public final class GradleBuildResolver implements BuildResolver {
 	 * @since 1.0.0
 	 */
 	private static final String INIT_FILE_NAME = INIT_FILE_NAME_PREFIX + INIT_FILE_NAME_SUFFIX;
+
+	/**
+	 * Maximum number of characters of a line to be read while preserving a mark.
+	 * @since 2.5.0
+	 */
+	private static final int READ_AHEAD_LIMIT = 65_536;
+
+	/**
+	 * {@link List} of settings file names.
+	 * @since 2.5.0
+	 */
+	private static final List<String> SETTINGS_FILE_NAMES = List.of(
+			"settings.gradle",
+			"settings.gradle.kts"
+	);
 
 	/**
 	 * {@link Set} of file types.
@@ -131,36 +148,42 @@ public final class GradleBuildResolver implements BuildResolver {
 	 * @throws BuildResolveException might occur while resolving the build
 	 * @since 1.0.0
 	 */
-	private Build resolve(final BuildFile file, final OutputStream outputStream) throws IOException {
+	private Build resolve(final BuildFile file, final ByteArrayOutputStream outputStream) throws IOException {
 		logger.info("Resolving the {} build", () -> ToString.toString(file));
-		final var connector = GradleConnector.newConnector()
-				.forProjectDirectory(file.getFile().getParent().toFile());
-		GradleUtils.retrieveOptionalHome()
-				.map(Path::of)
-				.ifPresent(installation -> {
-					logger.debug("Using the {} installation", () -> ToString.toString(installation));
-					connector.useInstallation(installation.toFile());
-				});
-		try (var connection = connector.connect()) {
-			final var initTempFile = Files.createTempFile(INIT_FILE_NAME_PREFIX, INIT_FILE_NAME_SUFFIX);
-			try {
-				Files.copy(
-						Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(INIT_FILE_NAME)),
-						initTempFile,
-						StandardCopyOption.REPLACE_EXISTING
-				);
-				connection.newBuild()
-						.forTasks("repositories", "dependencies")
-						.withArguments("--init-script=" + initTempFile)
-						.setStandardOutput(outputStream)
-						.run();
-			} finally {
-				Files.delete(initTempFile);
+		final var directory = file.getFile().toAbsolutePath().getParent();
+		try {
+			run(directory, Strings.EMPTY, outputStream);
+		} catch (final BuildResolveException e) {
+			// An included build without its own settings file cannot be run on its own, so its tasks are run from the
+			// nearest ancestor build that includes it (an included build is named after its directory by default)
+			final var optionalIncludingDirectory = SETTINGS_FILE_NAMES.stream()
+					.noneMatch(settingsFileName -> Files.isRegularFile(directory.resolve(settingsFileName)))
+					? Stream.iterate(directory.getParent(), Objects::nonNull, Path::getParent)
+							.filter(
+									parent -> SETTINGS_FILE_NAMES.stream()
+											.anyMatch(
+													settingsFileName -> Files.isRegularFile(
+															parent.resolve(settingsFileName)
+													)
+											)
+							)
+							.findFirst()
+					: Optional.<Path>empty();
+			if (optionalIncludingDirectory.isEmpty()) {
+				throw e;
 			}
-		} catch (final GradleConnectionException e) {
-			throw new BuildResolveException(e);
-		} finally {
-			connector.disconnect();
+			final var includingDirectory = optionalIncludingDirectory.orElseThrow();
+			logger.debug(
+					"Retrying from the {} including build",
+					() -> ToString.toString(includingDirectory)
+			);
+			outputStream.reset();
+			try {
+				run(includingDirectory, ":" + directory.getFileName() + ":", outputStream);
+			} catch (final BuildResolveException retryException) {
+				e.addSuppressed(retryException);
+				throw e;
+			}
 		}
 		try (var reader = Readers.buffered(Readers.of(outputStream.toString()))) {
 			logger.trace("Parsing repositories");
@@ -183,8 +206,19 @@ public final class GradleBuildResolver implements BuildResolver {
 					)
 			);
 
+			logger.trace("Parsing plugins");
+			final var plugins = parsePlugins(reader);
+			logger.debug("Parsed plugins:");
+			plugins.forEach(
+					plugin -> logger.debug(
+							"- {}",
+							() -> ToString.toString(plugin)
+					)
+			);
+
 			logger.trace("Parsing artifacts");
-			final var artifacts = parseArtifacts(reader);
+			final var artifacts = new ArrayList<>(plugins);
+			artifacts.addAll(parseArtifacts(reader));
 			logger.debug("Parsed artifacts:");
 			artifacts.forEach(
 					artifact -> logger.debug(
@@ -204,6 +238,53 @@ public final class GradleBuildResolver implements BuildResolver {
 			);
 
 			return new Build(file, filteredRepositories, filteredArtifacts);
+		}
+	}
+
+	/**
+	 * Run the {@code repositories}, {@code plugins} and {@code dependencies} tasks of a <i>Gradle</i> project.
+	 * @param projectDirectory the directory to run <i>Gradle</i> from
+	 * @param taskPrefix a prefix to qualify tasks of an included build, or an empty {@link String}
+	 * @param outputStream an {@link OutputStream} for the standard output
+	 * @throws IOException might occur with input/output operations
+	 * @throws BuildResolveException might occur while running the tasks
+	 * @since 2.5.0
+	 */
+	private static void run(
+			final Path projectDirectory,
+			final String taskPrefix,
+			final OutputStream outputStream
+	) throws IOException {
+		final var connector = GradleConnector.newConnector()
+				.forProjectDirectory(projectDirectory.toFile());
+		GradleUtils.retrieveOptionalHome()
+				.map(Path::of)
+				.ifPresent(installation -> {
+					logger.debug("Using the {} installation", () -> ToString.toString(installation));
+					connector.useInstallation(installation.toFile());
+				});
+		try (var connection = connector.connect()) {
+			final var initTempFile = Files.createTempFile(INIT_FILE_NAME_PREFIX, INIT_FILE_NAME_SUFFIX);
+			try {
+				Files.copy(
+						Objects.requireNonNull(
+								GradleBuildResolver.class.getClassLoader().getResourceAsStream(INIT_FILE_NAME)
+						),
+						initTempFile,
+						StandardCopyOption.REPLACE_EXISTING
+				);
+				connection.newBuild()
+						.forTasks(taskPrefix + "repositories", taskPrefix + "plugins", taskPrefix + "dependencies")
+						.withArguments("--init-script=" + initTempFile)
+						.setStandardOutput(outputStream)
+						.run();
+			} finally {
+				Files.delete(initTempFile);
+			}
+		} catch (final GradleConnectionException e) {
+			throw new BuildResolveException(e);
+		} finally {
+			connector.disconnect();
 		}
 	}
 
@@ -231,9 +312,15 @@ public final class GradleBuildResolver implements BuildResolver {
 		final var repositories = new ArrayList<Repository>();
 		String line;
 		while (null != (line = bufferedReader.readLine())) {
-			if ("> Task :repositories".equals(line)) {
+			if (line.startsWith("> Task :") && line.endsWith(":repositories")) {
+				bufferedReader.mark(READ_AHEAD_LIMIT);
 				while (null != (line = bufferedReader.readLine())) {
 					if (line.isEmpty()) {
+						break;
+					}
+					// A task without output is directly followed by the next task, which must not be consumed
+					if (line.startsWith("> Task ")) {
+						bufferedReader.reset();
 						break;
 					}
 					if (2 > Strings.frequency(line, ':')) {
@@ -252,11 +339,57 @@ public final class GradleBuildResolver implements BuildResolver {
 					final var id = parts.get(1);
 					final var url = parts.get(2);
 					repositories.add(new Repository(repositoryType, id, url));
+					bufferedReader.mark(READ_AHEAD_LIMIT);
 				}
 				break;
 			}
 		}
 		return repositories;
+	}
+
+	/**
+	 * Parse a {@link List} of plugin artifacts from a {@link BufferedReader} of the <i>Gradle</i> {@code :plugins}
+	 * task.
+	 * @param bufferedReader a {@link BufferedReader}
+	 * @return the {@link List} of plugin artifacts
+	 * @throws IOException might occur with input/output operations
+	 * @throws NullPointerException if the {@link BufferedReader} is {@code null}
+	 * @throws BuildResolveException if the <i>Gradle</i> {@code :plugins} task output is unexpected
+	 * @since 2.5.0
+	 */
+	static List<Artifact<GradleArtifactType>> parsePlugins(final BufferedReader bufferedReader) throws IOException {
+		Ensure.notNull("bufferedReader", bufferedReader);
+		final var plugins = new ArrayList<Artifact<GradleArtifactType>>();
+		String line;
+		while (null != (line = bufferedReader.readLine())) {
+			if (line.startsWith("> Task :") && line.endsWith(":plugins")) {
+				bufferedReader.mark(READ_AHEAD_LIMIT);
+				while (null != (line = bufferedReader.readLine())) {
+					if (line.isEmpty()) {
+						break;
+					}
+					// A task without output is directly followed by the next task, which must not be consumed
+					if (line.startsWith("> Task ")) {
+						bufferedReader.reset();
+						break;
+					}
+					if (2 != Strings.frequency(line, ':')) {
+						throw new BuildResolveException("Unexpected Gradle \":plugins\" plugin format");
+					}
+					final var parts = Strings.split(':', line);
+					plugins.add(
+							new Artifact<>(
+									GradleArtifactType.PLUGIN,
+									new ArtifactIdentifier(parts.get(0), parts.get(1)),
+									parts.get(2)
+							)
+					);
+					bufferedReader.mark(READ_AHEAD_LIMIT);
+				}
+				break;
+			}
+		}
+		return plugins;
 	}
 
 	/**
@@ -273,10 +406,10 @@ public final class GradleBuildResolver implements BuildResolver {
 		final var artifacts = new ArrayList<Artifact<GradleArtifactType>>();
 		String line;
 		while (null != (line = bufferedReader.readLine())) {
-			if ("> Task :dependencies".equals(line)) {
+			if (line.startsWith("> Task :") && line.endsWith(":dependencies")) {
 				if (!Strings.EMPTY.equals(bufferedReader.readLine())
 						|| !"-".repeat(60).equals(bufferedReader.readLine())
-						|| !Strings.nullToEmpty(bufferedReader.readLine()).startsWith("Root project '")
+						|| !Strings.nullToEmpty(bufferedReader.readLine()).matches("(Root project|Project) '.*")
 						|| !"-".repeat(60).equals(bufferedReader.readLine())
 						|| !Strings.EMPTY.equals(bufferedReader.readLine())) {
 					throw new BuildResolveException("Unexpected Gradle \":dependencies\" header format");
@@ -307,7 +440,8 @@ public final class GradleBuildResolver implements BuildResolver {
 							}
 							if ("No dependencies".equals(line)
 									|| line.startsWith("|    ")
-									|| line.startsWith("     ")) {
+									|| line.startsWith("     ")
+								|| Strings.substringAfter(line, "--- ").startsWith("project ")) {
 								continue;
 							}
 							if (!line.startsWith("+--- ") && !line.startsWith("\\--- ")) {
@@ -323,6 +457,10 @@ public final class GradleBuildResolver implements BuildResolver {
 									),
 									" FAILED"
 							);
+							// File dependencies (such as "gradleApi()" or "files(…)") have no coordinates
+							if ("unspecified".equals(artifactString)) {
+								continue;
+							}
 							var frequency = Strings.frequency(artifactString, " -> ");
 							if (1 < frequency) {
 								throw new BuildResolveException("Unexpected Gradle \":dependencies\" artifact format");

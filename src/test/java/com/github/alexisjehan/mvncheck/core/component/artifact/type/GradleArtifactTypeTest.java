@@ -50,5 +50,6 @@ final class GradleArtifactTypeTest {
 	@Test
 	void testGetRepositoryType() {
 		assertThat(GradleArtifactType.COMPILE_ONLY.getRepositoryType()).isEqualTo(RepositoryType.NORMAL);
+		assertThat(GradleArtifactType.PLUGIN.getRepositoryType()).isEqualTo(RepositoryType.PLUGIN);
 	}
 }

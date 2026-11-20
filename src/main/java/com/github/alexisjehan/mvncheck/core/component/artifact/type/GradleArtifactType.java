@@ -24,6 +24,7 @@
 package com.github.alexisjehan.mvncheck.core.component.artifact.type;
 
 import com.github.alexisjehan.javanilla.misc.CaseStyle;
+import com.github.alexisjehan.mvncheck.core.component.repository.RepositoryType;
 
 import java.util.Set;
 
@@ -86,6 +87,12 @@ public enum GradleArtifactType implements ArtifactType {
 	 * @since 1.0.0
 	 */
 	IMPLEMENTATION,
+
+	/**
+	 * Plugin artifacts, requested in a {@code plugins} block (resolved as plugin marker artifacts).
+	 * @since 2.5.0
+	 */
+	PLUGIN(Property.PLUGIN),
 
 	/**
 	 * Runtime dependency artifacts.
@@ -183,7 +190,13 @@ public enum GradleArtifactType implements ArtifactType {
 		 * Flagged as a deprecated artifact type.
 		 * @since 1.0.0
 		 */
-		DEPRECATED
+		DEPRECATED,
+
+		/**
+		 * Flagged as a plugin artifact type.
+		 * @since 2.5.0
+		 */
+		PLUGIN
 	}
 
 	/**
@@ -226,5 +239,14 @@ public enum GradleArtifactType implements ArtifactType {
 	 */
 	public boolean isDeprecated() {
 		return properties.contains(Property.DEPRECATED);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @since 2.5.0
+	 */
+	@Override
+	public RepositoryType getRepositoryType() {
+		return properties.contains(Property.PLUGIN) ? RepositoryType.PLUGIN : RepositoryType.NORMAL;
 	}
 }
