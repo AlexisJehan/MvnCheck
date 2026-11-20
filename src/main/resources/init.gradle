@@ -1,5 +1,21 @@
+def pluginRequests = [:]
+def currentProjectPath = null
+gradle.beforeProject {
+	project -> currentProjectPath = project.path
+}
+gradle.afterProject {
+	project -> currentProjectPath = null
+}
 settingsEvaluated {
 	settings ->
+		settings.pluginManagement.resolutionStrategy.eachPlugin {
+			details ->
+				if (null != currentProjectPath && null != details.requested.version) {
+					def id = details.requested.id.id
+					pluginRequests.computeIfAbsent(currentProjectPath) { [] }
+							.add("$id:${id}.gradle.plugin:${details.requested.version}")
+				}
+		}
 		allprojects {
 			task repositories {
 				doLast {
@@ -20,6 +36,16 @@ settingsEvaluated {
 									.each {
 										repository -> println "$repositoryType:${repository.name}:${repository.url}"
 									}
+					}
+					if (settings.pluginManagement.repositories.isEmpty()) {
+						println 'PLUGIN:Gradle Central Plugin Repository:https://plugins.gradle.org/m2'
+					}
+				}
+			}
+			task plugins {
+				doLast {
+					pluginRequests.getOrDefault(project.path, []).each {
+						pluginRequest -> println pluginRequest
 					}
 				}
 			}
