@@ -354,6 +354,35 @@ final class GradleBuildResolverTest {
 	}
 
 	@Test
+	void testFindIncludingBuildDirectory(@TempDir final Path tmpDirectory) throws IOException {
+		Files.createFile(tmpDirectory.resolve("settings.gradle.kts"));
+		final var tmpIncludedBuildDirectory = Files.createDirectory(tmpDirectory.resolve("build-logic"));
+		final var tmpNestedBuildDirectory = Files.createDirectory(tmpDirectory.resolve("nested"));
+		Files.createFile(tmpNestedBuildDirectory.resolve("settings.gradle"));
+		final var tmpNestedIncludedBuildDirectory = Files.createDirectories(
+				tmpNestedBuildDirectory.resolve("foo").resolve("bar")
+		);
+		assertThat(GradleBuildResolver.findIncludingBuildDirectory(tmpDirectory)).isEmpty();
+		assertThat(GradleBuildResolver.findIncludingBuildDirectory(tmpIncludedBuildDirectory))
+				.contains(tmpDirectory);
+		assertThat(GradleBuildResolver.findIncludingBuildDirectory(tmpNestedBuildDirectory)).isEmpty();
+		assertThat(GradleBuildResolver.findIncludingBuildDirectory(tmpNestedIncludedBuildDirectory))
+				.contains(tmpNestedBuildDirectory);
+	}
+
+	@Test
+	void testFindIncludingBuildDirectoryWithoutAncestor(@TempDir final Path tmpDirectory) throws IOException {
+		final var tmpBuildDirectory = Files.createDirectory(tmpDirectory.resolve("build-logic"));
+		assertThat(GradleBuildResolver.findIncludingBuildDirectory(tmpBuildDirectory)).isEmpty();
+	}
+
+	@Test
+	void testFindIncludingBuildDirectoryInvalid() {
+		assertThatNullPointerException()
+				.isThrownBy(() -> GradleBuildResolver.findIncludingBuildDirectory(null));
+	}
+
+	@Test
 	void testGetFileTypes() {
 		assertThat(gradleBuildResolver.getFileTypes()).contains(
 				BuildFileType.GRADLE_GROOVY,

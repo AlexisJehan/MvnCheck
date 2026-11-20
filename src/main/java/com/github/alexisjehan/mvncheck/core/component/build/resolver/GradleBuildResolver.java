@@ -156,23 +156,7 @@ public final class GradleBuildResolver implements BuildResolver {
 		} catch (final BuildResolveException e) {
 			// An included build without its own settings file cannot be run on its own, so its tasks are run from the
 			// nearest ancestor build that includes it (an included build is named after its directory by default)
-			final var optionalIncludingDirectory = SETTINGS_FILE_NAMES.stream()
-					.noneMatch(settingsFileName -> Files.isRegularFile(directory.resolve(settingsFileName)))
-					? Stream.iterate(directory.getParent(), Objects::nonNull, Path::getParent)
-							.filter(
-									parent -> SETTINGS_FILE_NAMES.stream()
-											.anyMatch(
-													settingsFileName -> Files.isRegularFile(
-															parent.resolve(settingsFileName)
-													)
-											)
-							)
-							.findFirst()
-					: Optional.<Path>empty();
-			if (optionalIncludingDirectory.isEmpty()) {
-				throw e;
-			}
-			final var includingDirectory = optionalIncludingDirectory.orElseThrow();
+			final var includingDirectory = findIncludingBuildDirectory(directory).orElseThrow(() -> e);
 			logger.debug(
 					"Retrying from the {} including build",
 					() -> ToString.toString(includingDirectory)
@@ -239,6 +223,26 @@ public final class GradleBuildResolver implements BuildResolver {
 
 			return new Build(file, filteredRepositories, filteredArtifacts);
 		}
+	}
+
+	/**
+	 * Find the directory of the nearest ancestor build that could include a directory without its own settings file.
+	 * @param directory a directory
+	 * @return an {@link Optional} of the nearest ancestor directory containing a settings file, or an empty one if the
+	 * directory contains its own settings file or if no ancestor contains one
+	 * @throws NullPointerException if the directory is {@code null}
+	 * @since 2.5.0
+	 */
+	static Optional<Path> findIncludingBuildDirectory(final Path directory) {
+		Ensure.notNull("directory", directory);
+		final Predicate<Path> hasSettingsFile = path -> SETTINGS_FILE_NAMES.stream()
+				.anyMatch(settingsFileName -> Files.isRegularFile(path.resolve(settingsFileName)));
+		if (hasSettingsFile.test(directory)) {
+			return Optional.empty();
+		}
+		return Stream.iterate(directory.getParent(), Objects::nonNull, Path::getParent)
+				.filter(hasSettingsFile)
+				.findFirst();
 	}
 
 	/**
